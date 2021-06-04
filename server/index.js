@@ -30,10 +30,54 @@ app.get('/api', (req, res) => {
       res.status(200).send(response.data);
     })
     .catch((err) => {
+      res.status(404).send(err);
+    });
+});
+//POST
+app.post('/api', (req, res) => {
+  const { endpoint, content } = req.body;
+
+  console.log('content', content);
+  const options = {
+    url: `${config.API_HOST}/${endpoint}`,
+    product_id: 17071,
+    method: 'POST',
+    headers: {
+      'User-Agent': 'request',
+      Authorization: `${process.env.GIT_KEY}`,
+    },
+    content,
+  };
+
+  axios(options)
+    .then((response) => {
+      res.status(201).send();
+    })
+    .catch((err) => {
       res.status(400).send(err);
     });
 });
+//PUT
+app.put('/api', (req, res) => {
+  const { endpoint, params } = req.body;
+  const options = {
+    url: `${config.API_HOST}/${endpoint}`,
+    method: 'PUT',
+    headers: {
+      'User-Agent': 'request',
+      Authorization: `${process.env.GIT_KEY}`,
+    },
+    params,
+  };
 
+  axios(options)
+    .then((response) => {
+      res.status(204).send();
+    })
+    .catch((err) => {
+      res.status(400).send(err);
+    });
+});
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
