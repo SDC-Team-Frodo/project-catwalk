@@ -1,5 +1,5 @@
 yarn.lock
 node_modules/
-./client/dist/bundle.js
+client/dist
 
 .DS_store
