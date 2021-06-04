@@ -4,8 +4,6 @@ const axios = require('axios');
 const config = require('../config/config');
 require('dotenv').config();
 
-// process.env.ENV_VAR_NAME
-
 const app = express();
 const PORT = 42069;
 
