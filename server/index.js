@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, '/../client/dist')));
 
 // routes
 app.get('/api', (req, res) => {
-  const { endpoint, data } = req.body;
+  const { endpoint, params } = req.body;
   const options = {
     url: `${config.API_HOST}/${endpoint}`,
     method: 'GET',
@@ -22,7 +22,7 @@ app.get('/api', (req, res) => {
       'User-Agent': 'request',
       Authorization: `${process.env.GIT_KEY}`,
     },
-    data,
+    params,
   };
 
   axios(options)
