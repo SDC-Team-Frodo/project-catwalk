@@ -1,10 +1,11 @@
 import React from 'react';
-import QaContainer from './QAWidget/widget.jsx';
-import OverviewContainer from './Overview/widget.jsx';
-import ReviewsContainer from './ReviewsWidget/widget.jsx';
-import RelatedContainer from './RelatedWidget/widget.jsx';
+import QaContainer from './QAWidget/widget';
+import OverviewContainer from './Overview/widget';
+import ReviewsContainer from './ReviewsWidget/widget';
+import RelatedContainer from './RelatedWidget/widget';
+import '../../dist/style.sass';
 
-var App = () => (
+const App = () => (
   <>
     <OverviewContainer />
     <RelatedContainer />
