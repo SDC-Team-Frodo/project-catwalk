@@ -4,7 +4,8 @@
   "description": "Show relevant information for a single product in the catalog. Single page react app that displays individual product information.",
   "main": "index.js",
   "scripts": {
-    "start": "live-server --watch=./client --open=./client/dist",
+    "start": "node server/index.js",
+    "start:dev": "npx nodemon server/index.js -w",
     "build": "webpack --config webpack.config.js -w",
     "test": "jest"
   },
@@ -32,12 +33,14 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "jest": "^27.0.4",
     "live-server": "^1.2.1",
+    "nodemon": "^2.0.7",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.0"
   },
   "dependencies": {
     "axios": "^0.21.1",
     "css-loader": "^5.2.6",
+    "express": "^4.17.1",
     "lodash": "^4.17.21",
     "node-sass": "^6.0.0",
     "react": "^17.0.2",
