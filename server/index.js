@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 
-// routes
+// GET
 app.get('/api', (req, res) => {
   const { endpoint, params } = req.body;
   const options = {
@@ -33,31 +33,30 @@ app.get('/api', (req, res) => {
       res.status(404).send(err);
     });
 });
-//POST
-app.post('/api', (req, res) => {
-  const { endpoint, content } = req.body;
 
-  console.log('content', content);
+// POST
+app.post('/api', (req, res) => {
+  const { endpoint, data } = req.body;
   const options = {
     url: `${config.API_HOST}/${endpoint}`,
-    product_id: 17071,
     method: 'POST',
     headers: {
       'User-Agent': 'request',
       Authorization: `${process.env.GIT_KEY}`,
     },
-    content,
+    data,
   };
 
   axios(options)
-    .then((response) => {
+    .then(() => {
       res.status(201).send();
     })
     .catch((err) => {
       res.status(400).send(err);
     });
 });
-//PUT
+
+// PUT
 app.put('/api', (req, res) => {
   const { endpoint, params } = req.body;
   const options = {
@@ -71,7 +70,7 @@ app.put('/api', (req, res) => {
   };
 
   axios(options)
-    .then((response) => {
+    .then(() => {
       res.status(204).send();
     })
     .catch((err) => {
