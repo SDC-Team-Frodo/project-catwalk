@@ -1,24 +1,24 @@
 import axios from 'axios';
 
 const request = {
-  get: (endpoint, params) => {
-    return axios.get('/api', {
+  get: (endpoint, params) => (
+    axios.get('/api', {
       endpoint,
       params,
-    });
-  },
-  post: (endpoint, data) => {
-    return axios.post('/api', {
+    })
+  ),
+  post: (endpoint, data) => (
+    axios.post('/api', {
       endpoint,
       data,
-    });
-  },
-  put: (endpoint, params) => {
-    return axios.put('/api', {
+    })
+  ),
+  put: (endpoint, params) => (
+    axios.put('/api', {
       endpoint,
       params,
-    });
-  },
+    })
+  ),
 };
 
 export default request;
