@@ -1,3 +1,4 @@
 client/dist
 jest.config.js
+config.yml
 *.test.js
