@@ -9,7 +9,7 @@ describe('Review component', () => {
   });
 
   it('should have the right message in the dom', () => {
-    const message = 'this is the Review';
+    const message = 'this is Review';
 
     expect(screen.getByText(message)).toBeInTheDocument();
   });
