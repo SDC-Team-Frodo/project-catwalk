@@ -2,3 +2,4 @@ client/dist
 jest.config.js
 config.yml
 *.test.js
+client/src/components/QAWidget/mockData.js
