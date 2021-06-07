@@ -8,10 +8,8 @@ describe('Review component', () => {
     render(<ReviewContainer />);
   });
 
-  it('should have the right message in the dom', () => {
-    const message = 'this is the Review';
-
-    expect(screen.getByText(message)).toBeInTheDocument();
+  it('should have the right subsection title', () => {
+    expect(screen.getByText('RATINGS & REVIEWS')).toBeInTheDocument();
   });
 
   afterAll(cleanup);

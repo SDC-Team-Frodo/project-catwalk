@@ -1,10 +1,9 @@
 import React from 'react';
 
 const ReviewContainer = (props) => (
-  // CI test
-  <div id="Review">
-    <h1>this is the Review</h1>
-  </div>
+  <article id="Review">
+    <h1>RATINGS &amp; REVIEWS</h1>
+  </article>
 );
 
 export default ReviewContainer;
