@@ -8,16 +8,17 @@ const SearchBar = (props) => {
   const [allQuestions, setAllQuestions] = useState(JSON.stringify(data));
   const [searchClicked, setSearchClicked] = useState(false);
   const [relevantQuestions, setRelevantQuestions] = useState(allQuestions);
-  const [testQuestions, setTestQuestions] = useState([1, 2, 3, 4, 5]);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
     if (searchClicked === true) {
       setRelevantQuestions(JSON.stringify(searchFunc(search, JSON.parse(allQuestions), 3)));
-      console.log(JSON.stringify(searchFunc(search, JSON.parse(allQuestions), 3)));
       setSearchClicked(false);
     }
   }, [search, searchClicked]);
+
+  useEffect(() => {
+  }, [relevantQuestions]);
   return (
     <div>
       <div id="searchDiv">
