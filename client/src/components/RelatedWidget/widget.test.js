@@ -11,7 +11,7 @@ describe('Related component', () => {
   });
 
   it('should have the right message in the dom', () => {
-    const message = 'Related List';
+    const message = 'Related Product List';
 
     expect(screen.getByText(message)).toBeInTheDocument();
   });
