@@ -24,7 +24,7 @@ app.get('/api', (req, res) => {
     },
     params,
   };
-
+  console.log(options);
   axios(options)
     .then((response) => {
       res.status(200).send(response.data);

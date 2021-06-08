@@ -1,4 +1,4 @@
-// this function takes in a arr of obects and will sork the array based on
+// this function takes in an arr of objects and will sork the array based on
 // the comparable value in each of the objects from highest to lowest
 
 const organize = (arr, comparable) => {

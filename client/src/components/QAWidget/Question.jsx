@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Answer from './Answer';
 
-
 const Question = (props) => {
   const { question } = props;
   const allAnswers = Object.values(question.answers);
@@ -20,18 +19,13 @@ const Question = (props) => {
     <div>
       <h1>{`Q: ${question.question_body} Helpfulness: ${question.question_helpfulness}`}</h1>
       <div>
-        {answers.map((answer, i) => {
-          return (
-            <Answer index={i} answer={answer} key={i} />
-          );
-        })}
-
+        {answers.map((answer, i) => <Answer index={i} answer={answer} key={i} />)}
       </div>
       <button
         type="button"
         id="loadA"
         onClick={() => {
-          setDisplayedAnswers(displayedAnswers + 2)
+          setDisplayedAnswers(displayedAnswers + 2);
         }}
       >
         {buttonLabel}
@@ -39,7 +33,5 @@ const Question = (props) => {
     </div>
   );
 };
-// Question.propTypes = {
-//   question: PropTypes.object.isRequired,
-// };
+
 export default Question;

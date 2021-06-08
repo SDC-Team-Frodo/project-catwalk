@@ -19,14 +19,12 @@ function QuestionList(props) {
 
   return (
     <div className="QuestionList">
-      {questions.map((question, i) => {
-        return <Question key={i} question={question}/>
-      })}
+      {questions.map((question, i) => <Question key={i} question={question} />)}
       <button
         type="button"
         id="loadQ"
         onClick={() => {
-          setDisplayedQuestions(displayedQuestions + 2)
+          setDisplayedQuestions(displayedQuestions + 2);
         }}
       >
         {buttonLabel}

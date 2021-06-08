@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
 import QuestionList from './QuestionList';
 import mockData from './mockData';
 import ProductContext from '../../contexts/ProductContext';
@@ -10,17 +11,18 @@ const QaContainer = (props) => {
   console.log(product.id);
 
   useEffect(() => {
-    request.get('qa/questions', {
-      product_id: 17071,
-    }).then((data) => {
-      setQuestions(data.results);
-    }).catch((err) => console.error(err));
+    console.log(axios.get('/api/', {
+      endpoint: 'qa/questions',
+      params: {
+        product_id: 17071,
+      },
+    }));// .then((data) => {
+    //   setQuestions(data.results);
+    // }).catch((err) => console.error(err));
   });
-  return (
-      <QuestionList data={questions} />
-  );
+  return <QuestionList data={questions} />;
 };
 
 export default QaContainer;
-//Testign the pull request
-//Another one
+// Testign the pull request
+// Another one
