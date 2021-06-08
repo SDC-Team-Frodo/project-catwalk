@@ -18,7 +18,7 @@ const Question = (props) => {
   }, [displayedAnswers]);
   return (
     <div>
-      <h1>{`Q: ${question.question_body}`}</h1>
+      <h1>{`Q: ${question.question_body} Helpfulness: ${question.question_helpfulness}`}</h1>
       {answers.map((answer, i) => {
         return (
           <Answer answer={answer} key={i} />

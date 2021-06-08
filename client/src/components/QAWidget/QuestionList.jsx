@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Question from './Question';
+import organize from './organize';
 
 function QuestionList(props) {
   const { data } = props;
+  const [allQuestions] = useState(organize(data, "question_helpfulness"));
   const [displayedQuestions, setDisplayedQuestions] = useState(4);
-  const [questions, setQuestions] = useState(data.slice(0, displayedQuestions));
+  const [questions, setQuestions] = useState(allQuestions.slice(0, displayedQuestions));
   const [buttonLabel, setButtonLabel] = useState('More Questions');
 
   useEffect(() => {
-    if (data[displayedQuestions - 2] !== undefined) {
-      setQuestions(data.slice(0, displayedQuestions));
+    if (allQuestions[displayedQuestions - 2] !== undefined) {
+      setQuestions(allQuestions.slice(0, displayedQuestions));
     } else {
       setButtonLabel('No More Questions');
     }
