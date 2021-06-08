@@ -2,6 +2,8 @@ import React from 'react';
 
 const GalleryAside = (props) => {
 
+  // Added support for hiding.
+  // I assume conditionally rendering will break the useState hook if it misses rendering any of the children using said hook.
   return (
     <div id="gallery-aside" className={props.fullscreenSlider ? 'hide' : ''}>
       <section className="left-margin top-margin">
