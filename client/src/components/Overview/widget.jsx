@@ -30,8 +30,8 @@ const OverviewContainer = (props) => {
   return (
     <div id="overview">
       <div className="separator">
-        <Gallery />
-        <GalleryAside />
+        <Gallery fullscreenSlider={fullscreenSlider} setFullscreenSlider={setFullscreenSlider}/>
+        <GalleryAside fullscreenSlider={fullscreenSlider}/>
       </div>
       <div className="separator">
         <Description />
