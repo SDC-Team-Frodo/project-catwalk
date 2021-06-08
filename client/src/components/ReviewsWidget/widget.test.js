@@ -2,7 +2,7 @@ import React from 'react';
 import { screen, render, fireEvent, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import ReviewContainer from './widget';
-import ProductBreakdown from './ProductBreakDown';
+import ProductBreakdown from './ProductBreakdown';
 import RatingsBreakdown from './RatingsBreakdown';
 import ReviewsList from './ReviewsList';
 import ReviewForm from './ReviewForm';
@@ -21,7 +21,7 @@ describe('Review component', () => {
 
 describe('Ratings Breakdown', () => {
   beforeAll(() => {
-    render(<RatingsBreakDown />);
+    render(<RatingsBreakdown />);
   });
 
   test('should have the correct ratings breakdown text', () => {
@@ -33,7 +33,7 @@ describe('Ratings Breakdown', () => {
 
 describe('Product Breakdown', () => {
   beforeAll(() => {
-    render(<ProductBreakDown />);
+    render(<ProductBreakdown />);
   });
 
   test('should have the correct product breakdown text', () => {
