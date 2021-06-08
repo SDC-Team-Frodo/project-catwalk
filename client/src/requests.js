@@ -3,8 +3,10 @@ import axios from 'axios';
 const request = {
   get: (endpoint, params) => (
     axios.get('/api', {
-      endpoint,
-      params,
+      params: {
+        endpoint,
+        params,
+      },
     })
   ),
   post: (endpoint, data) => (

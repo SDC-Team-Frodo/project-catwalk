@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, '/../client/dist')));
 
 // GET
 app.get('/api', (req, res) => {
-  const { endpoint, params } = req.body;
+  const { endpoint, params } = req.query;
   const options = {
     url: `${config.API_HOST}/${endpoint}`,
     method: 'GET',
@@ -22,7 +22,7 @@ app.get('/api', (req, res) => {
       'User-Agent': 'request',
       Authorization: `${process.env.GIT_KEY}`,
     },
-    params,
+    params: JSON.parse(params),
   };
   console.log(options);
   axios(options)
@@ -46,6 +46,7 @@ app.post('/api', (req, res) => {
     },
     data,
   };
+  console.log(options);
 
   axios(options)
     .then(() => {
@@ -58,7 +59,7 @@ app.post('/api', (req, res) => {
 
 // PUT
 app.put('/api', (req, res) => {
-  const { endpoint, params } = req.body;
+  const { endpoint, params } = req.query;
   const options = {
     url: `${config.API_HOST}/${endpoint}`,
     method: 'PUT',
@@ -66,7 +67,7 @@ app.put('/api', (req, res) => {
       'User-Agent': 'request',
       Authorization: `${process.env.GIT_KEY}`,
     },
-    params,
+    params: JSON.parse(params),
   };
 
   axios(options)
