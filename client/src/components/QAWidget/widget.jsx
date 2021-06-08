@@ -12,6 +12,7 @@ const QaContainer = (props) => {
 
   return (
     <div id="QAWidget">
+      <h1 id="QATitle" data-testid="QAtitle" className="title">Questions And Answers</h1>
       <QuestionsContext.Provider value={mockData.results}>
         <SearchBar />
       </QuestionsContext.Provider>
