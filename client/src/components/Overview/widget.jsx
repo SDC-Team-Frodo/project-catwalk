@@ -1,24 +1,35 @@
 import React, { useState, useContext } from 'react';
+import Gallery from './Gallery';
+import GalleryAside from './GalleryAside';
+import Description from './Description';
+import Features from './Features'
 import ThemeContext from '../../contexts/ThemeContext';
 import RatingContext from '../../contexts/RatingContext';
 import ProductContext from '../../contexts/ProductContext';
-
-// pull request test 2
-console.log(ThemeContext);
+// import '../../overview.sass';
 
 
 const OverviewContainer = (props) => {
+
+  // contexts
   const theme = useContext(ThemeContext);
   const rating = useContext(RatingContext);
   const product = useContext(ProductContext);
 
-  let [obj, setObj] = useState({a: 1, b: 2});
+  // states
+  const [fullscreenSlider, setFullscreenSlider] = useState(false);
+  const [selectedStyle, setSelectedStyle] = useState('1');
 
   return (
-    <div id="Overview">
-      <h1 onClick={() => setObj(
-        {theme, rating, product}
-      )}>{JSON.stringify(obj)}</h1>
+    <div id="overview">
+      <div className="separator">
+        <Gallery />
+        <GalleryAside />
+      </div>
+      <div className="separator">
+        <Description />
+        <Features />
+      </div>
     </div>
   )
 };
