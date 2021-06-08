@@ -7,7 +7,7 @@ import request from '../../requests';
 import SearchBar from './SearchBar';
 import mockData from './mockData';
 
-const QaContainer = (props) => {
+const QaContainer = () => {
   const product = useContext(ProductContext);
 
   return (

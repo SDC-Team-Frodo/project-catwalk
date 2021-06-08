@@ -3,9 +3,9 @@ import QuestionsContext from '../../contexts/QuestionsContext';
 import QuestionList from './QuestionList';
 import searchFunc from './search';
 
-const SearchBar = (props) => {
+const SearchBar = () => {
   const data = useContext(QuestionsContext);
-  const [allQuestions, setAllQuestions] = useState(JSON.stringify(data));
+  const [allQuestions] = useState(JSON.stringify(data));
   const [searchClicked, setSearchClicked] = useState(false);
   const [relevantQuestions, setRelevantQuestions] = useState(allQuestions);
   const [search, setSearch] = useState('');
