@@ -1,26 +1,22 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import QuestionList from './QuestionList';
-import mockData from './mockData';
+import QuestionsContext from '../../contexts/QuestionsContext';
 import ProductContext from '../../contexts/ProductContext';
 import request from '../../requests';
+import SearchBar from './SearchBar';
+import mockData from './mockData';
 
 const QaContainer = (props) => {
-  const [questions, setQuestions] = useState(mockData.results);
   const product = useContext(ProductContext);
-  console.log(product.id);
 
-  useEffect(() => {
-    console.log(axios.get('/api/', {
-      endpoint: 'qa/questions',
-      params: {
-        product_id: 17071,
-      },
-    }));// .then((data) => {
-    //   setQuestions(data.results);
-    // }).catch((err) => console.error(err));
-  });
-  return <QuestionList data={questions} />;
+  return (
+    <div id="QAWidget">
+      <QuestionsContext.Provider value={mockData.results}>
+        <SearchBar />
+      </QuestionsContext.Provider>
+    </div>
+  );
 };
 
 export default QaContainer;

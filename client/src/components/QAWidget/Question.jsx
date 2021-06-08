@@ -17,7 +17,12 @@ const Question = (props) => {
   }, [displayedAnswers]);
   return (
     <div>
-      <h1>{`Q: ${question.question_body} Helpfulness: ${question.question_helpfulness}`}</h1>
+      <h1>
+        {`Q: ${question.question_body}`}
+        <span className="helpful">
+          {`Helpful? Yes(${question.question_helpfulness})`}
+        </span>
+      </h1>
       <div>
         {answers.map((answer, i) => <Answer index={i} answer={answer} key={i} />)}
       </div>

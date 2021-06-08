@@ -5,7 +5,7 @@ const Answer = (props) => {
   return (
     <div>
       <h2>
-        {index === 0 &&(
+        {index === 0 && (
           'A: '
         )}
         {answer.body}

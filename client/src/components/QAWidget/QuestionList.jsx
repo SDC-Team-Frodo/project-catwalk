@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Question from './Question';
 import organize from './organize';
+import QuestionsContext from '../../contexts/QuestionsContext';
 
 function QuestionList(props) {
-  const { data } = props;
-  const [allQuestions] = useState(organize(data, "question_helpfulness"));
+  const data = useContext(QuestionsContext);
+  const [allQuestions] = useState(organize(JSON.parse(data), "question_helpfulness"));
   const [displayedQuestions, setDisplayedQuestions] = useState(4);
   const [questions, setQuestions] = useState(allQuestions.slice(0, displayedQuestions));
   const [buttonLabel, setButtonLabel] = useState('More Questions');
