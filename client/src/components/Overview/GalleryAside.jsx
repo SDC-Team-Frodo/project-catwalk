@@ -4,13 +4,16 @@ const GalleryAside = (props) => {
 
   return (
     <div id="gallery-aside">
-      <div className="rating">
-        <i className="fas fa-star"></i>
-        <i className="fas fa-star"></i>
-        <i className="fas fa-star"></i>
-        <i className="far fa-star"></i>
-        <i className="far fa-star"></i>
-      </div>
+      <section className="space-right">
+
+        <div className="rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+        </div>
+    </section>
 
     </div>
   );
