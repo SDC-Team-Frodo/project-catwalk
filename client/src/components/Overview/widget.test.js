@@ -8,11 +8,17 @@ describe('Overview component', () => {
     render(<OverviewContainer />);
   });
 
-  it('should have the right message in the dom', () => {
-    const message = 'this is the Overview';
-
-    expect(screen.getByText(message)).toBeInTheDocument();
+  test('each subcomponent in overview should render inside the dom', () => {
+    const subComponents = [
+      'gallery', 'gallery-aside',
+      'description', 'features'
+    ]
+    subComponents.forEach(name => {
+      const element = document.querySelector(`#${name}`);
+      expect(element).toBeInTheDocument();
+    })
   });
 
   afterAll(cleanup);
 });
+
