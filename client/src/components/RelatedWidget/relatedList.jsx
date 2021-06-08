@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import RelatedCard from './relatedCard';
 import relatedSamples from './relatedSamples'; // delete later
+import stylesSamples from './stylesSamples'; // delete later
 
 const RelatedList = function() {
   return (

@@ -11,6 +11,7 @@ const RelatedContainer = () => {
   // send to send API calls for each outfit to get star rating
   return (
     <>
+      <div>Related Product List</div>
       <RelatedList />
       <OutfitList />
     </>
