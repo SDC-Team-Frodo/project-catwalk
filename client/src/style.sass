@@ -1,3 +1,5 @@
+// app level
+$font-stack: Tahoma, Arial, Helvetica, sans-serif;
 $body-color: black
 $background-color: white
 
@@ -18,6 +20,94 @@ main
   min-width: 400px
   padding: 0 15vw
 
+// overview
+.separator
+  display: flex
+
+#overview
+  color: black !important
+
+#gallery
+  order: 1
+  background-color: grey
+  position: relative
+  width: 60vw
+  height: 25em
+
+#gallery-aside
+  order: 2
+  position: relative
+  background-color: darkgrey
+  width: 40vw
+  height: 25em
+
+#description
+  order: 1
+  position: relative
+  background: darkgrey
+  width: 60vw
+  height: 15em
+
+#features
+  order: 2
+  display: inline-block
+  position: relative
+  background: lightgrey
+  width: 40vw
+  height: 15em
+
+.left-margin
+  margin-left: 2.5em
+
+.top-margin
+  margin-top: 2em
+
+.left-border
+  border-left: .1em solid black
+
+#fcontainer>i
+  margin-top: .5em
+  margin-left: .5em
+  margin-bottom: .5em
+  margin-right: .5em
+
+.hide
+  display: none
+
+.full
+  width: 100vw !important
+
+.float-right
+  float: right
+  margin-right: 1em
+  margin-top: 1em
+
+// related
+#related
+  align: center
+  background-color: #f2f2f2
+  color: #212121
+  font: 100% $font-stack
+  display: flex
+
+
+.relatedCard
+  margin: 6px
+  height: 384px
+  width: 256px
+  position: relative
+  background-color: white
+  border: 2px solid black
+
+.textContainer
+  padding: 10px
+
+.star
+  position: absolute
+  top: 5px
+  right: 5px
+
+// reviews
 #reviews-ratings-container, #reviews-container, #ratings-container
   display: flex
 

@@ -6,7 +6,7 @@ import Features from './Features';
 import ThemeContext from '../../contexts/ThemeContext';
 import RatingContext from '../../contexts/RatingContext';
 import ProductContext from '../../contexts/ProductContext';
-import '../../overview.sass';
+// import '../../overview.sass';
 
 const DEBUG = true;
 
