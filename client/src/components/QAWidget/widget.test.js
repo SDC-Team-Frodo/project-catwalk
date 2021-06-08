@@ -2,8 +2,8 @@ import React from 'react';
 import { screen, render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import QaContainer from './widget';
-import SearchBar from './components/SearchBar';
-import QuestionList from './components/SearchBar';
+import SearchBar from './SearchBar';
+import QuestionList from './SearchBar';
 
 describe('QA component', () => {
   beforeAll(() => {
