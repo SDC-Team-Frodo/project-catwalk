@@ -11,29 +11,31 @@ describe('QA component', () => {
   });
 
   // Need a test for making sure that the title is rendering
-
+  test('Should render QA Container', () => {
+    expect(screen.getByText('Questions And Answers')).toBeInTheDocument();
+  })
 
   afterAll(cleanup);
 });
 
-describe('SearchBar component', () => {
-  beforeAll(() => {
-    render(<SearchBar />)
-  });
+// xdescribe('SearchBar component', () => {
+//   beforeAll(() => {
+//     render(<SearchBar />)
+//   });
 
-  // upon clicking the search button the questions list should rerender
-
-
-  afterAll(cleanup);
-})
-
-describe('QuestionList component', () => {
-  beforeAll(() => {
-    render(<QuestionList />)
-  });
-
-  // Questions should be rendered in order from most helpful to least helpful
+//   // upon clicking the search button the questions list should rerender
 
 
-  afterAll(cleanup);
-})
+//   afterAll(cleanup);
+// })
+
+// xdescribe('QuestionList component', () => {
+//   beforeAll(() => {
+//     render(<QuestionList />)
+//   });
+
+//   // Questions should be rendered in order from most helpful to least helpful
+
+
+//   afterAll(cleanup);
+// })
