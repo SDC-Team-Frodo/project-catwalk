@@ -21,7 +21,6 @@ export default {
           "id": 2,
           "url": "urlplaceholder/review_5_photo_number_2.jpg"
         },
-        // ...
       ]
     },
     {
@@ -54,7 +53,6 @@ export default {
           "id": 2,
           "url": "urlplaceholder/review_5_photo_number_2.jpg"
         },
-        // ...
       ]
     },
     {
@@ -87,7 +85,6 @@ export default {
           "id": 2,
           "url": "urlplaceholder/review_5_photo_number_2.jpg"
         },
-        // ...
       ]
     },
   ]

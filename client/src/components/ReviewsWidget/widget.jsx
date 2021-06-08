@@ -7,10 +7,16 @@ import ReviewForm from './ReviewForm';
 const ReviewContainer = () => (
   <article id="ReviewWidget">
     <header>RATINGS &amp; REVIEWS</header>
-    <RatingsBreakdown />
-    <ProductBreakdown />
-    <ReviewsList />
-    <ReviewForm />
+    <div id="reviews-ratings-container">
+      <div id="ratings-container">
+        <RatingsBreakdown />
+        <ProductBreakdown />
+      </div>
+      <div id="reviews-container">
+        <ReviewsList />
+        <ReviewForm />
+      </div>
+    </div>
   </article>
 );
 
