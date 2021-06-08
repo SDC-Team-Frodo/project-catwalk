@@ -19,13 +19,16 @@ const Question = (props) => {
   return (
     <div>
       <h1>{`Q: ${question.question_body} Helpfulness: ${question.question_helpfulness}`}</h1>
-      {answers.map((answer, i) => {
-        return (
-          <Answer answer={answer} key={i} />
-        );
-      })}
-      <button id="loadA" onClick={
-        () => {
+      <div>
+        {answers.map((answer, i) => {
+          return (
+            <Answer index={i} answer={answer} key={i} />
+          );
+        })}
+
+      </div>
+      <button id="loadA"
+        onClick={() => {
           setDisplayedAnswers(displayedAnswers + 2)
         }
       }>{buttonLabel}</button>
