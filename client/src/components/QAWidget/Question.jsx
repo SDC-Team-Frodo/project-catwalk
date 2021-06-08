@@ -27,13 +27,19 @@ const Question = (props) => {
         })}
 
       </div>
-      <button id="loadA"
+      <button
+        type="button"
+        id="loadA"
         onClick={() => {
           setDisplayedAnswers(displayedAnswers + 2)
-        }
-      }>{buttonLabel}</button>
+        }}
+      >
+        {buttonLabel}
+      </button>
     </div>
   );
 };
-
+// Question.propTypes = {
+//   question: PropTypes.object.isRequired,
+// };
 export default Question;

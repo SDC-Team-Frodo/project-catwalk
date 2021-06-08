@@ -22,7 +22,15 @@ function QuestionList(props) {
       {questions.map((question, i) => {
         return <Question key={i} question={question}/>
       })}
-      <button id="loadQ" onClick={() => { setDisplayedQuestions(displayedQuestions + 2) }}>{buttonLabel}</button>
+      <button
+        type="button"
+        id="loadQ"
+        onClick={() => {
+          setDisplayedQuestions(displayedQuestions + 2)
+        }}
+      >
+        {buttonLabel}
+      </button>
     </div>
   );
 }
