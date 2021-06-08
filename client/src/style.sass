@@ -1,12 +1,108 @@
-$body-color: lightgreen
-$background-color: green
+$body-color: black
+$background-color: white
 
 body
   color: $body-color
   background-color: $background-color
-  padding: 0
-  margin: 0
 
 div
   margin: 0
   padding: 0
+
+main
+  width: 100%
+
+#app
+  display: flex
+  margin: auto
+  min-width: 400px
+  padding: 0 15vw
+
+#reviews-ratings-container, #reviews-container, #ratings-container
+  display: flex
+
+#reviews-container, #ratings-container
+  flex-direction: column
+
+#reviews-ratings-container
+  justify-content: space-between
+
+#reviews-container
+  width: 65%
+
+#ratings-container
+  width: 30%
+
+#ratings-breakdown
+  .avg-rating-stars
+    align-items: center
+    display: flex
+
+#reviews
+  ul
+    list-style-type: none
+    margin: 0
+    max-height: 95vh
+    overflow-y: scroll
+    padding: 0
+  li
+    border-bottom: 2px solid gray
+    display: flex
+    flex-direction: column
+    font-size: 14px
+    padding: 2.5em 0 1.5em 0
+
+.reviews-count
+  font-weight: bold
+  select
+    border: none
+    border-bottom: 1px solid black
+    outline: none
+
+.review
+  button
+    background: none
+    border: none
+    color: inherit
+    cursor: pointer
+    font: inherit
+    outline: inherit
+    padding: 0 0.5em
+    text-decoration: underline
+
+.review-date
+  align-items: center
+  color: gray
+  display: flex
+  font-size: 10px
+  justify-content: space-between
+
+.review-summary
+  font-size: 18px
+  font-weight: bold
+  margin-bottom: 0
+
+.recommend, .reviewer
+  margin-bottom: 1em
+
+.response
+  background-color: lightgray
+  margin-bottom: 1em
+  padding: 1em 1em 0 1em
+
+.helpful
+  color: gray
+  font-size: 10px
+
+.review-buttons
+  display: flex
+  justify-content: space-between
+  margin-top: 2em
+  width: 50%
+  button
+    background-color: lightgray
+    border: 1px solid black
+    border-radius: 0
+    cursor: pointer
+    height: 4em
+    width: 48%
