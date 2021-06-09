@@ -13,7 +13,7 @@ const ReviewsList = () => {
   return (
     <section id="reviews">
       <div className="reviews-count">
-        {reviewData.results.length}
+        <span>{reviewData.results.length}</span>
         reviews, sorted by
         <select onChange={(e) => setSortOrder(() => e.target.value)}>
           <option value="relevant">relevance</option>
