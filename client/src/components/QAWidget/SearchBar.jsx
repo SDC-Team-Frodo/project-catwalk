@@ -25,8 +25,6 @@ const SearchBar = () => {
     }
   }, [search, searchClicked]);
 
-  useEffect(() => {
-  }, [relevantQuestions]);
   return (
     <div>
       <div id="searchDiv">

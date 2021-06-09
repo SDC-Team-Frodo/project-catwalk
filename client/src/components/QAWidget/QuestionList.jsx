@@ -18,7 +18,7 @@ function QuestionList() {
 
   useEffect(() => {
     setQuestions(allQuestions.slice(0, displayedQuestions));
-  }, [allQuestions]);
+  }, [allQuestions, displayedQuestions]);
 
   useEffect(() => {
     if (allQuestions[displayedQuestions - 2] !== undefined) {

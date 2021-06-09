@@ -1,22 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import formatDate from '../../helpers/formatDate';
+import QuestionsContext from '../../contexts/QuestionsContext';
 import Modal from '../Modal';
 
 const Answer = (props) => {
   const { answer, index } = props;
-  const [answerState, setAnswerState] = useState(answer);
-  const [helpfulCount, setHelpfulcount] = useState(answerState.helpfulness);
+  const [helpfulCount, setHelpfulcount] = useState(answer.helpfulness);
   const [yesClicked, setYesClicked] = useState(false);
-
-  useEffect(() => {
-    console.log(answer);
-    setAnswerState(answer);
-  }, [answer]);
-
-  useEffect(() => {
-    setHelpfulcount(answerState.helpfulness);
-    setYesClicked(false);
-  }, [answerState]);
 
   useEffect(() => {
     if (yesClicked) {
@@ -30,13 +20,13 @@ const Answer = (props) => {
         {index === 0 && (
           'A: '
         )}
-        {answerState.body}
+        {answer.body}
       </h2>
       <h5>
         by:
-        {answerState.answerer_name}
+        {answer.answerer_name}
         ,
-        {formatDate(answerState.date)}
+        {formatDate(answer.date)}
         Helpful?
         <span
           onClick={() => {
@@ -50,8 +40,8 @@ const Answer = (props) => {
         Report
       </h5>
       <div id="answerImageDiv">
-        {answerState.photos.length > 0 && (
-          answerState.photos.map((photo, i) => {
+        {answer.photos.length > 0 && (
+          answer.photos.map((photo, i) => {
             return (
               <Modal
                 key={i}

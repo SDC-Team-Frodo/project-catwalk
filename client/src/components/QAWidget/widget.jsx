@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import QuestionList from './QuestionList';
 import QuestionsContext from '../../contexts/QuestionsContext';
 import ProductContext from '../../contexts/ProductContext';
 import request from '../../requests';
@@ -9,7 +7,7 @@ import mockData from './mockData';
 
 const QaContainer = () => {
   const product = useContext(ProductContext);
-  const [data, setData] = useState(mockData);
+  const [data, setData] = useState({results: {}});
 
   useEffect(() => {
     request.get('qa/questions', {
