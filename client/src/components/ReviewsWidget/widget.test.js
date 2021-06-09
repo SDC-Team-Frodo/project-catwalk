@@ -24,8 +24,12 @@ describe('Ratings Breakdown', () => {
     render(<RatingsBreakdown />);
   });
 
-  test('should have the correct ratings breakdown text', () => {
-    expect(screen.getByText('Some bars go here')).toBeInTheDocument();
+  test('should have all 5 ratings bars', () => {
+    expect(screen.getByText('5 stars')).toBeInTheDocument();
+    expect(screen.getByText('4 stars')).toBeInTheDocument();
+    expect(screen.getByText('3 stars')).toBeInTheDocument();
+    expect(screen.getByText('2 stars')).toBeInTheDocument();
+    expect(screen.getByText('1 stars')).toBeInTheDocument();
   });
 
   afterAll(cleanup);
