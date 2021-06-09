@@ -3,6 +3,7 @@ import StyleGrid from './subcomponents/StyleGrid';
 import ProductContext from '../../contexts/ProductContext';
 import RatingContext from '../../contexts/RatingContext';
 import ReactStars from 'react-rating-stars-component';
+import Price from './subcomponents/Price';
 
 const GalleryAside = (props) => {
 
@@ -40,7 +41,10 @@ const GalleryAside = (props) => {
         <h2>
           {product.name}
         </h2>
-        <span className="slim">${product.default_price}</span>
+        <Price
+          price={product ? product.default_price : 0}
+          salePrice={activeStyle ? activeStyle.sale_price : null}
+          />
         <br />
         <br />
         <div id="styles">
