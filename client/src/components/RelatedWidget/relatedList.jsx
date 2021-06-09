@@ -9,9 +9,9 @@ const RelatedList = function () {
   let index = 1;
   let translateX = 0;
 
-  // eslint-disable-next-line func-names
-  const buttonHandle = function (event) {
+  function buttonHandle(event) {
     const response = event.target.id;
+    let initial = 0;
 
     if (response === 'relatedPrevious') {
       if (index !== 1) {
@@ -26,13 +26,9 @@ const RelatedList = function () {
     }
 
     const cards = document.getElementsByClassName('relatedCard');
-    for (var i = 0; i < cards.length; i++) {
-      cards[i].style.transform = `translateX(${translateX}px`;
+    for (initial; initial < cards.length; initial += 1) {
+      cards[initial].style.transform = `translateX(${translateX}px`;
     }
-
-    // document.getElementsByClassName('relatedCard').forEach((card) => {
-    //   card.style.transform = `translateX(${translateX}px`;
-    // });
   }
 
   return (
