@@ -21,6 +21,18 @@ export default {
           "id": 2,
           "url": "urlplaceholder/review_5_photo_number_2.jpg"
         },
+        {
+          "id": 3,
+          "url": "urlplaceholder/review_5_photo_number_3.jpg"
+        },
+        {
+          "id": 4,
+          "url": "urlplaceholder/review_5_photo_number_4.jpg"
+        },
+        {
+          "id": 5,
+          "url": "urlplaceholder/review_5_photo_number_5.jpg"
+        },
       ]
     },
     {

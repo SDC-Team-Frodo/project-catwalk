@@ -7,7 +7,7 @@ const RelatedCard = (props) => {
   } = product;
 
   return (
-    <div className="relatedCard">
+    <div className="relatedCard card">
       <div className="imageContainer">
         <img src={thumbnail} alt="Failed" />
         <div className="star">&#9734;</div>

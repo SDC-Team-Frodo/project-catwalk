@@ -108,25 +108,61 @@ main
   margin-right: 1em
   margin-top: 1em
 
-// related
+
+
 #related
-  align: center
-  background-color: #f2f2f2
-  color: #212121
-  font: 100% $font-stack
   display: flex
+  align-items: center
 
+.carousel
+  align-items: center
+  display: flex
+  overflow: hidden
+  position:relative
 
-.relatedCard
-  margin: 6px
+.carousel_button
+  height: 100px
+  width: 3rem
+  cursor: pointer
+  border: 0
+  font-weight: bold
+  padding: 20px
+
+  .previous
+    right: 5px
+
+  .next
+    left: 5px
+
+  &:hover
+    opacity: 100%
+    background-color: #969696
+
+.card
+  margin-left: 6px
+  margin-right: 6px
   height: 384px
   width: 256px
   position: relative
   background-color: white
-  border: 2px solid black
+  border: 1px solid black
+  transition: transform 0.25s
+
+  .relatedCard
+    transform: translateX(0)
+
+.plus
+  display: flex
+  justify-content: center
+  align-items: center
+  text-align: center
 
 .textContainer
   padding: 10px
+
+.imageContainer
+  height: 256px
+  width: 256px
 
 .star
   position: absolute
@@ -134,6 +170,11 @@ main
   right: 5px
 
 // reviews
+#review-widget
+  margin: 3em 0 1em 0
+  header
+    font-size: 14px
+
 #reviews-ratings-container, #reviews-container, #ratings-container
   display: flex
 
@@ -142,31 +183,39 @@ main
 
 #reviews-ratings-container
   justify-content: space-between
+  margin-top: 1em
 
 #reviews-container
+  min-width: 400px
   width: 65%
 
 #ratings-container
+  min-width: 250px
   width: 30%
 
 #ratings-breakdown
   .avg-rating-stars
-    align-items: center
+    align-items: flex-start
     display: flex
+    font-size: 40px
+    font-weight: bold
+    .avg-rating
+      margin-right: 0.25em
+      letter-spacing: 0.05em
 
-#reviews
-  ul
-    list-style-type: none
-    margin: 0
-    max-height: 95vh
-    overflow-y: scroll
-    padding: 0
-  li
-    border-bottom: 2px solid gray
-    display: flex
-    flex-direction: column
-    font-size: 14px
-    padding: 2.5em 0 1.5em 0
+.review-tiles
+  list-style-type: none
+  margin: 0
+  max-height: 95vh
+  overflow-y: scroll
+  padding: 0
+
+.review
+  border-bottom: 2px solid gray
+  display: flex
+  flex-direction: column
+  font-size: 14px
+  padding: 2.5em 0 1.5em 0
 
 .reviews-count
   font-weight: bold
@@ -197,6 +246,18 @@ main
   font-size: 18px
   font-weight: bold
   margin-bottom: 0
+
+.review-photos
+    display: flex
+    justify-content: flex-start
+    list-style-type: none
+    margin-bottom: 1em
+    max-height: auto
+    overflow-x: scroll
+    padding: 0
+
+.review-photo
+    margin-right: 0.25em
 
 .recommend, .reviewer
   margin-bottom: 1em
