@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import Question from './Question';
 import organize from './organize';
 import QuestionsContext from '../../contexts/QuestionsContext';
+import Modal from '../Modal';
+import QuestionForm from './QuestionForm';
 
 function QuestionList() {
   const data = useContext(QuestionsContext);
@@ -39,6 +41,18 @@ function QuestionList() {
       >
         {buttonLabel}
       </button>
+      <Modal
+        header={(
+          <div id="modalHeader">
+            <h1>Ask Your Question</h1>
+            <h3>About The Product</h3>
+          </div>
+        )}
+        body={<QuestionForm />}
+        footer={<h2>This is the Footer</h2>}
+        btnName="Ask Question"
+        btnId="QButton"
+      />
     </div>
   );
 }
