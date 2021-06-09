@@ -15,23 +15,23 @@ export default {
       "helpfulness": 5,
       "photos": [{
           "id": 1,
-          "url": "urlplaceholder/review_5_photo_number_1.jpg"
+          "url": "https://upload.wikimedia.org/wikipedia/en/thumb/3/33/Patrick_Star.svg/1200px-Patrick_Star.svg.png"
         },
         {
           "id": 2,
-          "url": "urlplaceholder/review_5_photo_number_2.jpg"
+          "url": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png"
         },
         {
           "id": 3,
-          "url": "urlplaceholder/review_5_photo_number_3.jpg"
+          "url": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f8/Mr._Krabs.svg/1200px-Mr._Krabs.svg.png"
         },
         {
           "id": 4,
-          "url": "urlplaceholder/review_5_photo_number_4.jpg"
+          "url": "https://upload.wikimedia.org/wikipedia/en/thumb/8/8f/Squidward_Tentacles.svg/1200px-Squidward_Tentacles.svg.png"
         },
         {
           "id": 5,
-          "url": "urlplaceholder/review_5_photo_number_5.jpg"
+          "url": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a0/Sandy_Cheeks.svg/1200px-Sandy_Cheeks.svg.png"
         },
       ]
     },

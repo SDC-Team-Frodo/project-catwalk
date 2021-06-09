@@ -1,12 +1,15 @@
 export default {
   "product_id": "2",
   "ratings": {
-    2: 1,
-    3: 1,
-    4: 2,
+    1: 10,
+    2: 23,
+    3: 12,
+    4: 15,
+    5: 40,
   },
   "recommended": {
-    0: 5
+    true: 5,
+    false: 4,
   },
   "characteristics": {
     "Size": {
