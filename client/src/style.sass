@@ -82,22 +82,57 @@ main
   margin-right: 1em
   margin-top: 1em
 
-// related
 #related
-  align: center
-  background-color: #f2f2f2
-  color: #212121
-  font: 100% $font-stack
   display: flex
+  align-items: center
 
+.carousel
+  width: #969696
+  align-items: center
+  display: flex
+  overflow: hidden
+  position:relative
+  transform: translateX(0)
+  transition: transform 0.25s
+  color: #212121
+
+.carousel_button
+  height: 100px
+  width: 3rem
+  cursor: pointer
+  font-size: 3rem
+  border: 0
+  font-weight: bold
+  z-index: 1
+  padding: 20px
+  font: 100% $font-stack
+
+  .previous
+    right: 5px
+
+  .next
+    left: 5px
+
+  &:hover
+    opacity: 100%
+    background-color: #969696
 
 .relatedCard
-  margin: 6px
+  margin-left: 6px
+  margin-right: 6px
   height: 384px
   width: 256px
   position: relative
   background-color: white
-  border: 2px solid black
+  border: 1px solid black
+
+
+.plus
+  display: flex
+  justify-content: center
+  align-items: center
+  text-align: center
+
 
 .textContainer
   padding: 10px
