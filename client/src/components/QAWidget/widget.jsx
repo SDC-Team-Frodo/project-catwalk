@@ -7,7 +7,7 @@ import mockData from './mockData';
 
 const QaContainer = () => {
   const product = useContext(ProductContext);
-  const [data, setData] = useState({results: {}});
+  const [data, setData] = useState({ results: {} });
 
   useEffect(() => {
     request.get('qa/questions', {
