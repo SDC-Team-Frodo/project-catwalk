@@ -4,14 +4,44 @@ import relatedSamples from './relatedSamples'; // delete later
 import stylesSamples from './stylesSamples'; // delete later
 
 // eslint-disable-next-line func-names
-const RelatedList = function (props) {
+const RelatedList = function () {
+  const numberOfCards = relatedSamples.length;
+  let index = 1;
+  let translateX = 0;
+
+  // eslint-disable-next-line func-names
+  const buttonHandle = function (event) {
+    const response = event.target.id;
+
+    if (response === 'relatedPrevious') {
+      if (index !== 1) {
+        index -= 1;
+        translateX += 270;
+      }
+    } else if (response === 'relatedNext') {
+      if (index !== numberOfCards) {
+        index += 1;
+        translateX -= 270;
+      }
+    }
+
+    const cards = document.getElementsByClassName('relatedCard');
+    for (var i = 0; i < cards.length; i++) {
+      cards[i].style.transform = `translateX(${translateX}px`;
+    }
+
+    // document.getElementsByClassName('relatedCard').forEach((card) => {
+    //   card.style.transform = `translateX(${translateX}px`;
+    // });
+  }
+
   return (
     <div id="related" >
-      <button type="button" className="carousel_button previous" id="previous">&#60;</button>
+      <button type="button" className="carousel_button previous" id="relatedPrevious" onClick={buttonHandle}>&#60;</button>
       <div className="carousel" id="relatedList">
         {relatedSamples.map((relatedProduct, index) => <RelatedCard product={relatedProduct} thumbnail={stylesSamples[index].photos[0].thumbnail_url} key={relatedProduct.id} />)}
       </div>
-      <button type="button" className="carousel_button next" id="next">&#62;</button>
+      <button type="button" className="carousel_button next" id="relatedNext" onClick={buttonHandle}>&#62;</button>
     </div>
   );
 };
