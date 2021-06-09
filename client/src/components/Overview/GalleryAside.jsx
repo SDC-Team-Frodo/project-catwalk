@@ -1,8 +1,10 @@
 import React from 'react';
+import StyleGrid from './subcomponents/StyleGrid'
 
 const GalleryAside = (props) => {
 
-  const { product } = props;
+  const { product, styles } = props;
+  console.log(styles);
   // Added support for hiding.
   // I assume conditionally rendering will break the useState hook if it misses rendering any of the children using said hook.
   return (
@@ -34,9 +36,7 @@ const GalleryAside = (props) => {
         <br />
         <div id="styles">
           <strong>Styles &gt;</strong> SELECTED STYLE
-          <div id="style-grid">
-
-          </div>
+          <StyleGrid styles={styles}/>
         </div>
 
         <select name="SELECT SIZE" defaultValue="SELECT SIZE">

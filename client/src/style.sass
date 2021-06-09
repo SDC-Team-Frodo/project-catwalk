@@ -18,7 +18,7 @@ main
   display: flex
   margin: auto
   min-width: 400px
-  padding: 0 15vw
+  padding: 0 10vw
 
 // overview
 .separator
@@ -40,6 +40,35 @@ main
   background-color: darkgrey
   width: 40vw
   height: 25em
+
+// #style-grid
+//   display: grid
+//   grid-template-columns: repeat(auto-fill, minmax(3em, 1fr))
+//   column-gap: .37em
+//   row-gap: .25em
+
+// .style-tile
+//   border-radius: 50%
+//   background-color: black
+//   width: 3.5em
+//   height: 3.5em
+//   margin: .25em
+
+#style-grid
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  justify-content: flex-start
+  align-content: flex-start
+
+
+.style-tile
+  border-radius: 50%
+  background-color: black
+  width: 3.5em
+  height: 3.5em
+  margin-right: .75em
+  margin-bottom: .25em
 
 #description
   order: 1
@@ -66,10 +95,7 @@ main
   border-left: .1em solid black
 
 #fcontainer>i
-  margin-top: .5em
-  margin-left: .5em
-  margin-bottom: .5em
-  margin-right: .5em
+  margin: .5em
 
 .hide
   display: none
