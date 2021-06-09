@@ -7,8 +7,6 @@ import request from '../../requests';
 import SearchBar from './SearchBar';
 import mockData from './mockData';
 
-const DEBUG = false;
-
 const QaContainer = (props) => {
   const product = useContext(ProductContext);
 
