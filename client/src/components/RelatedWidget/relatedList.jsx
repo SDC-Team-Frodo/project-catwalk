@@ -16,6 +16,7 @@ const RelatedList = function () {
   const [index, setIndex] = useState(1);
   const [translateX, setTranslateX] = useState(0);
 
+  // Get initial value for related product's id, ratings, thumbnails
   useEffect(() => {
     request.get(`products/${product.id}/related`, { endpoint: `products/${product.id}/related` })
       .then((relatedProductsIds) => {
@@ -42,6 +43,7 @@ const RelatedList = function () {
       .catch((err) => console.log(err));
   }, [product.id]);
 
+  // Handles button event related to carousel next and previous buttons
   function buttonHandle(event) {
     const response = event.target.id;
 
@@ -58,6 +60,7 @@ const RelatedList = function () {
     }
   }
 
+  // Initiates the movement for the carousel
   useEffect(() => {
     let initial = 0;
     const cards = document.getElementsByClassName('relatedCard');
