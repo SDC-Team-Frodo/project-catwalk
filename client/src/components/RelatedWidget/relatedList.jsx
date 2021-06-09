@@ -70,10 +70,10 @@ const RelatedList = function () {
   }, [index, translateX]);
 
   return (
-    <div id="related" >
+    <div id="related">
       <button type="button" className="carousel_button previous" id="relatedPrevious" onClick={buttonHandle}>&#60;</button>
       <div className="carousel" id="relatedList">
-        {relatedSamples.map((relatedProduct, index) => <RelatedCard product={relatedProduct} thumbnail={stylesSamples[index].photos[0].thumbnail_url} key={relatedProduct.id} />)}
+        {relatedSamples.map((relatedProduct, i) => <RelatedCard product={relatedProduct} thumbnail={stylesSamples[i].photos[0].thumbnail_url} key={relatedProduct.id} />)}
       </div>
       <button type="button" className="carousel_button next" id="relatedNext" onClick={buttonHandle}>&#62;</button>
     </div>
