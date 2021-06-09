@@ -7,16 +7,21 @@ const ReviewsList = () => {
   const [reviewsShown, setReviewsShown] = useState(2);
   const [sortOrder, setSortOrder] = useState('relevant');
   // useEffect
+  useEffect(() => {
+    // fetch list of reviews based on sortOrder state
+  }, [sortOrder]);
   return (
     <section id="reviews">
       <div className="reviews-count">
-        {reviewData.results.length} reviews, sorted by <select onChange={(e) => setSortOrder((e) => e.target.value)}>
+        {reviewData.results.length}
+        reviews, sorted by
+        <select onChange={(e) => setSortOrder(() => e.target.value)}>
           <option value="relevant">relevance</option>
           <option value="newest">newest</option>
           <option value="helpful">helpful</option>
         </select>
       </div>
-      <ul>
+      <ul className="review-tiles">
         {reviewData.results.slice(0, reviewsShown).map((review) => (
           <ReviewTile key={review.review_id} review={review} />
         ))}
