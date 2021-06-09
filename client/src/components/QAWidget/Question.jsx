@@ -3,20 +3,26 @@ import Answer from './Answer';
 
 const Question = (props) => {
   const { question } = props;
-  const allAnswers = Object.values(question.answers);
   const [displayedAnswers, setDisplayedAnswers] = useState(2);
-  const [answers, setAnswers] = useState(allAnswers.slice(0, displayedAnswers));
+  const [answers, setAnswers] = useState(
+    Object.values(question.answers).slice(0, displayedAnswers),
+  );
   const [buttonLabel, setButtonLabel] = useState('More Answers');
 
   useEffect(() => {
-    if (allAnswers[displayedAnswers - 2] !== undefined) {
-      setAnswers(allAnswers.slice(0, displayedAnswers));
+    if (Object.values(question.answers)[displayedAnswers - 2] !== undefined) {
+      setAnswers(Object.values(question.answers).slice(0, displayedAnswers));
     } else {
       setButtonLabel('No More Answers');
     }
   }, [displayedAnswers]);
+
+  useEffect(() => {
+    setAnswers(Object.values(question.answers).slice(0, displayedAnswers));
+  }, [question]);
+
   return (
-    <div>
+    <div className="question">
       <h2>
         {`Q: ${question.question_body}`}
         <span className="helpful">
@@ -29,6 +35,7 @@ const Question = (props) => {
       <button
         type="button"
         id="loadA"
+        className="hoverGrey"
         onClick={() => {
           setDisplayedAnswers(displayedAnswers + 2);
         }}

@@ -7,7 +7,7 @@ const organize = (arr, comparable) => {
   while (result.length < initialLength) {
     let highest = arr[0];
     let index = 0;
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < arr.length; i += 1) {
       if (arr[i][comparable] > highest[comparable]) {
         highest = arr[i];
         index = i;
