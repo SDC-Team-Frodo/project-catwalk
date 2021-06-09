@@ -8,8 +8,7 @@ import RatingContext from '../../contexts/RatingContext';
 import ProductContext from '../../contexts/ProductContext';
 // import '../../overview.sass';
 
-const DEBUG = true;
-
+const DEBUG = false;
 
 const OverviewContainer = (props) => {
   // contexts
