@@ -3,8 +3,7 @@ import ReactStars from 'react-rating-stars-component';
 import formatDate from '../../helpers/formatDate';
 
 const ReviewTile = ({ review }) => {
-  // useState
-  // useEffect
+  const [hidden, setHidden] = useState(review.body.length > 250);
   return (
     <li className="review">
       <div className="review-date">
@@ -13,7 +12,9 @@ const ReviewTile = ({ review }) => {
             ...{
               size: 16,
               value: review.rating,
-              edit: true,
+              a11y: true,
+              edit: false,
+              activeColor: 'red',
             }
           }
           />
@@ -21,8 +22,28 @@ const ReviewTile = ({ review }) => {
         <span>{formatDate(review.date)}</span>
       </div>
       <p className="review-summary">{review.summary}</p>
-      <p className="review-body">{review.body}</p>
-      {review.recommend && <div className="recommend">✓ I recommend this product</div>}
+      <div className="review-body">
+        <p>{hidden ? `${review.body.slice(0, 249)}...` : review.body}</p>
+        {hidden && <button type="button" onClick={() => setHidden((isHidden) => !isHidden)}>Show More</button>}
+        {!!review.photos.length
+        && (
+          <ul className="review-photos">
+            {review.photos.map((photo) => {
+              return (
+                <li className="review-photo" key={photo.id}>
+                  <img src={photo.url} alt="a review thingie" />
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
+      {review.recommend && (
+        <div className="recommend">
+          <i className="fas fa-check" />
+          I recommend this product
+        </div>
+      )}
       <div className="reviewer">
         --
         {review.reviewer_name}
