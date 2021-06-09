@@ -3,3 +3,5 @@ jest.config.js
 config.yml
 *.test.js
 client/src/components/QAWidget/mockData.js
+testReviewData.js
+testReviewMetadata.js

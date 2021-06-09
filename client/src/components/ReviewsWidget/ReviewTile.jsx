@@ -3,40 +3,48 @@ import ReactStars from 'react-rating-stars-component';
 import formatDate from '../../helpers/formatDate';
 
 const ReviewTile = ({ review }) => {
-
+  // useState
+  // useEffect
   return (
     <li className="review">
-      <span>
-        <ReactStars {
-          ...{
-            size: 20,
-            value: review.rating,
-            edit: false,
+      <div className="review-date">
+        <span>
+          <ReactStars {
+            ...{
+              size: 16,
+              value: review.rating,
+              edit: true,
+            }
           }
-        }
-        />
-      </span>
-      <span>{formatDate(review.date)}</span>
-      <div className="review-summary">{review.summary}</div>
-      <div className="review-body">{review.body}</div>
-      <div className="recommend">{review.recommend && '✅ I recommend this product'}</div>
-      <div className="reviewer">{review.reviewer_name}</div>
-      <div className="response">
-        {review.response
-          && (
-          <div>
-            Response:
-            <div>
-              {review.response}
-            </div>
-          </div>
-          )}
+          />
+        </span>
+        <span>{formatDate(review.date)}</span>
       </div>
+      <p className="review-summary">{review.summary}</p>
+      <p className="review-body">{review.body}</p>
+      {review.recommend && <div className="recommend">✓ I recommend this product</div>}
+      <div className="reviewer">
+        --
+        {review.reviewer_name}
+      </div>
+      {review.response
+        && (
+          <div className="response">
+            Response:
+            <p>
+              {review.response}
+            </p>
+          </div>
+        )}
       <div className="helpful">
         Helpful?
-        <a> Yes </a>/<a> No </a>
+        <button type="button"> Yes </button>
+        /
+        <button type="button"> No </button>
+        (
         {review.helpfulness}
-        | Report
+        ) |
+        <button type="button"> Report </button>
       </div>
     </li>
   );
