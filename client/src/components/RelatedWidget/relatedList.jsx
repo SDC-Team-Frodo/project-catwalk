@@ -8,25 +8,38 @@ import stylesSamples from './stylesSamples'; // delete later
 // eslint-disable-next-line func-names
 const RelatedList = function () {
   const product = useContext(ProductContext);
-  const numberOfCards = relatedSamples.length;
-  const [relatedlist, setRelatedlist] = useState([]);
+
+  const [numberOfCards, setNumberOfCards] = useState(relatedSamples.length); //change from api call
+  const [relatedProductlist, setRelatedProductlist] = useState([]);
+  const [relatedRatings, setRelatedRatings] = useState([]);
+  const [relatedThumbnails, setRelatedThumbnails] = useState([]);
   const [index, setIndex] = useState(1);
   const [translateX, setTranslateX] = useState(0);
 
   useEffect(() => {
     request.get(`products/${product.id}/related`, { endpoint: `products/${product.id}/related` })
-    // request.get(`reviews/meta`, { endpoint: `reviews/meta`, product_id: product.id })
-    // request.get(`products/${product.id}/styles`, { endpoint: `products/${product.id}/styles` })
-      .then((relatedProducts) => {
-        console.log('Successfully retrieved related:', relatedProducts.data);
-        // console.log('Successfully retrieved related:', relatedProducts.data.ratings);
-        // console.log('Successfully retrieved related:', relatedProducts.data.results[0].photos[0].thumbnail_url);
-        //fetch data for each related product
-        //fetch data for each related product thumbnail images
-        //fetch data for each related product star rating
-      }).catch((err) => {
-        console.log(err);
-      });
+      .then((relatedProductsIds) => {
+        relatedProductsIds.data.forEach((id) => {
+          request.get(`products/${id}`, { endpoint: `products/${id}` })
+            .then((newRelatedProduct) => {
+              setRelatedProductlist((oldProducts) => [...oldProducts, newRelatedProduct.data]);
+            })
+            .catch((err) => console.log(err));
+
+          request.get(`reviews/meta`, { endpoint: `reviews/meta`, product_id: id })
+            .then((rating) => {
+              setRelatedRatings((oldRatings) => [...oldRatings, rating.data.ratings]);
+            })
+            .catch((err) => console.log(err));
+
+          request.get(`products/${id}/styles`, { endpoint: `products/${id}/styles` })
+            .then((thumbnail) => {
+              setRelatedThumbnails((oldThumbnails) => [...oldThumbnails, thumbnail.data.results[0].photos[0]]);
+            })
+            .catch((err) => console.log(err));
+        });
+      })
+      .catch((err) => console.log(err));
   }, [product.id]);
 
   function buttonHandle(event) {
