@@ -82,7 +82,8 @@ main
   margin-right: 1em
   margin-top: 1em
 
-//related
+
+
 #related
   display: flex
   align-items: center
@@ -96,7 +97,7 @@ main
 .carousel_button
   height: 100px
   width: 3rem
-  cursor: pointer
+  yarcursor: pointer
   border: 0
   font-weight: bold
   padding: 20px
@@ -111,9 +112,7 @@ main
     opacity: 100%
     background-color: #969696
 
-.relatedCard
-  transform: translateX(0)
-  transition: transform 0.25s
+.card
   margin-left: 6px
   margin-right: 6px
   height: 384px
@@ -121,6 +120,10 @@ main
   position: relative
   background-color: white
   border: 1px solid black
+
+  .relatedCard
+    transform: translateX(0)
+    transition: transform 0.25s
 
 .plus
   display: flex
@@ -135,7 +138,6 @@ main
   position: absolute
   top: 5px
   right: 5px
-  cursor: pointer
 
 // reviews
 #review-widget
