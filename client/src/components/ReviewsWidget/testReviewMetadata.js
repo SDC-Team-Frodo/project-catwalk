@@ -6,7 +6,8 @@ export default {
     4: 2,
   },
   "recommended": {
-    0: 5
+    true: 5,
+    false: 4,
   },
   "characteristics": {
     "Size": {
