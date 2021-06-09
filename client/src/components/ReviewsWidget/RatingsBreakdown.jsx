@@ -8,13 +8,16 @@ const RatingsBreakdown = () => {
   return (
     <section id="ratings-breakdown">
       <div className="avg-rating-stars">
-        <div>{averageRating}</div>
+        <div className="avg-rating">{averageRating}</div>
         <div>
           <ReactStars {
             ...{
               size: 16,
-              value: averageRating,
+              value: Math.round(averageRating * 2) / 2,
+              a11y: true,
+              isHalf: true,
               edit: false,
+              activeColor: 'red',
             }
           }
           />
