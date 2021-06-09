@@ -18,7 +18,7 @@ main
   display: flex
   margin: auto
   min-width: 400px
-  padding: 0 15vw
+  padding: 0 10vw
 
 // overview
 .separator
@@ -29,7 +29,7 @@ main
 
 #gallery
   order: 1
-  background-color: grey
+  // background-color: grey
   position: relative
   width: 60vw
   height: 25em
@@ -37,14 +37,43 @@ main
 #gallery-aside
   order: 2
   position: relative
-  background-color: darkgrey
+  // background-color: darkgrey
   width: 40vw
   height: 25em
+
+// #style-grid
+//   display: grid
+//   grid-template-columns: repeat(auto-fill, minmax(3em, 1fr))
+//   column-gap: .37em
+//   row-gap: .25em
+
+// .style-tile
+//   border-radius: 50%
+//   background-color: black
+//   width: 3.5em
+//   height: 3.5em
+//   margin: .25em
+
+#style-grid
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  justify-content: flex-start
+  align-content: flex-start
+
+
+.style-tile
+  border-radius: 50%
+  background-color: black
+  width: 3.5em
+  height: 3.5em
+  margin-right: .75em
+  margin-bottom: .25em
 
 #description
   order: 1
   position: relative
-  background: darkgrey
+  // background: darkgrey
   width: 60vw
   height: 15em
 
@@ -52,7 +81,7 @@ main
   order: 2
   display: inline-block
   position: relative
-  background: lightgrey
+  // background: lightgrey
   width: 40vw
   height: 15em
 
@@ -66,10 +95,7 @@ main
   border-left: .1em solid black
 
 #fcontainer>i
-  margin-top: .5em
-  margin-left: .5em
-  margin-bottom: .5em
-  margin-right: .5em
+  margin: .5em
 
 .hide
   display: none
@@ -257,3 +283,86 @@ main
     cursor: pointer
     height: 4em
     width: 48%
+
+// Modal
+.modal
+  top: 10%
+  border: thick double black
+  padding: 10px
+  position: fixed
+  background-color: skyblue
+  z-index: 2147483647
+  width: 60vw
+  left: 50%
+  transform: translateX(-50%)
+
+#backDrop
+  opacity: 0.5
+  top: 0%
+  left: 0%
+  position: fixed
+  background-color: black
+  height: 100%
+  width: 100%
+  z-index: 2147483646
+
+img
+  max-width: 100%
+  max-height: 100%
+
+#modalImgDiv
+  width: fit-content
+
+
+//QA
+#QATitle
+  border: thick double black
+  padding: 2px
+  text-align: center
+
+#Qinput
+  border: 2px solid black
+  width: 30vw
+  font-size: 20px
+
+#search
+  margin: 1vw
+  border: 2px solid black
+  width: 15vw
+  font-size: 20px
+
+#loadQ, #loadA
+  border: 2px solid black
+  font-size: 10px
+  width: 12vw
+
+#QButton
+  margin-left: 7vw
+  border: thick double black
+  font-size: 20px
+  width: 20vw
+
+.question
+  padding: 10px
+  border-bottom: 2px solid grey
+  margin: 3vw
+
+.hoverGrey:hover
+  background-color: lightgrey
+
+#loadQ
+  margin-bottom: 25px
+  margin-left: 48px
+
+#searchDiv
+  margin-left: 12vw
+
+.answerImage
+  margin: 5px
+  height: 50px
+  width: 50px
+  border: 2px solid black
+
+#answerImageDiv
+  display: flex
+
