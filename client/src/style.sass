@@ -145,6 +145,11 @@ main
   right: 5px
 
 // reviews
+#review-widget
+  margin: 3em 0 1em 0
+  header
+    font-size: 14px
+
 #reviews-ratings-container, #reviews-container, #ratings-container
   display: flex
 
@@ -153,31 +158,39 @@ main
 
 #reviews-ratings-container
   justify-content: space-between
+  margin-top: 1em
 
 #reviews-container
+  min-width: 400px
   width: 65%
 
 #ratings-container
+  min-width: 250px
   width: 30%
 
 #ratings-breakdown
   .avg-rating-stars
-    align-items: center
+    align-items: flex-start
     display: flex
+    font-size: 40px
+    font-weight: bold
+    .avg-rating
+      margin-right: 0.25em
+      letter-spacing: 0.05em
 
-#reviews
-  ul
-    list-style-type: none
-    margin: 0
-    max-height: 95vh
-    overflow-y: scroll
-    padding: 0
-  li
-    border-bottom: 2px solid gray
-    display: flex
-    flex-direction: column
-    font-size: 14px
-    padding: 2.5em 0 1.5em 0
+.review-tiles
+  list-style-type: none
+  margin: 0
+  max-height: 95vh
+  overflow-y: scroll
+  padding: 0
+
+.review
+  border-bottom: 2px solid gray
+  display: flex
+  flex-direction: column
+  font-size: 14px
+  padding: 2.5em 0 1.5em 0
 
 .reviews-count
   font-weight: bold
@@ -208,6 +221,18 @@ main
   font-size: 18px
   font-weight: bold
   margin-bottom: 0
+
+.review-photos
+    display: flex
+    justify-content: flex-start
+    list-style-type: none
+    margin-bottom: 1em
+    max-height: auto
+    overflow-x: scroll
+    padding: 0
+
+.review-photo
+    margin-right: 0.25em
 
 .recommend, .reviewer
   margin-bottom: 1em

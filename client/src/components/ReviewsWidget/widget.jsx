@@ -5,7 +5,7 @@ import ReviewsList from './ReviewsList';
 import ReviewForm from './ReviewForm';
 
 const ReviewContainer = () => (
-  <article id="ReviewWidget">
+  <article id="review-widget">
     <header>RATINGS &amp; REVIEWS</header>
     <div id="reviews-ratings-container">
       <div id="ratings-container">
