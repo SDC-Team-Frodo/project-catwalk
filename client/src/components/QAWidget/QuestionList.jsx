@@ -17,7 +17,6 @@ function QuestionList(props) {
 
   useEffect(() => {
     setQuestions(allQuestions.slice(0, displayedQuestions));
-    console.log(allQuestions);
   }, [allQuestions]);
 
   useEffect(() => {

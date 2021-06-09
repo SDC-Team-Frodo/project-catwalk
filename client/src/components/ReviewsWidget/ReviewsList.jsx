@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ReviewTile from './ReviewTile';
 import reviewData from './testReviewData';
-import request from '../../requests';
 
 const ReviewsList = () => {
   // will get filtered reviews from a context object set in widget.jsx
@@ -10,11 +9,11 @@ const ReviewsList = () => {
   // useEffect
   return (
     <section id="reviews">
-      <div>
+      <div className="reviews-count">
         {reviewData.results.length} reviews, sorted by <select onChange={(e) => setSortOrder((e) => e.target.value)}>
-          <option value="relevant">Relevance</option>
-          <option value="newest">Newest</option>
-          <option value="helpful">Helpful</option>
+          <option value="relevant">relevance</option>
+          <option value="newest">newest</option>
+          <option value="helpful">helpful</option>
         </select>
       </div>
       <ul>
@@ -22,9 +21,12 @@ const ReviewsList = () => {
           <ReviewTile key={review.review_id} review={review} />
         ))}
       </ul>
-      <div>
-        {reviewsShown + 1 <= reviewData.results.length && <button type="button" onClick={() => setReviewsShown((numReviews) => numReviews + 2)}>More Reviews</button>}
-        <button type="button">Write A Review</button>
+      <div className="review-buttons">
+        {reviewsShown + 1 <= reviewData.results.length && <button type="button" onClick={() => setReviewsShown((numReviews) => numReviews + 2)}>MORE REVIEWS</button>}
+        <button type="button">
+          WRITE A REVIEW
+          <big> + </big>
+        </button>
       </div>
     </section>
   );
