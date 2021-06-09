@@ -24,18 +24,24 @@ const OverviewContainer = (props) => {
 
   // states
   const [fullscreenSlider, setFullscreenSlider] = useState(false);
-  const [selectedStyle, setSelectedStyle] = useState('1');
+  const [selectedStyleIndex, setSelectedStyleIndex] = useState(1);
   const [styles, setStyles] = useState([]);
 
-
+  // returns the list of styles at selectedStyleIndex
+  const selectedStyle = () => {
+    return styles[selectedStyleIndex];
+  }
 
   useEffect(() => {
     request.get(`products/${product.id}/styles`, {
       productId: product.id
     })
       .then((result) => {
-        setSelectedStyle(0);
-        setStyles(result.data.results); // styles nested in {data} of results
+        const styleResults = result.data.results;
+        const styleIndex = styleResults.findIndex(s => s['default?']) || 0;
+
+        setSelectedStyleIndex(styleIndex);
+        setStyles(styleResults); // styles nested in {data} of results
       })
       .catch(console.error);
   }, [product]);
@@ -45,11 +51,14 @@ const OverviewContainer = (props) => {
       <div className="separator">
         <Gallery
           fullscreenSlider={fullscreenSlider}
-          setFullscreenSlider={setFullscreenSlider}/>
+          setFullscreenSlider={setFullscreenSlider}
+          style={selectedStyle()}/>
         <GalleryAside
           fullscreenSlider={fullscreenSlider}
           product={product}
-          styles={styles}/>
+          styles={styles}
+          selectedStyleIndex={selectedStyleIndex}
+          setSelectedStyleIndex={setSelectedStyleIndex}/>
       </div>
       <div className="separator">
         <Description product={product}/>
