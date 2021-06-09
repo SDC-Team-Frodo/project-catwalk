@@ -1,7 +1,9 @@
 import React/* , { useState, useEffect, useContext } */ from 'react';
 import ReactStars from 'react-rating-stars-component';
+import ProgressBar from './ProgressBar';
 import testReviewMetadata from './testReviewMetadata';
 import getAverageRating from '../../helpers/averageRating';
+import getTotalRatings from '../../helpers/totalRatings';
 
 const RatingsBreakdown = () => {
   const averageRating = getAverageRating(testReviewMetadata.ratings);
@@ -23,7 +25,16 @@ const RatingsBreakdown = () => {
           />
         </div>
       </div>
-      <div>Some bars go here</div>
+      <ul className="rating-bars">
+        {[5, 4, 3, 2, 1].map((value) => (
+          <ProgressBar
+            key={value}
+            numStars={value}
+            numReviews={testReviewMetadata.ratings[value] || 0}
+            totalReviews={getTotalRatings(testReviewMetadata.ratings)}
+          />
+        ))}
+      </ul>
     </section>
   );
 };
