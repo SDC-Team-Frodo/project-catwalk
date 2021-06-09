@@ -15,7 +15,7 @@ const QuestionForm = (props) => {
         />
       </div>
       <div>
-        <label className="formInput" htmlFor="Question">
+        <label className="formInput" htmlFor="nickName">
           What Is Your Nickname-----
         </label>
         <input
@@ -26,7 +26,7 @@ const QuestionForm = (props) => {
         <h4>For privacy reasons, do not use your full name or email address</h4>
       </div>
       <div>
-        <label className="formInput" htmlFor="Question">
+        <label className="formInput" htmlFor="email">
           Your Email--------------------
         </label>
         <input

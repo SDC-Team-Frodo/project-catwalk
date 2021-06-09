@@ -5,10 +5,18 @@ import searchFunc from './search';
 
 const SearchBar = () => {
   const data = useContext(QuestionsContext);
-  const [allQuestions] = useState(JSON.stringify(data));
+  const [allQuestions, setAllQuestions] = useState(JSON.stringify(data));
   const [searchClicked, setSearchClicked] = useState(false);
   const [relevantQuestions, setRelevantQuestions] = useState(allQuestions);
   const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    setAllQuestions(JSON.stringify(data));
+  }, [data]);
+
+  useEffect(() => {
+    setRelevantQuestions(allQuestions);
+  }, [allQuestions]);
 
   useEffect(() => {
     if (searchClicked === true) {

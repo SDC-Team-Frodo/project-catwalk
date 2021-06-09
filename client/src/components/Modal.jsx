@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
 
 const Modal = (props) => {
@@ -7,10 +9,16 @@ const Modal = (props) => {
   if (display) {
     return (
       <div>
-        <div id="backDrop" />
+        <div
+          id="backDrop"
+          type="button"
+          onClick={() => {
+            setDisplay(false);
+          }}
+        />
         <div className="modal" id={modalId}>
           <div id="header">
-            <button
+            {/* <button
               id="closeButton"
               type="button"
               onClick={() => {
@@ -18,7 +26,7 @@ const Modal = (props) => {
               }}
             >
               Close
-            </button>
+            </button> */}
             {header}
           </div>
           <div id="body">

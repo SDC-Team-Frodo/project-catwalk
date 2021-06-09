@@ -3,10 +3,18 @@ import Answer from './Answer';
 
 const Question = (props) => {
   const { question } = props;
-  const allAnswers = Object.values(question.answers);
+  const [allAnswers, setAllAnswers] = useState(Object.values(question.answers));
   const [displayedAnswers, setDisplayedAnswers] = useState(2);
   const [answers, setAnswers] = useState(allAnswers.slice(0, displayedAnswers));
   const [buttonLabel, setButtonLabel] = useState('More Answers');
+
+  useEffect(() => {
+    setAllAnswers(Object.values(question.answers));
+  }, [question]);
+
+  useEffect(() => {
+    setDisplayedAnswers(2);
+  }, [allAnswers]);
 
   useEffect(() => {
     if (allAnswers[displayedAnswers - 2] !== undefined) {
@@ -15,6 +23,7 @@ const Question = (props) => {
       setButtonLabel('No More Answers');
     }
   }, [displayedAnswers]);
+
   return (
     <div className="question">
       <h2>

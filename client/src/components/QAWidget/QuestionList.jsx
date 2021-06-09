@@ -14,7 +14,6 @@ function QuestionList() {
 
   useEffect(() => {
     setAllQuestions(organize(JSON.parse(data), 'question_helpfulness'));
-    setQuestions(allQuestions.slice(0, displayedQuestions));
   }, [data]);
 
   useEffect(() => {
@@ -51,7 +50,6 @@ function QuestionList() {
           </div>
         )}
         body={<QuestionForm />}
-        footer={<h2>This is the Footer</h2>}
         btnName="Ask Question"
         btnId="QButton"
       />

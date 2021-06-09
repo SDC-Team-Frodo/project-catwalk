@@ -9,11 +9,20 @@ import mockData from './mockData';
 
 const QaContainer = () => {
   const product = useContext(ProductContext);
+  const [data, setData] = useState(mockData);
+
+  useEffect(() => {
+    request.get('qa/questions', {
+      product_id: product.id,
+    }).then((newData) => {
+      setData(newData.data);
+    }).catch((err) => console.error(err));
+  }, [product]);
 
   return (
     <div id="QAWidget">
       <h1 id="QATitle" data-testid="QAtitle" className="title">Questions And Answers</h1>
-      <QuestionsContext.Provider value={mockData.results}>
+      <QuestionsContext.Provider value={data.results}>
         <SearchBar />
       </QuestionsContext.Provider>
     </div>

@@ -4,8 +4,19 @@ import Modal from '../Modal';
 
 const Answer = (props) => {
   const { answer, index } = props;
-  const [helpfulCount, setHelpfulcount] = useState(answer.helpfulness);
+  const [answerState, setAnswerState] = useState(answer);
+  const [helpfulCount, setHelpfulcount] = useState(answerState.helpfulness);
   const [yesClicked, setYesClicked] = useState(false);
+
+  useEffect(() => {
+    console.log(answer);
+    setAnswerState(answer);
+  }, [answer]);
+
+  useEffect(() => {
+    setHelpfulcount(answerState.helpfulness);
+    setYesClicked(false);
+  }, [answerState]);
 
   useEffect(() => {
     if (yesClicked) {
@@ -19,13 +30,13 @@ const Answer = (props) => {
         {index === 0 && (
           'A: '
         )}
-        {answer.body}
+        {answerState.body}
       </h2>
       <h5>
         by:
-        {answer.answerer_name}
+        {answerState.answerer_name}
         ,
-        {formatDate(answer.date)}
+        {formatDate(answerState.date)}
         Helpful?
         <span
           onClick={() => {
@@ -38,21 +49,23 @@ const Answer = (props) => {
         </span>
         Report
       </h5>
-      {answer.photos.length > 0 && (
-        answer.photos.map((photo, i) => {
-          return (
-            <Modal
-              key={i}
-              modalId={`answerPhoto${i}`}
-              body={(
-                <img src={photo} />
-              )}
-              isImage="true"
-              image={<img className="answerImage" src={photo} />}
-            />
-          );
-        })
-      )}
+      <div id="answerImageDiv">
+        {answerState.photos.length > 0 && (
+          answerState.photos.map((photo, i) => {
+            return (
+              <Modal
+                key={i}
+                modalId={`answerPhoto${i}`}
+                body={(
+                  <img src={photo} />
+                )}
+                isImage="true"
+                image={<img className="answerImage" src={photo} />}
+              />
+            );
+          })
+        )}
+      </div>
     </div>
   );
 };
