@@ -50,10 +50,10 @@ describe('Reviews List', () => {
   });
 
   test('Write a review button is always in the document', () => {
-    let writeReviewButton = screen.queryByText('Write A Review');
+    let writeReviewButton = screen.queryByText('WRITE A REVIEW');
     expect(writeReviewButton).toBeInTheDocument();
     fireEvent.click(writeReviewButton);
-    writeReviewButton = screen.queryByText('Write A Review');
+    writeReviewButton = screen.queryByText('WRITE A REVIEW');
     expect(writeReviewButton).toBeInTheDocument();
   });
 
