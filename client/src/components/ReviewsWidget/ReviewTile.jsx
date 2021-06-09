@@ -28,13 +28,11 @@ const ReviewTile = ({ review }) => {
         {!!review.photos.length
         && (
           <ul className="review-photos">
-            {review.photos.map((photo) => {
-              return (
-                <li className="review-photo" key={photo.id}>
-                  <img src={photo.url} alt="a review thingie" />
-                </li>
-              );
-            })}
+            {review.photos.map((photo) => (
+              <li className="review-photo" key={photo.id}>
+                <img src={photo.url} alt="a review thingie" />
+              </li>
+            ))}
           </ul>
         )}
       </div>
@@ -62,9 +60,12 @@ const ReviewTile = ({ review }) => {
         <button type="button"> Yes </button>
         /
         <button type="button"> No </button>
-        (
-        {review.helpfulness}
-        ) |
+        <span>
+          (
+          {review.helpfulness}
+          )
+        </span>
+        |
         <button type="button"> Report </button>
       </div>
     </li>
