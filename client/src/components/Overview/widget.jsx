@@ -10,7 +10,6 @@ import '../../overview.sass';
 
 const DEBUG = true;
 
-
 const OverviewContainer = (props) => {
   // contexts
   const theme = useContext(ThemeContext);
@@ -31,7 +30,7 @@ const OverviewContainer = (props) => {
     <div id="overview">
       <div className="separator">
         <Gallery fullscreenSlider={fullscreenSlider} setFullscreenSlider={setFullscreenSlider}/>
-        <GalleryAside fullscreenSlider={fullscreenSlider}/>
+        <GalleryAside fullscreenSlider={fullscreenSlider} product={product}/>
       </div>
       <div className="separator">
         <Description />

@@ -2,6 +2,7 @@ import React from 'react';
 
 const GalleryAside = (props) => {
 
+  const { product } = props;
   // Added support for hiding.
   // I assume conditionally rendering will break the useState hook if it misses rendering any of the children using said hook.
   return (
@@ -14,23 +15,23 @@ const GalleryAside = (props) => {
           <i className="fas fa-star"></i>
           <i className="far fa-star"></i>
           <i className="far fa-star"></i>
-          <a href="#Reviews">
+          <a href="#ReviewWidget">
             Read all reviews
           </a>
         </div>
 
         <br />
 
-        <span className="uppercase slim">CATEGORY</span>
+        <span className="uppercase slim">{product.category}</span>
 
         <br />
 
         <h2>
-          Expanded Product Name
+          {product.name}
         </h2>
-
+        <span className="slim">${product.default_price}</span>
         <br />
-
+        <br />
         <div id="styles">
           <strong>Styles &gt;</strong> SELECTED STYLE
           <div id="style-grid">
