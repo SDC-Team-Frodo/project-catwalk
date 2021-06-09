@@ -3,7 +3,7 @@ import QuestionsContext from '../../contexts/QuestionsContext';
 import QuestionList from './QuestionList';
 import searchFunc from './search';
 
-const SearchBar = (props) => {
+const SearchBar = () => {
   const data = useContext(QuestionsContext);
   const [allQuestions, setAllQuestions] = useState(JSON.stringify(data));
   const [searchClicked, setSearchClicked] = useState(false);
@@ -11,18 +11,29 @@ const SearchBar = (props) => {
   const [search, setSearch] = useState('');
 
   useEffect(() => {
+    setAllQuestions(JSON.stringify(data));
+  }, [data]);
+
+  useEffect(() => {
+    setRelevantQuestions(allQuestions);
+  }, [allQuestions]);
+
+  useEffect(() => {
     if (searchClicked === true) {
-      setRelevantQuestions(JSON.stringify(searchFunc(search, JSON.parse(allQuestions), 3)));
-      setSearchClicked(false);
+      if (search === '') {
+        setRelevantQuestions(allQuestions);
+      } else {
+        setRelevantQuestions(JSON.stringify(searchFunc(search, JSON.parse(allQuestions), 3)));
+        setSearchClicked(false);
+      }
     }
   }, [search, searchClicked]);
 
-  useEffect(() => {
-  }, [relevantQuestions]);
   return (
     <div>
       <div id="searchDiv">
         <input
+          id="Qinput"
           type="text"
           value={search}
           placeholder="Search For a Question"
@@ -34,6 +45,7 @@ const SearchBar = (props) => {
         <button
           id="search"
           type="button"
+          className="hoverGrey"
           onClick={() => {
             setSearchClicked(true);
           }}
