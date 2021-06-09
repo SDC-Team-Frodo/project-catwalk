@@ -20,8 +20,12 @@ const SearchBar = () => {
 
   useEffect(() => {
     if (searchClicked === true) {
-      setRelevantQuestions(JSON.stringify(searchFunc(search, JSON.parse(allQuestions), 3)));
-      setSearchClicked(false);
+      if (search === '') {
+        setRelevantQuestions(allQuestions);
+      } else {
+        setRelevantQuestions(JSON.stringify(searchFunc(search, JSON.parse(allQuestions), 3)));
+        setSearchClicked(false);
+      }
     }
   }, [search, searchClicked]);
 
