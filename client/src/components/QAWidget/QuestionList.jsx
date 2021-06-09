@@ -35,6 +35,7 @@ function QuestionList() {
       <button
         type="button"
         id="loadQ"
+        className="hoverGrey"
         onClick={() => {
           setDisplayedQuestions(displayedQuestions + 2);
         }}
@@ -42,6 +43,7 @@ function QuestionList() {
         {buttonLabel}
       </button>
       <Modal
+        modalId="QuestionFormModal"
         header={(
           <div id="modalHeader">
             <h1>Ask Your Question</h1>

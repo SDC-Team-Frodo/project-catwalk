@@ -23,6 +23,7 @@ const SearchBar = () => {
     <div>
       <div id="searchDiv">
         <input
+          id="Qinput"
           type="text"
           value={search}
           placeholder="Search For a Question"
@@ -34,6 +35,7 @@ const SearchBar = () => {
         <button
           id="search"
           type="button"
+          className="hoverGrey"
           onClick={() => {
             setSearchClicked(true);
           }}

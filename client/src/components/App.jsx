@@ -9,7 +9,6 @@ import ThemeContext from '../contexts/ThemeContext';
 import testData from '../testData';
 import '../style.sass';
 
-
 const App = () => {
 
   return (

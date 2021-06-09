@@ -16,7 +16,7 @@ const Question = (props) => {
     }
   }, [displayedAnswers]);
   return (
-    <div>
+    <div className="question">
       <h2>
         {`Q: ${question.question_body}`}
         <span className="helpful">
@@ -29,6 +29,7 @@ const Question = (props) => {
       <button
         type="button"
         id="loadA"
+        className="hoverGrey"
         onClick={() => {
           setDisplayedAnswers(displayedAnswers + 2);
         }}

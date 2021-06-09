@@ -1,48 +1,63 @@
 import React, { useState, useEffect } from 'react';
 
 const Modal = (props) => {
-  const { header, body, footer, btnName, btnId } = props;
+  const { modalId, header, body, footer, btnName, btnId, isImage, image } = props;
   const [display, setDisplay] = useState(false);
 
-  // useEffect(() => {
-  //   if (display === true) {
-
-  //   }
-  // }, [display]);
   if (display) {
     return (
-      <div id="modal">
-        <div id="header">
-          <button
-            id="closeButton"
-            type="button"
-            onClick={() => {
-              setDisplay(false);
-            }}
-          >
-            Close
-          </button>
-          {header}
-        </div>
-        <div id="body">
-          {body}
-        </div>
-        <div id="footer">
-          {footer}
+      <div>
+        <div id="backDrop" />
+        <div className="modal" id={modalId}>
+          <div id="header">
+            <button
+              id="closeButton"
+              type="button"
+              onClick={() => {
+                setDisplay(false);
+              }}
+            >
+              Close
+            </button>
+            {header}
+          </div>
+          <div id="body">
+            {body}
+          </div>
+          <div id="footer">
+            {footer}
+          </div>
         </div>
       </div>
     );
   }
   return (
-    <button
-      id={btnId}
-      type="button"
-      onClick={() => {
-        setDisplay(true);
-      }}
-    >
-      {btnName}
-    </button>
+    <div>
+      { !isImage && (
+      <button
+        id={btnId}
+        type="button"
+        className="hoverGrey"
+        onClick={() => {
+          setDisplay(true);
+        }}
+      >
+        {btnName}
+      </button>
+      )}
+      { isImage && (
+        // eslint-disable-next-line object-curly-spacing
+        <div
+          id="modalImgDiv"
+          type="button"
+          onClick={() => {
+            setDisplay(true);
+          }}
+        >
+          {image}
+        </div>
+      )}
+    </div>
   );
 };
 
