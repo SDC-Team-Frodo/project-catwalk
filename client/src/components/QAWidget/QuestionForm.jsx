@@ -1,22 +1,24 @@
 import React from 'react';
 
-const QuestionForm = (props) => {
+const QuestionForm = () => {
 
   return (
     <div id="questionForm">
       <div>
         <label className="formInput" htmlFor="Question">
-          Your Question----------------
+          Your Question
         </label>
-        <input
-          type="text"
+        <textarea
+          rows="3"
+          cols="100"
+          wrap="hard"
           id="Question"
           placeholder="Write your question here"
         />
       </div>
       <div>
         <label className="formInput" htmlFor="nickName">
-          What Is Your Nickname-----
+          What Is Your Nickname
         </label>
         <input
           type="text"
@@ -27,7 +29,7 @@ const QuestionForm = (props) => {
       </div>
       <div>
         <label className="formInput" htmlFor="email">
-          Your Email--------------------
+          Your Email
         </label>
         <input
           type="text"
@@ -37,6 +39,7 @@ const QuestionForm = (props) => {
         <h4>For authentication reasons, you will not be emailed</h4>
       </div>
       <button
+        className="hoverGrey"
         type="button"
         id="submitQBtn"
       >

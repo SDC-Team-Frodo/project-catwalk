@@ -10,7 +10,7 @@ function QuestionList() {
   const [allQuestions, setAllQuestions] = useState(organize(JSON.parse(data), 'question_helpfulness'));
   const [displayedQuestions, setDisplayedQuestions] = useState(4);
   const [questions, setQuestions] = useState(allQuestions.slice(0, displayedQuestions));
-  const [buttonLabel, setButtonLabel] = useState('More Questions');
+  const [buttonDisplay, setButtonDisplay] = useState(true);
 
   useEffect(() => {
     setAllQuestions(organize(JSON.parse(data), 'question_helpfulness'));
@@ -24,23 +24,26 @@ function QuestionList() {
     if (allQuestions[displayedQuestions - 2] !== undefined) {
       setQuestions(allQuestions.slice(0, displayedQuestions));
     } else {
-      setButtonLabel('No More Questions');
+      setButtonDisplay(false);
     }
   }, [displayedQuestions]);
 
   return (
     <div className="QuestionList">
+      {/* eslint-disable-next-line react/no-array-index-key */}
       {questions.map((question, i) => <Question key={i} question={question} />)}
-      <button
-        type="button"
-        id="loadQ"
-        className="hoverGrey"
-        onClick={() => {
-          setDisplayedQuestions(displayedQuestions + 2);
-        }}
-      >
-        {buttonLabel}
-      </button>
+      {buttonDisplay && (
+        <button
+          type="button"
+          id="loadQ"
+          className="hoverGrey"
+          onClick={() => {
+            setDisplayedQuestions(displayedQuestions + 2);
+          }}
+        >
+          More Questions
+        </button>
+      )}
       <Modal
         modalId="QuestionFormModal"
         header={(
