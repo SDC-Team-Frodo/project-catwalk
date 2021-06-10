@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ProductContext from '../../contexts/ProductContext';
 import request from '../../requests';
-// import BlankCard from './blankCard';
 
 const OutfitList = () => {
   const product = useContext(ProductContext);
 
   const [numberOfCards, setNumberOfCards] = useState(0);
   const [translateX, setTranslateX] = useState(0);
-  const [outfitIds, setOutfitList] = useState(JSON.parse(localStorage.getItem('outfit')));
+  const [outfitIds, setOutfitIds] = useState(JSON.parse(localStorage.getItem('outfit')));
   const [outfitProducts, setOutfitProducts] = useState([]);
   const [outfitRatings, setOutfitRatings] = useState([]);
   const [outfitThumbnails, setOutfitThumbnails] = useState([]);
@@ -16,7 +15,31 @@ const OutfitList = () => {
 
   useEffect(() => {
     console.log('should only render once?')
-  }, [outfitIds])
+    if (outfitIds > 0) {
+      setNumberOfCards(outfitIds.length);
+      outfitIds.forEach((id) => {
+        request.get(`products/${id}`, { endpoint: `products/${id}` })
+          .then((newOutfitProduct) => {
+            setOutfitProducts((oldProducts) => [...oldProducts, newOutfitProduct.data]);
+          })
+          .catch((err) => console.log(err));
+
+        request.get(`reviews/meta`, { endpoint: `reviews/meta`, product_id: id })
+          .then((rating) => {
+            setOutfitRatings((oldRatings) => [...oldRatings, rating.data.ratings]);
+          })
+          .catch((err) => console.log(err));
+
+        request.get(`products/${id}/styles`, { endpoint: `products/${id}/styles` })
+          .then((thumbnail) => {
+            setOutfitThumbnails((oldThumbnails) => [...oldThumbnails, thumbnail.data.results[0].photos[0]]);
+          })
+          .catch((err) => console.log(err));
+      });
+    } else if (!outfitIds) {
+      setOutfitIds([]);
+    }
+  }, [outfitIds]);
 
   function addOutfit() {
     let outfitIdsLocal = JSON.parse(localStorage.getItem('outfit'));
