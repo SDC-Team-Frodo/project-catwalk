@@ -55,9 +55,6 @@ const Question = (props) => {
             btnId="addAnswer"
 
           />
-          {/* <button type="button" className="reportButton">
-            Add Answer
-          </button> */}
         </div>
       </h2>
       <div>

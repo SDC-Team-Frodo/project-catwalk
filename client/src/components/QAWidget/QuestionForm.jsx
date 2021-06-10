@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const QuestionForm = () => {
+  const [question, setQuestion] = useState('');
+  const [nickName, setNickName] = useState('');
+  const [email, setEmail] = useState('');
 
   return (
     <div id="questionForm">

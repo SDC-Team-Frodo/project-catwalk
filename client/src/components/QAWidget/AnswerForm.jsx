@@ -1,6 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const AnswerForm = () => {
+  const [answer, setAnswer] = useState('');
+  const [nickName, setNickName] = useState('');
+  const [email, setEmail] = useState('');
+  const [subClicked, setSubClicked] = useState(false);
+
+  useEffect(() => {
+    if (subClicked) {
+      console.log(answer);
+      console.log(nickName);
+      console.log(email);
+      setSubClicked(false);
+    }
+  }, [subClicked]);
 
   return (
     <div id="answerForm">
@@ -14,6 +27,9 @@ const AnswerForm = () => {
           wrap="hard"
           id="Question"
           placeholder="Write your question here"
+          onChange={(e) => {
+            setAnswer(e.target.value);
+          }}
         />
       </div>
       <div>
@@ -24,6 +40,9 @@ const AnswerForm = () => {
           type="text"
           id="nickName"
           placeholder="Example: jack543!!"
+          onChange={(e) => {
+            setNickName(e.target.value);
+          }}
         />
         <h4>For privacy reasons, do not use your full name or email address</h4>
       </div>
@@ -35,6 +54,9 @@ const AnswerForm = () => {
           type="text"
           id="email"
           placeholder="Example: billbillbill@email.com"
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
         />
         <h4>For authentication reasons, you will not be emailed</h4>
       </div>
@@ -42,6 +64,9 @@ const AnswerForm = () => {
         className="hoverGrey"
         type="button"
         id="submitABtn"
+        onClick={() => {
+          setSubClicked(true);
+        }}
       >
         Submit!
       </button>
