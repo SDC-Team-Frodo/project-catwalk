@@ -6,25 +6,31 @@ const RelatedCard = (props) => {
   const {
     features, default_price, category, name,
   } = product;
-  // console.log(props.product)
 
-  return (
-    <div className="relatedCard card">
-      <div className="imageContainer">
-        <img src={thumbnail ? thumbnail.thumbnail_url : null} alt="Failed" />
-        <div className="star">&#9734;</div>
+  if (thumbnail) {
+    const background = {
+      backgroundImage: `url("${thumbnail.thumbnail_url}")`
+    }
+    return (
+      <div className="relatedCard card">
+        <div className="imageContainer" style={background}>
+          <img src={thumbnail.thumbnail_url} alt="Failed" />
+          <div className="star">&#9734;</div>
+        </div>
+        <div className="textContainer">
+          {category}
+          <br />
+          <b>{name}</b>
+          <br />
+          ${default_price}
+          <br />
+          <span>&#x2605;&#x2605;&#x2605;&#9734;&#9734;</span>
+        </div>
       </div>
-      <div className="textContainer">
-        {category}
-        <br />
-        <b>{name}</b>
-        <br />
-        {default_price}
-        <br />
-        <span>&#x2605;&#x2605;&#x2605;&#9734;&#9734;</span>
-      </div>
-    </div>
-  );
+    );
+  } else {
+    return <p>List Loading</p>
+  }
 };
 
 export default RelatedCard;
