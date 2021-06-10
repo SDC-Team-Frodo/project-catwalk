@@ -2,28 +2,29 @@ import React, { useState, useEffect, useContext } from 'react';
 import RelatedCard from './relatedCard';
 import request from '../../requests';
 import ProductContext from '../../contexts/ProductContext';
-import relatedSamples from './relatedSamples'; // delete later
-import stylesSamples from './stylesSamples'; // delete later
 
 // eslint-disable-next-line func-names
 const RelatedList = function () {
   const product = useContext(ProductContext);
 
-  const [numberOfCards, setNumberOfCards] = useState(relatedSamples.length); //change from api call
-  const [relatedProductlist, setRelatedProductlist] = useState([]);
+  const [array, setarray] = useState([]);
+  const [numberOfCards, setNumberOfCards] = useState(0); //change from api call
+  const [translateX, setTranslateX] = useState(0);
+  const [relatedProductList, setRelatedProductList] = useState([]);
   const [relatedRatings, setRelatedRatings] = useState([]);
   const [relatedThumbnails, setRelatedThumbnails] = useState([]);
   const [index, setIndex] = useState(1);
-  const [translateX, setTranslateX] = useState(0);
 
   // Get initial value for related product's id, ratings, thumbnails
   useEffect(() => {
     request.get(`products/${product.id}/related`, { endpoint: `products/${product.id}/related` })
       .then((relatedProductsIds) => {
+        setNumberOfCards(relatedProductsIds.length);
+        console.log('this is product ids', relatedProductsIds.data)
         relatedProductsIds.data.forEach((id) => {
           request.get(`products/${id}`, { endpoint: `products/${id}` })
             .then((newRelatedProduct) => {
-              setRelatedProductlist((oldProducts) => [...oldProducts, newRelatedProduct.data]);
+              setRelatedProductList((oldProducts) => [...oldProducts, newRelatedProduct.data]);
             })
             .catch((err) => console.log(err));
 
@@ -42,6 +43,8 @@ const RelatedList = function () {
       })
       .catch((err) => console.log(err));
   }, [product.id]);
+
+  console.log(array)
 
   // Handles button event related to carousel next and previous buttons
   function buttonHandle(event) {
@@ -73,7 +76,10 @@ const RelatedList = function () {
     <div id="related">
       <button type="button" className="carousel_button previous" id="relatedPrevious" onClick={buttonHandle}>&#60;</button>
       <div className="carousel" id="relatedList">
-        {relatedSamples.map((relatedProduct, i) => <RelatedCard product={relatedProduct} thumbnail={stylesSamples[i].photos[0].thumbnail_url} key={relatedProduct.id} />)}
+        {/* {relatedSamples.map((relatedProduct, i) => <RelatedCard product={relatedProduct} thumbnail={stylesSamples[i].photos[0].thumbnail_url} key={relatedProduct.id} />)} */}
+        {/* {relatedProductList.length === numberOfCards
+          ? relatedProductList.map((relatedProduct, i) => <RelatedCard product={relatedProduct} thumbnail={relatedThumbnails[i]} ratings={relatedRatings[i]} key={relatedProduct.id} />) : null} */}
+        {relatedProductList.map((relatedProduct, i) => <RelatedCard product={relatedProduct} thumbnail={relatedThumbnails[i]} ratings={relatedRatings[i]} key={relatedProduct.id} />)}
       </div>
       <button type="button" className="carousel_button next" id="relatedNext" onClick={buttonHandle}>&#62;</button>
     </div>
