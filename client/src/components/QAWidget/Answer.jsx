@@ -56,7 +56,7 @@ const Answer = (props) => {
                     key={i}
                     modalId={`answerPhoto${i}`}
                     body={(
-                      <img src={photo} />
+                      <img className="Image" src={photo} />
                     )}
                     isImage="true"
                     image={<img className="answerImage" src={photo} />}
