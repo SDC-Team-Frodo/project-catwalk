@@ -21,8 +21,6 @@ const GalleryNav = (props) => {
       nextScroll = Math.max(scroll + scrollAmount, MIN_HEIGHT);
     }
 
-    console.log(scroll, nextScroll, scrollAmount)
-
     nav.scroll({
       top: nextScroll,
       behavior: 'smooth'

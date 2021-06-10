@@ -12,7 +12,6 @@ const GalleryNavTile = (props) => {
   };
 
 
-  // console.log('nav tile')
   return (
     <div className="gallery-nav-tile" style={css}>
 
