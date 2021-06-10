@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import formatDate from '../../helpers/formatDate';
-import QuestionsContext from '../../contexts/QuestionsContext';
 import Modal from '../Modal';
 
 const Answer = (props) => {

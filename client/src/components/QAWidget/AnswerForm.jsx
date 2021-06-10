@@ -1,12 +1,12 @@
 import React from 'react';
 
-const QuestionForm = () => {
+const AnswerForm = () => {
 
   return (
-    <div id="questionForm">
+    <div id="answerForm">
       <div>
-        <label className="formInput" htmlFor="Question">
-          Your Question *Mandatory
+        <label className="formInput" htmlFor="Answer">
+          Your Answer *Mandatory
         </label>
         <textarea
           rows="3"
@@ -23,7 +23,7 @@ const QuestionForm = () => {
         <input
           type="text"
           id="nickName"
-          placeholder="Example: jackson11!"
+          placeholder="Example: jack543!!"
         />
         <h4>For privacy reasons, do not use your full name or email address</h4>
       </div>
@@ -41,7 +41,7 @@ const QuestionForm = () => {
       <button
         className="hoverGrey"
         type="button"
-        id="submitQBtn"
+        id="submitABtn"
       >
         Submit!
       </button>
@@ -49,4 +49,4 @@ const QuestionForm = () => {
   );
 };
 
-export default QuestionForm;
+export default AnswerForm;

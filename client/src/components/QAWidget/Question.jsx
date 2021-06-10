@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Answer from './Answer';
+import Modal from '../Modal';
+import AnswerForm from './AnswerForm';
 
 const Question = (props) => {
   const { question } = props;
@@ -37,9 +39,25 @@ const Question = (props) => {
             {`Yes(${question.question_helpfulness})`}
           </button>
           |
-          <button type="button" className="reportButton">
+          <Modal
+            header={(
+              <div id="AnswerHeader" className="modalHeader">
+                <h1>Submit your Answer</h1>
+                <h2>*Product Name*</h2>
+                <h2>
+                  {'Question:   '}
+                  {question.question_body}
+                </h2>
+              </div>
+            )}
+            body={<AnswerForm />}
+            btnName="Add Answer"
+            btnId="addAnswer"
+
+          />
+          {/* <button type="button" className="reportButton">
             Add Answer
-          </button>
+          </button> */}
         </div>
       </h2>
       <div>

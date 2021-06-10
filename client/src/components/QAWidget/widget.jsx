@@ -27,9 +27,9 @@ const QaContainer = () => {
         <Modal
           modalId="QuestionFormModal"
           header={(
-            <div id="modalHeader">
+            <div className="modalHeader">
               <h1>Ask Your Question</h1>
-              <h3>About The Product</h3>
+              <h3>*Product Name*</h3>
             </div>
           )}
           body={<QuestionForm />}

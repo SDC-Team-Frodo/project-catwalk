@@ -349,6 +349,9 @@ img
 #modalImgDiv
   width: fit-content
 
+.modalHeader
+  text-align: center
+
 
 /////////////QA//////////////
 #QATitle
@@ -404,6 +407,7 @@ img
 
 
 #helpfulQ
+  display: flex
   float: right
   color: gray
   font-size: 13px
@@ -423,12 +427,17 @@ img
     background-color: white
     border: none
 
-#questionForm
+#questionForm, #answerForm
+  color: black
   width: 100%
   button
+    color: black
+    text-decoration: none
     margin-left: 42%
     font-size: 25px
     border: 2px solid black
+  button:hover
+    background-color: lightgrey
   div
     height: 100px
     border-bottom: 1px solid black
@@ -439,7 +448,7 @@ img
     width: 45%
     font-size: 25px
     float: right
-    margin-right: 20%
+    margin-right: 5%
   #Question
     height: 75px
 
@@ -447,3 +456,6 @@ img
   margin-bottom: 10px
   max-height: 95vh
   overflow-y: scroll
+
+#AnswerHeader
+  color: black
