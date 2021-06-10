@@ -396,16 +396,25 @@ main
     width: 48%
 
 // Modal
+img
+  max-width: 100%
+  max-height: 100%
+
 .modal
-  top: 10%
+  top: 50vh
+  max-height: 80vh
   border: thick double black
   padding: 10px
   position: fixed
   background-color: skyblue
   z-index: 2147483647
-  width: 60vw
-  left: 50%
-  transform: translateX(-50%)
+  max-width: 80vw
+  left: 50vw
+  transform: translate(-50%, -50%)
+  .modalBody
+      img
+        max-width: 80vw
+        max-height: 80vh
 
 #backDrop
   opacity: 0.5
@@ -417,12 +426,12 @@ main
   width: 100%
   z-index: 2147483646
 
-img
-  max-width: 100%
-  max-height: 100%
 
 #modalImgDiv
   width: fit-content
+
+.modalHeader
+  text-align: center
 
 
 /////////////QA//////////////
@@ -444,7 +453,7 @@ img
 
 #loadQ, #loadA
   border: 2px solid black
-  font-size: 10px
+  font-size: 20px
   width: 12vw
 
 #QButton
@@ -455,15 +464,22 @@ img
 
 .question
   padding: 10px
-  border-bottom: 2px solid grey
-  margin: 3vw
+  border-bottom: 2px solid black
+  margin: 3%
+  .AnswerText
+    font-weight: 200
+
+.answer
+  padding: 5px
+  border-bottom: 1px solid grey
+  margin: 3%
 
 .hoverGrey:hover
   background-color: lightgrey
 
 #loadQ
   margin-bottom: 25px
-  margin-left: 48px
+  margin-left: 42%
 
 #searchDiv
   margin-left: 12vw
@@ -479,6 +495,7 @@ img
 
 
 #helpfulQ
+  display: flex
   float: right
   color: gray
   font-size: 13px
@@ -498,12 +515,17 @@ img
     background-color: white
     border: none
 
-#questionForm
-  width: 100%
+#questionForm, #answerForm
+  color: black
+  width: 60vw
   button
+    color: black
+    text-decoration: none
     margin-left: 42%
     font-size: 25px
     border: 2px solid black
+  button:hover
+    background-color: lightgrey
   div
     height: 100px
     border-bottom: 1px solid black
@@ -514,7 +536,22 @@ img
     width: 45%
     font-size: 25px
     float: right
-    margin-right: 20%
+    margin-right: 5%
   #Question
     height: 75px
 
+.QuestionList
+  margin-bottom: 10px
+  max-height: 95vh
+  overflow-y: scroll
+
+#AnswerHeader
+  color: black
+
+.inValid
+  color: red
+
+.disclaimer
+  font-size: 15px
+  font-weight: 200
+  color: grey
