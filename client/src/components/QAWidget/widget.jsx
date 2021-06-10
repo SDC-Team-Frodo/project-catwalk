@@ -4,6 +4,8 @@ import ProductContext from '../../contexts/ProductContext';
 import request from '../../requests';
 import SearchBar from './SearchBar';
 import mockData from './mockData';
+import Modal from '../Modal';
+import QuestionForm from './QuestionForm';
 
 const QaContainer = () => {
   const product = useContext(ProductContext);
@@ -22,6 +24,18 @@ const QaContainer = () => {
       <h1 id="QATitle" data-testid="QAtitle" className="title">Questions And Answers</h1>
       <QuestionsContext.Provider value={data.results}>
         <SearchBar />
+        <Modal
+          modalId="QuestionFormModal"
+          header={(
+            <div className="modalHeader">
+              <h1>Ask Your Question</h1>
+              <h3>{product.name}</h3>
+            </div>
+          )}
+          body={<QuestionForm />}
+          btnName="Ask Question"
+          btnId="QButton"
+        />
       </QuestionsContext.Provider>
     </div>
   );
