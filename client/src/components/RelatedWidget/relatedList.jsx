@@ -7,7 +7,6 @@ import ProductContext from '../../contexts/ProductContext';
 const RelatedList = function () {
   const product = useContext(ProductContext);
 
-  const [array, setarray] = useState([]);
   const [numberOfCards, setNumberOfCards] = useState(0); //change from api call
   const [translateX, setTranslateX] = useState(0);
   const [relatedProductList, setRelatedProductList] = useState([]);
@@ -19,8 +18,7 @@ const RelatedList = function () {
   useEffect(() => {
     request.get(`products/${product.id}/related`, { endpoint: `products/${product.id}/related` })
       .then((relatedProductsIds) => {
-        setNumberOfCards(relatedProductsIds.length);
-        console.log('this is product ids', relatedProductsIds.data)
+        setNumberOfCards(relatedProductsIds.data.length);
         relatedProductsIds.data.forEach((id) => {
           request.get(`products/${id}`, { endpoint: `products/${id}` })
             .then((newRelatedProduct) => {
@@ -44,8 +42,6 @@ const RelatedList = function () {
       .catch((err) => console.log(err));
   }, [product.id]);
 
-  console.log(array)
-
   // Handles button event related to carousel next and previous buttons
   function buttonHandle(event) {
     const response = event.target.id;
@@ -56,7 +52,7 @@ const RelatedList = function () {
         setTranslateX((previousTranslateX) => previousTranslateX + 270);
       }
     } else if (response === 'relatedNext') {
-      if (index !== numberOfCards) {
+      if (index < numberOfCards - 4) {
         setIndex((previousIndex) => previousIndex + 1);
         setTranslateX((previousTranslateX) => previousTranslateX - 270);
       }
@@ -76,9 +72,6 @@ const RelatedList = function () {
     <div id="related">
       <button type="button" className="carousel_button previous" id="relatedPrevious" onClick={buttonHandle}>&#60;</button>
       <div className="carousel" id="relatedList">
-        {/* {relatedSamples.map((relatedProduct, i) => <RelatedCard product={relatedProduct} thumbnail={stylesSamples[i].photos[0].thumbnail_url} key={relatedProduct.id} />)} */}
-        {/* {relatedProductList.length === numberOfCards
-          ? relatedProductList.map((relatedProduct, i) => <RelatedCard product={relatedProduct} thumbnail={relatedThumbnails[i]} ratings={relatedRatings[i]} key={relatedProduct.id} />) : null} */}
         {relatedProductList.map((relatedProduct, i) => <RelatedCard product={relatedProduct} thumbnail={relatedThumbnails[i]} ratings={relatedRatings[i]} key={relatedProduct.id} />)}
       </div>
       <button type="button" className="carousel_button next" id="relatedNext" onClick={buttonHandle}>&#62;</button>
