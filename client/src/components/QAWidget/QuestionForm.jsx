@@ -35,18 +35,18 @@ const QuestionForm = () => {
           id="nickName"
           placeholder="Example: jackson11!"
         />
-        <h4>For privacy reasons, do not use your full name or email address</h4>
+        <h4 className="disclaimer">*For privacy reasons, do not use your full name or email address*</h4>
       </div>
       <div>
         <label className="formInput" htmlFor="email">
           Your Email *Mandatory
         </label>
         <input
-          type="text"
+          type="email"
           id="email"
           placeholder="Example: billbillbill@email.com"
         />
-        <h4>For authentication reasons, you will not be emailed</h4>
+        <h4 className="disclaimer">*For authentication reasons, you will not be emailed*</h4>
       </div>
       <button
         className="hoverGrey"

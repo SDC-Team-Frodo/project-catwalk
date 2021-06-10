@@ -1,28 +1,59 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 const AnswerForm = () => {
   const [answer, setAnswer] = useState('');
   const [nickName, setNickName] = useState('');
   const [email, setEmail] = useState('');
   const [subClicked, setSubClicked] = useState(false);
+  const [validA, setValidA] = useState(false);
+  const [validN, setValidN] = useState(false);
+  const [validE, setValidE] = useState(false);
+
+  const isEmail = () => {
+    if (
+      email.length > 2
+      && email.indexOf('@') > -1
+      && email.indexOf('.') > -1
+      && email.indexOf(' ') === -1
+      && email.slice(email.indexOf('.'), email.length).length === 4
+    ) {
+      return true;
+    }
+    return false;
+  };
 
   useEffect(() => {
     if (subClicked) {
-      console.log(answer);
-      console.log(nickName);
-      console.log(email);
-      setAnswer('');
-      setNickName('');
-      setEmail('');
-      setSubClicked(false);
+      if (
+        validA
+        && validN
+        && validE
+      ) {
+        // Need to make the api request
+        console.log('Answer:', answer);
+        console.log('NickName:', nickName);
+        console.log('Email:', email);
+        // then do this stuff
+        setAnswer('');
+        setNickName('');
+        setEmail('');
+        setSubClicked(false);
+      }
     }
   }, [subClicked]);
+
+  useEffect(() => {
+    answer.length > 2 ? setValidA(true) : setValidA(false)
+    nickName.length > 2 ? setValidN(true) : setValidN(false)
+    isEmail() ? setValidE(true) : setValidE(false)
+  }, [answer, nickName, email]);
 
   return (
     <div id="answerForm">
       <div>
         <label className="formInput" htmlFor="Answer">
-          Your Answer *Mandatory
+          Your Answer
+          <span className={validA ? 'valid' : 'inValid'}>{' * Mandatory'}</span>
         </label>
         <textarea
           rows="3"
@@ -38,7 +69,8 @@ const AnswerForm = () => {
       </div>
       <div>
         <label className="formInput" htmlFor="nickName">
-          What Is Your Nickname *Mandatory
+          What Is Your Nickname
+          <span className={validN ? 'valid' : 'inValid'}>{' * Mandatory'}</span>
         </label>
         <input
           type="text"
@@ -49,11 +81,12 @@ const AnswerForm = () => {
             setNickName(e.target.value);
           }}
         />
-        <h4>For privacy reasons, do not use your full name or email address</h4>
+        <h4 className="disclaimer">*For privacy reasons, do not use your full name or email address*</h4>
       </div>
       <div>
         <label className="formInput" htmlFor="email">
-          Your Email *Mandatory
+          Your Email
+          <span className={validE ? 'valid' : 'inValid'}>{' * Mandatory'}</span>
         </label>
         <input
           type="text"
@@ -64,7 +97,7 @@ const AnswerForm = () => {
             setEmail(e.target.value);
           }}
         />
-        <h4>For authentication reasons, you will not be emailed</h4>
+        <h4 className="disclaimer">*For authentication reasons, you will not be emailed*</h4>
       </div>
       <button
         className="hoverGrey"

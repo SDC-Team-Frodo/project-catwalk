@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Answer from './Answer';
 import Modal from '../Modal';
 import AnswerForm from './AnswerForm';
+import ProductContext from '../../contexts/ProductContext';
 
 const Question = (props) => {
   const { question } = props;
+  const product = useContext(ProductContext);
   const [displayedAnswers, setDisplayedAnswers] = useState(2);
   const [answers, setAnswers] = useState(
     Object.values(question.answers).slice(0, displayedAnswers),
@@ -43,7 +45,7 @@ const Question = (props) => {
             header={(
               <div id="AnswerHeader" className="modalHeader">
                 <h1>Submit your Answer</h1>
-                <h2>*Product Name*</h2>
+                <h2>{product.name}</h2>
                 <h2>
                   {'Question:   '}
                   {question.question_body}
