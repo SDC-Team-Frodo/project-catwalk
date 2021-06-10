@@ -1,47 +1,57 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable camelcase */
 import React, { useState, useEffect } from 'react';
 import isEmail from './isEmail';
+import request from '../../requests';
+// import ProductContext from '../../ProductContext';
 
-const QuestionForm = () => {
-  const [question, setQuestion] = useState('');
+const AnswerForm = (props) => {
+  const { question_id } = props;
+  // const product = useContext(ProductContext);
+  const [answer, setAnswer] = useState('');
   const [nickName, setNickName] = useState('');
   const [email, setEmail] = useState('');
   const [subClicked, setSubClicked] = useState(false);
-  const [validQ, setValidQ] = useState(false);
+  const [validA, setValidA] = useState(false);
   const [validN, setValidN] = useState(false);
   const [validE, setValidE] = useState(false);
 
   useEffect(() => {
     if (subClicked) {
       if (
-        validQ
+        validA
         && validN
         && validE
       ) {
         // Need to make the api request
-        console.log('Question:', question);
-        console.log('NickName:', nickName);
-        console.log('Email:', email);
-        // then do this stuff
-        setQuestion('');
-        setNickName('');
-        setEmail('');
-        setSubClicked(false);
+        request.post(`qa/questions/${question_id}/answers`, {
+          body: answer,
+          name: nickName,
+          email,
+          photos: [],
+        }).then((res) => {
+          setAnswer('');
+          setNickName('');
+          setEmail('');
+          setSubClicked(false);
+          console.log(res);
+        }).catch(() => alert('couldn\'t send answer'));
       }
     }
   }, [subClicked]);
 
   useEffect(() => {
-    question.length > 2 ? setValidQ(true) : setValidQ(false)
-    nickName.length > 2 ? setValidN(true) : setValidN(false)
-    isEmail(email) ? setValidE(true) : setValidE(false)
-  }, [question, nickName, email]);
+    answer.length > 2 ? setValidA(true) : setValidA(false);
+    nickName.length > 2 ? setValidN(true) : setValidN(false);
+    isEmail(email) ? setValidE(true) : setValidE(false);
+  }, [answer, nickName, email]);
 
   return (
-    <div id="questionForm">
+    <div id="answerForm">
       <div>
-        <label className="formInput" htmlFor="Question">
-          Your Question
-          <span className={validQ ? 'valid' : 'inValid'}>{' * Mandatory'}</span>
+        <label className="formInput" htmlFor="Answer">
+          Your Answer
+          <span className={validA ? 'valid' : 'inValid'}>{' * Mandatory'}</span>
         </label>
         <textarea
           rows="3"
@@ -49,8 +59,9 @@ const QuestionForm = () => {
           wrap="hard"
           id="Question"
           placeholder="Write your question here"
+          value={answer}
           onChange={(e) => {
-            setQuestion(e.target.value);
+            setAnswer(e.target.value);
           }}
         />
       </div>
@@ -62,7 +73,8 @@ const QuestionForm = () => {
         <input
           type="text"
           id="nickName"
-          placeholder="Example: jackson11!"
+          placeholder="Example: jack543!!"
+          value={nickName}
           onChange={(e) => {
             setNickName(e.target.value);
           }}
@@ -75,9 +87,10 @@ const QuestionForm = () => {
           <span className={validE ? 'valid' : 'inValid'}>{' * Mandatory'}</span>
         </label>
         <input
-          type="email"
+          type="text"
           id="email"
           placeholder="Example: billbillbill@email.com"
+          value={email}
           onChange={(e) => {
             setEmail(e.target.value);
           }}
@@ -87,7 +100,7 @@ const QuestionForm = () => {
       <button
         className="hoverGrey"
         type="button"
-        id="submitQBtn"
+        id="submitABtn"
         onClick={() => {
           setSubClicked(true);
         }}
@@ -98,4 +111,4 @@ const QuestionForm = () => {
   );
 };
 
-export default QuestionForm;
+export default AnswerForm;
