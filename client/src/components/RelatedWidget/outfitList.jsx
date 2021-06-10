@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import ProductContext from '../../contexts/ProductContext';
+import Card from './card';
 import request from '../../requests';
+import ProductContext from '../../contexts/ProductContext';
+import './carousel.sass';
 
 const OutfitList = () => {
   const product = useContext(ProductContext);
@@ -14,8 +16,12 @@ const OutfitList = () => {
   const [index, setIndex] = useState(1);
 
   useEffect(() => {
-    console.log('should only render once?')
-    if (outfitIds > 0) {
+    console.log('this is outfit ids', outfitIds)
+    if (outfitIds) {
+      setOutfitProducts([]);
+      setOutfitRatings([]);
+      setOutfitThumbnails([]);
+      console.log('getting product information now')
       setNumberOfCards(outfitIds.length);
       outfitIds.forEach((id) => {
         request.get(`products/${id}`, { endpoint: `products/${id}` })
@@ -41,6 +47,15 @@ const OutfitList = () => {
     }
   }, [outfitIds]);
 
+  function removeOutfit(event) {
+    let id = event.target.id.match(/\d+/);
+    id = parseInt(id[0], 10);
+    const outfitIdsLocal = JSON.parse(localStorage.getItem('outfit'));
+    outfitIdsLocal.splice(outfitIdsLocal.indexOf(id), 1);
+    setOutfitIds(outfitIdsLocal);
+    localStorage.setItem('outfit', JSON.stringify(outfitIdsLocal));
+  }
+
   function addOutfit() {
     let outfitIdsLocal = JSON.parse(localStorage.getItem('outfit'));
 
@@ -51,32 +66,35 @@ const OutfitList = () => {
     if (outfitIdsLocal.indexOf(product.id) === -1) {
       outfitIdsLocal.push(product.id);
       localStorage.setItem('outfit', JSON.stringify(outfitIdsLocal));
-      console.log(outfitIdsLocal)
-      setOutfitList(outfitIdsLocal);
+      setOutfitIds(outfitIdsLocal);
     }
   }
+
   //// DELETE THESE
-  function clearOutfitLocal () {
-    localStorage.removeItem('outfit')
+  function clearOutfitLocal() {
+    setOutfitIds([]);
+    localStorage.removeItem('outfit', []);
   }
-  function checkLocal () {
-    console.log('this is in local', JSON.parse(localStorage.getItem('outfit')))
-    console.log('this is in state', outfitIds)
+
+  function addData() {
+    setOutfitIds([17071, 17074, 17075, 17067, 17069, 17072])
+    localStorage.setItem('outfit', JSON.stringify([17071, 17074, 17075, 17067, 17069, 17072]))
   }
 
   return (
-    <>
-    <div className="card plus" onClick={addOutfit} id="blank">
-      +
-      <br />
-      Add Current Product To
-      <br />
-      Outfits
-    </div>
-    <button type="button" onClick={clearOutfitLocal}>clear</button>
+    <div className="outfitWidget">
+      <div className="card plus" onClick={addOutfit} id="blank">
+        +
+        <br />
+        Add Current Product To
+        <br />
+        Outfits
+      </div>
 
-    <button type="button" onClick={checkLocal}>check inside of local storage outfit</button>
-    </>
+      {outfitProducts.length > 0 && outfitProducts.map((outfitProduct, i) => <Card product={outfitProduct} thumbnail={outfitThumbnails[i]} ratings={outfitRatings[i]} key={product.id} cardClass="outfitCard" func={removeOutfit}/>)}
+      <button type="button" onClick={clearOutfitLocal}>clear local and state</button>
+      <button type="button" onClick={addData}>Add Data</button>
+    </div>
   );
 };
 
