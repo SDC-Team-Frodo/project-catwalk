@@ -4,7 +4,7 @@ const Description = (props) => {
   const product = props.product;
   return (
     <div id="description">
-      <section className="left-margin top-margin">
+      <section className="left-margin large-top-margin">
         <h3>{product.slogan}</h3>
         <p>{product.description}</p>
 
