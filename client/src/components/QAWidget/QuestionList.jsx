@@ -44,18 +44,6 @@ function QuestionList() {
           More Questions
         </button>
       )}
-      <Modal
-        modalId="QuestionFormModal"
-        header={(
-          <div id="modalHeader">
-            <h1>Ask Your Question</h1>
-            <h3>About The Product</h3>
-          </div>
-        )}
-        body={<QuestionForm />}
-        btnName="Ask Question"
-        btnId="QButton"
-      />
     </div>
   );
 }
