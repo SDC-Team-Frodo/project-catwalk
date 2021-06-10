@@ -1,9 +1,16 @@
-import React from 'react';
-import StyleGrid from './subcomponents/StyleGrid'
+import React, { useContext } from 'react';
+import StyleGrid from './subcomponents/StyleGrid';
+import ProductContext from '../../contexts/ProductContext';
+import RatingContext from '../../contexts/RatingContext';
+import ReactStars from 'react-rating-stars-component';
+import Price from './subcomponents/Price';
 
 const GalleryAside = (props) => {
 
-  const { product, styles, selectedStyleIndex, setSelectedStyleIndex } = props;
+  const rating = useContext(RatingContext);
+  const product = useContext(ProductContext);
+
+  const { activeStyle, styles, selectedStyleIndex, setSelectedStyleIndex } = props;
 
   // Added support for hiding.
   // I assume conditionally rendering will break the useState hook if it misses rendering any of the children using said hook.
@@ -11,16 +18,17 @@ const GalleryAside = (props) => {
     <div id="gallery-aside" className={props.fullscreenSlider ? 'hide' : ''}>
       <section className="left-margin top-margin">
 
-        <div className="rating">
-          <i className="fas fa-star"></i>
-          <i className="fas fa-star"></i>
-          <i className="fas fa-star"></i>
-          <i className="far fa-star"></i>
-          <i className="far fa-star"></i>
-          <a href="#ReviewWidget">
-            Read all reviews
-          </a>
+        <div id="gallery-aside-stars">
+          <ReactStars {
+            ...{
+              size: 18,
+              value: Number(rating),
+              edit: false,
+            }
+          } />
         </div>
+
+        <a href="#review-widget">Read all reviews</a>
 
         <br />
 
@@ -31,11 +39,14 @@ const GalleryAside = (props) => {
         <h2>
           {product.name}
         </h2>
-        <span className="slim">${product.default_price}</span>
+        <Price
+          price={product ? product.default_price : 0}
+          salePrice={activeStyle ? activeStyle.sale_price : null}
+          />
         <br />
         <br />
         <div id="styles">
-          <strong>Styles &gt;</strong> SELECTED STYLE
+          <strong>Styles &gt;</strong> {activeStyle ? activeStyle.name : ''}
           <StyleGrid
             styles={styles}
             selectedStyleIndex={selectedStyleIndex}
