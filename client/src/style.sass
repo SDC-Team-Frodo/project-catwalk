@@ -33,6 +33,48 @@ main
   position: relative
   width: 60vw
   height: 25em
+  &.full
+    margin: auto
+    width: 75% !important
+    height: 30em !important
+  i
+    position: relative
+
+#outer-gallery-nav
+  position: absolute
+  height: 100%
+
+#gallery-nav
+  display: flex
+  flex-direction: column
+  justify-content: start
+  top: 6%
+  left: -2em
+  position: absolute
+  opacity: .8
+  height: 90%
+  width: 4em
+  // background-color: blue
+  overflow: hidden
+  &:hover
+    opacity: 1
+
+.scroll-up
+  top: 1%
+  right: .6em
+
+.scroll-down
+  top: 94.5%
+  right: 1.5em
+
+.gallery-nav-tile
+  width: 3.0em
+  height: 3.0em
+  margin: 0 0 .75em .3em
+  background-color: grey
+  flex-shrink: 0
+  &:hover
+    background-color: green
 
 #gallery-aside
   order: 2
@@ -40,6 +82,17 @@ main
   // background-color: darkgrey
   width: 40vw
   height: 25em
+  #gallery-aside-stars
+    display: inline-block !important
+  a
+    font-size: .8em
+    position: relative
+    display: inline-block !important
+    margin-left: .5em
+    top: -.5em
+  .strikethrough
+    text-decoration: line-through
+
 
 // #style-grid
 //   display: grid
@@ -60,7 +113,6 @@ main
   flex-wrap: wrap
   justify-content: flex-start
   align-content: flex-start
-
 
 .style-tile
   border-radius: 50%
@@ -99,9 +151,6 @@ main
 
 .hide
   display: none
-
-.full
-  width: 100vw !important
 
 .float-right
   float: right
@@ -191,8 +240,6 @@ main
   width: 65%
 
 #ratings-container
-  font-size: 12px
-  margin-right: 4em
   min-width: 250px
   width: 30%
 
@@ -279,8 +326,6 @@ main
 
 .reviews-count
   font-weight: bold
-  span
-    margin-right: 0.25em
   select
     border: none
     border-bottom: 1px solid black
@@ -315,6 +360,7 @@ main
     list-style-type: none
     margin-bottom: 1em
     max-height: auto
+    overflow-x: scroll
     padding: 0
 
 .review-photo
@@ -327,10 +373,6 @@ main
 .recommend, .reviewer
   margin-bottom: 1em
 
-.recommend
-  i
-    margin-right: 0.5em
-
 .response
   background-color: lightgray
   margin-bottom: 1em
@@ -339,8 +381,6 @@ main
 .helpful
   color: gray
   font-size: 10px
-  span
-    margin-right: 0.5em
 
 .review-buttons
   display: flex
