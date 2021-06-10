@@ -1,7 +1,6 @@
 import React/* , { useState, useEffect, useContext } */ from 'react';
 import ReactStars from 'react-rating-stars-component';
 import ProgressBar from './ProgressBar';
-import testReviewMetadata from './testReviewMetadata';
 import getAverageRating from '../../helpers/averageRating';
 import getTotalRatings from '../../helpers/totalRatings';
 

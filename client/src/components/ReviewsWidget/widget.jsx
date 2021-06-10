@@ -27,10 +27,12 @@ const ReviewContainer = () => {
       <div id="reviews-ratings-container">
         <div id="ratings-container">
           {reviewsMeta.ratings && <RatingsBreakdown ratings={reviewsMeta.ratings} />}
-          <div>
-            {reviewsMeta.recommended && getRecommendedAvg(reviewsMeta.recommended)}
-            % of reviews recommend this product
+          {reviewsMeta.recommended
+          && (
+          <div className="recommend-summary">
+            {`${getRecommendedAvg(reviewsMeta.recommended)}% of reviews recommend this product`}
           </div>
+          )}
           {reviewsMeta.characteristics
           && <ProductBreakdown characteristics={reviewsMeta.characteristics} />}
         </div>
