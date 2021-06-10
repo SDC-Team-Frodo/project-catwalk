@@ -13,12 +13,10 @@ const DEBUG = false;
 const OverviewContainer = (props) => {
   // contexts
   const theme = useContext(ThemeContext);
-  const rating = useContext(RatingContext);
   const product = useContext(ProductContext);
 
   if (DEBUG) {
     console.log(theme);
-    console.log(rating);
     console.log(product);
   }
 
@@ -52,13 +50,13 @@ const OverviewContainer = (props) => {
         <Gallery
           fullscreenSlider={fullscreenSlider}
           setFullscreenSlider={setFullscreenSlider}
-          style={selectedStyle()}/>
+          activeStyle={selectedStyle()}/>
         <GalleryAside
           fullscreenSlider={fullscreenSlider}
-          product={product}
           styles={styles}
           selectedStyleIndex={selectedStyleIndex}
-          setSelectedStyleIndex={setSelectedStyleIndex}/>
+          setSelectedStyleIndex={setSelectedStyleIndex}
+          activeStyle={selectedStyle()}/>
       </div>
       <div className="separator">
         <Description product={product}/>
