@@ -2,7 +2,7 @@ import React from 'react';
 
 const GalleryNavTile = (props) => {
 
-  const { photo } = props;
+  const { photo, setSelectedPhotoIndex, index, selected } = props;
 
   const css = {
     backgroundImage: `url(${photo.url})`,
@@ -11,9 +11,16 @@ const GalleryNavTile = (props) => {
     backgroundPosition: 'center'
   };
 
+  let classes = 'gallery-nav-tile';
+  if (selected) {
+    classes += ' selected';
+  }
 
   return (
-    <div className="gallery-nav-tile" style={css}>
+    <div
+      className={classes}
+      style={css}
+      onClick={() => setSelectedPhotoIndex(index)}>
 
     </div>
   );
