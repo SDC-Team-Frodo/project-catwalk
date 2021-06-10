@@ -7,13 +7,13 @@ const Question = (props) => {
   const [answers, setAnswers] = useState(
     Object.values(question.answers).slice(0, displayedAnswers),
   );
-  const [buttonLabel, setButtonLabel] = useState('More Answers');
+  const [buttonDisplay, setButtonDisplay] = useState(true);
 
   useEffect(() => {
     if (Object.values(question.answers)[displayedAnswers - 2] !== undefined) {
       setAnswers(Object.values(question.answers).slice(0, displayedAnswers));
     } else {
-      setButtonLabel('No More Answers');
+      setButtonDisplay(false);
     }
   }, [displayedAnswers]);
 
@@ -39,16 +39,18 @@ const Question = (props) => {
       <div>
         {answers.map((answer, i) => <Answer index={i} answer={answer} key={i} />)}
       </div>
-      <button
-        type="button"
-        id="loadA"
-        className="hoverGrey"
-        onClick={() => {
-          setDisplayedAnswers(displayedAnswers + 2);
-        }}
-      >
-        {buttonLabel}
-      </button>
+      {buttonDisplay && (
+        <button
+          type="button"
+          id="loadA"
+          className="hoverGrey"
+          onClick={() => {
+            setDisplayedAnswers(displayedAnswers + 2);
+          }}
+        >
+          More Answers
+        </button>
+      )}
     </div>
   );
 };
