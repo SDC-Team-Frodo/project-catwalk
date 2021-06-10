@@ -5,7 +5,7 @@ const ProgressBar = ({ numStars, numReviews, totalReviews }) => {
   return (
     <li className="rating-bar">
       <div>
-        {numStars} stars
+        {`${numStars} stars`}
       </div>
       <div className="rating-container">
         <div className="rating-filler" style={{ width: `${Math.round((numReviews / totalReviews) * 100)}%` }} />

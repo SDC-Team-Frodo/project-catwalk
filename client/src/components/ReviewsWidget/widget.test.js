@@ -6,6 +6,8 @@ import ProductBreakdown from './ProductBreakdown';
 import RatingsBreakdown from './RatingsBreakdown';
 import ReviewsList from './ReviewsList';
 import ReviewForm from './ReviewForm';
+import reviewData from './testReviewData';
+import reviewMetadata from './testReviewMetadata';
 
 describe('Review component', () => {
   beforeAll(() => {
@@ -21,7 +23,7 @@ describe('Review component', () => {
 
 describe('Ratings Breakdown', () => {
   beforeAll(() => {
-    render(<RatingsBreakdown />);
+    render(<RatingsBreakdown ratings={reviewMetadata.ratings}/>);
   });
 
   test('should have all 5 ratings bars', () => {
@@ -50,7 +52,7 @@ describe('Product Breakdown', () => {
 
 describe('Reviews List', () => {
   beforeAll(() => {
-    render(<ReviewsList />);
+    render(<ReviewsList reviews={reviewData.results}/>);
   });
 
   test('Write a review button is always in the document', () => {
