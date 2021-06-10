@@ -52,7 +52,7 @@ const Question = (props) => {
                 </h2>
               </div>
             )}
-            body={<AnswerForm />}
+            body={<AnswerForm question_id={question.question_id} />}
             btnName="Add Answer"
             btnId="addAnswer"
 

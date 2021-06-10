@@ -1,6 +1,12 @@
+/* eslint-disable camelcase */
 import React, { useState, useEffect, useContext } from 'react';
+import isEmail from './isEmail';
+import request from '../../requests';
+// import ProductContext from '../../ProductContext';
 
-const AnswerForm = () => {
+const AnswerForm = (props) => {
+  const { question_id } = props;
+  // const product = useContext(ProductContext);
   const [answer, setAnswer] = useState('');
   const [nickName, setNickName] = useState('');
   const [email, setEmail] = useState('');
@@ -8,19 +14,6 @@ const AnswerForm = () => {
   const [validA, setValidA] = useState(false);
   const [validN, setValidN] = useState(false);
   const [validE, setValidE] = useState(false);
-
-  const isEmail = () => {
-    if (
-      email.length > 2
-      && email.indexOf('@') > -1
-      && email.indexOf('.') > -1
-      && email.indexOf(' ') === -1
-      && email.slice(email.indexOf('.'), email.length).length === 4
-    ) {
-      return true;
-    }
-    return false;
-  };
 
   useEffect(() => {
     if (subClicked) {
@@ -30,9 +23,12 @@ const AnswerForm = () => {
         && validE
       ) {
         // Need to make the api request
-        console.log('Answer:', answer);
-        console.log('NickName:', nickName);
-        console.log('Email:', email);
+        request.post(`qa/questions/:${question_id}/answers`, {
+          body: answer,
+          name: nickName,
+          email,
+          photos: [],
+        });
         // then do this stuff
         setAnswer('');
         setNickName('');
@@ -45,7 +41,7 @@ const AnswerForm = () => {
   useEffect(() => {
     answer.length > 2 ? setValidA(true) : setValidA(false)
     nickName.length > 2 ? setValidN(true) : setValidN(false)
-    isEmail() ? setValidE(true) : setValidE(false)
+    isEmail(email) ? setValidE(true) : setValidE(false)
   }, [answer, nickName, email]);
 
   return (
