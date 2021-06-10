@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import RelatedCard from './relatedCard';
+import Card from './card';
 import request from '../../requests';
 import ProductContext from '../../contexts/ProductContext';
 
@@ -71,7 +71,7 @@ const RelatedList = () => {
     <div id="related">
       <button type="button" className="carousel_button previous" id="relatedPrevious" onClick={buttonHandle}>&#60;</button>
       <div className="carousel" id="relatedList">
-        {relatedProductList.map((relatedProduct, i) => <RelatedCard product={relatedProduct} thumbnail={relatedThumbnails[i]} ratings={relatedRatings[i]} key={relatedProduct.id} />)}
+        {relatedProductList.map((relatedProduct, i) => <Card product={relatedProduct} thumbnail={relatedThumbnails[i]} ratings={relatedRatings[i]} key={relatedProduct.id} cardClass={'relatedCard'}/>)}
       </div>
       <button type="button" className="carousel_button next" id="relatedNext" onClick={buttonHandle}>&#62;</button>
     </div>
