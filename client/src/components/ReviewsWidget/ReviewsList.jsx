@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ReviewTile from './ReviewTile';
-import reviewData from './testReviewData';
 
 const ReviewsList = ({ reviews }) => {
   // will get filtered reviews from a context object set in widget.jsx

@@ -24,7 +24,6 @@ app.get('/api', (req, res) => {
     },
     params: JSON.parse(params),
   };
-  console.log(options);
   axios(options)
     .then((response) => {
       res.status(200).send(response.data);
@@ -46,7 +45,6 @@ app.post('/api', (req, res) => {
     },
     data,
   };
-  console.log(options);
 
   axios(options)
     .then(() => {
