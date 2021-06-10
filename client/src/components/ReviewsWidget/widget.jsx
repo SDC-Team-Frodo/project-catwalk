@@ -11,9 +11,6 @@ const ReviewContainer = () => {
   const product = useContext(ProductContext);
   const [reviews, setReviews] = useState([]);
   const [reviewsMeta, setReviewsMeta] = useState({});
-  console.log('PRODUCT', product);
-  console.log('REVIEWS', reviews);
-  console.log('META', reviewsMeta);
   useEffect(() => {
     request.get('reviews', { product_id: product.id, count: 500 })
       .then((data) => setReviews(data.data.results))
