@@ -4,6 +4,13 @@ const QuestionForm = () => {
   const [question, setQuestion] = useState('');
   const [nickName, setNickName] = useState('');
   const [email, setEmail] = useState('');
+  const [subClicked, setSubClicked] = useState(false);
+
+  useEffect(() => {
+    if (subClicked) {
+      setSubClicked(false);
+    }
+  }, [subClicked]);
 
   return (
     <div id="questionForm">

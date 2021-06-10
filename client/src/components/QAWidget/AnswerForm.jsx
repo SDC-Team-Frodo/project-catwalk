@@ -11,6 +11,9 @@ const AnswerForm = () => {
       console.log(answer);
       console.log(nickName);
       console.log(email);
+      setAnswer('');
+      setNickName('');
+      setEmail('');
       setSubClicked(false);
     }
   }, [subClicked]);
@@ -27,6 +30,7 @@ const AnswerForm = () => {
           wrap="hard"
           id="Question"
           placeholder="Write your question here"
+          value={answer}
           onChange={(e) => {
             setAnswer(e.target.value);
           }}
@@ -40,6 +44,7 @@ const AnswerForm = () => {
           type="text"
           id="nickName"
           placeholder="Example: jack543!!"
+          value={nickName}
           onChange={(e) => {
             setNickName(e.target.value);
           }}
@@ -54,6 +59,7 @@ const AnswerForm = () => {
           type="text"
           id="email"
           placeholder="Example: billbillbill@email.com"
+          value={email}
           onChange={(e) => {
             setEmail(e.target.value);
           }}
