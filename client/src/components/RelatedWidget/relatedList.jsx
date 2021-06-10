@@ -3,8 +3,7 @@ import RelatedCard from './relatedCard';
 import request from '../../requests';
 import ProductContext from '../../contexts/ProductContext';
 
-// eslint-disable-next-line func-names
-const RelatedList = function () {
+const RelatedList = () => {
   const product = useContext(ProductContext);
 
   const [numberOfCards, setNumberOfCards] = useState(0); //change from api call
