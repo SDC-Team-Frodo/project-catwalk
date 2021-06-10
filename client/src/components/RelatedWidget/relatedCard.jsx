@@ -12,10 +12,10 @@ const RelatedCard = (props) => {
       backgroundImage: `url("${thumbnail.thumbnail_url}")`
     }
     return (
-      <div className="relatedCard card">
+      <div className="card">
         <div className="imageContainer" style={background}>
           <img src={thumbnail.thumbnail_url} alt="Failed" />
-          <div className="star">&#9734;</div>
+          <div className="cardIcon">&#9734;</div>
         </div>
         <div className="textContainer">
           {category}
