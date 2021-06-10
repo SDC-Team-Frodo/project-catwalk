@@ -7,7 +7,7 @@ const Gallery = (props) => {
   const css = {
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'rileftght'
+    backgroundPosition: 'center'
   };
 
   if (style) {

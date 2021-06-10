@@ -12,8 +12,6 @@ const GalleryAside = (props) => {
 
   const { activeStyle, styles, selectedStyleIndex, setSelectedStyleIndex } = props;
 
-
-
   // Added support for hiding.
   // I assume conditionally rendering will break the useState hook if it misses rendering any of the children using said hook.
   return (

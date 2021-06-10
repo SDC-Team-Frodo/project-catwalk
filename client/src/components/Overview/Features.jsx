@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import _ from 'lodash';
+import Feature from './subcomponents/Feature'
+import ProductContext from '../../contexts/ProductContext';
 
 const Features = (props) => {
+
+  const product = useContext(ProductContext);
+  const { features } = product
+  console.log(features);
+
   return (
     <div id="features">
       <section id="fcontainer" className="left-border left-margin top-margin">
-        <i className="fas fa-check"></i>GMO &amp; Pesticide Free <br />
+      {features.map((feature, index) => <Feature feature={feature} key={`feature-${index}`} />
+      )}
 
-        <i className="fas fa-check"></i>Made with 1000% Genetic Modification <br />
-
-        <i className="fas fa-check"></i>This is made up<br />
 
       </section>
     </div>
