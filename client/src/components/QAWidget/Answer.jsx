@@ -15,10 +15,10 @@ const Answer = (props) => {
   }, [yesClicked]);
 
   return (
-    <div>
+    <div className="answer">
       {display ? (
         <section>
-          <h2>
+          <h2 className="AnswerText">
             {index === 0 && (
               'A: '
             )}

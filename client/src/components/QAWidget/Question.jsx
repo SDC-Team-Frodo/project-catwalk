@@ -31,7 +31,7 @@ const Question = (props) => {
 
   return (
     <div className="question">
-      <h2>
+      <h2 className="QuestionText">
         {`Q: ${question.question_body}`}
         <div id="helpfulQ">
           Helpful?
