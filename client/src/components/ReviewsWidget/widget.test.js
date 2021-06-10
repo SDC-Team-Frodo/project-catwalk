@@ -3,6 +3,8 @@ import { screen, render, fireEvent, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import ReviewContainer from './widget';
 import ProductBreakdown from './ProductBreakdown';
+import CharBar from './CharBar';
+import CharLabels from './CharLabels';
 import RatingsBreakdown from './RatingsBreakdown';
 import ReviewsList from './ReviewsList';
 import ReviewForm from './ReviewForm';
@@ -42,16 +44,47 @@ describe('Product Breakdown', () => {
     render(<ProductBreakdown characteristics={reviewMetadata.characteristics} />);
   });
 
+  test('should have the correct subsection header', () => {
+    expect(screen.getByText('CHARACTERISTICS')).toBeInTheDocument();
+  });
+
+  afterAll(cleanup);
+});
+
+describe('Characteristics Bars', () => {
+  // beforeAll(() => {
+  //   render(<CharBar char={'Size'} />);
+  //   render(<CharBar char={'Width'} />);
+  //   render(<CharBar char={'Comfort'} />);
+  // });
+
+  test('should have all characteristics for given product', () => {
+    render(<CharBar char={'Size'} />);
+    expect(document.getElementsByClassName('char-container').length).toBe(3);
+  });
+
   test('should have all characteristic bars for given product', () => {
+    render(<CharBar char={'Size'} />);
     expect(screen.getByText('Size')).toBeInTheDocument();
+    render(<CharBar char={'Width'} />);
     expect(screen.getByText('Width')).toBeInTheDocument();
+    render(<CharBar char={'Comfort'} />);
     expect(screen.getByText('Comfort')).toBeInTheDocument();
+  });
+
+  afterAll(cleanup);
+});
+
+describe('Characteristics Labels', () => {
+  beforeAll(() => {
+    render(<CharLabels char={'Size'} />);
+    render(<CharLabels char={'Comfort'} />);
   });
 
   test('should have all characteristic labels for a characteristic', () => {
     expect(screen.getByText('Too small')).toBeInTheDocument();
     expect(screen.getByText('Perfect')).toBeInTheDocument();
-    expect(screen.getByText('Too large')).toBeInTheDocument();
+    expect(screen.getByText('Too big')).toBeInTheDocument();
     expect(screen.getByText('Poor')).toBeInTheDocument();
     expect(screen.getByText('Great')).toBeInTheDocument();
   });
