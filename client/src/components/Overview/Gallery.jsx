@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import GalleryNav from './GalleryNav'
 
 const Gallery = (props) => {
-  const { style, fullscreenSlider } = props;
+  const { activeStyle, fullscreenSlider } = props;
 
   const ficon = fullscreenSlider ? 'compress' : 'expand';
   const css = {
@@ -10,15 +11,16 @@ const Gallery = (props) => {
     backgroundPosition: 'center'
   };
 
-  if (style) {
-    console.log('style', style);
-    css.backgroundImage = `url(${style.photos[0].url})`;
+  if (activeStyle) {
+    console.log('style', activeStyle);
+    css.backgroundImage = `url(${activeStyle.photos[0].url})`;
   }
   return (
     <div
       id="gallery"
       style={css}
       className={props.fullscreenSlider ? 'full' : ''}>
+        <GalleryNav activeStyle={activeStyle}/>
       <i
         className={`fas fa-${ficon} float-right`}
         onClick={() => props.setFullscreenSlider(!props.fullscreenSlider)}></i>

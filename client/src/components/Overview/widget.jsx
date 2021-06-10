@@ -50,7 +50,7 @@ const OverviewContainer = (props) => {
         <Gallery
           fullscreenSlider={fullscreenSlider}
           setFullscreenSlider={setFullscreenSlider}
-          style={selectedStyle()}/>
+          activeStyle={selectedStyle()}/>
         <GalleryAside
           fullscreenSlider={fullscreenSlider}
           styles={styles}
