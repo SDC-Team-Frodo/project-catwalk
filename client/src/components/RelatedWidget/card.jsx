@@ -5,11 +5,11 @@ const Card = (props) => {
   const { product, thumbnail, ratings, cardClass } = props;
   let { func } = props;
   const {
-    features, default_price, category, name,
+    default_price, category, name,
   } = product;
 
   const cardClasses = `${cardClass  } card`;
-  const iconId = `${cardClass}${product.id}`
+  const iconId = `${cardClass}${product.id}`;
 
   if (!func) {
     func = function () {
