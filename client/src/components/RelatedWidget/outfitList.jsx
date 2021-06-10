@@ -8,50 +8,28 @@ const OutfitList = () => {
 
   const [numberOfCards, setNumberOfCards] = useState(0);
   const [translateX, setTranslateX] = useState(0);
-  const [outfitList, setOutfitList] = useState(JSON.parse(localStorage.getItem('outfit')));
+  const [outfitIds, setOutfitList] = useState(JSON.parse(localStorage.getItem('outfit')));
   const [outfitProducts, setOutfitProducts] = useState([]);
   const [outfitRatings, setOutfitRatings] = useState([]);
   const [outfitThumbnails, setOutfitThumbnails] = useState([]);
   const [index, setIndex] = useState(1);
 
   useEffect(() => {
-    if (outfitList && outfitList.length > 0) {
-      outfitList.forEach((id) => {
-        request.get(`products/${id}`, { endpoint: `products/${id}` })
-          .then((newOutfitProduct) => {
-            setOutfitProducts((oldProducts) => [...oldProducts, newOutfitProduct.data]);
-          })
-          .catch((err) => console.log(err));
-
-        // request.get(`reviews/meta`, { endpoint: `reviews/meta`, product_id: id })
-        //   .then((rating) => {
-        //     setOutfitRatings((oldRatings) => [...oldRatings, rating.data.ratings]);
-        //   })
-        //   .catch((err) => console.log(err));
-
-        // request.get(`products/${id}/styles`, { endpoint: `products/${id}/styles` })
-        //   .then((thumbnail) => {
-        //     setOutfitThumbnails((oldThumbnails) => [...oldThumbnails, thumbnail.data.results[0].photos[0]]);
-        //   })
-        //   .catch((err) => console.log(err));
-      });
-    } else {
-      setOutfitList([]);
-    }
-  }, [outfitList]);
+    console.log('should only render once?')
+  }, [outfitIds])
 
   function addOutfit() {
-    let outfitListLocal = JSON.parse(localStorage.getItem('outfit'));
+    let outfitIdsLocal = JSON.parse(localStorage.getItem('outfit'));
 
-    if (!outfitListLocal) {
-      outfitListLocal = [];
+    if (!outfitIdsLocal) {
+      outfitIdsLocal = [];
     }
 
-    if (outfitListLocal.indexOf(product.id) === -1) {
-      outfitListLocal.push(product.id);
-      localStorage.setItem('outfit', JSON.stringify(outfitListLocal));
-      console.log(outfitListLocal)
-      setOutfitList(outfitListLocal);
+    if (outfitIdsLocal.indexOf(product.id) === -1) {
+      outfitIdsLocal.push(product.id);
+      localStorage.setItem('outfit', JSON.stringify(outfitIdsLocal));
+      console.log(outfitIdsLocal)
+      setOutfitList(outfitIdsLocal);
     }
   }
   //// DELETE THESE
@@ -60,7 +38,7 @@ const OutfitList = () => {
   }
   function checkLocal () {
     console.log('this is in local', JSON.parse(localStorage.getItem('outfit')))
-    console.log('this is in state', outfitList)
+    console.log('this is in state', outfitIds)
   }
 
   return (
