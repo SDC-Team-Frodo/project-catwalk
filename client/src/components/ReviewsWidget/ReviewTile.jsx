@@ -4,6 +4,7 @@ import formatDate from '../../helpers/formatDate';
 
 const ReviewTile = ({ review }) => {
   const [hidden, setHidden] = useState(review.body.length > 250);
+  // const [selectedHelpful, setSelectedHelpful] = useState(false);
   return (
     <li className="review">
       <div className="review-date">

@@ -5,8 +5,8 @@ import testReviewMetadata from './testReviewMetadata';
 import getAverageRating from '../../helpers/averageRating';
 import getTotalRatings from '../../helpers/totalRatings';
 
-const RatingsBreakdown = () => {
-  const averageRating = getAverageRating(testReviewMetadata.ratings);
+const RatingsBreakdown = ({ ratings }) => {
+  const averageRating = getAverageRating(ratings);
   return (
     <section id="ratings-breakdown">
       <div className="avg-rating-stars">
@@ -30,8 +30,8 @@ const RatingsBreakdown = () => {
           <ProgressBar
             key={value}
             numStars={value}
-            numReviews={testReviewMetadata.ratings[value] || 0}
-            totalReviews={getTotalRatings(testReviewMetadata.ratings)}
+            numReviews={ratings[value] || 0}
+            totalReviews={getTotalRatings(ratings)}
           />
         ))}
       </ul>

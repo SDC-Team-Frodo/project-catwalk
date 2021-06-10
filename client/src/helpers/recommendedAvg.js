@@ -1,3 +1,5 @@
-const getRecommendedAvg = (data) => Math.round((data.true / (data.true + data.false)) * 100);
+const getRecommendedAvg = (data) => (
+  Math.round((data.true / (Number(data.true) + Number(data.false))) * 100)
+);
 
 export default getRecommendedAvg;

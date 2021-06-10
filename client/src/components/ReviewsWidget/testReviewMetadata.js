@@ -5,7 +5,7 @@ export default {
     2: 23,
     3: 12,
     4: 15,
-    5: 40,
+    5: 400,
   },
   "recommended": {
     true: 5,
