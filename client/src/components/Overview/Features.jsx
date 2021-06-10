@@ -7,7 +7,6 @@ const Features = (props) => {
 
   const product = useContext(ProductContext);
   const { features } = product
-  console.log(features);
 
   return (
     <div id="features">

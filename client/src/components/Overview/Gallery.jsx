@@ -12,7 +12,6 @@ const Gallery = (props) => {
   };
 
   if (activeStyle) {
-    console.log('style', activeStyle);
     css.backgroundImage = `url(${activeStyle.photos[0].url})`;
   }
   return (
@@ -20,7 +19,7 @@ const Gallery = (props) => {
       id="gallery"
       style={css}
       className={props.fullscreenSlider ? 'full' : ''}>
-        <GalleryNav activeStyle={activeStyle}/>
+        {activeStyle && <GalleryNav activeStyle={activeStyle}/>}
       <i
         className={`fas fa-${ficon} float-right`}
         onClick={() => props.setFullscreenSlider(!props.fullscreenSlider)}></i>

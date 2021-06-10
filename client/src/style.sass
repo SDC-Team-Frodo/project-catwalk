@@ -40,21 +40,41 @@ main
   i
     position: relative
 
+#outer-gallery-nav
+  position: absolute
+  height: 100%
+
 #gallery-nav
   display: flex
+  flex-direction: column
+  justify-content: start
+  top: 6%
   left: -2em
   position: absolute
   opacity: .8
-  height: 100%
-  width: 5em
-  background-color: blue
-  overflow-y: auto
+  height: 90%
+  width: 4em
+  // background-color: blue
+  overflow: hidden
   &:hover
     opacity: 1
 
-.gallery-tile
-  width: 3.5em
-  height: 3.5em
+.scroll-up
+  top: 1%
+  right: .6em
+
+.scroll-down
+  top: 94.5%
+  right: 1.5em
+
+.gallery-nav-tile
+  width: 3.0em
+  height: 3.0em
+  margin: 0 0 .75em .3em
+  background-color: red
+  flex-shrink: 0
+  &:hover
+    background-color: green
 
 #gallery-aside
   order: 2
