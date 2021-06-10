@@ -21,6 +21,12 @@ const Question = (props) => {
     setAnswers(Object.values(question.answers).slice(0, displayedAnswers));
   }, [question]);
 
+  useEffect(() => {
+    if (answers.length === question.answers.length) {
+      setButtonDisplay(false);
+    }
+  }, [answers]);
+
   return (
     <div className="question">
       <h2>

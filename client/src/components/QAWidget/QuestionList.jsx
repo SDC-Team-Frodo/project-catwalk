@@ -23,10 +23,14 @@ function QuestionList() {
   useEffect(() => {
     if (allQuestions[displayedQuestions - 2] !== undefined) {
       setQuestions(allQuestions.slice(0, displayedQuestions));
-    } else {
-      setButtonDisplay(false);
     }
   }, [displayedQuestions]);
+
+  useEffect(() => {
+    if (questions.length === allQuestions.length) {
+      setButtonDisplay(false);
+    }
+  }, [questions]);
 
   return (
     <div className="QuestionList">
