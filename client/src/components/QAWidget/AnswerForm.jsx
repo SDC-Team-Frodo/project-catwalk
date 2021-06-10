@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable camelcase */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import isEmail from './isEmail';
 import request from '../../requests';
 // import ProductContext from '../../ProductContext';
@@ -23,25 +24,26 @@ const AnswerForm = (props) => {
         && validE
       ) {
         // Need to make the api request
-        request.post(`qa/questions/:${question_id}/answers`, {
+        request.post(`qa/questions/${question_id}/answers`, {
           body: answer,
           name: nickName,
           email,
           photos: [],
-        });
-        // then do this stuff
-        setAnswer('');
-        setNickName('');
-        setEmail('');
-        setSubClicked(false);
+        }).then((res) => {
+          setAnswer('');
+          setNickName('');
+          setEmail('');
+          setSubClicked(false);
+          console.log(res);
+        }).catch(() => alert('couldn\'t send answer'));
       }
     }
   }, [subClicked]);
 
   useEffect(() => {
-    answer.length > 2 ? setValidA(true) : setValidA(false)
-    nickName.length > 2 ? setValidN(true) : setValidN(false)
-    isEmail(email) ? setValidE(true) : setValidE(false)
+    answer.length > 2 ? setValidA(true) : setValidA(false);
+    nickName.length > 2 ? setValidN(true) : setValidN(false);
+    isEmail(email) ? setValidE(true) : setValidE(false);
   }, [answer, nickName, email]);
 
   return (
