@@ -22,23 +22,27 @@ const Answer = (props) => {
         )}
         {answer.body}
       </h2>
-      <h5>
-        by:
+      <div id="userInfoAndHelpful">
+        {'by:  '}
         {answer.answerer_name}
-        ,
+        {',  '}
         {formatDate(answer.date)}
         Helpful?
-        <span
+        <button
+          type="button"
           onClick={() => {
             setYesClicked(true);
           }}
         >
-          Yes(
-          {helpfulCount}
-          )
-        </span>
-        Report
-      </h5>
+          {`Yes(${helpfulCount})`}
+        </button>
+        |
+        <button
+          type="button"
+        >
+          Report
+        </button>
+      </div>
       <div id="answerImageDiv">
         {answer.photos.length > 0 && (
           answer.photos.map((photo, i) => {

@@ -25,9 +25,16 @@ const Question = (props) => {
     <div className="question">
       <h2>
         {`Q: ${question.question_body}`}
-        <span className="helpful">
-          {`Helpful? Yes(${question.question_helpfulness})`}
-        </span>
+        <div id="helpfulQ">
+          Helpful?
+          <button type="button" className="yesButton">
+            {`Yes(${question.question_helpfulness})`}
+          </button>
+          |
+          <button type="button" className="reportButton">
+            Add Answer
+          </button>
+        </div>
       </h2>
       <div>
         {answers.map((answer, i) => <Answer index={i} answer={answer} key={i} />)}
