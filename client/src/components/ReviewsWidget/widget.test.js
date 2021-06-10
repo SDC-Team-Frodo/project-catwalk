@@ -23,7 +23,7 @@ describe('Review component', () => {
 
 describe('Ratings Breakdown', () => {
   beforeAll(() => {
-    render(<RatingsBreakdown ratings={reviewMetadata.ratings}/>);
+    render(<RatingsBreakdown ratings={reviewMetadata.ratings} />);
   });
 
   test('should have all 5 ratings bars', () => {
@@ -39,11 +39,21 @@ describe('Ratings Breakdown', () => {
 
 describe('Product Breakdown', () => {
   beforeAll(() => {
-    render(<ProductBreakdown />);
+    render(<ProductBreakdown characteristics={reviewMetadata.characteristics} />);
   });
 
-  test('should have the correct product breakdown text', () => {
-    expect(screen.getByText('Some other bars go here')).toBeInTheDocument();
+  test('should have all characteristic bars for given product', () => {
+    expect(screen.getByText('Size')).toBeInTheDocument();
+    expect(screen.getByText('Width')).toBeInTheDocument();
+    expect(screen.getByText('Comfort')).toBeInTheDocument();
+  });
+
+  test('should have all characteristic labels for a characteristic', () => {
+    expect(screen.getByText('Too small')).toBeInTheDocument();
+    expect(screen.getByText('Perfect')).toBeInTheDocument();
+    expect(screen.getByText('Too large')).toBeInTheDocument();
+    expect(screen.getByText('Poor')).toBeInTheDocument();
+    expect(screen.getByText('Great')).toBeInTheDocument();
   });
 
   afterAll(cleanup);
