@@ -1,25 +1,37 @@
 /* eslint-disable camelcase */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 
 const Card = (props) => {
   const { product, thumbnail, ratings, cardClass } = props;
+  let { func } = props;
   const {
     features, default_price, category, name,
   } = product;
 
-  const cardClasses = cardClass + ' card';
+  const cardClasses = `${cardClass  } card`;
+  const iconId = `${cardClass}${product.id}`
+
+  if (!func) {
+    func = function () {
+      console.log('failed to pass down')
+    };
+  }
+
+  function redirect () {
+    console.log('redirect to page')
+  }
 
   if (thumbnail) {
     const background = {
-      backgroundImage: `url("${thumbnail.thumbnail_url}")`
+      backgroundImage: `url("${thumbnail.thumbnail_url}")`,
     };
     return (
       <div className={cardClasses}>
-        <div className="imageContainer" style={background}>
+        <div className="imageContainer" style={background} onClick={redirect}>
           <img src={thumbnail.thumbnail_url} alt="Failed" />
-          <div className="cardIcon">&#9734;</div>
         </div>
-        <div className="textContainer">
+        <div className="cardIcon" id={iconId} onClick={func} madeup="whatever">&#9734;</div>
+        <div className="textContainer" onClick={redirect}>
           {category}
           <br />
           <b>{name}</b>
