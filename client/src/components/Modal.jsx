@@ -18,15 +18,6 @@ const Modal = (props) => {
         />
         <div className="modal" id={modalId}>
           <div id="header">
-            {/* <button
-              id="closeButton"
-              type="button"
-              onClick={() => {
-                setDisplay(false);
-              }}
-            >
-              Close
-            </button> */}
             {header}
           </div>
           <div id="body">
