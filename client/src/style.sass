@@ -199,7 +199,7 @@ main
 .uppercase
   text-transform: uppercase
 
-#related
+.outfitRelatedWidget
   display: flex
   align-items: center
 
@@ -208,6 +208,7 @@ main
   display: flex
   overflow: hidden
   position:relative
+  padding: 30px
 
 .carousel_button
   height: 100px
@@ -237,11 +238,13 @@ main
   border: 1px solid black
   transition: transform 0.25s
 
-  .relatedCard
-    transform: translateX(0)
+  &:hover
+    transform: scale(1.1)
+    z-index: 2
+    cursor: pointer
 
 .plus
-  display: flex
+  width: 256px
   justify-content: center
   align-items: center
   text-align: center
@@ -252,8 +255,15 @@ main
 .imageContainer
   height: 256px
   width: 256px
+  margin-left: auto
+  margin-right: auto
+  display: flex
+  justify-content: center
+  align-items: center
+  text-align: center
 
-.star
+
+.cardIcon
   position: absolute
   top: 5px
   right: 5px
