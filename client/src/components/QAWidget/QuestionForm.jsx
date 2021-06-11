@@ -30,7 +30,6 @@ const QuestionForm = () => {
           product_id: product.id,
         }).then((res) => {
           // then do this stuff
-          console.log(res);
           setQuestion('');
           setNickName('');
           setEmail('');

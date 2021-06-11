@@ -6,7 +6,7 @@ import request from '../../requests';
 // import ProductContext from '../../ProductContext';
 
 const AnswerForm = (props) => {
-  const { question_id, modalOff } = props;
+  const { question_id } = props;
   // const product = useContext(ProductContext);
   const [answer, setAnswer] = useState('');
   const [nickName, setNickName] = useState('');
