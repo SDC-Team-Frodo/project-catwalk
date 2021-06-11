@@ -15,6 +15,7 @@ const App = () => {
   const [currentProductId, setCurrentProductId] = useState(17071);
   const [currentProductData, setCurrentProductData] = useState(testData);
   const [idInput, setIdInput] = useState('');
+  const [averageRating, setAverageRating] = useState(null);
 
   useEffect(() => {
     console.log('APP', currentProductId);
@@ -51,12 +52,12 @@ const App = () => {
       </div>
       <ThemeContext.Provider value="light">
         <ProductContext.Provider value={currentProductData}>
-          <RatingContext.Provider value="3.5">
+          <RatingContext.Provider value={[averageRating, setAverageRating]}>
             <OverviewContainer />
           </RatingContext.Provider>
           <RelatedContainer />
           <QaContainer />
-          <RatingContext.Provider value="3.5">
+          <RatingContext.Provider value={[averageRating, setAverageRating]}>
             <ReviewsContainer />
           </RatingContext.Provider>
         </ProductContext.Provider>
