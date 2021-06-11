@@ -13,19 +13,18 @@ const DEBUG = false;
 const OverviewContainer = (props) => {
   // contexts
   const theme = useContext(ThemeContext);
-  const rating = useContext(RatingContext);
   const product = useContext(ProductContext);
 
   if (DEBUG) {
     console.log(theme);
-    console.log(rating);
     console.log(product);
   }
 
   // states
   const [fullscreenSlider, setFullscreenSlider] = useState(false);
-  const [selectedStyleIndex, setSelectedStyleIndex] = useState(1);
+  const [selectedStyleIndex, setSelectedStyleIndex] = useState(0);
   const [styles, setStyles] = useState([]);
+  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
 
   // returns the list of styles at selectedStyleIndex
   const selectedStyle = () => {
@@ -41,6 +40,7 @@ const OverviewContainer = (props) => {
         const styleIndex = styleResults.findIndex(s => s['default?']) || 0;
 
         setSelectedStyleIndex(styleIndex);
+        setSelectedPhotoIndex(0);
         setStyles(styleResults); // styles nested in {data} of results
       })
       .catch(console.error);
@@ -52,13 +52,15 @@ const OverviewContainer = (props) => {
         <Gallery
           fullscreenSlider={fullscreenSlider}
           setFullscreenSlider={setFullscreenSlider}
-          style={selectedStyle()}/>
+          activeStyle={selectedStyle()}
+          selectedPhotoIndex={selectedPhotoIndex}
+          setSelectedPhotoIndex={setSelectedPhotoIndex}/>
         <GalleryAside
           fullscreenSlider={fullscreenSlider}
-          product={product}
           styles={styles}
           selectedStyleIndex={selectedStyleIndex}
-          setSelectedStyleIndex={setSelectedStyleIndex}/>
+          setSelectedStyleIndex={setSelectedStyleIndex}
+          activeStyle={selectedStyle()}/>
       </div>
       <div className="separator">
         <Description product={product}/>

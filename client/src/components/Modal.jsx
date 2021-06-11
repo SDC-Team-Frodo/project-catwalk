@@ -20,7 +20,7 @@ const Modal = (props) => {
           <div id="header">
             {header}
           </div>
-          <div id="body">
+          <div className="modalBody">
             {body}
           </div>
           <div id="footer">

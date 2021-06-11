@@ -1,17 +1,25 @@
 // app level
-$font-stack: Tahoma, Arial, Helvetica, sans-serif;
-$body-color: black
+$font-stack: Tahoma, Arial, Helvetica, sans-serif
+$header-color: #333333e8
+$body-color: #696969
 $background-color: white
 
 body
   color: $body-color
-  background-color: $background-color
+  font-family: $font-stack
+
+h1, h2, h3, h4, strong, i
+  color: $header-color
+
+span, p
+  color: $body-color
 
 div
   margin: 0
   padding: 0
 
 main
+  background-color: $background-color
   width: 100%
 
 #app
@@ -32,14 +40,91 @@ main
   // background-color: grey
   position: relative
   width: 60vw
-  height: 25em
+  height: 30em
+  &.full
+    margin: auto
+    width: 80% !important
+    height: 35em !important
+  i
+    position: relative
+
+#outer-gallery-nav
+  position: absolute
+  height: 100%
+
+#gallery-nav
+  display: flex
+  flex-direction: column
+  justify-content: start
+  top: 6%
+  left: -2em
+  position: absolute
+  opacity: .9
+  height: 90%
+  width: 4em
+  // background-color: blue
+  overflow: hidden
+  &:hover
+    opacity: 1
+
+.scroll-up
+  top: 1%
+  right: .6em
+
+.scroll-down
+  top: 94.5%
+  right: 1.5em
+
+.gallery-nav-tile
+  width: 3.0em
+  height: 3.0em
+  margin: 0 0 .75em .3em
+  background-color: grey
+  flex-shrink: 0
+  &:hover
+    filter: brightness(1.1)
+  &.selected
+    // border-bottom: .2em solid black
+    box-shadow: 0 .25em #F39C12
 
 #gallery-aside
   order: 2
   position: relative
   // background-color: darkgrey
   width: 40vw
-  height: 25em
+  height: 30em
+  #gallery-aside-stars
+    display: inline-block !important
+  a
+    font-size: .8em
+    position: relative
+    display: inline-block !important
+    margin-left: .5em
+    top: -.5em
+  .strikethrough
+    text-decoration: line-through
+  h2
+    margin: .5em 0
+
+  #size-select
+    border-radius: 0
+    padding: 1em 3em 1em 1.5em
+    flex-grow: 2
+    font-weight: strong
+    margin-right: 1.5em
+
+  #quantity-select
+    border-radius: 0
+    padding: 1em 1em 1em 1em
+    width: 6em
+    flex-grow: 0
+    flex-shrink: 2
+    font-weight: strong
+
+
+#styles
+  strong
+    margin-bottom: .25em
 
 // #style-grid
 //   display: grid
@@ -61,7 +146,6 @@ main
   justify-content: flex-start
   align-content: flex-start
 
-
 .style-tile
   border-radius: 50%
   background-color: black
@@ -75,7 +159,7 @@ main
   position: relative
   // background: darkgrey
   width: 60vw
-  height: 15em
+  // height: 15em
 
 #features
   order: 2
@@ -83,12 +167,15 @@ main
   position: relative
   // background: lightgrey
   width: 40vw
-  height: 15em
+  // height: 15em
 
 .left-margin
   margin-left: 2.5em
 
 .top-margin
+  margin-top: .75em
+
+.large-top-margin
   margin-top: 2em
 
 .left-border
@@ -100,15 +187,17 @@ main
 .hide
   display: none
 
-.full
-  width: 100vw !important
-
 .float-right
   float: right
   margin-right: 1em
   margin-top: 1em
 
+.slim
+  font-size: .8em
+  font-weight: 200 !important
 
+.uppercase
+  text-transform: uppercase
 
 .outfitRelatedWidget
   display: flex
@@ -184,7 +273,8 @@ main
 #review-widget
   margin: 3em 0 1em 0
   header
-    font-size: 14px
+    font-size: 18px
+    font-weight: bold
 
 #reviews-ratings-container, #reviews-container, #ratings-container
   display: flex
@@ -201,8 +291,6 @@ main
   width: 65%
 
 #ratings-container
-  font-size: 12px
-  margin-right: 4em
   min-width: 250px
   width: 30%
 
@@ -216,29 +304,62 @@ main
       margin-right: 0.25em
       letter-spacing: 0.05em
 
-.rating-bars
+#char-breakdown
+  margin-top: 2em
+
+.rating-bars, .char-bars
+  font-weight: bold
   list-style-type: none
   margin-top: 1.5em
   padding: 0
+  width: inherit
 
-.rating-bar
+.rating-bar, .char-bar
   align-items: center
   display: flex
   justify-content: space-between
   margin-bottom: 1.5em
   padding: 0
+
+.rating-bar
   cursor: pointer
 
 .rating-container
-    background-color: lightgray
-    border-radius: 10px
-    height: 1em
-    width: 70%
+  background-color: lightgray
+  border-radius: 10px
+  height: 1em
+  width: 70%
 
 .rating-filler
   height: inherit
   background-color: green
   border-radius: inherit
+
+.char-bars
+  div
+    i
+      margin-bottom: 0.1em
+      position: relative
+      width: inherit
+
+.char-bar
+  margin-bottom: -0.25em
+  margin-top: 0.5em
+  width: inherit
+
+.char-container
+  background-color: lightgray
+  height: 0.5em
+
+.char-labels
+  display: flex
+  font-size: 10px
+  justify-content: space-between
+  margin-bottom: 1.5em
+
+.recommend-summary
+  font-style: italic
+  text-align: center
 
 .review-tiles
   list-style-type: none
@@ -256,8 +377,6 @@ main
 
 .reviews-count
   font-weight: bold
-  span
-    margin-right: 0.25em
   select
     border: none
     border-bottom: 1px solid black
@@ -292,9 +411,11 @@ main
     list-style-type: none
     margin-bottom: 1em
     max-height: auto
+    overflow-x: scroll
     padding: 0
 
 .review-photo
+  cursor: pointer
   margin-right: 0.25em
   img
     height: auto
@@ -302,10 +423,6 @@ main
 
 .recommend, .reviewer
   margin-bottom: 1em
-
-.recommend
-  i
-    margin-right: 0.5em
 
 .response
   background-color: lightgray
@@ -315,8 +432,6 @@ main
 .helpful
   color: gray
   font-size: 10px
-  span
-    margin-right: 0.5em
 
 .review-buttons
   display: flex
@@ -332,16 +447,25 @@ main
     width: 48%
 
 // Modal
+img
+  max-width: 100%
+  max-height: 100%
+
 .modal
-  top: 10%
+  top: 50vh
+  max-height: 80vh
   border: thick double black
   padding: 10px
   position: fixed
   background-color: skyblue
   z-index: 2147483647
-  width: 60vw
-  left: 50%
-  transform: translateX(-50%)
+  max-width: 80vw
+  left: 50vw
+  transform: translate(-50%, -50%)
+  .modalBody
+      img
+        max-width: 80vw
+        max-height: 80vh
 
 #backDrop
   opacity: 0.5
@@ -353,12 +477,12 @@ main
   width: 100%
   z-index: 2147483646
 
-img
-  max-width: 100%
-  max-height: 100%
 
 #modalImgDiv
   width: fit-content
+
+.modalHeader
+  text-align: center
 
 
 /////////////QA//////////////
@@ -380,7 +504,7 @@ img
 
 #loadQ, #loadA
   border: 2px solid black
-  font-size: 10px
+  font-size: 20px
   width: 12vw
 
 #QButton
@@ -391,15 +515,22 @@ img
 
 .question
   padding: 10px
-  border-bottom: 2px solid grey
-  margin: 3vw
+  border-bottom: 2px solid black
+  margin: 3%
+  .AnswerText
+    font-weight: 200
+
+.answer
+  padding: 5px
+  border-bottom: 1px solid grey
+  margin: 3%
 
 .hoverGrey:hover
   background-color: lightgrey
 
 #loadQ
   margin-bottom: 25px
-  margin-left: 48px
+  margin-left: 42%
 
 #searchDiv
   margin-left: 12vw
@@ -415,6 +546,7 @@ img
 
 
 #helpfulQ
+  display: flex
   float: right
   color: gray
   font-size: 13px
@@ -434,12 +566,17 @@ img
     background-color: white
     border: none
 
-#questionForm
-  width: 100%
+#questionForm, #answerForm
+  color: black
+  width: 60vw
   button
+    color: black
+    text-decoration: none
     margin-left: 42%
     font-size: 25px
     border: 2px solid black
+  button:hover
+    background-color: lightgrey
   div
     height: 100px
     border-bottom: 1px solid black
@@ -450,7 +587,22 @@ img
     width: 45%
     font-size: 25px
     float: right
-    margin-right: 20%
+    margin-right: 5%
   #Question
     height: 75px
 
+.QuestionList
+  margin-bottom: 10px
+  max-height: 95vh
+  overflow-y: scroll
+
+#AnswerHeader
+  color: black
+
+.inValid
+  color: red
+
+.disclaimer
+  font-size: 15px
+  font-weight: 200
+  color: grey
