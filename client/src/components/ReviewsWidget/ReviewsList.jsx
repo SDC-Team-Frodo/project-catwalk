@@ -1,14 +1,39 @@
 import React, { useState, useEffect, useContext } from 'react';
+import FilterContext from './FilterContext';
 import ReviewTile from './ReviewTile';
+import request from '../../requests';
 
-const ReviewsList = ({ reviews }) => {
-  // will get filtered reviews from a context object set in widget.jsx
+const ReviewsList = ({ product }) => {
+  const [allReviews, setAllReviews] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [reviewsShown, setReviewsShown] = useState(2);
   const [sortOrder, setSortOrder] = useState('relevant');
-  // useEffect
+  const [filteredContext, setFilteredContext] = useContext(FilterContext);
   useEffect(() => {
-    // fetch list of reviews based on sortOrder state
+    request.get('reviews', { product_id: product.id, count: 500 })
+      .then((data) => {
+        setAllReviews(data.data.results);
+        setReviews(data.data.results);
+      })
+      .catch((err) => new Error(err));
+  }, [product]);
+  useEffect(() => {
+    request.get('reviews', { product_id: product.id, count: 500, sort: sortOrder })
+      .then((data) => {
+        setAllReviews(data.data.results);
+        setFilteredContext([...filteredContext]);
+      })
+      .catch((err) => new Error(err));
   }, [sortOrder]);
+  useEffect(() => {
+    if (filteredContext.length) {
+      setReviews(allReviews.filter((review) => (
+        filteredContext.includes(review.rating)
+      )));
+    } else {
+      setReviews(allReviews);
+    }
+  }, [filteredContext]);
   return (
     <section id="reviews">
       <h4>REVIEWS</h4>

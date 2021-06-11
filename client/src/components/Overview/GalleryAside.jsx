@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import StyleGrid from './subcomponents/StyleGrid';
 import ProductContext from '../../contexts/ProductContext';
 import RatingContext from '../../contexts/RatingContext';
@@ -7,12 +7,10 @@ import Price from './subcomponents/Price';
 import SelectSize from './subcomponents/SelectSize';
 
 const GalleryAside = (props) => {
-
-  const rating = useContext(RatingContext);
+  const [averageRating, setAverageRating] = useContext(RatingContext);
   const product = useContext(ProductContext);
 
   const { activeStyle, styles, selectedStyleIndex, setSelectedStyleIndex } = props;
-
   // Added support for hiding.
   // I assume conditionally rendering will break the useState hook if it misses rendering any of the children using said hook.
   return (
@@ -20,13 +18,20 @@ const GalleryAside = (props) => {
       <section className="left-margin top-margin">
 
         <div id="gallery-aside-stars">
-          <ReactStars {
-            ...{
-              size: 18,
-              value: Number(rating),
-              edit: false,
-            }
-          } />
+          {averageRating !== null
+            && (
+              <ReactStars {
+                ...{
+                  size: 16,
+                  value: Math.round(averageRating * 2) / 2,
+                  a11y: true,
+                  isHalf: true,
+                  edit: false,
+                  activeColor: 'red',
+                }
+              }
+              />
+            )}
         </div>
 
         <a href="#review-widget">Read all reviews</a>

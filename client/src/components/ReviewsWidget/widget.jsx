@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ProductContext from '../../contexts/ProductContext';
+import FilterContext from './FilterContext';
 import RatingsBreakdown from './RatingsBreakdown';
 import ProductBreakdown from './ProductBreakdown';
 import ReviewsList from './ReviewsList';
@@ -9,13 +10,8 @@ import getRecommendedAvg from '../../helpers/recommendedAvg';
 
 const ReviewContainer = () => {
   const product = useContext(ProductContext);
-  const [reviews, setReviews] = useState([]);
   const [reviewsMeta, setReviewsMeta] = useState({});
-  useEffect(() => {
-    request.get('reviews', { product_id: product.id, count: 500 })
-      .then((data) => setReviews(data.data.results))
-      .catch((err) => new Error(err));
-  }, [product]);
+  const [filteredContext, setFilteredContext] = useState([]);
   useEffect(() => {
     request.get('reviews/meta', { product_id: product.id })
       .then((metadata) => setReviewsMeta(metadata.data))
@@ -26,7 +22,12 @@ const ReviewContainer = () => {
       <header>RATINGS &amp; REVIEWS</header>
       <div id="reviews-ratings-container">
         <div id="ratings-container">
-          {reviewsMeta.ratings && <RatingsBreakdown ratings={reviewsMeta.ratings} />}
+          {reviewsMeta.ratings
+          && (
+          <FilterContext.Provider value={[filteredContext, setFilteredContext]}>
+            <RatingsBreakdown ratings={reviewsMeta.ratings} />
+          </FilterContext.Provider>
+          )}
           {reviewsMeta.recommended
           && (
           <div className="recommend-summary">
@@ -37,7 +38,9 @@ const ReviewContainer = () => {
           && <ProductBreakdown characteristics={reviewsMeta.characteristics} />}
         </div>
         <div id="reviews-container">
-          <ReviewsList reviews={reviews} />
+          <FilterContext.Provider value={[filteredContext, setFilteredContext]}>
+            <ReviewsList product={product} />
+          </FilterContext.Provider>
           <ReviewForm />
         </div>
       </div>

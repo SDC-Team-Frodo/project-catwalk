@@ -1,11 +1,28 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactStars from 'react-rating-stars-component';
+import request from '../../requests';
 import formatDate from '../../helpers/formatDate';
 
 const ReviewTile = ({ review }) => {
   const [hidden, setHidden] = useState(review.body.length > 250);
-  // const [selectedHelpful, setSelectedHelpful] = useState(false);
-  return (
+  const [selectedHelpful, setSelectedHelpful] = useState(false);
+  const [helpfulCount, setHelpfulCount] = useState(review.helpfulness);
+  const [reported, setReported] = useState(false);
+  useEffect(() => {
+    if (selectedHelpful) {
+      request.put(`reviews/${review.review_id}/helpful`, { review_id: review.review_id })
+        .then(() => { setHelpfulCount(helpfulCount + 1); })
+        .catch((err) => new Error(err));
+    }
+  }, [selectedHelpful]);
+  useEffect(() => {
+    if (reported) {
+      request.put(`reviews/${review.review_id}/report`, { review_id: review.review_id })
+        .then()
+        .catch((err) => new Error(err));
+    }
+  }, [reported]);
+  return !reported ? (
     <li className="review">
       <div className="review-date">
         <span>
@@ -58,17 +75,17 @@ const ReviewTile = ({ review }) => {
         )}
       <div className="helpful">
         Helpful?
-        <button type="button">Yes</button>
+        <button type="button" disabled={selectedHelpful} onClick={() => setSelectedHelpful(true)}>Yes</button>
         <span>
           (
-          {review.helpfulness}
+          {helpfulCount}
           )
         </span>
         |
-        <button type="button"> Report </button>
+        <button type="button" disabled={reported} onClick={() => setReported(true)}> Report </button>
       </div>
     </li>
-  );
+  ) : null;
 };
 
 export default ReviewTile;
