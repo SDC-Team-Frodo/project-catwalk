@@ -1,17 +1,25 @@
 // app level
-$font-stack: Tahoma, Arial, Helvetica, sans-serif;
-$body-color: black
+$font-stack: Tahoma, Arial, Helvetica, sans-serif
+$header-color: #333333e8
+$body-color: #696969
 $background-color: white
 
 body
   color: $body-color
-  background-color: $background-color
+  font-family: $font-stack
+
+h1, h2, h3, h4, strong, i
+  color: $header-color
+
+span, p
+  color: $body-color
 
 div
   margin: 0
   padding: 0
 
 main
+  background-color: $background-color
   width: 100%
 
 #app
@@ -32,11 +40,11 @@ main
   // background-color: grey
   position: relative
   width: 60vw
-  height: 25em
+  height: 30em
   &.full
     margin: auto
-    width: 75% !important
-    height: 30em !important
+    width: 80% !important
+    height: 35em !important
   i
     position: relative
 
@@ -51,7 +59,7 @@ main
   top: 6%
   left: -2em
   position: absolute
-  opacity: .8
+  opacity: .9
   height: 90%
   width: 4em
   // background-color: blue
@@ -74,14 +82,17 @@ main
   background-color: grey
   flex-shrink: 0
   &:hover
-    background-color: green
+    filter: brightness(1.1)
+  &.selected
+    // border-bottom: .2em solid black
+    box-shadow: 0 .25em #F39C12
 
 #gallery-aside
   order: 2
   position: relative
   // background-color: darkgrey
   width: 40vw
-  height: 25em
+  height: 30em
   #gallery-aside-stars
     display: inline-block !important
   a
@@ -92,7 +103,28 @@ main
     top: -.5em
   .strikethrough
     text-decoration: line-through
+  h2
+    margin: .5em 0
 
+  #size-select
+    border-radius: 0
+    padding: 1em 3em 1em 1.5em
+    flex-grow: 2
+    font-weight: strong
+    margin-right: 1.5em
+
+  #quantity-select
+    border-radius: 0
+    padding: 1em 1em 1em 1em
+    width: 6em
+    flex-grow: 0
+    flex-shrink: 2
+    font-weight: strong
+
+
+#styles
+  strong
+    margin-bottom: .25em
 
 // #style-grid
 //   display: grid
@@ -127,7 +159,7 @@ main
   position: relative
   // background: darkgrey
   width: 60vw
-  height: 15em
+  // height: 15em
 
 #features
   order: 2
@@ -135,12 +167,15 @@ main
   position: relative
   // background: lightgrey
   width: 40vw
-  height: 15em
+  // height: 15em
 
 .left-margin
   margin-left: 2.5em
 
 .top-margin
+  margin-top: .75em
+
+.large-top-margin
   margin-top: 2em
 
 .left-border
@@ -157,7 +192,12 @@ main
   margin-right: 1em
   margin-top: 1em
 
+.slim
+  font-size: .8em
+  font-weight: 200 !important
 
+.uppercase
+  text-transform: uppercase
 
 #related
   display: flex

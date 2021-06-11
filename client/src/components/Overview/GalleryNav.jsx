@@ -3,7 +3,7 @@ import GalleryNavTile from './subcomponents/GalleryNavTile';
 
 const GalleryNav = (props) => {
 
-  const { activeStyle } = props;
+  const { activeStyle, setSelectedPhotoIndex, selectedPhotoIndex } = props;
   let { photos } = activeStyle;
 
   const [scroll, setScroll] = useState(0);
@@ -42,7 +42,7 @@ const GalleryNav = (props) => {
       <i className="fas fa-chevron-up scroll-up" onClick={scrollUp}></i>
       <div id="gallery-nav">
 
-        {photos.map((photo, index) => <GalleryNavTile key={`gallery-nav-${index}`} photo={photo} index={index}/>)}
+        {photos.map((photo, index) => <GalleryNavTile key={`gallery-nav-${index}`} photo={photo} index={index} setSelectedPhotoIndex={setSelectedPhotoIndex} selected={selectedPhotoIndex===index}/>)}
       </div>
       <i className="fas fa-chevron-down scroll-down" onClick={scrollDown}></i>
     </div>

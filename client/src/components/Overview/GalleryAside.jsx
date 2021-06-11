@@ -4,6 +4,7 @@ import ProductContext from '../../contexts/ProductContext';
 import RatingContext from '../../contexts/RatingContext';
 import ReactStars from 'react-rating-stars-component';
 import Price from './subcomponents/Price';
+import SelectSize from './subcomponents/SelectSize';
 
 const GalleryAside = (props) => {
 
@@ -29,12 +30,8 @@ const GalleryAside = (props) => {
         </div>
 
         <a href="#review-widget">Read all reviews</a>
-
         <br />
-
-        <span className="uppercase slim">{product.category}</span>
-
-        <br />
+        <span className="slim">{product.category}</span>
 
         <h2>
           {product.name}
@@ -46,25 +43,26 @@ const GalleryAside = (props) => {
         <br />
         <br />
         <div id="styles">
-          <strong>Styles &gt;</strong> {activeStyle ? activeStyle.name : ''}
-          <StyleGrid
-            styles={styles}
-            selectedStyleIndex={selectedStyleIndex}
-            setSelectedStyleIndex={setSelectedStyleIndex}/>
+          <strong>Styles &gt;</strong> {activeStyle && activeStyle.name}
         </div>
+        <StyleGrid
+          styles={styles}
+          selectedStyleIndex={selectedStyleIndex}
+          setSelectedStyleIndex={setSelectedStyleIndex}/>
 
-        <select name="SELECT SIZE" defaultValue="SELECT SIZE">
-          <option disabled hidden>SELECT SIZE</option>
-          <option>Small</option>
-          <option>Medium</option>
-          <option>Big Chungus</option>
-        </select>
-        <input type="number" min="1"/>
+        <form>
+          <div class="separator">
+            <SelectSize />
+            <input id="quantity-select" type="number" min="1"/>
+          </div>
 
-        <br />
+          <br />
+          <div class="separator">
+            <button>ADD TO BAG +</button>
+            <button><i className="far fa-star"></i></button>
+          </div>
 
-        <button>ADD TO BAG +</button>
-        <button><i className="far fa-star"></i></button>
+        </form>
 
 
     </section>
