@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-wrap-multilines */
 import React, { useState, useEffect, useContext} from 'react';
 import ReactStars from 'react-rating-stars-component';
 import getAverageRating from '../../helpers/averageRating';
@@ -28,7 +29,17 @@ const Card = (props) => {
           <img src={thumbnail.thumbnail_url} alt="Failed" />
         </div>
         <div className="cardIcon" onClick={func} >
-          {isStars ? <ReactStars  id={iconId} count={1} value={1} edit={false} size={24} color={'red'} /> : <span id={iconId}>&#9447;</span>}
+          {isStars ? <ReactStars {
+              ...{
+                size: 24,
+                count: 1,
+                value: 1,
+                a11y: true,
+                isHalf: true,
+                edit: false,
+              }
+            }
+            /> : <span id={iconId}>&#9447;</span>}
         </div>
         <div className="textContainer" onClick={redirect}>
           {category}
@@ -38,7 +49,17 @@ const Card = (props) => {
           ${default_price}
           <br />
           <div className="cardRating">
-            {ratings && <ReactStars count={5} value={getAverageRating(ratings)} edit={false} isHalf={true} />}
+            {ratings && <ReactStars {
+              ...{
+                size: 16,
+                value: getAverageRating(ratings),
+                a11y: true,
+                isHalf: true,
+                edit: false,
+                activeColor: 'red',
+              }
+            }
+            />}
           </div>
         </div>
       </div>
