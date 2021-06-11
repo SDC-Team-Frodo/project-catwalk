@@ -17,6 +17,16 @@ const AnswerForm = (props) => {
   const [validN, setValidN] = useState(false);
   const [validE, setValidE] = useState(false);
   const [displaySent, setDisplaySent] = useState(false);
+  const [photos, setPhotos] = useState([]);
+
+  const handleFileInput = (e) => {
+    const file = e.target.files;
+    const reader = new FileReader();
+    reader.readAsDataURL(file[0]);
+    reader.onload = (e) => {
+      setPhotos([...photos, e.target.result]);
+    };
+  };
 
   useEffect(() => {
     if (subClicked) {
@@ -30,7 +40,7 @@ const AnswerForm = (props) => {
           body: answer,
           name: nickName,
           email,
-          photos: [],
+          photos,
         }).then((res) => {
           setAnswer('');
           setNickName('');
@@ -60,8 +70,9 @@ const AnswerForm = (props) => {
             cols="100"
             wrap="hard"
             id="Question"
-            placeholder="Write your question here"
+            placeholder="Write your answer here"
             value={answer}
+            maxLength="1000"
             onChange={(e) => {
               setAnswer(e.target.value);
             }}
@@ -98,6 +109,18 @@ const AnswerForm = (props) => {
             }}
           />
           <h4 className="disclaimer">*For authentication reasons, you will not be emailed*</h4>
+        </div>
+        <div>
+          <label className="formInput" htmlFor="image">
+            Upload Photo
+          </label>
+          <input
+            type="file"
+            id="image"
+            alt="none"
+            value=""
+            onChange={(e) => handleFileInput(e)}
+          />
         </div>
         <button
           className="hoverGrey"
