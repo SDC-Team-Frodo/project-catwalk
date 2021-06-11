@@ -35,12 +35,16 @@ main
 #overview
   color: black !important
   position: relative
+  min-width: 45em
 
 #gallery-container
+  order: 1
+  // flex-grow: 2
   z-index: 2
   position: relative
-  width: 60vw
-  height: 30em
+  min-width: 15em
+  width: 60%
+  min-height: 30em
   &.full
     margin: auto
     width: 100% !important
@@ -57,13 +61,13 @@ main
     position: relative
 
 #gallery
-  order: 1
   z-index: 1 !important
   // background-color: grey
   position: relative
-  width: inherit
-  height: inherit
+  width: 100%
+  height: 100%
   cursor: zoom-in
+  margin: 0 !important
 
 #outer-gallery-nav
   z-index: 2
@@ -112,8 +116,8 @@ main
   order: 2
   position: relative
   // background-color: darkgrey
-  width: 40vw
-  height: 30em
+  width: 40%
+  min-height: 30em
   #gallery-aside-stars
     display: inline-block !important
   a
@@ -191,7 +195,7 @@ main
 #description
   order: 1
   position: relative
-  width: 60vw
+  width: 60%
   i
     cursor: pointer
     font-size: 1.5em
@@ -215,7 +219,7 @@ main
   display: inline-block
   position: relative
   // background: lightgrey
-  width: 40vw
+  width: 40%
   // height: 15em
 
 .left-margin

@@ -57,20 +57,22 @@ const Gallery = (props) => {
 
   return (
     <div id="gallery-container" className={(fullscreenSlider ? 'full' : '')+ (zoom ? ' zoom' : '')}>
-
-      {activeStyle && <GalleryNav
+      <div
+        id="gallery"
+        className={(fullscreenSlider ? 'full' : '')+ (zoom ? ' zoom' : '')}
+        style={css}
+        onClick={handleGalleryClick}
+        onPointerMove={handleMouseMove}>
+           {activeStyle && <GalleryNav
         activeStyle={activeStyle}
         setSelectedPhotoIndex={setSelectedPhotoIndex}
         selectedPhotoIndex={selectedPhotoIndex}/>}
       <i
         className={`fas fa-${ficon} float-right`}
         onClick={handleIconClick} />
-      <div
-        id="gallery"
-        style={css}
-        onClick={handleGalleryClick}
-        onPointerMove={handleMouseMove}>
       </div>
+
+
     </div>
   );
 }
