@@ -41,7 +41,6 @@ const RelatedList = () => {
       .catch((err) => console.log(err));
   }, [product.id]);
 
-  // Handles button event related to carousel next and previous buttons
   function buttonHandle(event) {
     const response = event.target.id;
 
@@ -58,7 +57,6 @@ const RelatedList = () => {
     }
   }
 
-  // Initiates the movement for the carousel
   useEffect(() => {
     let initial = 0;
     const cards = document.getElementsByClassName('relatedCard');
@@ -68,10 +66,10 @@ const RelatedList = () => {
   }, [index, translateX]);
 
   return (
-    <div id="related">
+    <div className="outfitRelatedWidget" id="related">
       <button type="button" className="carousel_button previous" id="relatedPrevious" onClick={buttonHandle}>&#60;</button>
       <div className="carousel" id="relatedList">
-        {relatedProductList.map((relatedProduct, i) => <Card product={relatedProduct} thumbnail={relatedThumbnails[i]} ratings={relatedRatings[i]} key={relatedProduct.id} cardClass={'relatedCard'}/>)}
+        {relatedProductList.map((relatedProduct, i) => <Card product={relatedProduct} thumbnail={relatedThumbnails[i]} ratings={relatedRatings[i]} key={`${relatedProduct.id}${i}`} cardClass={'relatedCard'}/>)}
       </div>
       <button type="button" className="carousel_button next" id="relatedNext" onClick={buttonHandle}>&#62;</button>
     </div>
