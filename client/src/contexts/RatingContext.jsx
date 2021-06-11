@@ -1,5 +1,5 @@
 import React, { createContext } from 'react';
 
-const RatingContext = createContext('3.5');
+const RatingContext = createContext();
 
 export default RatingContext;
