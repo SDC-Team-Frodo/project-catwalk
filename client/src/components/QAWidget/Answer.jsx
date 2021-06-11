@@ -1,4 +1,7 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect, useContext } from 'react';
+import request from '../../requests';
 import formatDate from '../../helpers/formatDate';
 import Modal from '../Modal';
 
@@ -43,6 +46,8 @@ const Answer = (props) => {
               type="button"
               onClick={() => {
                 setDisplay(false);
+                request.put(`qa/answers/${answer.id}/helpful`, {
+                });
               }}
             >
               Report
@@ -50,19 +55,17 @@ const Answer = (props) => {
           </div>
           <div id="answerImageDiv">
             {answer.photos.length > 0 && (
-              answer.photos.map((photo, i) => {
-                return (
-                  <Modal
-                    key={i}
-                    modalId={`answerPhoto${i}`}
-                    body={(
-                      <img className="Image" src={photo} />
-                    )}
-                    isImage="true"
-                    image={<img className="answerImage" src={photo} />}
-                  />
-                );
-              })
+              answer.photos.map((photo, i) => (
+                <Modal
+                  key={i}
+                  modalId={`answerPhoto${i}`}
+                  body={(
+                    <img className="Image" src={photo} />
+                  )}
+                  isImage="true"
+                  image={<img className="answerImage" src={photo} />}
+                />
+              ))
             )}
           </div>
         </section>

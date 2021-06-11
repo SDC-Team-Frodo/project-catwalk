@@ -3,6 +3,7 @@ import Answer from './Answer';
 import Modal from '../Modal';
 import AnswerForm from './AnswerForm';
 import ProductContext from '../../contexts/ProductContext';
+import request from '../../requests';
 
 const Question = (props) => {
   const { question } = props;
@@ -39,7 +40,15 @@ const Question = (props) => {
         {`Q: ${question.question_body}`}
         <div id="helpfulQ">
           Helpful?
-          <button type="button" className="yesButton">
+          <button
+            type="button"
+            className="yesButton"
+            onClick={() => {
+              request.put(`qa/questions/${question.question_id}/helpful`, {
+                question_id: question.question_id,
+              });
+            }}
+          >
             {`Yes(${question.question_helpfulness})`}
           </button>
           |
@@ -70,6 +79,7 @@ const Question = (props) => {
           id="loadA"
           className="hoverGrey"
           onClick={() => {
+            // eslint-disable-next-line no-unused-expressions
             buttonLabel === 'More Answers' ? setDisplayedAnswers('all') : setDisplayedAnswers('collapsed');
           }}
         >
