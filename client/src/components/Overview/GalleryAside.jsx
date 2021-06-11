@@ -59,7 +59,7 @@ const GalleryAside = (props) => {
 
         <form>
           <div className="separator">
-            {activeStyle && <SelectSize activeStyle={activeStyle}
+            {(activeStyle && activeStyle.skus) && <SelectSize activeStyle={activeStyle}
             selectedSizeIndex={selectedSizeIndex}
             setSelectedSizeIndex={setSelectedSizeIndex}/>}
             <QuantityInput

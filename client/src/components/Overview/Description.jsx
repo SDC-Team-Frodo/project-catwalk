@@ -7,7 +7,11 @@ const Description = (props) => {
       <section className="left-margin large-top-margin">
         <h3>{product.slogan}</h3>
         <p>{product.description}</p>
-
+          <i className="fab fa-twitter"></i>
+          <i className="fab fa-facebook"></i>
+          <i className="fab fa-pinterest"></i>
+          <i className="fab fa-tumblr"></i>
+          <i className="fas fa-share-alt"></i>
       </section>
     </div>
   );

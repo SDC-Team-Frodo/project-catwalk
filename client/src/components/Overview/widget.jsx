@@ -22,6 +22,7 @@ const OverviewContainer = (props) => {
 
   // states
   const [fullscreenSlider, setFullscreenSlider] = useState(false);
+  const [zoom, setZoom] = useState(false);
   const [selectedStyleIndex, setSelectedStyleIndex] = useState(0);
   const [styles, setStyles] = useState([]);
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
@@ -41,10 +42,10 @@ const OverviewContainer = (props) => {
         const styleResults = result.data.results;
         const styleIndex = styleResults.findIndex(s => s['default?']) || 0;
 
+        setSelectedSizeIndex(-1);
         setSelectedStyleIndex(styleIndex);
         setSelectedPhotoIndex(0);
         setCartQuantity(1);
-        setSelectedSizeIndex(-1);
         setStyles(styleResults); // styles nested in {data} of results
       })
       .catch(console.error);
@@ -58,7 +59,9 @@ const OverviewContainer = (props) => {
           setFullscreenSlider={setFullscreenSlider}
           activeStyle={selectedStyle()}
           selectedPhotoIndex={selectedPhotoIndex}
-          setSelectedPhotoIndex={setSelectedPhotoIndex}/>
+          setSelectedPhotoIndex={setSelectedPhotoIndex}
+          zoom={zoom}
+          setZoom={setZoom}/>
         <GalleryAside
           fullscreenSlider={fullscreenSlider}
           styles={styles}
