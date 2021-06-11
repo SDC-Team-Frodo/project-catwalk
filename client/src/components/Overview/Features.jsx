@@ -8,13 +8,13 @@ const Features = (props) => {
   const product = useContext(ProductContext);
   const { features } = product
 
+  //
+
   return (
     <div id="features">
-      <section id="fcontainer" className="left-border left-margin top-margin">
+      <section id="fcontainer" className="left-border left-margin large-top-margin">
       {features.map((feature, index) => <Feature feature={feature} key={`feature-${index}`} />
       )}
-
-
       </section>
     </div>
   );
