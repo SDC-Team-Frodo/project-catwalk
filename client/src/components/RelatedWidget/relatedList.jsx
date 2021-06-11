@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Card from './card';
 import request from '../../requests';
 import ProductContext from '../../contexts/ProductContext';
+import helpers from './relatedHelpers';
 
 const RelatedList = () => {
   const product = useContext(ProductContext);
@@ -78,18 +79,20 @@ const RelatedList = () => {
     }
   }
 
-  function compareFeatures(event) {
+  function compareFeaturesModal(event) {
     let id = event.target.id.match(/\d+/);
     id = parseInt(id[0], 10);
     const cardIndex = relatedIds.indexOf(id);
-    console.log(relatedProductList[cardIndex].features)
+    const currentFeatures = product.features;
+    const selectedFeatures = relatedProductList[cardIndex].features;
+    helpers.compareFeatures(currentFeatures, selectedFeatures)
   }
 
   return (
     <div className="outfitRelatedWidget" id="related">
       <button type="button" className="carousel_button previous" id="relatedPrevious" onClick={buttonHandle}>&#60;</button>
       <div className="carousel" id="relatedList">
-        {relatedProductList.map((relatedProduct, i) => <Card product={relatedProduct} thumbnail={relatedThumbnails[i]} ratings={relatedRatings[i]} key={`${relatedProduct.id}${i}`} cardClass={'relatedCard'} func={compareFeatures} isStars={true} />)}
+        {relatedProductList.map((relatedProduct, i) => <Card product={relatedProduct} thumbnail={relatedThumbnails[i]} ratings={relatedRatings[i]} key={`${relatedProduct.id}${i}`} cardClass={'relatedCard'} func={compareFeaturesModal} isStars={true} />)}
       </div>
       <button type="button" className="carousel_button next" id="relatedNext" onClick={buttonHandle}>&#62;</button>
     </div>
