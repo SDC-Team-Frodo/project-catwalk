@@ -96,14 +96,16 @@ const OutfitList = () => {
     <div className="outfitRelatedWidget">
       <button type="button" className="carousel_button previous" id="outfitPrevious" onClick={buttonHandle}>&#60;</button>
       <div className="carousel" id="relatedList">
-        <div className="card plus" onClick={addOutfit} id="blank">
-          +
-          <br />
-          Add Current Product To
-          <br />
-          Outfits
+        <div className="card" onClick={addOutfit} id="blank">
+          <div className="plus">
+            +
+            <br />
+            Add Current Product To
+            <br />
+            Outfits
+          </div>
         </div>
-        {outfitProducts.length > 0 && outfitProducts.map((outfitProduct, i) => <Card product={outfitProduct} thumbnail={outfitThumbnails[i]} ratings={outfitRatings[i]} key={product.id} cardClass="outfitCard" func={removeOutfit}/>)}
+        {outfitProducts.length > 0 && outfitProducts.map((outfitProduct, i) => <Card product={outfitProduct} thumbnail={outfitThumbnails[i]} ratings={outfitRatings[i]} key={`${product.id}${i}`} cardClass="outfitCard" func={removeOutfit}/>)}
       </div>
       <button type="button" className="carousel_button next" id="outfitNext" onClick={buttonHandle}>&#62;</button>
     </div>
