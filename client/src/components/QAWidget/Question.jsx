@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useContext } from 'react';
 import Answer from './Answer';
 import Modal from '../Modal';
@@ -13,6 +15,8 @@ const Question = (props) => {
     Object.values(question.answers).slice(0, displayedAnswers),
   );
   const [buttonLabel, setButtonLabel] = useState('More Answers');
+  const [yesClicked, setYesClicked] = useState(false);
+  const [helpfulCount, setHelpfulCount] = useState(question.question_helpfulness);
 
   useEffect(() => {
     if (displayedAnswers === 'all') {
@@ -34,6 +38,10 @@ const Question = (props) => {
     }
   }, [answers]);
 
+  useEffect(() => {
+    setHelpfulCount(helpfulCount + 1);
+  }, [yesClicked]);
+
   return (
     <div className="question">
       <h2 className="QuestionText">
@@ -46,10 +54,14 @@ const Question = (props) => {
             onClick={() => {
               request.put(`qa/questions/${question.question_id}/helpful`, {
                 question_id: question.question_id,
-              });
+              }).then((res) => { setYesClicked(true); })
+                .catch((err) => {
+                  console.error(err);
+                  alert('Couldn\'t complete request');
+                });
             }}
           >
-            {`Yes(${question.question_helpfulness})`}
+            {`Yes(${helpfulCount})`}
           </button>
           |
           <Modal

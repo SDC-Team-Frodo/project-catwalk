@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect, useContext } from 'react';
@@ -36,7 +37,16 @@ const Answer = (props) => {
             <button
               type="button"
               onClick={() => {
-                setYesClicked(true);
+                if (!yesClicked) {
+                  request.put(`qa/answers/${answer.id}/helpful`, {
+                    answer_id: answer.id,
+                  }).then((res) => {
+                    setYesClicked(true);
+                  }).catch((err) => {
+                    console.error(err);
+                    alert('Couldn\'t Complete Request');
+                  });
+                }
               }}
             >
               {`Yes(${helpfulCount})`}
@@ -45,8 +55,13 @@ const Answer = (props) => {
             <button
               type="button"
               onClick={() => {
-                setDisplay(false);
-                request.put(`qa/answers/${answer.id}/helpful`, {
+                request.put(`qa/answers/${answer.id}/report`, {
+                  answer_id: answer.id,
+                }).then((res) => {
+                  setDisplay(false);
+                }).catch((err) => {
+                  console.error(err);
+                  alert('Couldn\'t Complete Request');
                 });
               }}
             >
