@@ -85,6 +85,17 @@ const OutfitList = () => {
 
   // Initiates the movement for the carousel
   useEffect(() => {
+    if (index === 1) {
+      document.getElementById('outfitPrevious').style.visibility = 'hidden';
+    } else {
+      document.getElementById('outfitPrevious').style.visibility = 'visible';
+    }
+    if (index >= numberOfCards - 3) {
+      document.getElementById('outfitNext').style.visibility = 'hidden';
+    } else {
+      document.getElementById('outfitNext').style.visibility = 'visible';
+    }
+
     let initial = 0;
     const cards = document.getElementsByClassName('outfitCard');
     for (initial; initial < cards.length; initial += 1) {

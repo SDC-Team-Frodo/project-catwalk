@@ -42,12 +42,23 @@ const RelatedList = () => {
   }, [product.id]);
 
   useEffect(() => {
+    if (index === 1) {
+      document.getElementById('relatedPrevious').style.visibility = 'hidden';
+    } else {
+      document.getElementById('relatedPrevious').style.visibility = 'visible';
+    }
+    if (index >= numberOfCards - 3) {
+      document.getElementById('relatedNext').style.visibility = 'hidden';
+    } else {
+      document.getElementById('relatedNext').style.visibility = 'visible';
+    }
+
     let initial = 0;
     const cards = document.getElementsByClassName('relatedCard');
     for (initial; initial < cards.length; initial += 1) {
       cards[initial].style.transform = `translateX(${translateX}px`;
     }
-  }, [index, translateX]);
+  }, [index, translateX, numberOfCards]);
 
   function buttonHandle(event) {
     const response = event.target.id;
@@ -58,7 +69,7 @@ const RelatedList = () => {
         setTranslateX((previousTranslateX) => previousTranslateX + 270);
       }
     } else if (response === 'relatedNext') {
-      if (index < numberOfCards - 4) {
+      if (index < numberOfCards - 3) {
         setIndex((previousIndex) => previousIndex + 1);
         setTranslateX((previousTranslateX) => previousTranslateX - 270);
       }
