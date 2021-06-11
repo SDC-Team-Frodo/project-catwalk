@@ -17,7 +17,6 @@ const RelatedList = () => {
   useEffect(() => {
     request.get(`products/${product.id}/related`, { endpoint: `products/${product.id}/related` })
       .then((relatedProductsIds) => {
-        console.log(relatedProductsIds.data)
         setNumberOfCards(relatedProductsIds.data.length);
         relatedProductsIds.data.forEach((id) => {
           request.get(`products/${id}`, { endpoint: `products/${id}` })
