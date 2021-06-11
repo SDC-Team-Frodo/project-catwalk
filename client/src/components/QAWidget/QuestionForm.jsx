@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import ProductContext from '../../contexts/ProductContext';
+import request from '../../requests';
 import isEmail from './isEmail';
 
 const QuestionForm = () => {
+  const product = useContext(ProductContext);
   const [question, setQuestion] = useState('');
   const [nickName, setNickName] = useState('');
   const [email, setEmail] = useState('');
@@ -19,14 +22,22 @@ const QuestionForm = () => {
         && validE
       ) {
         // Need to make the api request
-        console.log('Question:', question);
-        console.log('NickName:', nickName);
-        console.log('Email:', email);
-        // then do this stuff
-        setQuestion('');
-        setNickName('');
-        setEmail('');
-        setSubClicked(false);
+        request.post('qa/questions', {
+          body: question,
+          name: nickName,
+          email,
+          product_id: product.id,
+        }).then((res) => {
+          // then do this stuff
+          console.log(res);
+          setQuestion('');
+          setNickName('');
+          setEmail('');
+          setSubClicked(false);
+        }).catch((err) => {
+          console.error(err);
+          alert('couldn\'t send');
+        });
       }
     }
   }, [subClicked]);
