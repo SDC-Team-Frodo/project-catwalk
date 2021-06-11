@@ -31,7 +31,7 @@ const ReviewTile = ({ review }) => {
           <ul className="review-photos">
             {review.photos.map((photo) => (
               <li className="review-photo" key={photo.id}>
-                <img src={photo.url} alt="a review thingie" />
+                <img src={photo.url} alt="review img" />
               </li>
             ))}
           </ul>

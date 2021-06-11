@@ -4,7 +4,7 @@ import CharLabels from './CharLabels';
 
 const ProductBreakdown = ({ characteristics }) => (
   <section id="char-breakdown">
-    CHARACTERISTICS
+    <h4>CHARACTERISTICS</h4>
     <ul className="char-bars">
       {Object.keys(characteristics).map((char) => (
         <div key={characteristics[char].id}>

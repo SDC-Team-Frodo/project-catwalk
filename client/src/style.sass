@@ -14,6 +14,10 @@ div
 main
   width: 100%
 
+h4
+  font-weight: 600
+  margin-block-start: 0
+
 #app
   display: flex
   margin: auto
@@ -228,6 +232,13 @@ main
 #reviews-ratings-container, #reviews-container, #ratings-container
   display: flex
 
+@media (max-width: 400px)
+  #reviews-ratings-container
+    flex-direction: column
+
+  #ratings-container
+    flex-direction: row
+
 #reviews-container, #ratings-container
   flex-direction: column
 
@@ -240,6 +251,7 @@ main
   width: 65%
 
 #ratings-container
+  margin-right: 50px
   min-width: 250px
   width: 30%
 
@@ -253,11 +265,7 @@ main
       margin-right: 0.25em
       letter-spacing: 0.05em
 
-#char-breakdown
-  margin-top: 2em
-
 .rating-bars, .char-bars
-  font-weight: bold
   list-style-type: none
   margin-top: 1.5em
   padding: 0
@@ -267,7 +275,7 @@ main
   align-items: center
   display: flex
   justify-content: space-between
-  margin-bottom: 1.5em
+  margin-bottom: 1em
   padding: 0
 
 .rating-bar
@@ -282,10 +290,11 @@ main
 .rating-filler
   height: inherit
   background-color: green
-  border-radius: inherit
+  border-radius: 10px 0 0 10px
 
 .char-bars
   div
+    font-size: 12px
     i
       margin-bottom: 0.1em
       position: relative
@@ -308,6 +317,7 @@ main
 
 .recommend-summary
   font-style: italic
+  margin-bottom: 1em
   text-align: center
 
 .review-tiles
@@ -372,6 +382,10 @@ main
 
 .recommend, .reviewer
   margin-bottom: 1em
+
+.recommend
+  i
+    margin-right: 0.5em
 
 .response
   background-color: lightgray

@@ -11,9 +11,9 @@ const ReviewsList = ({ reviews }) => {
   }, [sortOrder]);
   return (
     <section id="reviews">
+      <h4>REVIEWS</h4>
       <div className="reviews-count">
-        <span>{reviews.length}</span>
-        reviews, sorted by
+        {`${reviews.length} reviews, sorted by `}
         <select onChange={(e) => setSortOrder(() => e.target.value)}>
           <option value="relevant">relevance</option>
           <option value="newest">newest</option>

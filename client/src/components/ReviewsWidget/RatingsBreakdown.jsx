@@ -8,6 +8,7 @@ const RatingsBreakdown = ({ ratings }) => {
   const averageRating = getAverageRating(ratings);
   return (
     <section id="ratings-breakdown">
+      <h4>RATINGS</h4>
       <div className="avg-rating-stars">
         <div className="avg-rating">{averageRating}</div>
         <div>
