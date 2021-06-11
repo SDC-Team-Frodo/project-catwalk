@@ -76,7 +76,7 @@ const OutfitList = () => {
         setTranslateX((previousTranslateX) => previousTranslateX + 270);
       }
     } else if (response === 'outfitNext') {
-      if (index < numberOfCards - 4) {
+      if (index < numberOfCards - 3) {
         setIndex((previousIndex) => previousIndex + 1);
         setTranslateX((previousTranslateX) => previousTranslateX - 270);
       }
