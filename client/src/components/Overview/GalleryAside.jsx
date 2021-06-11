@@ -5,12 +5,18 @@ import RatingContext from '../../contexts/RatingContext';
 import ReactStars from 'react-rating-stars-component';
 import Price from './subcomponents/Price';
 import SelectSize from './subcomponents/SelectSize';
+import QuantityInput from './subcomponents/QuantityInput';
 
 const GalleryAside = (props) => {
   const [averageRating, setAverageRating] = useContext(RatingContext);
   const product = useContext(ProductContext);
 
+<<<<<<< HEAD
   const { activeStyle, styles, selectedStyleIndex, setSelectedStyleIndex } = props;
+=======
+  const {  cartQuantity, setCartQuantity, selectedSizeIndex, setSelectedSizeIndex, activeStyle, styles, selectedStyleIndex, setSelectedStyleIndex } = props;
+
+>>>>>>> main
   // Added support for hiding.
   // I assume conditionally rendering will break the useState hook if it misses rendering any of the children using said hook.
   return (
@@ -42,7 +48,7 @@ const GalleryAside = (props) => {
           {product.name}
         </h2>
         <Price
-          price={product ? product.default_price : 0}
+          price={activeStyle ? activeStyle.original_price : 0}
           salePrice={activeStyle ? activeStyle.sale_price : null}
           />
         <br />
@@ -50,21 +56,34 @@ const GalleryAside = (props) => {
         <div id="styles">
           <strong>Styles &gt;</strong> {activeStyle && activeStyle.name}
         </div>
+        {/*
+        selectedSizeIndex={selectedSizeIndex}
+          setSelectedSizeIndex={setSelectedSizeIndex}
+          cartQuantity={cartQuantity}
+          setCartQuantity={setCartQuantity}
+           */}
         <StyleGrid
           styles={styles}
           selectedStyleIndex={selectedStyleIndex}
           setSelectedStyleIndex={setSelectedStyleIndex}/>
 
         <form>
-          <div class="separator">
-            <SelectSize />
-            <input id="quantity-select" type="number" min="1"/>
+          <div className="separator">
+            {(activeStyle && activeStyle.skus) && <SelectSize activeStyle={activeStyle}
+            selectedSizeIndex={selectedSizeIndex}
+            setSelectedSizeIndex={setSelectedSizeIndex}/>}
+            <QuantityInput
+              cartQuantity={cartQuantity}
+              setCartQuantity={setCartQuantity} />
           </div>
 
           <br />
-          <div class="separator">
-            <button>ADD TO BAG +</button>
-            <button><i className="far fa-star"></i></button>
+          <div className="separator">
+            <button id="add-to-bag">
+              ADD TO BAG
+              <i className="fas fa-plus"></i>
+            </button>
+            <button id="favorite-button"><i className="far fa-star"></i></button>
           </div>
 
         </form>
