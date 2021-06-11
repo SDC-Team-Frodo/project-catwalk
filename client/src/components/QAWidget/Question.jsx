@@ -11,23 +11,25 @@ const Question = (props) => {
   const [answers, setAnswers] = useState(
     Object.values(question.answers).slice(0, displayedAnswers),
   );
-  const [buttonDisplay, setButtonDisplay] = useState(true);
+  const [buttonLabel, setButtonLabel] = useState('More Answers');
 
   useEffect(() => {
-    if (Object.values(question.answers)[displayedAnswers - 2] !== undefined) {
-      setAnswers(Object.values(question.answers).slice(0, displayedAnswers));
+    if (displayedAnswers === 'all') {
+      setAnswers(Object.values(question.answers));
+      setButtonLabel('Collapse Answers');
     } else {
-      setButtonDisplay(false);
+      setAnswers(Object.values(question.answers).slice(0, 2));
+      setButtonLabel('More Answers');
     }
   }, [displayedAnswers]);
 
   useEffect(() => {
-    setAnswers(Object.values(question.answers).slice(0, displayedAnswers));
+    setAnswers(Object.values(question.answers).slice(0, 2));
   }, [question]);
 
   useEffect(() => {
     if (answers.length === question.answers.length) {
-      setButtonDisplay(false);
+      setButtonLabel(false);
     }
   }, [answers]);
 
@@ -52,26 +54,26 @@ const Question = (props) => {
                 </h2>
               </div>
             )}
-            body={<AnswerForm question_id={question.question_id} />}
+            body={<AnswerForm modalOff={() => {}} question_id={question.question_id} />}
             btnName="Add Answer"
             btnId="addAnswer"
 
           />
         </div>
       </h2>
-      <div>
+      <div className="AnswerList">
         {answers.map((answer, i) => <Answer index={i} answer={answer} key={i} />)}
       </div>
-      {buttonDisplay && (
+      {Object.values(question.answers).length > 2 && (
         <button
           type="button"
           id="loadA"
           className="hoverGrey"
           onClick={() => {
-            setDisplayedAnswers(displayedAnswers + 2);
+            buttonLabel === 'More Answers' ? setDisplayedAnswers('all') : setDisplayedAnswers('collapsed');
           }}
         >
-          More Answers
+          {buttonLabel}
         </button>
       )}
     </div>
