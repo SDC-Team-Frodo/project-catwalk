@@ -12,7 +12,7 @@ const Card = (props) => {
     default_price, category, name,
   } = product;
 
-  const cardClasses = `${cardClass  } card`;
+  const cardClasses = `${cardClass} card`;
   const iconId = `${cardClass}${product.id}`;
 
   function redirect () {
@@ -28,18 +28,8 @@ const Card = (props) => {
         <div className="imageContainer" style={background} onClick={redirect}>
           <img src={thumbnail.thumbnail_url} alt="Failed" />
         </div>
-        <div className="cardIcon" onClick={func} >
-          {isStars ? <ReactStars {
-              ...{
-                size: 24,
-                count: 1,
-                value: 1,
-                a11y: true,
-                isHalf: true,
-                edit: false,
-              }
-            }
-            /> : <span id={iconId}>&#9447;</span>}
+        <div className="cardIcon" id={iconId} onClick={func} >
+          {isStars ? <span className="cardIcon" id={iconId}>&#x2605;</span> : <span className="cardIcon" id={iconId}>&#9447;</span>}
         </div>
         <div className="textContainer" onClick={redirect}>
           {category}
@@ -51,7 +41,7 @@ const Card = (props) => {
           <div className="cardRating">
             {ratings && <ReactStars {
               ...{
-                size: 16,
+                size: 18,
                 value: getAverageRating(ratings),
                 a11y: true,
                 isHalf: true,

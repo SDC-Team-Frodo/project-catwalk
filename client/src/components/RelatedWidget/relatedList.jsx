@@ -9,6 +9,7 @@ const RelatedList = () => {
   const [numberOfCards, setNumberOfCards] = useState(0);
   const [translateX, setTranslateX] = useState(0);
   const [relatedProductList, setRelatedProductList] = useState([]);
+  const [relatedIds, setRelatedIds] = useState([]);
   const [relatedRatings, setRelatedRatings] = useState([]);
   const [relatedThumbnails, setRelatedThumbnails] = useState([]);
   const [index, setIndex] = useState(1);
@@ -18,6 +19,7 @@ const RelatedList = () => {
     request.get(`products/${product.id}/related`, { endpoint: `products/${product.id}/related` })
       .then((relatedProductsIds) => {
         setNumberOfCards(relatedProductsIds.data.length);
+        setRelatedIds(relatedProductsIds.data)
         relatedProductsIds.data.forEach((id) => {
           request.get(`products/${id}`, { endpoint: `products/${id}` })
             .then((newRelatedProduct) => {
@@ -76,8 +78,11 @@ const RelatedList = () => {
     }
   }
 
-  function compareFeatures() {
-    console.log('Placeholder');
+  function compareFeatures(event) {
+    let id = event.target.id.match(/\d+/);
+    id = parseInt(id[0], 10);
+    const cardIndex = relatedIds.indexOf(id);
+    console.log(relatedProductList[cardIndex].features)
   }
 
   return (
