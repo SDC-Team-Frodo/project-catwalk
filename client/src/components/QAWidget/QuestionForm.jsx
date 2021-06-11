@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React, { useState, useEffect, useContext } from 'react';
 import ProductContext from '../../contexts/ProductContext';
 import request from '../../requests';
@@ -43,9 +44,9 @@ const QuestionForm = () => {
   }, [subClicked]);
 
   useEffect(() => {
-    question.length > 2 ? setValidQ(true) : setValidQ(false)
-    nickName.length > 2 ? setValidN(true) : setValidN(false)
-    isEmail(email) ? setValidE(true) : setValidE(false)
+    question.length > 2 ? setValidQ(true) : setValidQ(false);
+    nickName.length > 2 ? setValidN(true) : setValidN(false);
+    isEmail(email) ? setValidE(true) : setValidE(false);
   }, [question, nickName, email]);
 
   if (!displaySent) {
