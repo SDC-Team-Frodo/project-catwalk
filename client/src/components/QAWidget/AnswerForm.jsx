@@ -19,15 +19,6 @@ const AnswerForm = (props) => {
   const [displaySent, setDisplaySent] = useState(false);
   const [photos, setPhotos] = useState([]);
 
-  const handleFileInput = (e) => {
-    const file = e.target.files;
-    const reader = new FileReader();
-    reader.readAsDataURL(file[0]);
-    reader.onload = (e) => {
-      setPhotos([...photos, e.target.result]);
-    };
-  };
-
   useEffect(() => {
     if (subClicked) {
       if (
@@ -110,18 +101,20 @@ const AnswerForm = (props) => {
           />
           <h4 className="disclaimer">*For authentication reasons, you will not be emailed*</h4>
         </div>
-        <div>
+        {/* <div>
           <label className="formInput" htmlFor="image">
             Upload Photo
           </label>
           <input
-            type="file"
+            type="text"
             id="image"
             alt="none"
-            value=""
-            onChange={(e) => handleFileInput(e)}
+            placeholder="Enter a URL to your photo"
+            onChange={(e) => {
+              setPhotos([...photos, e.target.value]);
+            }}
           />
-        </div>
+        </div> */}
         <button
           className="hoverGrey"
           type="button"
