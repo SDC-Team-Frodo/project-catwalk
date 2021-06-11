@@ -76,7 +76,7 @@ const OutfitList = () => {
         setTranslateX((previousTranslateX) => previousTranslateX + 270);
       }
     } else if (response === 'outfitNext') {
-      if (index < numberOfCards - 3) {
+      if (index < numberOfCards - 4) {
         setIndex((previousIndex) => previousIndex + 1);
         setTranslateX((previousTranslateX) => previousTranslateX - 270);
       }
@@ -96,7 +96,7 @@ const OutfitList = () => {
     <div className="outfitRelatedWidget">
       <button type="button" className="carousel_button previous" id="outfitPrevious" onClick={buttonHandle}>&#60;</button>
       <div className="carousel" id="relatedList">
-        <div className="card" onClick={addOutfit} id="blank">
+        <div className="outfitCard card" onClick={addOutfit} id="blank">
           <div className="plus">
             +
             <br />
