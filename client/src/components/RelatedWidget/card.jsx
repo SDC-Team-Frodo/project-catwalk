@@ -1,5 +1,6 @@
-/* eslint-disable camelcase */
 import React, { useState, useEffect, useContext} from 'react';
+import ReactStars from 'react-rating-stars-component';
+import getAverageRating from '../../helpers/averageRating';
 
 const Card = (props) => {
   const { product, thumbnail, ratings, cardClass } = props;
@@ -38,7 +39,9 @@ const Card = (props) => {
           <br />
           ${default_price}
           <br />
-          <span>&#x2605;&#x2605;&#x2605;&#9734;&#9734;</span>
+          <div className="cardRating">
+            {ratings && <ReactStars count={5} value={getAverageRating(ratings)} edit={false} />}
+          </div>
         </div>
       </div>
     );
