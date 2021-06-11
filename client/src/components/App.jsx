@@ -12,24 +12,24 @@ import request from '../requests';
 import '../style.sass';
 
 const App = () => {
-  // const [currentProductId, setCurrentProductId] = useState(17071);
+  const [currentProductId, setCurrentProductId] = useState(17071);
   const [currentProductData, setCurrentProductData] = useState(testData);
-  // const [idInput, setIdInput] = useState('');
+  const [idInput, setIdInput] = useState('');
 
-  // useEffect(() => {
-  //   request.get(`products/${currentProductId}`, {
-  //     product_id: currentProductId,
-  //   }).then((data) => {
-  //     setCurrentProductData(data);
-  //   }).catch((err) => {
-  //     console.error(err);
-  //     alert('The product couldn\'t load');
-  //     setCurrentProductData(testData);
-  //   });
-  // }, [currentProductId]);
+  useEffect(() => {
+    console.log('APP', currentProductId);
+    request.get(`products/${currentProductId}`, {
+      product_id: currentProductId,
+    }).then((res) => {
+      setCurrentProductData(res.data);
+    }).catch((err) => {
+      console.error(err);
+      alert('The product couldn\'t load');
+    });
+  }, [currentProductId]);
   return (
     <main>
-      {/* <div id="nav">
+      <div id="nav">
         <input
           type="text"
           placeholder="Product Id"
@@ -45,8 +45,10 @@ const App = () => {
           onClick={() => {
             setCurrentProductId(idInput);
           }}
-        />
-      </div> */}
+        >
+          Change Products
+        </button>
+      </div>
       <ThemeContext.Provider value="light">
         <ProductContext.Provider value={currentProductData}>
           <RatingContext.Provider value="3.5">

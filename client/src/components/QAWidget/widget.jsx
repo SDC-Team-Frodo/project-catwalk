@@ -15,6 +15,7 @@ const QaContainer = () => {
     request.get('qa/questions', {
       product_id: product.id,
     }).then((newData) => {
+      console.log('QA WIDGET', product.id);
       setData(newData.data);
     }).catch((err) => console.error(err));
   }, [product]);
