@@ -22,9 +22,12 @@ const OverviewContainer = (props) => {
 
   // states
   const [fullscreenSlider, setFullscreenSlider] = useState(false);
+  const [zoom, setZoom] = useState(false);
   const [selectedStyleIndex, setSelectedStyleIndex] = useState(0);
   const [styles, setStyles] = useState([]);
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
+  const [cartQuantity, setCartQuantity] = useState(1);
+  const [selectedSizeIndex, setSelectedSizeIndex] = useState(0);
 
   // returns the list of styles at selectedStyleIndex
   const selectedStyle = () => {
@@ -39,8 +42,10 @@ const OverviewContainer = (props) => {
         const styleResults = result.data.results;
         const styleIndex = styleResults.findIndex(s => s['default?']) || 0;
 
+        setSelectedSizeIndex(-1);
         setSelectedStyleIndex(styleIndex);
         setSelectedPhotoIndex(0);
+        setCartQuantity(1);
         setStyles(styleResults); // styles nested in {data} of results
       })
       .catch(console.error);
@@ -54,13 +59,19 @@ const OverviewContainer = (props) => {
           setFullscreenSlider={setFullscreenSlider}
           activeStyle={selectedStyle()}
           selectedPhotoIndex={selectedPhotoIndex}
-          setSelectedPhotoIndex={setSelectedPhotoIndex}/>
+          setSelectedPhotoIndex={setSelectedPhotoIndex}
+          zoom={zoom}
+          setZoom={setZoom}/>
         <GalleryAside
           fullscreenSlider={fullscreenSlider}
           styles={styles}
           selectedStyleIndex={selectedStyleIndex}
           setSelectedStyleIndex={setSelectedStyleIndex}
-          activeStyle={selectedStyle()}/>
+          activeStyle={selectedStyle()}
+          selectedSizeIndex={selectedSizeIndex}
+          setSelectedSizeIndex={setSelectedSizeIndex}
+          cartQuantity={cartQuantity}
+          setCartQuantity={setCartQuantity}/>
       </div>
       <div className="separator">
         <Description product={product}/>
