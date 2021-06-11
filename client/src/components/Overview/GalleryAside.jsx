@@ -51,15 +51,18 @@ const GalleryAside = (props) => {
           setSelectedStyleIndex={setSelectedStyleIndex}/>
 
         <form>
-          <div class="separator">
+          <div className="separator">
             <SelectSize />
             <input id="quantity-select" type="number" min="1"/>
           </div>
 
           <br />
-          <div class="separator">
-            <button>ADD TO BAG +</button>
-            <button><i className="far fa-star"></i></button>
+          <div className="separator">
+            <button id="add-to-bag">
+              ADD TO BAG
+              <i className="fas fa-plus"></i>
+            </button>
+            <button id="favorite-button"><i className="far fa-star"></i></button>
           </div>
 
         </form>

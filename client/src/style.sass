@@ -105,26 +105,55 @@ main
     text-decoration: line-through
   h2
     margin: .5em 0
+  #styles
+    margin-bottom: 1.5em
+  #style-grid
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: flex-start
+    align-content: flex-start
+    margin-bottom: 1.5em
 
   #size-select
+    font-weight: bold
     border-radius: 0
     padding: 1em 3em 1em 1.5em
     flex-grow: 2
-    font-weight: strong
     margin-right: 1.5em
+
+  .separator // separator NEST INSIDE #gallery-aside
+    width: 100%
+    justify-content: space-between
+    margin-bottom: .25em
 
   #quantity-select
     border-radius: 0
     padding: 1em 1em 1em 1em
     width: 6em
-    flex-grow: 0
-    flex-shrink: 2
-    font-weight: strong
+    font-weight: bold
 
+  #add-to-bag
+      flex: 1 2 0
+      font-weight: bold
+      position: relative
+      border-radius: 0
+      height: 4em
+      width: 12em
+      padding: 1em 3em 1em 1.5em
+      white-space: nowrap
+      text-align: left
+      i
+        position: absolute
+        float: right
+        right: 1.5em
+        top: 1.4em
 
-#styles
-  strong
-    margin-bottom: .25em
+  #favorite-button
+    width: 4em
+    padding: 1em
+    margin-left: 1.5em
+
 
 // #style-grid
 //   display: grid
@@ -139,12 +168,6 @@ main
 //   height: 3.5em
 //   margin: .25em
 
-#style-grid
-  display: flex
-  flex-direction: row
-  flex-wrap: wrap
-  justify-content: flex-start
-  align-content: flex-start
 
 .style-tile
   border-radius: 50%
