@@ -11,12 +11,8 @@ const GalleryAside = (props) => {
   const [averageRating, setAverageRating] = useContext(RatingContext);
   const product = useContext(ProductContext);
 
-<<<<<<< HEAD
-  const { activeStyle, styles, selectedStyleIndex, setSelectedStyleIndex } = props;
-=======
   const {  cartQuantity, setCartQuantity, selectedSizeIndex, setSelectedSizeIndex, activeStyle, styles, selectedStyleIndex, setSelectedStyleIndex } = props;
 
->>>>>>> main
   // Added support for hiding.
   // I assume conditionally rendering will break the useState hook if it misses rendering any of the children using said hook.
   return (
