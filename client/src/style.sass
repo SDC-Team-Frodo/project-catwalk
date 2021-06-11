@@ -34,21 +34,43 @@ main
 
 #overview
   color: black !important
-
-#gallery
-  order: 1
-  // background-color: grey
   position: relative
-  width: 60vw
-  height: 30em
+  min-width: 45em
+
+#gallery-container
+  order: 1
+  // flex-grow: 2
+  z-index: 2
+  position: relative
+  min-width: 15em
+  width: 60%
+  min-height: 30em
   &.full
     margin: auto
-    width: 80% !important
+    width: 100% !important
     height: 35em !important
+    cursor: zoom-in
+    i
+      cursor: zoom-out
+  &.zoom
+    cursor: all-scroll
+    i
+      cursor: zoom-out
   i
+    z-index: 2
     position: relative
 
+#gallery
+  z-index: 1 !important
+  // background-color: grey
+  position: relative
+  width: 100%
+  height: 100%
+  cursor: zoom-in
+  margin: 0 !important
+
 #outer-gallery-nav
+  z-index: 2
   position: absolute
   height: 100%
 
@@ -56,11 +78,11 @@ main
   display: flex
   flex-direction: column
   justify-content: start
-  top: 6%
+  top: 6.5%
   left: -2em
   position: absolute
   opacity: .9
-  height: 90%
+  height: 87%
   width: 4em
   // background-color: blue
   overflow: hidden
@@ -68,10 +90,12 @@ main
     opacity: 1
 
 .scroll-up
+  z-index: 2
   top: 1%
   right: .6em
 
 .scroll-down
+  z-index: 2
   top: 94.5%
   right: 1.5em
 
@@ -81,6 +105,7 @@ main
   margin: 0 0 .75em .3em
   background-color: grey
   flex-shrink: 0
+  cursor: pointer
   &:hover
     filter: brightness(1.1)
   &.selected
@@ -91,8 +116,8 @@ main
   order: 2
   position: relative
   // background-color: darkgrey
-  width: 40vw
-  height: 30em
+  width: 40%
+  min-height: 30em
   #gallery-aside-stars
     display: inline-block !important
   a
@@ -105,46 +130,58 @@ main
     text-decoration: line-through
   h2
     margin: .5em 0
+  #styles
+    margin-bottom: 1.5em
+  #style-grid
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: flex-start
+    align-content: flex-start
+    margin-bottom: 1.5em
 
   #size-select
+    font-weight: bold
     border-radius: 0
     padding: 1em 3em 1em 1.5em
     flex-grow: 2
-    font-weight: strong
     margin-right: 1.5em
+    cursor: pointer
+
+  .separator // separator NEST INSIDE #gallery-aside
+    width: 100%
+    justify-content: space-between
+    margin-bottom: .25em
+
+  button
+    cursor: pointer
 
   #quantity-select
     border-radius: 0
     padding: 1em 1em 1em 1em
     width: 6em
-    flex-grow: 0
-    flex-shrink: 2
-    font-weight: strong
+    font-weight: bold
 
+  #add-to-bag
+      flex: 1 2 0
+      font-weight: bold
+      position: relative
+      border-radius: 0
+      height: 4em
+      width: 12em
+      padding: 1em 3em 1em 1.5em
+      white-space: nowrap
+      text-align: left
+      i
+        position: absolute
+        float: right
+        right: 1.5em
+        top: 1.4em
 
-#styles
-  strong
-    margin-bottom: .25em
-
-// #style-grid
-//   display: grid
-//   grid-template-columns: repeat(auto-fill, minmax(3em, 1fr))
-//   column-gap: .37em
-//   row-gap: .25em
-
-// .style-tile
-//   border-radius: 50%
-//   background-color: black
-//   width: 3.5em
-//   height: 3.5em
-//   margin: .25em
-
-#style-grid
-  display: flex
-  flex-direction: row
-  flex-wrap: wrap
-  justify-content: flex-start
-  align-content: flex-start
+  #favorite-button
+    width: 4em
+    padding: 1em
+    margin-left: 1.5em
 
 .style-tile
   border-radius: 50%
@@ -153,20 +190,36 @@ main
   height: 3.5em
   margin-right: .75em
   margin-bottom: .25em
+  cursor: pointer
 
 #description
   order: 1
   position: relative
-  // background: darkgrey
-  width: 60vw
-  // height: 15em
+  width: 60%
+  i
+    cursor: pointer
+    font-size: 1.5em
+    margin-right: 1em
+    &.fa-twitter:hover
+      color: #1DA1F2
+    &.fa-pinterest:hover
+      color: #c8232c
+    &.fa-facebook:hover
+      color: #4267B2
+    &.fa-tumblr:hover
+      color: #34526f
+    &.fa-share-alt:hover
+      color: #00995e
+// i className="fab fa-pinterest"></i>
+//           <i className="fab fa-tumblr"></i>
+//           <i className="fas fa-share-alt"></i>
 
 #features
   order: 2
   display: inline-block
   position: relative
   // background: lightgrey
-  width: 40vw
+  width: 40%
   // height: 15em
 
 .left-margin

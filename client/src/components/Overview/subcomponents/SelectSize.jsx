@@ -1,14 +1,29 @@
 import React from 'react';
+import _ from 'lodash';
 
 const SelectSize = (props) => {
 
+  const { activeStyle, selectedSizeIndex, setSelectedSizeIndex } = props;
+  const { skus } = activeStyle;
+
+  let size = 'SELECT SIZE'
+  if (activeStyle.skus[selectedSizeIndex]) {
+    size = activeStyle.skus[selectedSizeIndex].size
+  }
+
+  const handleClick = (event) => {
+    const sku = event.target.value;
+    setSelectedSizeIndex(sku);
+  };
+
   return (
-    <select id="size-select" name="SELECT SIZE" defaultValue="SELECT SIZE">
-      <option disabled hidden>SELECT SIZE</option>
-      <option>Small</option>
-      <option>Medium</option>
-      <option>Big Chungus</option>
-    </select>
+    <>
+      <select id="size-select" name="SELECT SIZE" value={size} onChange={handleClick}>
+        <option disabled hidden>{size}</option>
+        {skus && _.map(skus, (sku, key) => <option key={`size-${sku.size}`} value={key}>{sku.size}</option>)}
+
+      </select>
+    </>
   );
 }
 
