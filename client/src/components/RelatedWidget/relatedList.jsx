@@ -6,7 +6,7 @@ import ProductContext from '../../contexts/ProductContext';
 const RelatedList = () => {
   const product = useContext(ProductContext);
 
-  const [numberOfCards, setNumberOfCards] = useState(0); //change from api call
+  const [numberOfCards, setNumberOfCards] = useState(0);
   const [translateX, setTranslateX] = useState(0);
   const [relatedProductList, setRelatedProductList] = useState([]);
   const [relatedRatings, setRelatedRatings] = useState([]);
