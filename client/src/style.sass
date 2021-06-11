@@ -110,27 +110,16 @@ main
 
 
 
-#related
-  display: flex
-  align-items: center
-
 .outfitRelatedWidget
   display: flex
   align-items: center
-
 
 .carousel
   align-items: center
   display: flex
   overflow: hidden
   position:relative
-
-.slider
-  align-items: center
-  display: flex
-  overflow: hidden
-  position:relative
-
+  padding: 30px
 
 .carousel_button
   height: 100px
@@ -162,9 +151,12 @@ main
 
   .relatedCard
     transform: translateX(0)
+  &:hover
+    transform: scale(1.1)
+    z-index: 2
 
 .plus
-  display: flex
+  width: 256px
   justify-content: center
   align-items: center
   text-align: center
