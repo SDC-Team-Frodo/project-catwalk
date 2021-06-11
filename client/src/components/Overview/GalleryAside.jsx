@@ -5,13 +5,14 @@ import RatingContext from '../../contexts/RatingContext';
 import ReactStars from 'react-rating-stars-component';
 import Price from './subcomponents/Price';
 import SelectSize from './subcomponents/SelectSize';
+import QuantityInput from './subcomponents/QuantityInput';
 
 const GalleryAside = (props) => {
 
   const rating = useContext(RatingContext);
   const product = useContext(ProductContext);
 
-  const { activeStyle, styles, selectedStyleIndex, setSelectedStyleIndex } = props;
+  const {  cartQuantity, setCartQuantity, selectedSizeIndex, setSelectedSizeIndex, activeStyle, styles, selectedStyleIndex, setSelectedStyleIndex } = props;
 
   // Added support for hiding.
   // I assume conditionally rendering will break the useState hook if it misses rendering any of the children using said hook.
@@ -37,7 +38,7 @@ const GalleryAside = (props) => {
           {product.name}
         </h2>
         <Price
-          price={product ? product.default_price : 0}
+          price={activeStyle ? activeStyle.original_price : 0}
           salePrice={activeStyle ? activeStyle.sale_price : null}
           />
         <br />
@@ -45,6 +46,12 @@ const GalleryAside = (props) => {
         <div id="styles">
           <strong>Styles &gt;</strong> {activeStyle && activeStyle.name}
         </div>
+        {/*
+        selectedSizeIndex={selectedSizeIndex}
+          setSelectedSizeIndex={setSelectedSizeIndex}
+          cartQuantity={cartQuantity}
+          setCartQuantity={setCartQuantity}
+           */}
         <StyleGrid
           styles={styles}
           selectedStyleIndex={selectedStyleIndex}
@@ -52,8 +59,12 @@ const GalleryAside = (props) => {
 
         <form>
           <div className="separator">
-            <SelectSize />
-            <input id="quantity-select" type="number" min="1"/>
+            {activeStyle && <SelectSize activeStyle={activeStyle}
+            selectedSizeIndex={selectedSizeIndex}
+            setSelectedSizeIndex={setSelectedSizeIndex}/>}
+            <QuantityInput
+              cartQuantity={cartQuantity}
+              setCartQuantity={setCartQuantity} />
           </div>
 
           <br />

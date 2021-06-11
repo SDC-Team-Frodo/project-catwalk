@@ -25,6 +25,8 @@ const OverviewContainer = (props) => {
   const [selectedStyleIndex, setSelectedStyleIndex] = useState(0);
   const [styles, setStyles] = useState([]);
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
+  const [cartQuantity, setCartQuantity] = useState(1);
+  const [selectedSizeIndex, setSelectedSizeIndex] = useState(0);
 
   // returns the list of styles at selectedStyleIndex
   const selectedStyle = () => {
@@ -41,6 +43,8 @@ const OverviewContainer = (props) => {
 
         setSelectedStyleIndex(styleIndex);
         setSelectedPhotoIndex(0);
+        setCartQuantity(1);
+        setSelectedSizeIndex(-1);
         setStyles(styleResults); // styles nested in {data} of results
       })
       .catch(console.error);
@@ -60,7 +64,11 @@ const OverviewContainer = (props) => {
           styles={styles}
           selectedStyleIndex={selectedStyleIndex}
           setSelectedStyleIndex={setSelectedStyleIndex}
-          activeStyle={selectedStyle()}/>
+          activeStyle={selectedStyle()}
+          selectedSizeIndex={selectedSizeIndex}
+          setSelectedSizeIndex={setSelectedSizeIndex}
+          cartQuantity={cartQuantity}
+          setCartQuantity={setCartQuantity}/>
       </div>
       <div className="separator">
         <Description product={product}/>
