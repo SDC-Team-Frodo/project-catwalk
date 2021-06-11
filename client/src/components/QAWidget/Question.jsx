@@ -61,7 +61,7 @@ const Question = (props) => {
           />
         </div>
       </h2>
-      <div>
+      <div className="AnswerList">
         {answers.map((answer, i) => <Answer index={i} answer={answer} key={i} />)}
       </div>
       {Object.values(question.answers).length > 2 && (
