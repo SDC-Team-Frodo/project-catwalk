@@ -105,7 +105,7 @@ const OutfitList = () => {
             Outfits
           </div>
         </div>
-        {outfitProducts.length > 0 && outfitProducts.map((outfitProduct, i) => <Card product={outfitProduct} thumbnail={outfitThumbnails[i]} ratings={outfitRatings[i]} key={`${product.id}${i}`} cardClass="outfitCard" func={removeOutfit}/>)}
+        {outfitProducts.length > 0 && outfitProducts.map((outfitProduct, i) => <Card product={outfitProduct} thumbnail={outfitThumbnails[i]} ratings={outfitRatings[i]} key={`${product.id}${i}`} cardClass="outfitCard" func={removeOutfit} isStars={false} />)}
       </div>
       <button type="button" className="carousel_button next" id="outfitNext" onClick={buttonHandle}>&#62;</button>
     </div>
