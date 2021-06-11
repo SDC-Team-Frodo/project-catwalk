@@ -11,16 +11,11 @@ const SelectSize = (props) => {
     size = activeStyle.skus[selectedSizeIndex].size
   }
 
-  console.log('selectedSizeIndex', selectedSizeIndex)
-  console.log('size', size);
-
   const handleClick = (event) => {
     const sku = event.target.value;
     setSelectedSizeIndex(sku);
   };
 
-
-  console.log(props)
   return (
     <>
       <select id="size-select" name="SELECT SIZE" value={size} onChange={handleClick}>
