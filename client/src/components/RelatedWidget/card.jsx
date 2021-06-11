@@ -15,7 +15,7 @@ const Card = (props) => {
   const iconId = `${cardClass}${product.id}`;
 
   function redirect () {
-    console.log('redirect to page')
+    console.log('redirect to page');
   }
 
   if (thumbnail) {
@@ -28,7 +28,8 @@ const Card = (props) => {
           <img src={thumbnail.thumbnail_url} alt="Failed" />
         </div>
         <div className="cardIcon" onClick={func} >
-          {isStars ? <ReactStars  id={iconId} count={1} value={1} edit={false} /> : <span id={iconId}>&#9447;</span>}</div>
+          {isStars ? <ReactStars  id={iconId} count={1} value={1} edit={false} size={24} color={'red'} /> : <span id={iconId}>&#9447;</span>}
+        </div>
         <div className="textContainer" onClick={redirect}>
           {category}
           <br />
