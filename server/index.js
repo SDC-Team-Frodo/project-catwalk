@@ -45,7 +45,6 @@ app.post('/api', (req, res) => {
     },
     data,
   };
-
   axios(options)
     .then(() => {
       res.status(201).send();
@@ -57,7 +56,7 @@ app.post('/api', (req, res) => {
 
 // PUT
 app.put('/api', (req, res) => {
-  const { endpoint, params } = req.query;
+  const { endpoint, params } = req.body;
   const options = {
     url: `${config.API_HOST}/${endpoint}`,
     method: 'PUT',
@@ -65,9 +64,8 @@ app.put('/api', (req, res) => {
       'User-Agent': 'request',
       Authorization: `${process.env.GIT_KEY}`,
     },
-    params: JSON.parse(params),
+    params,
   };
-
   axios(options)
     .then(() => {
       res.status(204).send();
