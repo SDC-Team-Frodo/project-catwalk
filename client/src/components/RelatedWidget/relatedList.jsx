@@ -41,6 +41,14 @@ const RelatedList = () => {
       .catch((err) => console.log(err));
   }, [product.id]);
 
+  useEffect(() => {
+    let initial = 0;
+    const cards = document.getElementsByClassName('relatedCard');
+    for (initial; initial < cards.length; initial += 1) {
+      cards[initial].style.transform = `translateX(${translateX}px`;
+    }
+  }, [index, translateX]);
+
   function buttonHandle(event) {
     const response = event.target.id;
 
@@ -57,19 +65,15 @@ const RelatedList = () => {
     }
   }
 
-  useEffect(() => {
-    let initial = 0;
-    const cards = document.getElementsByClassName('relatedCard');
-    for (initial; initial < cards.length; initial += 1) {
-      cards[initial].style.transform = `translateX(${translateX}px`;
-    }
-  }, [index, translateX]);
+  function compareFeatures() {
+    console.log('Placeholder');
+  }
 
   return (
     <div className="outfitRelatedWidget" id="related">
       <button type="button" className="carousel_button previous" id="relatedPrevious" onClick={buttonHandle}>&#60;</button>
       <div className="carousel" id="relatedList">
-        {relatedProductList.map((relatedProduct, i) => <Card product={relatedProduct} thumbnail={relatedThumbnails[i]} ratings={relatedRatings[i]} key={`${relatedProduct.id}${i}`} cardClass={'relatedCard'}/>)}
+        {relatedProductList.map((relatedProduct, i) => <Card product={relatedProduct} thumbnail={relatedThumbnails[i]} ratings={relatedRatings[i]} key={`${relatedProduct.id}${i}`} cardClass={'relatedCard'} func={compareFeatures} isStars={true} />)}
       </div>
       <button type="button" className="carousel_button next" id="relatedNext" onClick={buttonHandle}>&#62;</button>
     </div>
