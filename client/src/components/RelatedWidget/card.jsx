@@ -3,8 +3,10 @@ import ReactStars from 'react-rating-stars-component';
 import getAverageRating from '../../helpers/averageRating';
 
 const Card = (props) => {
-  const { product, thumbnail, ratings, cardClass, isStars } = props;
-  let { func } = props;
+  const {
+    product, thumbnail, ratings, cardClass, isStars, func,
+  } = props;
+
   const {
     default_price, category, name,
   } = product;
@@ -25,8 +27,8 @@ const Card = (props) => {
         <div className="imageContainer" style={background} onClick={redirect}>
           <img src={thumbnail.thumbnail_url} alt="Failed" />
         </div>
-        <div className="cardIcon" id={iconId} onClick={func} >
-          {isStars ? <ReactStars count={1} value={1} edit={false} /> : <span>&#9447;</span>}</div>
+        <div className="cardIcon" onClick={func} >
+          {isStars ? <ReactStars  id={iconId} count={1} value={1} edit={false} /> : <span id={iconId}>&#9447;</span>}</div>
         <div className="textContainer" onClick={redirect}>
           {category}
           <br />
@@ -35,7 +37,7 @@ const Card = (props) => {
           ${default_price}
           <br />
           <div className="cardRating">
-            {ratings && <ReactStars count={5} value={getAverageRating(ratings)} edit={false} halfIcon={true} />}
+            {ratings && <ReactStars count={5} value={getAverageRating(ratings)} edit={false} isHalf={true} />}
           </div>
         </div>
       </div>
