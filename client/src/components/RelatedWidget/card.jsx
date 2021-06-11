@@ -3,7 +3,7 @@ import ReactStars from 'react-rating-stars-component';
 import getAverageRating from '../../helpers/averageRating';
 
 const Card = (props) => {
-  const { product, thumbnail, ratings, cardClass } = props;
+  const { product, thumbnail, ratings, cardClass, isStars } = props;
   let { func } = props;
   const {
     default_price, category, name,
@@ -11,12 +11,6 @@ const Card = (props) => {
 
   const cardClasses = `${cardClass  } card`;
   const iconId = `${cardClass}${product.id}`;
-
-  if (!func) {
-    func = function () {
-      console.log('failed to pass down')
-    };
-  }
 
   function redirect () {
     console.log('redirect to page')
@@ -31,7 +25,8 @@ const Card = (props) => {
         <div className="imageContainer" style={background} onClick={redirect}>
           <img src={thumbnail.thumbnail_url} alt="Failed" />
         </div>
-        <div className="cardIcon" id={iconId} onClick={func} madeup="whatever">&#9734;</div>
+        <div className="cardIcon" id={iconId} onClick={func} >
+          {isStars ? <ReactStars count={1} value={1} edit={false} /> : <span>&#9447;</span>}</div>
         <div className="textContainer" onClick={redirect}>
           {category}
           <br />
@@ -40,7 +35,7 @@ const Card = (props) => {
           ${default_price}
           <br />
           <div className="cardRating">
-            {ratings && <ReactStars count={5} value={getAverageRating(ratings)} edit={false} />}
+            {ratings && <ReactStars count={5} value={getAverageRating(ratings)} edit={false} halfIcon={true} />}
           </div>
         </div>
       </div>
