@@ -203,7 +203,7 @@ main
 .uppercase
   text-transform: uppercase
 
-#related
+.outfitRelatedWidget
   display: flex
   align-items: center
 
@@ -212,6 +212,7 @@ main
   display: flex
   overflow: hidden
   position:relative
+  padding: 30px
 
 .carousel_button
   height: 100px
@@ -241,11 +242,13 @@ main
   border: 1px solid black
   transition: transform 0.25s
 
-  .relatedCard
-    transform: translateX(0)
+  &:hover
+    transform: scale(1.1)
+    z-index: 2
+    cursor: pointer
 
 .plus
-  display: flex
+  width: 256px
   justify-content: center
   align-items: center
   text-align: center
@@ -256,8 +259,15 @@ main
 .imageContainer
   height: 256px
   width: 256px
+  margin-left: auto
+  margin-right: auto
+  display: flex
+  justify-content: center
+  align-items: center
+  text-align: center
 
-.star
+
+.cardIcon
   position: absolute
   top: 5px
   right: 5px
@@ -460,7 +470,6 @@ img
   top: 50vh
   max-height: 80vh
   border: thick double black
-  padding: 10px
   position: fixed
   background-color: skyblue
   z-index: 2147483647
@@ -502,17 +511,20 @@ img
   font-size: 20px
 
 #search
+  cursor: pointer
   margin: 1vw
   border: 2px solid black
   width: 15vw
   font-size: 20px
 
 #loadQ, #loadA
+  cursor: pointer
   border: 2px solid black
   font-size: 20px
   width: 12vw
 
 #QButton
+  cursor: pointer
   margin-left: 37%
   border: thick double black
   font-size: 20px
@@ -538,7 +550,7 @@ img
   margin-left: 42%
 
 #searchDiv
-  margin-left: 12vw
+  margin-left: 20%
 
 .answerImage
   margin: 5px
@@ -556,6 +568,7 @@ img
   color: gray
   font-size: 13px
   button
+    cursor: pointer
     color: gray
     text-decoration: underline
     background-color: white
@@ -566,6 +579,7 @@ img
   color: gray
   font-size: 13px
   button
+    cursor: pointer
     color: gray
     text-decoration: underline
     background-color: white
@@ -575,9 +589,11 @@ img
   color: black
   width: 60vw
   button
+    cursor: pointer
     color: black
     text-decoration: none
     margin-left: 42%
+    margin-bottom: 10px
     font-size: 25px
     border: 2px solid black
   button:hover
@@ -598,7 +614,7 @@ img
 
 .QuestionList
   margin-bottom: 10px
-  max-height: 95vh
+  max-height: 75vh
   overflow-y: scroll
 
 #AnswerHeader
@@ -611,3 +627,14 @@ img
   font-size: 15px
   font-weight: 200
   color: grey
+
+.sent
+  font-weight: 200
+  margin-left: 50%
+  transform: translateX(-50%)
+  font-size: 80px
+  color: black
+
+.AnswerList
+  max-height: 50vh
+  overflow-y: scroll

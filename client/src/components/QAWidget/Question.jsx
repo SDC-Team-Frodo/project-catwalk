@@ -1,8 +1,11 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useContext } from 'react';
 import Answer from './Answer';
 import Modal from '../Modal';
 import AnswerForm from './AnswerForm';
 import ProductContext from '../../contexts/ProductContext';
+import request from '../../requests';
 
 const Question = (props) => {
   const { question } = props;
@@ -11,25 +14,33 @@ const Question = (props) => {
   const [answers, setAnswers] = useState(
     Object.values(question.answers).slice(0, displayedAnswers),
   );
-  const [buttonDisplay, setButtonDisplay] = useState(true);
+  const [buttonLabel, setButtonLabel] = useState('More Answers');
+  const [yesClicked, setYesClicked] = useState(false);
+  const [helpfulCount, setHelpfulCount] = useState(question.question_helpfulness);
 
   useEffect(() => {
-    if (Object.values(question.answers)[displayedAnswers - 2] !== undefined) {
-      setAnswers(Object.values(question.answers).slice(0, displayedAnswers));
+    if (displayedAnswers === 'all') {
+      setAnswers(Object.values(question.answers));
+      setButtonLabel('Collapse Answers');
     } else {
-      setButtonDisplay(false);
+      setAnswers(Object.values(question.answers).slice(0, 2));
+      setButtonLabel('More Answers');
     }
   }, [displayedAnswers]);
 
   useEffect(() => {
-    setAnswers(Object.values(question.answers).slice(0, displayedAnswers));
+    setAnswers(Object.values(question.answers).slice(0, 2));
   }, [question]);
 
   useEffect(() => {
     if (answers.length === question.answers.length) {
-      setButtonDisplay(false);
+      setButtonLabel(false);
     }
   }, [answers]);
+
+  useEffect(() => {
+    setHelpfulCount(helpfulCount + 1);
+  }, [yesClicked]);
 
   return (
     <div className="question">
@@ -37,8 +48,20 @@ const Question = (props) => {
         {`Q: ${question.question_body}`}
         <div id="helpfulQ">
           Helpful?
-          <button type="button" className="yesButton">
-            {`Yes(${question.question_helpfulness})`}
+          <button
+            type="button"
+            className="yesButton"
+            onClick={() => {
+              request.put(`qa/questions/${question.question_id}/helpful`, {
+                question_id: question.question_id,
+              }).then((res) => { setYesClicked(true); })
+                .catch((err) => {
+                  console.error(err);
+                  alert('Couldn\'t complete request');
+                });
+            }}
+          >
+            {`Yes(${helpfulCount})`}
           </button>
           |
           <Modal
@@ -52,26 +75,27 @@ const Question = (props) => {
                 </h2>
               </div>
             )}
-            body={<AnswerForm question_id={question.question_id} />}
+            body={<AnswerForm modalOff={() => {}} question_id={question.question_id} />}
             btnName="Add Answer"
             btnId="addAnswer"
 
           />
         </div>
       </h2>
-      <div>
+      <div className="AnswerList">
         {answers.map((answer, i) => <Answer index={i} answer={answer} key={i} />)}
       </div>
-      {buttonDisplay && (
+      {Object.values(question.answers).length > 2 && (
         <button
           type="button"
           id="loadA"
           className="hoverGrey"
           onClick={() => {
-            setDisplayedAnswers(displayedAnswers + 2);
+            // eslint-disable-next-line no-unused-expressions
+            buttonLabel === 'More Answers' ? setDisplayedAnswers('all') : setDisplayedAnswers('collapsed');
           }}
         >
-          More Answers
+          {buttonLabel}
         </button>
       )}
     </div>

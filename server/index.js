@@ -45,7 +45,6 @@ app.post('/api', (req, res) => {
     },
     data,
   };
-
   axios(options)
     .then(() => {
       res.status(201).send();
