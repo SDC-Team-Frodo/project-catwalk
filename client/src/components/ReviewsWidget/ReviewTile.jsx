@@ -58,7 +58,7 @@ const ReviewTile = ({ review }) => {
         )}
       <div className="helpful">
         Helpful?
-        <button type="button"> Yes </button>
+        <button type="button">Yes</button>
         <span>
           (
           {review.helpfulness}

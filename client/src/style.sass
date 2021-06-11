@@ -5,11 +5,16 @@ $body-color: #696969
 $background-color: white
 
 body
+  background-color: $background-color
   color: $body-color
   font-family: $font-stack
 
-h1, h2, h3, h4, strong, i
+h1, h2, h3, h4, header, strong, i
   color: $header-color
+
+h4
+  font-weight: 600
+  margin-block-start: 0
 
 span, p
   color: $body-color
@@ -19,12 +24,7 @@ div
   padding: 0
 
 main
-  background-color: $background-color
   width: 100%
-
-h4
-  font-weight: 600
-  margin-block-start: 0
 
 #app
   display: flex
@@ -389,7 +389,7 @@ h4
     cursor: pointer
     font: inherit
     outline: inherit
-    padding: 0 0.5em
+    padding: 0 0.25em 0 0.5em
     text-decoration: underline
 
 .review-date
@@ -435,6 +435,8 @@ h4
 .helpful
   color: gray
   font-size: 10px
+  span
+    margin-right: 0.5em
 
 .review-buttons
   display: flex
