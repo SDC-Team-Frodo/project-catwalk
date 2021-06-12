@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import ReactStars from 'react-rating-stars-component';
 import RatingContext from '../../contexts/RatingContext';
 import FilterContext from './FilterContext';
@@ -7,10 +7,15 @@ import getAverageRating from '../../helpers/averageRating';
 import getTotalRatings from '../../helpers/totalRatings';
 
 const RatingsBreakdown = ({ ratings }) => {
+  const [rendered, setRendered] = useState(false);
   const [averageRating, setAverageRating] = useContext(RatingContext);
   const [filteredContext, setFilteredContext] = useContext(FilterContext);
   useEffect(() => {
+    if (rendered) { setRendered(false); }
+  }, [ratings]);
+  useEffect(() => {
     setAverageRating(getAverageRating(ratings));
+    if (!rendered) { setRendered(true); }
   }, [ratings]);
   return (
     <section id="ratings-breakdown">

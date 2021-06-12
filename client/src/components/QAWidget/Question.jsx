@@ -7,12 +7,27 @@ import AnswerForm from './AnswerForm';
 import ProductContext from '../../contexts/ProductContext';
 import request from '../../requests';
 
+const organizeA = (arr) => {
+  const result = [];
+  for (let i = 0; i < arr.length; i += 1) {
+    if (arr[i].answerer_name === 'Seller') {
+      result.push(arr[i]);
+    }
+  }
+  for (let j = 0; j < arr.length; j += 1) {
+    if (arr[j].answerer_name !== 'Seller') {
+      result.push(arr[j]);
+    }
+  }
+  return result;
+};
+
 const Question = (props) => {
   const { question } = props;
   const product = useContext(ProductContext);
   const [displayedAnswers, setDisplayedAnswers] = useState(2);
   const [answers, setAnswers] = useState(
-    Object.values(question.answers).slice(0, displayedAnswers),
+    organizeA(Object.values(question.answers).slice(0, displayedAnswers)),
   );
   const [buttonLabel, setButtonLabel] = useState('More Answers');
   const [yesClicked, setYesClicked] = useState(false);
@@ -20,16 +35,16 @@ const Question = (props) => {
 
   useEffect(() => {
     if (displayedAnswers === 'all') {
-      setAnswers(Object.values(question.answers));
+      setAnswers(organizeA(Object.values(question.answers)));
       setButtonLabel('Collapse Answers');
     } else {
-      setAnswers(Object.values(question.answers).slice(0, 2));
+      setAnswers(organizeA(Object.values(question.answers).slice(0, 2)));
       setButtonLabel('More Answers');
     }
   }, [displayedAnswers]);
 
   useEffect(() => {
-    setAnswers(Object.values(question.answers).slice(0, 2));
+    setAnswers(organizeA(Object.values(question.answers).slice(0, 2)));
   }, [question]);
 
   useEffect(() => {
