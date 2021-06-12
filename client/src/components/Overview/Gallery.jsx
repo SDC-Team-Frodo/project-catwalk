@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import GalleryNav from './GalleryNav'
 
 const Gallery = (props) => {
@@ -6,49 +6,46 @@ const Gallery = (props) => {
 
   const ficon = fullscreenSlider ? 'compress' : 'expand';
   const css = {
-    backgroundSize: zoom ? 'initial' : 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
+    backgroundSize: (zoom && fullscreenSlider) ? 'initial' : 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat'
   };
 
+  useEffect(() => {
+    const gallery = document.getElementById('gallery');
+    if (!zoom) {
+      gallery.style.backgroundPosition = 'center';
+      gallery.style.backgroundSize = 'cover';
+    }
+
+    if (!fullscreenSlider) {
+      setZoom(false);
+    } else if (zoom) {
+      gallery.style.backgroundSize = 'initial';
+    }
+  }, [zoom, fullscreenSlider]);
 
   const handleMouseMove = (event) => {
-    if (fullscreenSlider && zoom)  {
-      var rect = event.target.getBoundingClientRect();
-      var x = event.clientX - rect.left;
-      var y = event.clientY - rect.top;
-      event.target.style.backgroundPosition = `-${x}px -${y}px`;
+    if (fullscreenSlider && zoom) {
+      const gallery = document.getElementById('gallery')
+      const rect = gallery.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / 1.25;
+      const y = (event.clientY - rect.top) / 1.25;
+      gallery.style.backgroundPosition = `-${x}px -${y}px`;
     }
   }
 
-  const recenter = () => {
-    const target = document.getElementById('gallery');
-    target.style.backgroundPosition = 'center';
-    target.style.backgroundSize = 'cover';
-  }
-
-  const unzoom = () => {
-    recenter();
-    setZoom(false);
-  }
-
-  const handleGalleryClick = (event) => {
-    if (zoom) {
-      unzoom();
-    } else if (!fullscreenSlider) {
-      setFullscreenSlider(true);
-    } else if (fullscreenSlider) {
-      setZoom(true);
-    }
-  }
-
-  const handleIconClick = () => {
+  const handleGalleryClick = () => {
     if (!fullscreenSlider) {
       setFullscreenSlider(true);
     } else {
-      setFullscreenSlider(false);
-      recenter();
+      setZoom(!zoom);
     }
+  }
+
+  const handleIconClick = (event) => {
+    event.stopPropagation();
+    setFullscreenSlider(!fullscreenSlider)
   }
 
   if (activeStyle) {

@@ -31,7 +31,6 @@ const Question = (props) => {
   );
   const [buttonLabel, setButtonLabel] = useState('More Answers');
   const [yesClicked, setYesClicked] = useState(false);
-  const [helpfulCount, setHelpfulCount] = useState(question.question_helpfulness);
 
   useEffect(() => {
     if (displayedAnswers === 'all') {
@@ -53,10 +52,6 @@ const Question = (props) => {
     }
   }, [answers]);
 
-  useEffect(() => {
-    setHelpfulCount(helpfulCount + 1);
-  }, [yesClicked]);
-
   return (
     <div className="question">
       <h2 className="QuestionText">
@@ -76,7 +71,7 @@ const Question = (props) => {
                 });
             }}
           >
-            {`Yes(${helpfulCount})`}
+            {`Yes(${!yesClicked ? question.question_helpfulness : question.question_helpfulness + 1})`}
           </button>
           |
           <Modal

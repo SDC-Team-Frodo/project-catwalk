@@ -1,14 +1,15 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable camelcase */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import isEmail from './isEmail';
 import request from '../../requests';
+import QALoadContext from '../../contexts/QALoadContext';
 // import ProductContext from '../../ProductContext';
 
 const AnswerForm = (props) => {
   const { question_id } = props;
-  // const product = useContext(ProductContext);
+  const load = useContext(QALoadContext);
   const [answer, setAnswer] = useState('');
   const [nickName, setNickName] = useState('');
   const [email, setEmail] = useState('');
@@ -38,6 +39,7 @@ const AnswerForm = (props) => {
           setEmail('');
           setSubClicked(false);
           setDisplaySent(true);
+          load();
         }).catch(() => alert('couldn\'t send answer'));
       }
     }
