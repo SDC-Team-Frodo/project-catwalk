@@ -27,7 +27,7 @@ const OutfitList = () => {
           })
           .catch((err) => console.log(err));
 
-        request.get(`reviews/meta`, { endpoint: `reviews/meta`, product_id: id })
+        request.get('reviews/meta', { endpoint: 'reviews/meta', product_id: id })
           .then((rating) => {
             setOutfitRatings((oldRatings) => [...oldRatings, rating.data.ratings]);
           })
@@ -68,7 +68,7 @@ const OutfitList = () => {
   }
 
   // Handles button event related to carousel next and previous buttons
-  function buttonHandle(event) {
+  function navButtonHandle(event) {
     const response = event.target.id;
     if (response === 'outfitPrevious') {
       if (index !== 1) {
@@ -85,29 +85,48 @@ const OutfitList = () => {
 
   // Initiates the movement for the carousel
   useEffect(() => {
+    if (index === 1) {
+      document.getElementById('outfitPrevious').style.visibility = 'hidden';
+    } else {
+      document.getElementById('outfitPrevious').style.visibility = 'visible';
+    }
+    if (index >= numberOfCards - 3) {
+      document.getElementById('outfitNext').style.visibility = 'hidden';
+    } else {
+      document.getElementById('outfitNext').style.visibility = 'visible';
+    }
+
     let initial = 0;
     const cards = document.getElementsByClassName('outfitCard');
     for (initial; initial < cards.length; initial += 1) {
       cards[initial].style.transform = `translateX(${translateX}px`;
     }
-  }, [index, translateX]);
+  }, [index, translateX, numberOfCards]);
 
   return (
     <div className="outfitRelatedWidget">
-      <button type="button" className="carousel_button previous" id="outfitPrevious" onClick={buttonHandle}>&#60;</button>
+      <button type="button" className="carousel_button previous" id="outfitPrevious" onClick={navButtonHandle}>&#60;</button>
       <div className="carousel" id="relatedList">
-        <div className="outfitCard card" onClick={addOutfit} id="blank">
-          <div className="plus">
-            +
-            <br />
-            Add Current Product To
-            <br />
-            Outfits
-          </div>
+        <div className="outfitCard card plus" onClick={addOutfit} id="blank">
+          +
+          <br />
+          Add Current Product To
+          <br />
+          Outfits
         </div>
-        {outfitProducts.length > 0 && outfitProducts.map((outfitProduct, i) => <Card product={outfitProduct} thumbnail={outfitThumbnails[i]} ratings={outfitRatings[i]} key={`${product.id}${i}`} cardClass="outfitCard" func={removeOutfit} isStars={false} />)}
+        {outfitProducts.length > 0 && outfitProducts.map((outfitProduct, i) => (
+          <Card
+            product={outfitProduct}
+            thumbnail={outfitThumbnails[i]}
+            ratings={outfitRatings[i]}
+            key={`${product.id}${i}`}
+            cardClass="outfitCard"
+            func={removeOutfit}
+            isStars={false}
+          />
+        ))}
       </div>
-      <button type="button" className="carousel_button next" id="outfitNext" onClick={buttonHandle}>&#62;</button>
+      <button type="button" className="carousel_button next" id="outfitNext" onClick={navButtonHandle}>&#62;</button>
     </div>
   );
 };

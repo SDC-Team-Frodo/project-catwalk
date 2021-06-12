@@ -55,7 +55,7 @@ const ReviewsList = ({ product }) => {
         {reviewsShown + 1 <= reviews.length && <button type="button" onClick={() => setReviewsShown((numReviews) => numReviews + 2)}>MORE REVIEWS</button>}
         <button type="button">
           WRITE A REVIEW
-          <big> + </big>
+          <i className="fas fa-plus" />
         </button>
       </div>
     </section>
