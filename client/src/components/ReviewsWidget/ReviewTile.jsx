@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ReactStars from 'react-rating-stars-component';
 import request from '../../requests';
 import formatDate from '../../helpers/formatDate';
 
@@ -25,18 +24,15 @@ const ReviewTile = ({ review }) => {
   return !reported ? (
     <li className="review">
       <div className="review-date">
-        <span>
-          <ReactStars {
-            ...{
-              size: 16,
-              value: review.rating,
-              a11y: true,
-              edit: false,
-              activeColor: 'red',
-            }
-          }
-          />
-        </span>
+        <div className="empty-stars">
+          <div className="filled-stars" style={{ width: `${review.rating * 20}%` }}>
+            <i className="fas fa-star" aria-hidden="true" />
+            <i className="fas fa-star" aria-hidden="true" />
+            <i className="fas fa-star" aria-hidden="true" />
+            <i className="fas fa-star" aria-hidden="true" />
+            <i className="fas fa-star" aria-hidden="true" />
+          </div>
+        </div>
         <span>{formatDate(review.date)}</span>
       </div>
       <p className="review-summary">{review.summary}</p>

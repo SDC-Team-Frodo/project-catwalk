@@ -49,13 +49,18 @@ main
   min-width: 15em
   width: 60%
   min-height: 30em
+  // transition: width 1s ease, height 1s ease
   &.full
     margin: auto
     width: 100% !important
     height: 35em !important
     cursor: zoom-in
     i
-      cursor: zoom-out
+      z-index: 3
+      &.collapse
+        cursor: zoom-out
+      &.expand
+        cursor: zoom-in
   &.zoom
     cursor: all-scroll
     i
@@ -63,6 +68,7 @@ main
   i
     z-index: 2
     position: relative
+    cursor: pointer
 
 #gallery
   z-index: 1 !important
@@ -70,8 +76,10 @@ main
   position: relative
   width: 100%
   height: 100%
-  cursor: zoom-in
   margin: 0 !important
+  cursor: zoom-in
+  &.zoom
+    cursor: zoom-out
 
 #outer-gallery-nav
   z-index: 2
@@ -79,6 +87,7 @@ main
   height: 100%
 
 #gallery-nav
+  z-index: 2
   display: flex
   flex-direction: column
   justify-content: start
@@ -104,6 +113,7 @@ main
   right: 1.5em
 
 .gallery-nav-tile
+  z-index: 2
   width: 3.0em
   height: 3.0em
   margin: 0 0 .75em .3em
@@ -129,7 +139,7 @@ main
     position: relative
     display: inline-block !important
     margin-left: .5em
-    top: -.5em
+    top: -.15em
   .strikethrough
     text-decoration: line-through
   h2
@@ -382,6 +392,28 @@ main
       margin-right: 0.25em
       letter-spacing: 0.05em
 
+.empty-stars
+  color: red
+  font-family: FontAwesome
+  font-size: 16px
+  left: 0
+  position: relative
+  top: 0
+  width: min-content
+  &::before
+    content: '\f006 \f006 \f006 \f006 \f006'
+
+.filled-stars
+  left: 0
+  position: absolute
+  overflow: hidden
+  top: 0
+  white-space: nowrap
+  i
+    color: red
+    ::before
+      content: '\f005'
+
 .rating-bars, .char-bars
   list-style-type: none
   margin-top: 1.5em
@@ -407,7 +439,7 @@ main
 .rating-filler
   height: inherit
   background-color: green
-  border-radius: 10px 0 0 10px
+  border-radius: 10px
 
 .char-bars
   div

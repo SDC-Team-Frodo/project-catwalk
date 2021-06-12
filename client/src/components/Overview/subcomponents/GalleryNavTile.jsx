@@ -16,11 +16,16 @@ const GalleryNavTile = (props) => {
     classes += ' selected';
   }
 
+  const handleClick = (event) => {
+    event.stopPropagation();
+    setSelectedPhotoIndex(index);
+  }
+
   return (
     <div
       className={classes}
       style={css}
-      onClick={() => setSelectedPhotoIndex(index)}>
+      onClick={handleClick}>
 
     </div>
   );
