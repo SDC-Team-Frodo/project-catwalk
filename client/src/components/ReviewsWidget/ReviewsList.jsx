@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import FilterContext from './FilterContext';
+import ReviewContext from '../../contexts/ReviewContext';
 import ReviewTile from './ReviewTile';
 import request from '../../requests';
 
 const ReviewsList = ({ product }) => {
-  const [allReviews, setAllReviews] = useState([]);
+  const [allReviews, setAllReviews] = useContext(ReviewContext);
   const [reviews, setReviews] = useState([]);
   const [reviewsShown, setReviewsShown] = useState(2);
   const [sortOrder, setSortOrder] = useState('relevant');

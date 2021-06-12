@@ -6,6 +6,8 @@ import ReviewsContainer from './ReviewsWidget/widget';
 import RelatedContainer from './RelatedWidget/widget';
 import QALoadContext from '../contexts/QALoadContext';
 import RatingContext from '../contexts/RatingContext';
+import ReviewContext from '../contexts/ReviewContext';
+
 import ProductContext from '../contexts/ProductContext';
 import ThemeContext from '../contexts/ThemeContext';
 import testData from '../testData';
@@ -17,6 +19,7 @@ const App = () => {
   const [currentProductData, setCurrentProductData] = useState(testData);
   const [idInput, setIdInput] = useState('');
   const [averageRating, setAverageRating] = useState(null);
+  const [allReviews, setAllReviews] = useState([]);
 
   useEffect(() => {
     request.get(`products/${currentProductId}`, {
@@ -52,16 +55,20 @@ const App = () => {
       </div>
       <ThemeContext.Provider value="light">
         <ProductContext.Provider value={currentProductData}>
-          <RatingContext.Provider value={[averageRating, setAverageRating]}>
-            <OverviewContainer />
-          </RatingContext.Provider>
+          <ReviewContext.Provider value={[allReviews, setAllReviews]}>
+            <RatingContext.Provider value={[averageRating, setAverageRating]}>
+              <OverviewContainer />
+            </RatingContext.Provider>
+          </ReviewContext.Provider>
           <RelatedContainer />
           <QALoadContext.Provider value={() => {}}>
             <QaContainer />
           </QALoadContext.Provider>
-          <RatingContext.Provider value={[averageRating, setAverageRating]}>
-            <ReviewsContainer />
-          </RatingContext.Provider>
+          <ReviewContext.Provider value={[allReviews, setAllReviews]}>
+            <RatingContext.Provider value={[averageRating, setAverageRating]}>
+              <ReviewsContainer />
+            </RatingContext.Provider>
+          </ReviewContext.Provider>
         </ProductContext.Provider>
       </ThemeContext.Provider>
     </main>
