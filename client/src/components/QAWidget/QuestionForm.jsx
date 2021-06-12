@@ -25,14 +25,12 @@ const QuestionForm = () => {
         && validN
         && validE
       ) {
-        // Need to make the api request
         request.post('qa/questions', {
           body: question,
           name: nickName,
           email,
           product_id: product.id,
         }).then((res) => {
-          // then do this stuff
           setQuestion('');
           setNickName('');
           setEmail('');
@@ -53,7 +51,6 @@ const QuestionForm = () => {
     isEmail(email) ? setValidE(true) : setValidE(false);
   }, [question, nickName, email]);
 
-  // if (!displaySent) {
   return (
     <div id="questionForm">
       <div>
@@ -113,14 +110,15 @@ const QuestionForm = () => {
         onClick={() => {
           setSubClicked(true);
           setDisplaySent(true);
+          setTimeout(() => {
+            setDisplaySent(false);
+          }, 2500);
         }}
       >
         {displaySent ? 'Sent!' : 'Submit!'}
       </button>
     </div>
   );
-  // }
-  // return <h1 className="sent">Sent</h1>;
 };
 
 export default QuestionForm;

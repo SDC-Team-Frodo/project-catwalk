@@ -27,7 +27,6 @@ const AnswerForm = (props) => {
         && validN
         && validE
       ) {
-        // Need to make the api request
         request.post(`qa/questions/${question_id}/answers`, {
           body: answer,
           name: nickName,
@@ -39,6 +38,9 @@ const AnswerForm = (props) => {
           setEmail('');
           setSubClicked(false);
           setDisplaySent(true);
+          setTimeout(() => {
+            setDisplaySent(false);
+          }, 2500);
           load();
         }).catch(() => alert('couldn\'t send answer'));
       }

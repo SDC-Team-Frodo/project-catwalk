@@ -33,7 +33,7 @@ const App = () => {
       <div id="nav">
         <input
           type="text"
-          placeholder="Product Id"
+          placeholder="17067 -- 18077"
           value={idInput}
           onChange={(e) => {
             setIdInput(e.target.value);
@@ -44,7 +44,11 @@ const App = () => {
           type="button"
           id="changeId"
           onClick={() => {
-            setCurrentProductId(idInput);
+            if (Number(idInput) >= 17067 && Number(idInput) <= 18077) {
+              setCurrentProductId(idInput);
+            } else {
+              setIdInput("Not Valid");
+            }
           }}
         >
           Change Products

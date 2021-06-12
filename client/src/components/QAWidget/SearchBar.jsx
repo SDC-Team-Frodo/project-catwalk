@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect, useContext } from 'react';
 import QuestionsContext from '../../contexts/QuestionsContext';
 import QuestionList from './QuestionList';
@@ -20,7 +22,8 @@ const SearchBar = () => {
 
   useEffect(() => {
     if (searchClicked === true) {
-      setRelevantQuestions(JSON.stringify(searchFunc(search, JSON.parse(allQuestions), search.split(' ').length - 1)));
+      setRelevantQuestions(JSON.stringify(searchFunc(search, JSON.parse(allQuestions),
+        search.split(' ').length === 1 ? 1 : search.split(' ').length - 1)));
       setSearchClicked(false);
     }
   }, [search, searchClicked]);
@@ -41,6 +44,7 @@ const SearchBar = () => {
         <img
           id="search"
           src="https://img.icons8.com/android/24/000000/search.png"
+          alt="search"
           type="button"
           onClick={() => {
             setSearchClicked(true);
