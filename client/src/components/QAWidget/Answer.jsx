@@ -30,7 +30,9 @@ const Answer = (props) => {
           </h2>
           <div id="userInfoAndHelpful">
             {'by:  '}
-            {answer.answerer_name}
+            <span className={answer.answerer_name !== 'Seller' ? 'answerName' : 'answerNameBold'}>
+              {answer.answerer_name}
+            </span>
             {',  '}
             {formatDate(answer.date)}
             Helpful?

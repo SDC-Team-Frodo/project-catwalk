@@ -13,7 +13,7 @@ const QaContainer = () => {
 
   useEffect(() => {
     request.get('qa/questions', {
-      product_id: 17078,
+      product_id: product.id,
     }).then((newData) => {
       setData(newData.data);
     }).catch((err) => console.error(err));
