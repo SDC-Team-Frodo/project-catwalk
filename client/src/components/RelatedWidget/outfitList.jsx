@@ -27,7 +27,7 @@ const OutfitList = () => {
           })
           .catch((err) => console.log(err));
 
-        request.get(`reviews/meta`, { endpoint: `reviews/meta`, product_id: id })
+        request.get('reviews/meta', { endpoint: 'reviews/meta', product_id: id })
           .then((rating) => {
             setOutfitRatings((oldRatings) => [...oldRatings, rating.data.ratings]);
           })
@@ -101,7 +101,7 @@ const OutfitList = () => {
     for (initial; initial < cards.length; initial += 1) {
       cards[initial].style.transform = `translateX(${translateX}px`;
     }
-  }, [index, translateX]);
+  }, [index, translateX, numberOfCards]);
 
   return (
     <div className="outfitRelatedWidget">
@@ -116,7 +116,18 @@ const OutfitList = () => {
             Outfits
           </div>
         </div>
-        {outfitProducts.length > 0 && outfitProducts.map((outfitProduct, i) => <Card product={outfitProduct} thumbnail={outfitThumbnails[i]} ratings={outfitRatings[i]} key={`${product.id}${i}`} cardClass="outfitCard" func={removeOutfit} isStars={false} />)}
+        {outfitProducts.length > 0 && outfitProducts.map((outfitProduct, i) => (
+          <Card
+            overview={product}
+            product={outfitProduct}
+            thumbnail={outfitThumbnails[i]}
+            ratings={outfitRatings[i]}
+            key={`${product.id}${i}`}
+            cardClass="outfitCard"
+            func={removeOutfit}
+            isStars={false}
+          />
+        ))}
       </div>
       <button type="button" className="carousel_button next" id="outfitNext" onClick={buttonHandle}>&#62;</button>
     </div>
