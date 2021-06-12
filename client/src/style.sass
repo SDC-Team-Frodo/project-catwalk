@@ -407,7 +407,7 @@ main
 .rating-filler
   height: inherit
   background-color: green
-  border-radius: 10px 0 0 10px
+  border-radius: 10px
 
 .char-bars
   div
@@ -538,7 +538,7 @@ img
   border: thick double black
   position: fixed
   background-color: skyblue
-  z-index: 2147483647
+  z-index: 2147483646
   max-width: 80vw
   left: 50vw
   transform: translate(-50%, -50%)
@@ -555,8 +555,21 @@ img
   background-color: black
   height: 100%
   width: 100%
-  z-index: 2147483646
+  z-index: 2147483645
 
+#CloseBtn
+  cursor: pointer
+  position: fixed
+  padding: 2px
+  top: 1vh
+  left: 8vh
+  font-weight: 400
+  font-size: 35px
+  color: lightgrey
+  z-index: 2147483647
+
+#CloseBtn:hover
+  color: white
 
 #modalImgDiv
   width: fit-content
@@ -633,6 +646,7 @@ img
   float: right
   color: gray
   font-size: 13px
+  font-weight: 200
   button
     cursor: pointer
     color: gray
@@ -704,3 +718,9 @@ img
 .AnswerList
   max-height: 50vh
   overflow-y: scroll
+
+#nav
+  margin: 15px
+
+.answerNameBold
+  font-weight: 600

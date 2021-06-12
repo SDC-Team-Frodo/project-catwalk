@@ -36,25 +36,25 @@ const RatingsBreakdown = ({ ratings }) => {
           </button>
         </div>
       )}
+      {averageRating !== null
+      && (
       <div className="avg-rating-stars">
         <div className="avg-rating">{averageRating}</div>
         <div>
-          {averageRating !== null
-          && (
-            <ReactStars {
-              ...{
-                size: 16,
-                value: Math.round(averageRating * 2) / 2,
-                a11y: true,
-                isHalf: true,
-                edit: false,
-                activeColor: 'red',
-              }
+          <ReactStars {
+            ...{
+              size: 16,
+              value: Math.round(averageRating * 2) / 2,
+              a11y: true,
+              isHalf: true,
+              edit: false,
+              activeColor: 'red',
             }
-            />
-          )}
+          }
+          />
         </div>
       </div>
+      )}
       <ul className="rating-bars">
         {[5, 4, 3, 2, 1].map((value) => (
           <ProgressBar
