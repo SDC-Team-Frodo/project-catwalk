@@ -585,16 +585,20 @@ img
   text-align: center
 
 #Qinput
-  border: 2px solid black
+  border: 1px solid white
+  border-bottom: 2px solid black
   width: 30vw
-  font-size: 20px
+  font-size: 30px
+
+#Qinput:focus
+  outline: none
 
 #search
   cursor: pointer
-  margin: 1vw
-  border: 2px solid black
-  width: 15vw
-  font-size: 20px
+  margin-left: 5px
+  margin-top: 10px
+  width: 30px
+  height: 30px
 
 #loadQ, #loadA
   cursor: pointer
@@ -629,7 +633,11 @@ img
   margin-left: 42%
 
 #searchDiv
-  margin-left: 20%
+  width: fit-content
+  display: flex
+  position: relative
+  margin-left: 50%
+  transform: translateX(-50%)
 
 .answerImage
   margin: 5px
