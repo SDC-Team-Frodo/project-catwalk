@@ -38,16 +38,14 @@ const SearchBar = () => {
             setSearch(e.target.value);
           }}
         />
-        <button
+        <img
           id="search"
+          src="https://img.icons8.com/android/24/000000/search.png"
           type="button"
-          className="hoverGrey"
           onClick={() => {
             setSearchClicked(true);
           }}
-        >
-          Search!
-        </button>
+        />
       </div>
       <div id="QAListDiv">
         <QuestionsContext.Provider value={relevantQuestions}>

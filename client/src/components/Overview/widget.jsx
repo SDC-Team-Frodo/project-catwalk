@@ -34,6 +34,19 @@ const OverviewContainer = (props) => {
     return styles[selectedStyleIndex];
   }
 
+  const submitCart = (event) => {
+    event.preventDefault()
+    if (selectedStyle === -1 || selectedSizeIndex === -1) {
+      alert('Please select a size and quantity');
+    } else {
+      request.post('cart', {
+        sku_id: selectedSizeIndex
+      })
+      .then(() => console.log('successfully posted to your bag'))
+      .catch(console.error);
+    }
+  };
+
   useEffect(() => {
     request.get(`products/${product.id}/styles`, {
       productId: product.id
@@ -71,7 +84,8 @@ const OverviewContainer = (props) => {
           selectedSizeIndex={selectedSizeIndex}
           setSelectedSizeIndex={setSelectedSizeIndex}
           cartQuantity={cartQuantity}
-          setCartQuantity={setCartQuantity}/>
+          setCartQuantity={setCartQuantity}
+          submitCart={submitCart}/>
       </div>
       <div className="separator">
         <Description product={product}/>

@@ -9,14 +9,7 @@ import Modal from '../Modal';
 const Answer = (props) => {
   const { answer, index } = props;
   const [display, setDisplay] = useState(true);
-  const [helpfulCount, setHelpfulcount] = useState(answer.helpfulness);
   const [yesClicked, setYesClicked] = useState(false);
-
-  useEffect(() => {
-    if (yesClicked) {
-      setHelpfulcount(helpfulCount + 1);
-    }
-  }, [yesClicked]);
 
   return (
     <div className="answer">
@@ -30,7 +23,9 @@ const Answer = (props) => {
           </h2>
           <div id="userInfoAndHelpful">
             {'by:  '}
-            {answer.answerer_name}
+            <span className={answer.answerer_name !== 'Seller' ? 'answerName' : 'answerNameBold'}>
+              {answer.answerer_name}
+            </span>
             {',  '}
             {formatDate(answer.date)}
             Helpful?
@@ -49,7 +44,7 @@ const Answer = (props) => {
                 }
               }}
             >
-              {`Yes(${helpfulCount})`}
+              {`Yes(${!yesClicked ? answer.helpfulness : answer.helpfulness + 1})`}
             </button>
             |
             <button

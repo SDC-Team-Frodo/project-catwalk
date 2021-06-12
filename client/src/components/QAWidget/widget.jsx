@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import QuestionsContext from '../../contexts/QuestionsContext';
+import QALoadContext from '../../contexts/QALoadContext';
 import ProductContext from '../../contexts/ProductContext';
 import request from '../../requests';
 import SearchBar from './SearchBar';
@@ -11,32 +12,38 @@ const QaContainer = () => {
   const product = useContext(ProductContext);
   const [data, setData] = useState(mockData);
 
-  useEffect(() => {
+  const load = () => {
     request.get('qa/questions', {
-      product_id: 17078,
+      product_id: product.id,
     }).then((newData) => {
       setData(newData.data);
     }).catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    load();
   }, [product]);
 
   return (
     <div id="QAWidget">
       <h1 id="QATitle" data-testid="QAtitle" className="title">Questions And Answers</h1>
-      <QuestionsContext.Provider value={data.results}>
-        <SearchBar />
-        <Modal
-          modalId="QuestionFormModal"
-          header={(
-            <div className="modalHeader">
-              <h1>Ask Your Question</h1>
-              <h3>{product.name}</h3>
-            </div>
-          )}
-          body={<QuestionForm />}
-          btnName="Ask Question"
-          btnId="QButton"
-        />
-      </QuestionsContext.Provider>
+      <QALoadContext.Provider value={load}>
+        <QuestionsContext.Provider value={data.results}>
+          <SearchBar />
+          <Modal
+            modalId="QuestionFormModal"
+            header={(
+              <div className="modalHeader">
+                <h1>Ask Your Question</h1>
+                <h3>{product.name}</h3>
+              </div>
+            )}
+            body={<QuestionForm />}
+            btnName="Ask Question"
+            btnId="QButton"
+          />
+        </QuestionsContext.Provider>
+      </QALoadContext.Provider>
     </div>
   );
 };

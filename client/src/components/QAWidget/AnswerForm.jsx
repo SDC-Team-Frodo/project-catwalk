@@ -1,14 +1,15 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable camelcase */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import isEmail from './isEmail';
 import request from '../../requests';
+import QALoadContext from '../../contexts/QALoadContext';
 // import ProductContext from '../../ProductContext';
 
 const AnswerForm = (props) => {
   const { question_id } = props;
-  // const product = useContext(ProductContext);
+  const load = useContext(QALoadContext);
   const [answer, setAnswer] = useState('');
   const [nickName, setNickName] = useState('');
   const [email, setEmail] = useState('');
@@ -17,6 +18,7 @@ const AnswerForm = (props) => {
   const [validN, setValidN] = useState(false);
   const [validE, setValidE] = useState(false);
   const [displaySent, setDisplaySent] = useState(false);
+  const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
     if (subClicked) {
@@ -30,13 +32,14 @@ const AnswerForm = (props) => {
           body: answer,
           name: nickName,
           email,
-          photos: [],
+          photos,
         }).then((res) => {
           setAnswer('');
           setNickName('');
           setEmail('');
           setSubClicked(false);
           setDisplaySent(true);
+          load();
         }).catch(() => alert('couldn\'t send answer'));
       }
     }
@@ -60,8 +63,9 @@ const AnswerForm = (props) => {
             cols="100"
             wrap="hard"
             id="Question"
-            placeholder="Write your question here"
+            placeholder="Write your answer here"
             value={answer}
+            maxLength="1000"
             onChange={(e) => {
               setAnswer(e.target.value);
             }}
@@ -99,6 +103,20 @@ const AnswerForm = (props) => {
           />
           <h4 className="disclaimer">*For authentication reasons, you will not be emailed*</h4>
         </div>
+        {/* <div>
+          <label className="formInput" htmlFor="image">
+            Upload Photo
+          </label>
+          <input
+            type="text"
+            id="image"
+            alt="none"
+            placeholder="Enter a URL to your photo"
+            onChange={(e) => {
+              setPhotos([...photos, e.target.value]);
+            }}
+          />
+        </div> */}
         <button
           className="hoverGrey"
           type="button"

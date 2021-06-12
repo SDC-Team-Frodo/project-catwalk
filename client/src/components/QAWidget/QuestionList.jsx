@@ -12,6 +12,7 @@ function QuestionList() {
 
   useEffect(() => {
     setAllQuestions(organize(JSON.parse(data), 'question_helpfulness'));
+    setDisplayedQuestions(4);
   }, [data]);
 
   useEffect(() => {
@@ -25,8 +26,10 @@ function QuestionList() {
   }, [displayedQuestions]);
 
   useEffect(() => {
-    if (questions.length === allQuestions.length) {
+    if (questions.length === JSON.parse(data).length) {
       setButtonDisplay(false);
+    } else {
+      setButtonDisplay(true);
     }
   }, [questions]);
 
