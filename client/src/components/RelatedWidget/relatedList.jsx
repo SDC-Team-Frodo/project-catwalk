@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import Card from './card';
 import request from '../../requests';
 import ProductContext from '../../contexts/ProductContext';
+import ComparisonTable from './comparisonTable';
+import helpers from './relatedHelpers';
 
 const RelatedList = () => {
   const product = useContext(ProductContext);
@@ -12,12 +14,17 @@ const RelatedList = () => {
   const [relatedRatings, setRelatedRatings] = useState([]);
   const [relatedThumbnails, setRelatedThumbnails] = useState([]);
   const [index, setIndex] = useState(1);
+  const [isModal, setIsModal] = useState(false);
+  const [relatedIds, setRelatedIds] = useState([]);
+  const [cardTarget, setCardTarget] = useState(null);
+  const [combinedFeatures, setCombinedFeatures] = useState(null);
 
   // Get initial value for related product's id, ratings, thumbnails
   useEffect(() => {
     request.get(`products/${product.id}/related`, { endpoint: `products/${product.id}/related` })
       .then((relatedProductsIds) => {
         setNumberOfCards(relatedProductsIds.data.length);
+        setRelatedIds(relatedProductsIds.data);
         relatedProductsIds.data.forEach((id) => {
           request.get(`products/${id}`, { endpoint: `products/${id}` })
             .then((newRelatedProduct) => {
@@ -25,7 +32,7 @@ const RelatedList = () => {
             })
             .catch((err) => console.log(err));
 
-          request.get(`reviews/meta`, { endpoint: `reviews/meta`, product_id: id })
+          request.get('reviews/meta', { endpoint: 'reviews/meta', product_id: id })
             .then((rating) => {
               setRelatedRatings((oldRatings) => [...oldRatings, rating.data.ratings]);
             })
@@ -42,14 +49,34 @@ const RelatedList = () => {
   }, [product.id]);
 
   useEffect(() => {
+    if (index === 1) {
+      document.getElementById('relatedPrevious').style.visibility = 'hidden';
+    } else {
+      document.getElementById('relatedPrevious').style.visibility = 'visible';
+    }
+    if (index >= numberOfCards - 3) {
+      document.getElementById('relatedNext').style.visibility = 'hidden';
+    } else {
+      document.getElementById('relatedNext').style.visibility = 'visible';
+    }
+
     let initial = 0;
     const cards = document.getElementsByClassName('relatedCard');
     for (initial; initial < cards.length; initial += 1) {
       cards[initial].style.transform = `translateX(${translateX}px`;
     }
-  }, [index, translateX]);
+  }, [index, translateX, numberOfCards]);
 
-  function buttonHandle(event) {
+  useEffect(() => {
+    if (cardTarget) {
+      const feat = helpers.compareFeatures(product.features, cardTarget.features);
+      setCombinedFeatures(feat);
+      setIsModal(true);
+      document.getElementById('compareModal').style.display = 'block';
+    }
+  }, [cardTarget]);
+
+  function navButtonHandle(event) {
     const response = event.target.id;
 
     if (response === 'relatedPrevious') {
@@ -58,25 +85,52 @@ const RelatedList = () => {
         setTranslateX((previousTranslateX) => previousTranslateX + 270);
       }
     } else if (response === 'relatedNext') {
-      if (index < numberOfCards - 4) {
+      if (index < numberOfCards - 3) {
         setIndex((previousIndex) => previousIndex + 1);
         setTranslateX((previousTranslateX) => previousTranslateX - 270);
       }
     }
   }
 
-  function compareFeatures() {
-    console.log('Placeholder');
+  function closeCompareWindow() {
+    setIsModal(false);
+    document.getElementById('compareModal').style.display = 'none';
+  }
+
+  function compareFeaturesModal(event) {
+    let id = event.target.id.match(/\d+/);
+    id = parseInt(id[0], 10);
+    const cardDetails = relatedProductList[relatedIds.indexOf(id)];
+    setCardTarget(cardDetails);
   }
 
   return (
-    <div className="outfitRelatedWidget" id="related">
-      <button type="button" className="carousel_button previous" id="relatedPrevious" onClick={buttonHandle}>&#60;</button>
-      <div className="carousel" id="relatedList">
-        {relatedProductList.map((relatedProduct, i) => <Card product={relatedProduct} thumbnail={relatedThumbnails[i]} ratings={relatedRatings[i]} key={`${relatedProduct.id}${i}`} cardClass={'relatedCard'} func={compareFeatures} isStars={true} />)}
+    <>
+      <div className="compareModal" id="compareModal">
+        <div className="compareContent">
+          <span className="compareClose" onClick={closeCompareWindow}>&times;</span>
+          {isModal ? <ComparisonTable overviewName={product.name} cardName={cardTarget.name} combined={combinedFeatures} /> : null}
+        </div>
       </div>
-      <button type="button" className="carousel_button next" id="relatedNext" onClick={buttonHandle}>&#62;</button>
-    </div>
+
+      <div className="outfitRelatedWidget" id="related">
+        <button type="button" className="carousel_button previous" id="relatedPrevious" onClick={navButtonHandle}>&#60;</button>
+        <div className="carousel" id="relatedList">
+          {relatedProductList.map((relatedProduct, i) => (
+            <Card
+              product={relatedProduct}
+              thumbnail={relatedThumbnails[i]}
+              ratings={relatedRatings[i]}
+              key={`${relatedProduct.id}${i}`}
+              cardClass="relatedCard"
+              func={compareFeaturesModal}
+              isStars={true}
+            />
+          ))}
+        </div>
+        <button type="button" className="carousel_button next" id="relatedNext" onClick={navButtonHandle}>&#62;</button>
+      </div>
+    </>
   );
 };
 
