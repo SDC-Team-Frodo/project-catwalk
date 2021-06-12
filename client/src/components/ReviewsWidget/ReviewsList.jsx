@@ -45,6 +45,7 @@ const ReviewsList = ({ product }) => {
           <option value="helpful">helpful</option>
         </select>
       </div>
+      {!reviews.length && <p className="empty-reviews">No reviews currently available for this product</p>}
       <ul className="review-tiles">
         {reviews.slice(0, reviewsShown).map((review) => (
           <ReviewTile key={review.review_id} review={review} />

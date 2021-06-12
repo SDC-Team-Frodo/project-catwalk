@@ -29,7 +29,7 @@ const RatingsBreakdown = ({ ratings }) => {
       {averageRating !== null
       && (
       <div className="avg-rating-stars">
-        <div className="avg-rating">{averageRating}</div>
+        <div className="avg-rating">{parseFloat(averageRating).toFixed(1)}</div>
         <div className="empty-stars">
           <div className="filled-stars" style={{ width: `${(Math.round(averageRating * 4) / 4) * 20}%` }}>
             <i className="fas fa-star" aria-hidden="true" />
