@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import Card from './card';
 import request from '../../requests';
 import ProductContext from '../../contexts/ProductContext';
+import ComparisonTable from './comparisonTable';
+import helpers from './relatedHelpers';
 
 const RelatedList = () => {
   const product = useContext(ProductContext);
@@ -77,15 +79,24 @@ const RelatedList = () => {
   }
 
   function compareFeaturesModal(event) {
+    console.log('create modal only on click')
   }
 
   return (
+    <>
+    <div className="compareModal" id="compareModal" >
+      <div className="compareContent">
+        <span className="compareClose">&times;</span>
+        <p>Generate Table Here</p>
+      </div>
+    </div>
+    <button id="compareBtn">Open Modal</button>
+
     <div className="outfitRelatedWidget" id="related">
       <button type="button" className="carousel_button previous" id="relatedPrevious" onClick={buttonHandle}>&#60;</button>
       <div className="carousel" id="relatedList">
         {relatedProductList.map((relatedProduct, i) => (
           <Card
-            overview={product}
             product={relatedProduct}
             thumbnail={relatedThumbnails[i]}
             ratings={relatedRatings[i]}
@@ -98,6 +109,7 @@ const RelatedList = () => {
       </div>
       <button type="button" className="carousel_button next" id="relatedNext" onClick={buttonHandle}>&#62;</button>
     </div>
+    </>
   );
 };
 
