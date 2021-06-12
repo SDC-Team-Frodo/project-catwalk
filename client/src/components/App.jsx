@@ -1,4 +1,4 @@
-import React, { useContext, createContext, Provider } from 'react';
+import React, { useState } from 'react';
 import QaContainer from './QAWidget/widget';
 import OverviewContainer from './Overview/widget';
 import ReviewsContainer from './ReviewsWidget/widget';
@@ -10,17 +10,17 @@ import testData from '../testData';
 import '../style.sass';
 
 const App = () => {
-
+  const [averageRating, setAverageRating] = useState(null);
   return (
     <main>
       <ThemeContext.Provider value="light">
         <ProductContext.Provider value={testData}>
-          <RatingContext.Provider value="3.5">
+          <RatingContext.Provider value={[averageRating, setAverageRating]}>
             <OverviewContainer />
           </RatingContext.Provider>
           <RelatedContainer />
           <QaContainer />
-          <RatingContext.Provider value="3.5">
+          <RatingContext.Provider value={[averageRating, setAverageRating]}>
             <ReviewsContainer />
           </RatingContext.Provider>
         </ProductContext.Provider>
