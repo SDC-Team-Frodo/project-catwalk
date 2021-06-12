@@ -27,7 +27,7 @@ const Question = (props) => {
   const product = useContext(ProductContext);
   const [displayedAnswers, setDisplayedAnswers] = useState(2);
   const [answers, setAnswers] = useState(
-    organizeA(Object.values(question.answers).slice(0, displayedAnswers)),
+    organizeA(Object.values(question.answers)).slice(0, displayedAnswers),
   );
   const [buttonLabel, setButtonLabel] = useState('More Answers');
   const [yesClicked, setYesClicked] = useState(false);
@@ -38,13 +38,13 @@ const Question = (props) => {
       setAnswers(organizeA(Object.values(question.answers)));
       setButtonLabel('Collapse Answers');
     } else {
-      setAnswers(organizeA(Object.values(question.answers).slice(0, 2)));
+      setAnswers(organizeA(Object.values(question.answers)).slice(0, 2));
       setButtonLabel('More Answers');
     }
   }, [displayedAnswers]);
 
   useEffect(() => {
-    setAnswers(organizeA(Object.values(question.answers).slice(0, 2)));
+    setAnswers(organizeA(Object.values(question.answers)).slice(0, 2));
   }, [question]);
 
   useEffect(() => {
