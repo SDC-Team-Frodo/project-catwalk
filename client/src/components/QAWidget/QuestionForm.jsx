@@ -2,11 +2,13 @@
 /* eslint-disable no-unused-expressions */
 import React, { useState, useEffect, useContext } from 'react';
 import ProductContext from '../../contexts/ProductContext';
+import QALoadContext from '../../contexts/QALoadContext';
 import request from '../../requests';
 import isEmail from './isEmail';
 
 const QuestionForm = () => {
   const product = useContext(ProductContext);
+  const load = useContext(QALoadContext);
   const [question, setQuestion] = useState('');
   const [nickName, setNickName] = useState('');
   const [email, setEmail] = useState('');
@@ -35,6 +37,8 @@ const QuestionForm = () => {
           setNickName('');
           setEmail('');
           setSubClicked(false);
+          console.log(res);
+          load();
         }).catch((err) => {
           console.error(err);
           alert('couldn\'t send');

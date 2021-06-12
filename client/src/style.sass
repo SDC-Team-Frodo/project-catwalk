@@ -612,33 +612,44 @@ img
 
 /////////////QA//////////////
 #QATitle
-  border: thick double black
+  border-bottom: thick double black
   padding: 2px
   text-align: center
+  font-weight: 250
+  font-size: 40px
 
 #Qinput
-  border: 2px solid black
+  border: 0px
+  border-bottom: 2px solid black
   width: 30vw
-  font-size: 20px
+  font-size: 30px
+
+#Qinput:focus
+  outline: none
 
 #search
   cursor: pointer
-  margin: 1vw
-  border: 2px solid black
-  width: 15vw
-  font-size: 20px
+  margin-left: 5px
+  margin-top: 10px
+  width: 30px
+  height: 30px
 
 #loadQ, #loadA
   cursor: pointer
-  border: 2px solid black
+  background-color: white
+  border: 0px
+  text-decoration: underline
   font-size: 20px
-  width: 12vw
+  width: fit-content
 
 #QButton
   cursor: pointer
-  margin-left: 37%
-  border: thick double black
-  font-size: 20px
+  margin-left: 50%
+  transform: translateX(-50%)
+  border: 0px
+  border-bottom: 2px solid black
+  background-color: white
+  font-size: 30px
   width: 20vw
 
 .question
@@ -654,14 +665,20 @@ img
   margin: 3%
 
 .hoverGrey:hover
-  background-color: lightgrey
+  color: grey
 
 #loadQ
+  font-size: 30px
   margin-bottom: 25px
-  margin-left: 42%
+  margin-left: 50%
+  transform: translateX(-50%)
 
 #searchDiv
-  margin-left: 20%
+  width: fit-content
+  display: flex
+  position: relative
+  margin-left: 50%
+  transform: translateX(-50%)
 
 .answerImage
   margin: 5px
