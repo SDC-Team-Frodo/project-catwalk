@@ -382,6 +382,28 @@ main
       margin-right: 0.25em
       letter-spacing: 0.05em
 
+.empty-stars
+  color: red
+  font-family: FontAwesome
+  font-size: 16px
+  left: 0
+  position: relative
+  top: 0
+  width: min-content
+  &::before
+    content: '\f006 \f006 \f006 \f006 \f006'
+
+.filled-stars
+  left: 0
+  position: absolute
+  overflow: hidden
+  top: 0
+  white-space: nowrap
+  i
+    color: red
+    ::before
+      content: '\f005'
+
 .rating-bars, .char-bars
   list-style-type: none
   margin-top: 1.5em
