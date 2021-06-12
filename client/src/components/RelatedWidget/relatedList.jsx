@@ -14,12 +14,17 @@ const RelatedList = () => {
   const [relatedRatings, setRelatedRatings] = useState([]);
   const [relatedThumbnails, setRelatedThumbnails] = useState([]);
   const [index, setIndex] = useState(1);
+  const [isModal, setIsModal] = useState(false);
+  const [relatedIds, setRelatedIds] = useState([]);
+  const [cardTarget, setCardTarget] = useState(null);
+  const [combinedFeatures, setCombinedFeatures] = useState(null);
 
   // Get initial value for related product's id, ratings, thumbnails
   useEffect(() => {
     request.get(`products/${product.id}/related`, { endpoint: `products/${product.id}/related` })
       .then((relatedProductsIds) => {
         setNumberOfCards(relatedProductsIds.data.length);
+        setRelatedIds(relatedProductsIds.data);
         relatedProductsIds.data.forEach((id) => {
           request.get(`products/${id}`, { endpoint: `products/${id}` })
             .then((newRelatedProduct) => {
@@ -62,7 +67,16 @@ const RelatedList = () => {
     }
   }, [index, translateX, numberOfCards]);
 
-  function buttonHandle(event) {
+  useEffect(() => {
+    if (cardTarget) {
+      const feat = helpers.compareFeatures(product.features, cardTarget.features);
+      setCombinedFeatures(feat);
+      setIsModal(true);
+      document.getElementById('compareModal').style.display = 'block';
+    }
+  }, [cardTarget]);
+
+  function navButtonHandle(event) {
     const response = event.target.id;
 
     if (response === 'relatedPrevious') {
@@ -78,37 +92,44 @@ const RelatedList = () => {
     }
   }
 
+  function closeCompareWindow() {
+    setIsModal(false);
+    document.getElementById('compareModal').style.display = 'none';
+  }
+
   function compareFeaturesModal(event) {
-    console.log('create modal only on click')
+    let id = event.target.id.match(/\d+/);
+    id = parseInt(id[0], 10);
+    const cardDetails = relatedProductList[relatedIds.indexOf(id)];
+    setCardTarget(cardDetails);
   }
 
   return (
     <>
-    <div className="compareModal" id="compareModal" >
-      <div className="compareContent">
-        <span className="compareClose">&times;</span>
-        <p>Generate Table Here</p>
+      <div className="compareModal" id="compareModal">
+        <div className="compareContent">
+          <span className="compareClose" onClick={closeCompareWindow}>&times;</span>
+          {isModal ? <ComparisonTable overviewName={product.name} cardName={cardTarget.name} combined={combinedFeatures} /> : null}
+        </div>
       </div>
-    </div>
-    <button id="compareBtn">Open Modal</button>
 
-    <div className="outfitRelatedWidget" id="related">
-      <button type="button" className="carousel_button previous" id="relatedPrevious" onClick={buttonHandle}>&#60;</button>
-      <div className="carousel" id="relatedList">
-        {relatedProductList.map((relatedProduct, i) => (
-          <Card
-            product={relatedProduct}
-            thumbnail={relatedThumbnails[i]}
-            ratings={relatedRatings[i]}
-            key={`${relatedProduct.id}${i}`}
-            cardClass="relatedCard"
-            func={compareFeaturesModal}
-            isStars={true}
-          />
-        ))}
+      <div className="outfitRelatedWidget" id="related">
+        <button type="button" className="carousel_button previous" id="relatedPrevious" onClick={navButtonHandle}>&#60;</button>
+        <div className="carousel" id="relatedList">
+          {relatedProductList.map((relatedProduct, i) => (
+            <Card
+              product={relatedProduct}
+              thumbnail={relatedThumbnails[i]}
+              ratings={relatedRatings[i]}
+              key={`${relatedProduct.id}${i}`}
+              cardClass="relatedCard"
+              func={compareFeaturesModal}
+              isStars
+            />
+          ))}
+        </div>
+        <button type="button" className="carousel_button next" id="relatedNext" onClick={navButtonHandle}>&#62;</button>
       </div>
-      <button type="button" className="carousel_button next" id="relatedNext" onClick={buttonHandle}>&#62;</button>
-    </div>
     </>
   );
 };
