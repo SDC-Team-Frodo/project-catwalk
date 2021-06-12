@@ -68,7 +68,7 @@ const OutfitList = () => {
   }
 
   // Handles button event related to carousel next and previous buttons
-  function buttonHandle(event) {
+  function navButtonHandle(event) {
     const response = event.target.id;
     if (response === 'outfitPrevious') {
       if (index !== 1) {
@@ -105,7 +105,7 @@ const OutfitList = () => {
 
   return (
     <div className="outfitRelatedWidget">
-      <button type="button" className="carousel_button previous" id="outfitPrevious" onClick={buttonHandle}>&#60;</button>
+      <button type="button" className="carousel_button previous" id="outfitPrevious" onClick={navButtonHandle}>&#60;</button>
       <div className="carousel" id="relatedList">
         <div className="outfitCard card plus" onClick={addOutfit} id="blank">
           +
@@ -126,7 +126,7 @@ const OutfitList = () => {
           />
         ))}
       </div>
-      <button type="button" className="carousel_button next" id="outfitNext" onClick={buttonHandle}>&#62;</button>
+      <button type="button" className="carousel_button next" id="outfitNext" onClick={navButtonHandle}>&#62;</button>
     </div>
   );
 };
