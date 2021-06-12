@@ -14,7 +14,10 @@ const ReviewContainer = () => {
   const [filteredContext, setFilteredContext] = useState([]);
   useEffect(() => {
     request.get('reviews/meta', { product_id: product.id })
-      .then((metadata) => setReviewsMeta(metadata.data))
+      .then((metadata) => {
+        setReviewsMeta(metadata.data);
+        setFilteredContext([]);
+      })
       .catch((err) => new Error(err));
   }, [product]);
   return (
@@ -28,7 +31,7 @@ const ReviewContainer = () => {
             <RatingsBreakdown ratings={reviewsMeta.ratings} />
           </FilterContext.Provider>
           )}
-          {reviewsMeta.recommended
+          {!!reviewsMeta.recommended
           && (
           <div className="recommend-summary">
             {`${getRecommendedAvg(reviewsMeta.recommended)}% of reviews recommend this product`}

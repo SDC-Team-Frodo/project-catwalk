@@ -21,7 +21,7 @@ const ProgressBar = ({ numStars, numReviews, totalReviews }) => {
     }
   }, [filtered]);
   return (
-    <li className="rating-bar" onClick={() => setFiltered(!filtered)}>
+    <li className={`rating-bar ${filteredContext.includes(numStars) && "rating-bar-active"}`} onClick={() => setFiltered(!filtered)}>
       <div>
         <u>{`${numStars} stars`}</u>
       </div>

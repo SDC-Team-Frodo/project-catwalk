@@ -2,7 +2,7 @@
 $font-stack: Tahoma, Arial, Helvetica, sans-serif
 $header-color: #333333e8
 $body-color: #696969
-$background-color: white
+$background-color: #eee
 
 body
   background-color: $background-color
@@ -411,6 +411,8 @@ span.cardIcon
 #ratings-breakdown
   .filter-summary
     font-size: 12px
+    margin-bottom: 1em
+    z-index: 1
     .current-filters
       font-size: 10px
     button
@@ -429,7 +431,7 @@ span.cardIcon
     font-size: 40px
     font-weight: bold
     .avg-rating
-      margin-right: 0.25em
+      margin: -0.25em 0.25em  0 0
       letter-spacing: 0.05em
 
 .empty-stars
@@ -451,8 +453,6 @@ span.cardIcon
   white-space: nowrap
   i
     color: red
-    ::before
-      content: '\f005'
 
 .rating-bars, .char-bars
   list-style-type: none
@@ -469,6 +469,13 @@ span.cardIcon
 
 .rating-bar
   cursor: pointer
+  transition: all 0.25s ease-in-out
+  &:hover
+    color: red
+    transform: scale(1.1)
+
+.rating-bar-active
+  font-weight: bold
 
 .rating-container
   background-color: lightgray
@@ -486,6 +493,7 @@ span.cardIcon
     i
       margin-bottom: 0.1em
       position: relative
+      transform: translateX(-50%)
       width: inherit
 
 .char-bar
@@ -515,6 +523,12 @@ span.cardIcon
   overflow-y: scroll
   padding: 0
 
+.empty-reviews
+  font-style: italic
+  margin-bottom: 0
+  text-align: center
+  text-decoration: underline
+
 .review
   border-bottom: 2px solid gray
   display: flex
@@ -524,7 +538,9 @@ span.cardIcon
 
 .reviews-count
   font-weight: bold
+  margin-top: -0.25em
   select
+    background-color: $background-color
     border: none
     border-bottom: 1px solid black
     cursor: pointer
@@ -540,6 +556,8 @@ span.cardIcon
     outline: inherit
     padding: 0 0.25em 0 0.5em
     text-decoration: underline
+    &:hover
+      color: $header-color
 
 .review-date
   align-items: center
@@ -552,6 +570,10 @@ span.cardIcon
   font-size: 18px
   font-weight: bold
   margin-bottom: 0
+
+.review-body
+  button
+    font-size: 12px
 
 .review-photos
     display: flex
@@ -598,6 +620,8 @@ span.cardIcon
     cursor: pointer
     height: 4em
     width: 48%
+    &:hover
+      color: $header-color
 
 // Modal
 img
