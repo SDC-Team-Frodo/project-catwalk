@@ -12,7 +12,7 @@ const GalleryAside = (props) => {
   const rating = useContext(RatingContext);
   const product = useContext(ProductContext);
 
-  const {  cartQuantity, setCartQuantity, selectedSizeIndex, setSelectedSizeIndex, activeStyle, styles, selectedStyleIndex, setSelectedStyleIndex } = props;
+  const {  cartQuantity, setCartQuantity, selectedSizeIndex, setSelectedSizeIndex, activeStyle, styles, selectedStyleIndex, setSelectedStyleIndex, submitCart } = props;
 
   // Added support for hiding.
   // I assume conditionally rendering will break the useState hook if it misses rendering any of the children using said hook.
@@ -69,7 +69,7 @@ const GalleryAside = (props) => {
 
           <br />
           <div className="separator">
-            <button id="add-to-bag">
+            <button id="add-to-bag" onClick={submitCart}>
               ADD TO BAG
               <i className="fas fa-plus"></i>
             </button>
