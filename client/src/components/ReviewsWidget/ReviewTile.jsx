@@ -37,8 +37,10 @@ const ReviewTile = ({ review }) => {
       </div>
       <p className="review-summary">{review.summary}</p>
       <div className="review-body">
-        <p>{hidden ? `${review.body.slice(0, 249)}...` : review.body}</p>
-        {hidden && <button type="button" onClick={() => setHidden((isHidden) => !isHidden)}>Show More</button>}
+        <p>
+          {hidden ? `${review.body.slice(0, 249)}... ` : review.body}
+          {review.body.length > 250 && <button type="button" onClick={() => setHidden((isHidden) => !isHidden)}>{hidden ? 'Show More' : 'Show Less'}</button>}
+        </p>
         {!!review.photos.length
         && (
           <ul className="review-photos">

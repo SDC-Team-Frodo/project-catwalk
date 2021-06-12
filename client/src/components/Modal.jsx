@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const Modal = (props) => {
-  const { modalId, header, body, footer, btnName, btnId, isImage, image } = props;
+  const {
+    modalId, header, body, footer, btnName, btnId, isImage, image,
+  } = props;
   const [display, setDisplay] = useState(false);
 
   if (display) {
