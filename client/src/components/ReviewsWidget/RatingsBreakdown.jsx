@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from 'react';
-// import ReactStars from 'react-rating-stars-component';
 import RatingContext from '../../contexts/RatingContext';
 import FilterContext from './FilterContext';
 import ProgressBar from './ProgressBar';

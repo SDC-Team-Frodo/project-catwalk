@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import StyleGrid from './subcomponents/StyleGrid';
 import ProductContext from '../../contexts/ProductContext';
 import RatingContext from '../../contexts/RatingContext';
-import ReactStars from 'react-rating-stars-component';
 import Price from './subcomponents/Price';
 import SelectSize from './subcomponents/SelectSize';
 import QuantityInput from './subcomponents/QuantityInput';
@@ -22,17 +21,15 @@ const GalleryAside = (props) => {
         <div id="gallery-aside-stars">
           {averageRating !== null
             && (
-              <ReactStars {
-                ...{
-                  size: 16,
-                  value: Math.round(averageRating * 2) / 2,
-                  a11y: true,
-                  isHalf: true,
-                  edit: false,
-                  activeColor: 'red',
-                }
-              }
-              />
+            <div className="empty-stars">
+              <div className="filled-stars" style={{ width: `${(Math.round(averageRating * 4) / 4) * 20}%` }}>
+                <i className="fas fa-star" aria-hidden="true" />
+                <i className="fas fa-star" aria-hidden="true" />
+                <i className="fas fa-star" aria-hidden="true" />
+                <i className="fas fa-star" aria-hidden="true" />
+                <i className="fas fa-star" aria-hidden="true" />
+              </div>
+            </div>
             )}
         </div>
 
