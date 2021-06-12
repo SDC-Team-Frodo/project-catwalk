@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext} from 'react';
+import React from 'react';
 import ReactStars from 'react-rating-stars-component';
 import getAverageRating from '../../helpers/averageRating';
 
@@ -11,10 +11,10 @@ const Card = (props) => {
     default_price, category, name,
   } = product;
 
-  const cardClasses = `${cardClass  } card`;
+  const cardClasses = `${cardClass} card`;
   const iconId = `${cardClass}${product.id}`;
 
-  function redirect () {
+  function redirect() {
     console.log('redirect to page');
   }
 
@@ -27,25 +27,38 @@ const Card = (props) => {
         <div className="imageContainer" style={background} onClick={redirect}>
           <img src={thumbnail.thumbnail_url} alt="Failed" />
         </div>
-        <div className="cardIcon" onClick={func} >
-          {isStars ? <ReactStars  id={iconId} count={1} value={1} edit={false} size={24} color={'red'} /> : <span id={iconId}>&#9447;</span>}
+        <div className="cardIcon" id={iconId} onClick={func}>
+          {!isStars ? <span className="cardIcon" id={iconId}>&#9447;</span>
+            : <span className="cardIcon" id={iconId}>&#x2605;</span>}
         </div>
         <div className="textContainer" onClick={redirect}>
           {category}
           <br />
           <b>{name}</b>
           <br />
-          ${default_price}
+          $
+          {default_price}
           <br />
           <div className="cardRating">
-            {ratings && <ReactStars count={5} value={getAverageRating(ratings)} edit={false} isHalf={true} />}
+            {ratings && (
+            <ReactStars {
+              ...{
+                size: 18,
+                value: getAverageRating(ratings),
+                a11y: true,
+                isHalf: true,
+                edit: false,
+                activeColor: 'red',
+              }
+            }
+            />
+            )}
           </div>
         </div>
       </div>
     );
-  } else {
-    return <p>List Loading</p>
   }
+  return <p>List Loading</p>;
 };
 
 export default Card;
