@@ -1,15 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import StyleGrid from './subcomponents/StyleGrid';
 import ProductContext from '../../contexts/ProductContext';
 import RatingContext from '../../contexts/RatingContext';
-import ReactStars from 'react-rating-stars-component';
 import Price from './subcomponents/Price';
 import SelectSize from './subcomponents/SelectSize';
 import QuantityInput from './subcomponents/QuantityInput';
 
 const GalleryAside = (props) => {
-
-  const rating = useContext(RatingContext);
+  const [averageRating, setAverageRating] = useContext(RatingContext);
   const product = useContext(ProductContext);
 
   const {  cartQuantity, setCartQuantity, selectedSizeIndex, setSelectedSizeIndex, activeStyle, styles, selectedStyleIndex, setSelectedStyleIndex, submitCart } = props;
@@ -21,13 +19,18 @@ const GalleryAside = (props) => {
       <section className="left-margin top-margin">
 
         <div id="gallery-aside-stars">
-          <ReactStars {
-            ...{
-              size: 18,
-              value: Number(rating),
-              edit: false,
-            }
-          } />
+          {averageRating !== null
+            && (
+            <div className="empty-stars">
+              <div className="filled-stars" style={{ width: `${(Math.round(averageRating * 4) / 4) * 20}%` }}>
+                <i className="fas fa-star" aria-hidden="true" />
+                <i className="fas fa-star" aria-hidden="true" />
+                <i className="fas fa-star" aria-hidden="true" />
+                <i className="fas fa-star" aria-hidden="true" />
+                <i className="fas fa-star" aria-hidden="true" />
+              </div>
+            </div>
+            )}
         </div>
 
         <a href="#review-widget">Read all reviews</a>
