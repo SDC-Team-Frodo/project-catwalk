@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import Card from './card';
 import request from '../../requests';
 import ProductContext from '../../contexts/ProductContext';
-import helpers from './relatedHelpers';
 
 const RelatedList = () => {
   const product = useContext(ProductContext);
@@ -10,7 +9,6 @@ const RelatedList = () => {
   const [numberOfCards, setNumberOfCards] = useState(0);
   const [translateX, setTranslateX] = useState(0);
   const [relatedProductList, setRelatedProductList] = useState([]);
-  const [relatedIds, setRelatedIds] = useState([]);
   const [relatedRatings, setRelatedRatings] = useState([]);
   const [relatedThumbnails, setRelatedThumbnails] = useState([]);
   const [index, setIndex] = useState(1);
@@ -20,7 +18,6 @@ const RelatedList = () => {
     request.get(`products/${product.id}/related`, { endpoint: `products/${product.id}/related` })
       .then((relatedProductsIds) => {
         setNumberOfCards(relatedProductsIds.data.length);
-        setRelatedIds(relatedProductsIds.data)
         relatedProductsIds.data.forEach((id) => {
           request.get(`products/${id}`, { endpoint: `products/${id}` })
             .then((newRelatedProduct) => {
@@ -28,7 +25,7 @@ const RelatedList = () => {
             })
             .catch((err) => console.log(err));
 
-          request.get(`reviews/meta`, { endpoint: `reviews/meta`, product_id: id })
+          request.get('reviews/meta', { endpoint: 'reviews/meta', product_id: id })
             .then((rating) => {
               setRelatedRatings((oldRatings) => [...oldRatings, rating.data.ratings]);
             })
@@ -80,19 +77,24 @@ const RelatedList = () => {
   }
 
   function compareFeaturesModal(event) {
-    let id = event.target.id.match(/\d+/);
-    id = parseInt(id[0], 10);
-    const cardIndex = relatedIds.indexOf(id);
-    const currentFeatures = product.features;
-    const selectedFeatures = relatedProductList[cardIndex].features;
-    helpers.compareFeatures(currentFeatures, selectedFeatures)
   }
 
   return (
     <div className="outfitRelatedWidget" id="related">
       <button type="button" className="carousel_button previous" id="relatedPrevious" onClick={buttonHandle}>&#60;</button>
       <div className="carousel" id="relatedList">
-        {relatedProductList.map((relatedProduct, i) => <Card product={relatedProduct} thumbnail={relatedThumbnails[i]} ratings={relatedRatings[i]} key={`${relatedProduct.id}${i}`} cardClass={'relatedCard'} func={compareFeaturesModal} isStars={true} />)}
+        {relatedProductList.map((relatedProduct, i) => (
+          <Card
+            overview={product}
+            product={relatedProduct}
+            thumbnail={relatedThumbnails[i]}
+            ratings={relatedRatings[i]}
+            key={`${relatedProduct.id}${i}`}
+            cardClass="relatedCard"
+            func={compareFeaturesModal}
+            isStars={true}
+          />
+        ))}
       </div>
       <button type="button" className="carousel_button next" id="relatedNext" onClick={buttonHandle}>&#62;</button>
     </div>
