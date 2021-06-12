@@ -6,7 +6,6 @@ const ProductBreakdown = ({ characteristics }) => (
   <section id="char-breakdown">
     <h4>CHARACTERISTICS</h4>
     <ul className="char-bars">
-      {console.log(characteristics)}
       {Object.keys(characteristics).map((char) => (
         <div key={characteristics[char].id}>
           <CharBar char={char} />

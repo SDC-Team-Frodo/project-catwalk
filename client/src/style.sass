@@ -417,6 +417,13 @@ main
 
 .rating-bar
   cursor: pointer
+  transition: all 0.25s ease-in-out
+  &:hover
+    color: red
+    transform: scale(1.1)
+
+.rating-bar-active
+  color: red
 
 .rating-container
   background-color: lightgray
@@ -496,6 +503,8 @@ main
     outline: inherit
     padding: 0 0.25em 0 0.5em
     text-decoration: underline
+    &:hover
+      color: $header-color
 
 .review-date
   align-items: center
@@ -558,6 +567,8 @@ main
     cursor: pointer
     height: 4em
     width: 48%
+    &:hover
+      color: $header-color
 
 // Modal
 img
