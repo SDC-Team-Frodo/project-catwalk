@@ -22,9 +22,14 @@ const SearchBar = () => {
 
   useEffect(() => {
     if (searchClicked === true) {
-      setRelevantQuestions(JSON.stringify(searchFunc(search, JSON.parse(allQuestions),
-        search.split(' ').length === 1 ? 1 : search.split(' ').length - 1)));
-      setSearchClicked(false);
+      if (search.length === 0) {
+        setRelevantQuestions(allQuestions);
+        setSearchClicked(false);
+      } else {
+        setRelevantQuestions(JSON.stringify(searchFunc(search, JSON.parse(allQuestions),
+          search.split(' ').length === 1 ? 1 : search.split(' ').length - 1)));
+        setSearchClicked(false);
+      }
     }
   }, [search, searchClicked]);
 
