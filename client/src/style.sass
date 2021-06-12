@@ -361,6 +361,8 @@ main
 #ratings-breakdown
   .filter-summary
     font-size: 12px
+    margin-bottom: 1em
+    z-index: 1
     .current-filters
       font-size: 10px
     button
@@ -379,7 +381,7 @@ main
     font-size: 40px
     font-weight: bold
     .avg-rating
-      margin-right: 0.25em
+      margin: -0.25em 0.25em  0 0
       letter-spacing: 0.05em
 
 .empty-stars
@@ -423,7 +425,7 @@ main
     transform: scale(1.1)
 
 .rating-bar-active
-  color: red
+  font-weight: bold
 
 .rating-container
   background-color: lightgray
@@ -486,6 +488,7 @@ main
 
 .reviews-count
   font-weight: bold
+  margin-top: -0.25em
   select
     background-color: $background-color
     border: none
