@@ -4,7 +4,7 @@ import TableEntry from './tableEntry';
 const ComparisonTable = (props) => {
   const { overviewName, productName, combined } = props;
   return (
-    <table className="comparisonWindow">
+    <table className="compareContent">
       <thead>
         <tr>
           <th>{overviewName}</th>
