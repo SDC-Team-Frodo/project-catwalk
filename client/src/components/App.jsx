@@ -18,7 +18,6 @@ const App = () => {
   const [averageRating, setAverageRating] = useState(null);
 
   useEffect(() => {
-    console.log('APP', currentProductId);
     request.get(`products/${currentProductId}`, {
       product_id: currentProductId,
     }).then((res) => {
