@@ -28,11 +28,13 @@ const GalleryNav = (props) => {
     setScroll(nextScroll);
   };
 
-  const scrollUp = () => {
+  const scrollUp = (event) => {
+    event.stopPropagation();
     handleScroll(true);
   }
 
-  const scrollDown = () => {
+  const scrollDown = (event) => {
+    event.stopPropagation();
     handleScroll(false);
   }
 
