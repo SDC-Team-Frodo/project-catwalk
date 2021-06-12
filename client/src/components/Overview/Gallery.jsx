@@ -28,9 +28,9 @@ const Gallery = (props) => {
   const handleMouseMove = (event) => {
     if (fullscreenSlider && zoom) {
       const gallery = document.getElementById('gallery')
-      var rect = gallery.getBoundingClientRect();
-      var x = (event.clientX - rect.left) / 1.25;
-      var y = (event.clientY - rect.top) / 1.25;
+      const rect = gallery.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / 1.25;
+      const y = (event.clientY - rect.top) / 1.25;
       gallery.style.backgroundPosition = `-${x}px -${y}px`;
     }
   }
