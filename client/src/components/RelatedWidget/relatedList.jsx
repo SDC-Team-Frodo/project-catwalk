@@ -124,7 +124,7 @@ const RelatedList = () => {
               key={`${relatedProduct.id}${i}`}
               cardClass="relatedCard"
               func={compareFeaturesModal}
-              isStars
+              isStars={true}
             />
           ))}
         </div>
