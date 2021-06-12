@@ -420,14 +420,12 @@ main
   padding: 0
   width: inherit
 
-.rating-bar, .char-bar
-  align-items: center
-  display: flex
-  justify-content: space-between
+.rating-bar
+  display: grid
+  grid-gap: 0.5rem
+  grid-template-columns: 2.25fr 6.75fr 1fr
   margin-bottom: 1em
   padding: 0
-
-.rating-bar
   cursor: pointer
   transition: all 0.25s ease-in-out
   &:hover
@@ -437,16 +435,23 @@ main
 .rating-bar-active
   font-weight: bold
 
+.rating-bar-stars
+  justify-self: flex-start
+
+.rating-bar-reviews
+  justify-self: flex-end
+
 .rating-container
   background-color: lightgray
   border-radius: 10px
   height: 1em
-  width: 70%
+  justify-self: center
+  width: 100%
 
 .rating-filler
-  height: inherit
   background-color: green
-  border-radius: 10px
+  border-radius: inherit
+  height: inherit
 
 .char-bars
   div
@@ -457,8 +462,12 @@ main
       width: inherit
 
 .char-bar
+  align-items: center
+  display: flex
+  justify-content: space-between
   margin-bottom: -0.25em
   margin-top: 0.5em
+  padding: 0
   width: inherit
 
 .char-container
@@ -580,6 +589,8 @@ main
     cursor: pointer
     height: 4em
     width: 48%
+    .fas
+      margin-left: 0.5em
     &:hover
       color: $header-color
 
