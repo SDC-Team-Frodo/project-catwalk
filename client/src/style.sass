@@ -2,7 +2,7 @@
 $font-stack: Tahoma, Arial, Helvetica, sans-serif
 $header-color: #333333e8
 $body-color: #696969
-$background-color: #eee
+$background-color: #ffffff
 
 body
   background-color: $background-color
@@ -655,13 +655,13 @@ img
         max-height: 80vh
 
 #backDrop
-  opacity: 0.5
-  top: 0%
-  left: 0%
+  backdrop-filter: blur(1em) brightness(0.5)
+  top: 0 !important
+  left: 0 !important
   position: fixed
-  background-color: black
-  height: 100%
-  width: 100%
+  background-color: transparent
+  height: 100vh !important
+  width: 100vw !important
   z-index: 2147483645
 
 #CloseBtn
@@ -679,6 +679,7 @@ img
   color: white
 
 #modalImgDiv
+  cursor: pointer
   width: fit-content
 
 .modalHeader
@@ -844,7 +845,50 @@ img
   overflow-y: scroll
 
 #nav
-  margin: 15px
+  margin-top: 1em
+  position: fixed
+  top: 0vh
+  z-index: 2147483645
+  right: 0
+  width: fit-content
+  border-bottom: 1px solid black
+  input
+    font-size: 1em
+    background-color: transparent
+    border: 0px
+  input:focus
+    outline: none
+  button
+    font-size: 1em
+    background-color: transparent
+    cursor: pointer
+    border: 0px
+  button:hover
+    color: grey
+
 
 .answerNameBold
   font-weight: 600
+
+// Browse
+#BrowseList
+  z-index: 1
+  div
+    border-bottom: 2px solid black
+    width: 80vw
+
+.details
+  padding: 2em
+  button
+    position: relative
+    margin: 1em
+    background-color: transparent
+    border: 0px
+    border-bottom: 2px solid black
+    font-size: 25px
+
+.BrowseImage
+  border: 2px solid grey
+  margin: 2em
+  max-width: 100em
+  height: 10em
