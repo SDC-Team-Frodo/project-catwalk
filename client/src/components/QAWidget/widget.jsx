@@ -4,13 +4,12 @@ import QALoadContext from '../../contexts/QALoadContext';
 import ProductContext from '../../contexts/ProductContext';
 import request from '../../requests';
 import SearchBar from './SearchBar';
-import mockData from './mockData';
 import Modal from '../Modal';
 import QuestionForm from './QuestionForm';
 
 const QaContainer = () => {
   const product = useContext(ProductContext);
-  const [data, setData] = useState(mockData);
+  const [data, setData] = useState({ results: [] });
 
   const load = () => {
     request.get('qa/questions', {
