@@ -100,6 +100,7 @@ const RelatedList = () => {
 
   function closeCompareWindow() {
     setIsModal(false);
+    setCardTarget(null);
     document.getElementById('compareModal').style.display = 'none';
   }
 
