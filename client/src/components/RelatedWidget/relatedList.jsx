@@ -22,31 +22,37 @@ const RelatedList = () => {
   // Get initial value for related product's id, ratings, thumbnails
   useEffect(() => {
     request.get(`products/${product.id}/related`, { endpoint: `products/${product.id}/related` })
-      .then((relatedProductsIds) => {
-        setNumberOfCards(relatedProductsIds.data.length);
-        setRelatedIds(relatedProductsIds.data);
-        relatedProductsIds.data.forEach((id) => {
-          request.get(`products/${id}`, { endpoint: `products/${id}` })
-            .then((newRelatedProduct) => {
-              setRelatedProductList((oldProducts) => [...oldProducts, newRelatedProduct.data]);
-            })
-            .catch((err) => console.log(err));
-
-          request.get('reviews/meta', { endpoint: 'reviews/meta', product_id: id })
-            .then((rating) => {
-              setRelatedRatings((oldRatings) => [...oldRatings, rating.data.ratings]);
-            })
-            .catch((err) => console.log(err));
-
-          request.get(`products/${id}/styles`, { endpoint: `products/${id}/styles` })
-            .then((thumbnail) => {
-              setRelatedThumbnails((oldThumbnails) => [...oldThumbnails, thumbnail.data.results[0].photos[0]]);
-            })
-            .catch((err) => console.log(err));
-        });
+      .then((relatedProductIds) => {
+        setRelatedIds(relatedProductIds.data);
+        setNumberOfCards(relatedProductIds.data.length);
       })
       .catch((err) => console.log(err));
-  }, [product.id]);
+  }, [product]);
+
+  useEffect(() => {
+    setRelatedProductList([]);
+    setRelatedRatings([]);
+    setRelatedThumbnails([]);
+    relatedIds.forEach((id) => {
+      request.get(`products/${id}`, { endpoint: `products/${id}` })
+        .then((newRelatedProduct) => {
+          setRelatedProductList((oldProducts) => [...oldProducts, newRelatedProduct.data]);
+        })
+        .catch((err) => console.log(err));
+
+      request.get('reviews/meta', { endpoint: 'reviews/meta', product_id: id })
+        .then((rating) => {
+          setRelatedRatings((oldRatings) => [...oldRatings, rating.data.ratings]);
+        })
+        .catch((err) => console.log(err));
+
+      request.get(`products/${id}/styles`, { endpoint: `products/${id}/styles` })
+        .then((thumbnail) => {
+          setRelatedThumbnails((oldThumbnails) => [...oldThumbnails, thumbnail.data.results[0].photos[0]]);
+        })
+        .catch((err) => console.log(err));
+    });
+  }, [relatedIds]);
 
   useEffect(() => {
     if (index === 1) {
