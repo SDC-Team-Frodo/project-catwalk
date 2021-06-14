@@ -1,5 +1,6 @@
-import React, { useState  } from 'react';
+import React, { useState } from 'react';
 import ReactStars from 'react-rating-stars-component';
+import request from '../../requests';
 
 const ReviewForm = ({ product, characteristics }) => {
   const ratingDescriptions = {
@@ -53,7 +54,9 @@ const ReviewForm = ({ product, characteristics }) => {
   const [recommended, setRecommended] = useState(true);
   const [charRatings, setCharRatings] = useState(
     Object.keys(characteristics).reduce((result, char) => {
-      result[char] = null;
+      result[char] = {};
+      result[char].id = characteristics[char].id;
+      result[char].value = null;
       return result;
     }, {}),
   );
@@ -66,10 +69,6 @@ const ReviewForm = ({ product, characteristics }) => {
     e.preventDefault();
     if (!rating) {
       alert('You must enter the following: Rating');
-      return;
-    }
-    if (!recommended) {
-      alert('You must enter the following: Recommended');
       return;
     }
     for (let char of Object.keys(charRatings)) {
@@ -91,7 +90,24 @@ const ReviewForm = ({ product, characteristics }) => {
       alert('You must enter the following: Email');
       return;
     }
-    console.log('You submitted me');
+    request.post('reviews', {
+      product_id: product.id,
+      rating,
+      summary,
+      body,
+      recommend: recommended,
+      name: username,
+      email,
+      photos,
+      characteristics: Object.keys(charRatings).reduce((result, char) => {
+        result[charRatings[char].id] = charRatings[char].value;
+        return result;
+      }, {}),
+    })
+      .then(() => {
+        console.log('You submitted me');
+      })
+      .catch((err) => new Error(err));
   };
   return (
     <form id="review-form">
@@ -155,58 +171,58 @@ const ReviewForm = ({ product, characteristics }) => {
                 value={1}
                 onClick={(e) => setCharRatings(() => {
                   const old = { ...charRatings };
-                  old[char] = e.target.value;
+                  old[char].value = Number(e.target.value);
                   return old;
                 })}
                 required
               />
-              {/* 1 */}
               <input
                 type="radio"
                 name={`${char}-input`}
                 value={2}
                 onClick={(e) => setCharRatings(() => {
                   const old = { ...charRatings };
-                  old[char] = e.target.value;
+                  old[char].value = Number(e.target.value);
                   return old;
                 })}
               />
-              {/* 2 */}
               <input
                 type="radio"
                 name={`${char}-input`}
                 value={3}
                 onClick={(e) => setCharRatings(() => {
                   const old = { ...charRatings };
-                  old[char] = e.target.value;
+                  old[char].value = Number(e.target.value);
                   return old;
                 })}
               />
-              {/* 3 */}
               <input
                 type="radio"
                 name={`${char}-input`}
                 value={4}
                 onClick={(e) => setCharRatings(() => {
                   const old = { ...charRatings };
-                  old[char] = e.target.value;
+                  old[char].value = Number(e.target.value);
                   return old;
                 })}
               />
-              {/* 4 */}
               <input
                 type="radio"
                 name={`${char}-input`}
                 value={5}
                 onClick={(e) => setCharRatings(() => {
                   const old = { ...charRatings };
-                  old[char] = Number(e.target.value);
+                  old[char].value = Number(e.target.value);
                   return old;
                 })}
               />
-              {/* 5 */}
+              <div>1</div>
+              <div>2</div>
+              <div>3</div>
+              <div>4</div>
+              <div>5</div>
             </div>
-            <div className="rating-meaning">{meanings[char][charRatings[char]] || 'None selected'}</div>
+            <div className="rating-meaning">{meanings[char][charRatings[char].value] || 'None selected'}</div>
           </label>
         ))}
       </div>

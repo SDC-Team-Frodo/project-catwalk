@@ -639,7 +639,7 @@ span.cardIcon
   justify-content: space-between
   margin-top: 2em
   width: 100%
-  button, .modelContainer
+  button, .modal-container
     height: 4em
     min-width: 95px
     width: 48%
@@ -667,8 +667,9 @@ span.cardIcon
       color: $header-color
 
 #review-modal
-  min-width: 400px
+  min-width: 350px
   overflow-y: scroll
+  width: 80vw
   #review-form
     color: black
     margin-bottom: 1em
@@ -683,8 +684,17 @@ span.cardIcon
     .char-input
       display: grid
       font-size: 12px
-      grid-template-columns: 1fr 2fr 3fr
+      grid-template-columns: 1fr 4fr 3fr
       margin-left: 2em
+      .char-rating-buttons
+        display: grid
+        grid-template: repeat(2, 1fr)/repeat(5, 1fr)
+        input, div
+          display: flex
+          justify-self: center
+          margin: 0
+          overflow-wrap: word-break
+          text-align: center
     .remaining-chars
       font-size: 10px
     .username-input, .email-input

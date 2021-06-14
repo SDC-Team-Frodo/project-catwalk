@@ -10,7 +10,7 @@ const Modal = (props) => {
 
   if (display) {
     return (
-      <div className="modal-container">
+      <div>
         {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
         <h1
           id="CloseBtn"
@@ -43,7 +43,7 @@ const Modal = (props) => {
     );
   }
   return (
-    <div>
+    <div className="modal-container">
       { !isImage && (
       <button
         id={btnId}
