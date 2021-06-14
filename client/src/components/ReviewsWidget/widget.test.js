@@ -152,11 +152,11 @@ xdescribe('Reviews List', () => {
 
 describe('Review Form', () => {
   beforeAll(() => {
-    render(<ReviewForm />);
+    render(<ReviewForm product={{ id: 17071 }} characteristics={reviewMetadata.characteristics} />);
   });
 
   test('should have the correct review form text', () => {
-    expect(screen.getByText('A form modal will go here')).toBeInTheDocument();
+    expect(screen.getByText('Overall Rating')).toBeInTheDocument();
   });
 
   afterAll(cleanup);
