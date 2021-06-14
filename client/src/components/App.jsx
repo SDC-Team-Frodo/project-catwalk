@@ -7,6 +7,7 @@ import RelatedContainer from './RelatedWidget/widget';
 import QALoadContext from '../contexts/QALoadContext';
 import RatingContext from '../contexts/RatingContext';
 import ProductContext from '../contexts/ProductContext';
+import ProductIdContext from '../contexts/ProductIdContext';
 import ThemeContext from '../contexts/ThemeContext';
 import testData from '../testData';
 import request from '../requests';
@@ -55,7 +56,9 @@ const App = () => {
           <RatingContext.Provider value={[averageRating, setAverageRating]}>
             <OverviewContainer />
           </RatingContext.Provider>
-          <RelatedContainer />
+          <ProductIdContext.Provider value={[currentProductId, setCurrentProductId]}>
+            <RelatedContainer />
+          </ProductIdContext.Provider>
           <QALoadContext.Provider value={() => {}}>
             <QaContainer />
           </QALoadContext.Provider>
