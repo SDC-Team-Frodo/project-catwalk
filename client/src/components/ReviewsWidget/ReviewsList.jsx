@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import FilterContext from './FilterContext';
+import ReviewContext from '../../contexts/ReviewContext';
 import ReviewTile from './ReviewTile';
 import request from '../../requests';
 
 const ReviewsList = ({ product }) => {
-  const [allReviews, setAllReviews] = useState([]);
+  const [allReviews, setAllReviews] = useContext(ReviewContext);
   const [reviews, setReviews] = useState([]);
   const [reviewsShown, setReviewsShown] = useState(2);
   const [sortOrder, setSortOrder] = useState('relevant');
@@ -55,7 +56,7 @@ const ReviewsList = ({ product }) => {
         {reviewsShown + 1 <= reviews.length && <button type="button" onClick={() => setReviewsShown((numReviews) => numReviews + 2)}>MORE REVIEWS</button>}
         <button type="button">
           WRITE A REVIEW
-          <big> + </big>
+          <i className="fas fa-plus" />
         </button>
       </div>
     </section>

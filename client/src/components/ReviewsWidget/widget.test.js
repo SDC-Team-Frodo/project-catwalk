@@ -20,7 +20,7 @@ const customRender = (ui, { providerProps, ...renderOptions }) => {
   )
 }
 
-describe('Review component', () => {
+xdescribe('Review component', () => {
   beforeAll(() => {
     render(<ReviewContainer />);
   });
