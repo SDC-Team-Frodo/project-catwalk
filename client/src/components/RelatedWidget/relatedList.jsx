@@ -29,13 +29,18 @@ const RelatedList = () => {
       .catch((err) => console.log(err));
   }, [product]);
 
+  function delay(i) {
+    setTimeout(() => {
+    }, 2000 * i);
+  }
+
   useEffect(() => {
     setRelatedProductList([]);
     setRelatedRatings([]);
     setRelatedThumbnails([]);
     setTranslateX(0);
     setIndex(1);
-    relatedIds.forEach((id) => {
+    relatedIds.forEach((id, indexDelay) => {
       request.get(`products/${id}`, { endpoint: `products/${id}` })
         .then((newRelatedProduct) => {
           setRelatedProductList((oldProducts) => [...oldProducts, newRelatedProduct.data]);
@@ -53,6 +58,7 @@ const RelatedList = () => {
           setRelatedThumbnails((oldThumbnails) => [...oldThumbnails, thumbnail.data.results[0].photos[0]]);
         })
         .catch((err) => console.log(err));
+      delay(indexDelay);
     });
   }, [relatedIds]);
 
