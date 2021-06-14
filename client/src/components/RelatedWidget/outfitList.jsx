@@ -19,6 +19,8 @@ const OutfitList = () => {
       setOutfitProducts([]);
       setOutfitRatings([]);
       setOutfitThumbnails([]);
+      setTranslateX(0);
+      setIndex(1);
       setNumberOfCards(outfitIds.length);
       outfitIds.forEach((id) => {
         request.get(`products/${id}`, { endpoint: `products/${id}` })
