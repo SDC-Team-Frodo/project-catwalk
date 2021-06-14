@@ -648,7 +648,7 @@ img
   max-height: 80vh
   border: thick double black
   position: fixed
-  background-color: skyblue
+  background-color: lightgreen
   z-index: 2147483646
   max-width: 80vw
   left: 50vw
@@ -881,8 +881,13 @@ img
 // Browse
 #BrowseList
   z-index: 1
+  p
+    color: purple
+    font-size: 1.1em
+  p:hover
+    color: green
   div
-    border-bottom: 2px solid black
+    border-bottom: 1px solid black
     width: 80vw
   button
     margin-top: 1em
@@ -892,7 +897,7 @@ img
   #nextBrowse
     float: right
   h3
-    bottom: 1vh
+    bottom: 0.5vh
     position: absolute
     left: 50%
     transform: translateX(-50%)
@@ -913,3 +918,5 @@ img
   max-width: 100em
   height: 10em
 
+.hoverGreen:hover
+  color: green

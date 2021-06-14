@@ -5,7 +5,7 @@ import allProducts from './AllProducts';
 
 const Browse = (props) => {
   const { setProduct } = props;
-  const [displayedProducts, setDisplayedProducts] = useState([0, 10]);
+  const [displayedProducts, setDisplayedProducts] = useState([0, 12]);
   const [products, setProducts] = useState(allProducts.slice(...displayedProducts));
 
   useEffect(() => {
@@ -22,23 +22,23 @@ const Browse = (props) => {
         <button
           type="button"
           id="previouseBrowse"
-          className="hoverGrey"
+          className="hoverGreen"
           onClick={() => {
-            setDisplayedProducts([displayedProducts[0] - 10, displayedProducts[1] - 10]);
+            setDisplayedProducts([displayedProducts[0] - 12, displayedProducts[1] - 12]);
           }}
         >
-          {"<"}
+          {'<'}
         </button>
       )}
       <button
         type="button"
         id="nextBrowse"
-        className="hoverGrey"
+        className="hoverGreen"
         onClick={() => {
-          setDisplayedProducts([displayedProducts[0] + 10, displayedProducts[1] + 10]);
+          setDisplayedProducts([displayedProducts[0] + 12, displayedProducts[1] + 12]);
         }}
       >
-        {">"}
+        {'>'}
       </button>
       <h3 id="curProductCount">{`${displayedProducts[0]} to ${displayedProducts[1]}`}</h3>
     </div>

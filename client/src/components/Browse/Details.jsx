@@ -31,7 +31,7 @@ const Details = (props) => {
     <div className="details">
       <h2>{name}</h2>
       <p>{description}</p>
-      {photos.map((photo, i) => (
+      {photos.slice(0, 8).map((photo, i) => (
         <img key={i} alt="No Img" className="BrowseImage" src={photo.thumbnail_url} />
       ))}
       <button
