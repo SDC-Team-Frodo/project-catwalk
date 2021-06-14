@@ -13,9 +13,9 @@ const TableEntry = (props) => {
 
   return (
     <tr>
-      <td>{overview}</td>
-      <td className="compareCharCol">{keys}</td>
-      <td className="compareCardCol">{card}</td>
+      <td className="compareColumns compareCurrentCol">{overview}</td>
+      <td className="compareColumns compareCharCol">{keys}</td>
+      <td className="compareColumns compareCardCol">{card}</td>
     </tr>
   );
 };
