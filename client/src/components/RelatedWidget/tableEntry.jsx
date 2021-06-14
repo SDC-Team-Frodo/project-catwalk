@@ -14,8 +14,8 @@ const TableEntry = (props) => {
   return (
     <tr>
       <td>{overview}</td>
-      <td>{keys}</td>
-      <td>{card}</td>
+      <td className="compareCharCol">{keys}</td>
+      <td className="compareCardCol">{card}</td>
     </tr>
   );
 };
