@@ -33,6 +33,8 @@ const RelatedList = () => {
     setRelatedProductList([]);
     setRelatedRatings([]);
     setRelatedThumbnails([]);
+    setTranslateX(0);
+    setIndex(1);
     relatedIds.forEach((id) => {
       request.get(`products/${id}`, { endpoint: `products/${id}` })
         .then((newRelatedProduct) => {
