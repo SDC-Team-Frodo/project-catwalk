@@ -23,6 +23,11 @@ const OutfitList = () => {
     setNumberOfCards(outfitIdsLocal.length);
   }, [product]);
 
+  function delay(i) {
+    setTimeout(() => {
+    }, 2000 * i);
+  }
+
   useEffect(() => {
     if (outfitIds) {
       setOutfitProducts([]);
@@ -31,7 +36,7 @@ const OutfitList = () => {
       setTranslateX(0);
       setIndex(1);
       setNumberOfCards(outfitIds.length);
-      outfitIds.forEach((id) => {
+      outfitIds.forEach((id, indexDelay) => {
         request.get(`products/${id}`, { endpoint: `products/${id}` })
           .then((newOutfitProduct) => {
             setOutfitProducts((oldProducts) => [...oldProducts, newOutfitProduct.data]);
@@ -49,6 +54,7 @@ const OutfitList = () => {
             setOutfitThumbnails((oldThumbnails) => [...oldThumbnails, thumbnail.data.results[0].photos[0]]);
           })
           .catch((err) => console.log(err));
+        delay(indexDelay)
       });
     } else if (!outfitIds) {
       setOutfitIds([]);
