@@ -50,7 +50,7 @@ const ReviewForm = ({ product, characteristics }) => {
     },
   }
   const [rating, setRating] = useState(null);
-  const [recommended, setRecommended] = useState(null);
+  const [recommended, setRecommended] = useState(true);
   const [charRatings, setCharRatings] = useState(
     Object.keys(characteristics).reduce((result, char) => {
       result[char] = null;
@@ -108,8 +108,14 @@ const ReviewForm = ({ product, characteristics }) => {
           value={0}
           onChange={(newValue) => setRating(newValue)}
         />
-        {rating && ratingDescriptions[rating]}
+        {rating
+        && (
+        <div className="rating-description">
+          {ratingDescriptions[rating]}
+        </div>
+        )}
       </div>
+      <br />
       <label htmlFor="recommended-input">
         <div className="review-topic">
           Do you recommend this product?
@@ -120,6 +126,7 @@ const ReviewForm = ({ product, characteristics }) => {
           name="recommended-input"
           value="Yes"
           onClick={() => setRecommended(true)}
+          defaultChecked
         />
         Yes
         <input
@@ -131,6 +138,7 @@ const ReviewForm = ({ product, characteristics }) => {
         />
         No
       </label>
+      <br />
       <br />
       <div className="review-topic">
         Characteristics
@@ -202,22 +210,24 @@ const ReviewForm = ({ product, characteristics }) => {
           </label>
         ))}
       </div>
+      <br />
       <label htmlFor="summary-input">
-        Review Summary
-        <br />
-        <input
-          type="text"
+        <div className="review-topic">Review Summary</div>
+        <textarea
           name="summary-input"
-          placeholder="Example: Best purchase ever!"
+          rows="2"
           maxLength="60"
+          placeholder="Example: Best purchase ever!"
           onChange={(e) => setSummary(e.target.value)}
         />
       </label>
       <br />
+      <br />
       <label htmlFor="body-input">
-        Review Body
-        <sup>*</sup>
-        <br />
+        <div className="review-topic">
+          Review Body
+          <sup>*</sup>
+        </div>
         <textarea
           name="body-input"
           rows="5"
@@ -228,13 +238,15 @@ const ReviewForm = ({ product, characteristics }) => {
           required
         />
         <br />
-        {body.length < 50 ? `Minimum required characters left: ${50 - body.length}` : 'Minimum reached'}
+        <div className="remaining-chars" style={{ color: body.length < 50 ? 'red' : 'green' }}>
+          {body.length < 50 ? `Minimum required characters left: ${50 - body.length}` : 'Minimum reached'}
+        </div>
       </label>
       <br />
       {photos.length < 5
       && (
       <label htmlFor="photo-input">
-        Upload your photos
+        <div className="review-topic">Upload your photos</div>
         <input
           type="file"
           name="photo-input"
@@ -244,44 +256,58 @@ const ReviewForm = ({ product, characteristics }) => {
       </label>
       )}
       <br />
-      {photos.map((url) => <img key={url} src={url} alt="img thumbnail" />)}
+      {!!photos.length
+      && (
+      <div className="photo-thumbnails">
+        {photos.map((url) => <img key={url} src={url} alt="img thumbnail" />)}
+        <br />
+      </div>
+      )}
       <br />
       <label htmlFor="username-input">
-        What is your nickname?
-        <sup>*</sup>
+        <div className="review-topic">
+          What is your nickname?
+          <sup>*</sup>
+        </div>
         <input
           type="text"
           name="username-input"
-          placeholder="Example: jackson11!"
+          className="username-input"
+          placeholder="jackson11!"
           maxLength="60"
           onChange={(e) => setUsername(e.target.value)}
           required
         />
         <br />
-        For privacy reasons, do not use your full name or email address
+        <div className="privacy-warning">For privacy reasons, do not use your full name or email address</div>
       </label>
       <br />
       <label htmlFor="email-input">
-        Your email
-        <sup>*</sup>
+        <div className="review-topic">
+          Your email
+          <sup>*</sup>
+        </div>
         <input
           type="email"
           name="username-input"
-          placeholder="Example: jackson11@email.com"
+          className="email-input"
+          placeholder="jackson11@email.com"
           maxLength="60"
           onChange={(e) => setEmail(e.target.value)}
         />
         <br />
-        For authentication reasons, you will not be emailed
+        <div className="privacy-warning">For authentication reasons, you will not be emailed</div>
       </label>
       <br />
       <label htmlFor="submit-input">
-        <input
-          type="button"
-          name="submit-input"
-          value="Submit"
-          onClick={submitReview}
-        />
+        <div className="submit">
+          <input
+            type="button"
+            name="submit-input"
+            value="Submit Review"
+            onClick={submitReview}
+          />
+        </div>
       </label>
     </form>
   );

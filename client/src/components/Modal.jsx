@@ -4,13 +4,13 @@ import React, { useState } from 'react';
 
 const Modal = (props) => {
   const {
-    modalId, header, body, footer, btnName, btnId, isImage, image,
+    modalId, header, body, footer, btnName, btnId, btnPlus, isImage, image,
   } = props;
   const [display, setDisplay] = useState(false);
 
   if (display) {
     return (
-      <div>
+      <div className="modal-container">
         {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
         <h1
           id="CloseBtn"
@@ -54,6 +54,7 @@ const Modal = (props) => {
         }}
       >
         {btnName}
+        {btnPlus}
       </button>
       )}
       { isImage && (
