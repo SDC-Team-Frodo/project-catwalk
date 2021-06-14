@@ -310,6 +310,8 @@ main
   overflow: hidden
   position:relative
   width: 1080px
+  padding-top: 25px
+  padding-top: 25px
 
 .carousel_button
   height: 100px
@@ -332,23 +334,24 @@ main
 .card
   margin-left: 6px
   margin-right: 6px
-  height: 384px
-  width: 256px
+  min-height: 384px
+  min-width: 256px
   position: relative
   background-color: white
   border: 1px solid black
   transition: transform 0.25s
 
   &:hover
-    z-index: 2
     cursor: pointer
 
-.plus
-  width: 256px
-  display: flex
+.blankCard
+  min-width: 256px
   justify-content: center
   align-items: center
   text-align: center
+
+.plus
+  padding-top: 60%
 
 .textContainer
   padding: 10px
@@ -371,6 +374,19 @@ main
 
   &:hover
   cursor: pointer
+
+.far
+  color: red
+
+.cardStar
+  position: absolute
+  top: 4px
+  right: 0px
+
+.cardCross
+  position: absolute
+  top: 0px
+  right: 5px
 
 span.cardIcon
   color: yellow !important
