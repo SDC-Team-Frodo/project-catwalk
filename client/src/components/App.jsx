@@ -3,9 +3,12 @@ import React, { useState, useEffect, useContext, createContext, Provider } from 
 import QaContainer from './QAWidget/widget';
 import OverviewContainer from './Overview/widget';
 import ReviewsContainer from './ReviewsWidget/widget';
+import Browse from './Browse/BrowsePage';
 import RelatedContainer from './RelatedWidget/widget';
 import QALoadContext from '../contexts/QALoadContext';
 import RatingContext from '../contexts/RatingContext';
+import ReviewContext from '../contexts/ReviewContext';
+
 import ProductContext from '../contexts/ProductContext';
 import ProductIdContext from '../contexts/ProductIdContext';
 import ThemeContext from '../contexts/ThemeContext';
@@ -14,12 +17,15 @@ import request from '../requests';
 import '../style.sass';
 
 const App = () => {
+  const [browse, setBrowse] = useState(false);
   const [currentProductId, setCurrentProductId] = useState(17071);
   const [currentProductData, setCurrentProductData] = useState(testData);
   const [idInput, setIdInput] = useState('');
   const [averageRating, setAverageRating] = useState(null);
+  const [allReviews, setAllReviews] = useState([]);
 
   useEffect(() => {
+    setBrowse(false);
     request.get(`products/${currentProductId}`, {
       product_id: currentProductId,
     }).then((res) => {
@@ -29,46 +35,67 @@ const App = () => {
       alert('The product couldn\'t load');
     });
   }, [currentProductId]);
-  return (
-    <main>
-      <div id="nav">
-        <input
-          type="text"
-          placeholder="Product Id"
-          value={idInput}
-          onChange={(e) => {
-            setIdInput(e.target.value);
-          }}
-        />
-        <button
-          value="search"
-          type="button"
-          id="changeId"
-          onClick={() => {
-            setCurrentProductId(idInput);
-          }}
-        >
-          Change Products
-        </button>
-      </div>
-      <ThemeContext.Provider value="light">
-        <ProductContext.Provider value={currentProductData}>
-          <RatingContext.Provider value={[averageRating, setAverageRating]}>
-            <OverviewContainer />
-          </RatingContext.Provider>
+  if (!browse) {
+    return (
+      <main>
+        <div id="nav">
+          <input
+            type="text"
+            placeholder="17067 -- 18077"
+            value={idInput}
+            onChange={(e) => {
+              setIdInput(e.target.value);
+            }}
+          />
+          <button
+            value="search"
+            type="button"
+            id="changeId"
+            onClick={() => {
+              if (Number(idInput) >= 17067 && Number(idInput) <= 18077) {
+                setCurrentProductId(idInput);
+              } else {
+                setIdInput("Not Valid");
+              }
+            }}
+          >
+            Change Product
+          </button>
+          <button
+            value="Browse"
+            type="button"
+            id="browse"
+            onClick={() => {
+              setBrowse(true);
+            }}
+          >
+            Browse Products
+          </button>
+        </div>
+        <ThemeContext.Provider value="light">
+          <ProductContext.Provider value={currentProductData}>
+            <ReviewContext.Provider value={[allReviews, setAllReviews]}>
+              <RatingContext.Provider value={[averageRating, setAverageRating]}>
+                <OverviewContainer />
+              </RatingContext.Provider>
+            </ReviewContext.Provider>
           <ProductIdContext.Provider value={[currentProductId, setCurrentProductId]}>
             <RelatedContainer />
           </ProductIdContext.Provider>
-          <QALoadContext.Provider value={() => {}}>
-            <QaContainer />
-          </QALoadContext.Provider>
-          <RatingContext.Provider value={[averageRating, setAverageRating]}>
-            <ReviewsContainer />
-          </RatingContext.Provider>
-        </ProductContext.Provider>
-      </ThemeContext.Provider>
-    </main>
-  );
+            <QALoadContext.Provider value={() => {}}>
+              <QaContainer />
+            </QALoadContext.Provider>
+            <ReviewContext.Provider value={[allReviews, setAllReviews]}>
+              <RatingContext.Provider value={[averageRating, setAverageRating]}>
+                <ReviewsContainer />
+              </RatingContext.Provider>
+            </ReviewContext.Provider>
+          </ProductContext.Provider>
+        </ThemeContext.Provider>
+      </main>
+    );
+  }
+  return <Browse setProduct={setCurrentProductId} />;
 };
 
 export default App;

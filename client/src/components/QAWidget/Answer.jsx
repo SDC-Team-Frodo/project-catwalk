@@ -35,6 +35,7 @@ const Answer = (props) => {
                 if (!yesClicked) {
                   request.put(`qa/answers/${answer.id}/helpful`, {
                     answer_id: answer.id,
+                    count: 100,
                   }).then((res) => {
                     setYesClicked(true);
                   }).catch((err) => {
