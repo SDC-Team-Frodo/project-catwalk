@@ -880,7 +880,16 @@ img
 
 // Browse
 #BrowseList
+  padding: 2.5em
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%)
+  background: lightgreen
   z-index: 1
+  align-content: center
+  h1
+    color: green
   p
     color: purple
     font-size: 1.1em
@@ -890,10 +899,14 @@ img
     border-bottom: 1px solid black
     width: 80vw
   button
+    background-color: transparent
+    color: purple
     margin-top: 1em
     border: 0
     font-size: 2em
     cursor: pointer
+  button:hover
+    color: green
   #nextBrowse
     float: right
   h3
