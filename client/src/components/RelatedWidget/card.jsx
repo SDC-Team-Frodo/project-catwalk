@@ -28,7 +28,7 @@ const Card = (props) => {
         <div className="imageContainer" style={background} onClick={redirect}>
           <img src={thumbnail.thumbnail_url} alt="Failed" />
         </div>
-        <div className="cardIcon" id={iconId} onClick={func}>
+        <div className="cardIcon" onClick={func}>
           {!isStars ? <span className="cardIcon cardCross" id={iconId}>&times;</span>
             : <span className="cardIcon cardStar"><i id={iconId} onClick={func} className="far fa-star" /></span>}
         </div>
