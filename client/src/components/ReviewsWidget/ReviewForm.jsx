@@ -254,7 +254,7 @@ const ReviewForm = ({ product, characteristics }) => {
           required
         />
         <br />
-        <div className="remaining-chars" style={{ color: body.length < 50 ? 'red' : 'green' }}>
+        <div className="remaining-chars" style={{ color: body.length < 50 ? 'red' : 'black' }}>
           {body.length < 50 ? `Minimum required characters left: ${50 - body.length}` : 'Minimum reached'}
         </div>
       </label>
