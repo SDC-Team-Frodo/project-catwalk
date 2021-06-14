@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import FilterContext from './FilterContext';
+import ReviewContext from '../../contexts/ReviewContext';
 import ReviewTile from './ReviewTile';
+import ReviewForm from './ReviewForm';
+import Modal from '../Modal';
 import request from '../../requests';
 
-const ReviewsList = ({ product }) => {
-  const [allReviews, setAllReviews] = useState([]);
+const ReviewsList = ({ product, characteristics }) => {
+  const [allReviews, setAllReviews] = useContext(ReviewContext);
   const [reviews, setReviews] = useState([]);
   const [reviewsShown, setReviewsShown] = useState(2);
   const [sortOrder, setSortOrder] = useState('relevant');
@@ -53,10 +56,21 @@ const ReviewsList = ({ product }) => {
       </ul>
       <div className="review-buttons">
         {reviewsShown + 1 <= reviews.length && <button type="button" onClick={() => setReviewsShown((numReviews) => numReviews + 2)}>MORE REVIEWS</button>}
-        <button type="button">
-          WRITE A REVIEW
-          <big> + </big>
-        </button>
+        <Modal
+          modalId="review-modal"
+          header={(
+            <div className="modalHeader">
+              <h3>Write Your Review</h3>
+              <h4>
+                {`About the ${product.name}`}
+              </h4>
+            </div>
+          )}
+          body={<ReviewForm product={product} characteristics={characteristics} />}
+          btnName="WRITE A REVIEW"
+          btnPlus={<i className="fas fa-plus" />}
+          btnId="new-review"
+        />
       </div>
     </section>
   );

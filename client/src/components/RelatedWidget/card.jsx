@@ -1,8 +1,9 @@
-import React from 'react';
-import ReactStars from 'react-rating-stars-component';
+import React, { useContext } from 'react';
 import getAverageRating from '../../helpers/averageRating';
+import ProductIdContext from '../../contexts/ProductIdContext';
 
 const Card = (props) => {
+  const [currentProductId, setCurrentProductId] = useContext(ProductIdContext);
   const {
     product, thumbnail, ratings, cardClass, isStars, func,
   } = props;
@@ -15,7 +16,7 @@ const Card = (props) => {
   const iconId = `${cardClass}${product.id}`;
 
   function redirect() {
-    console.log('redirect to page');
+    setCurrentProductId(product.id);
   }
 
   if (thumbnail) {
@@ -27,9 +28,9 @@ const Card = (props) => {
         <div className="imageContainer" style={background} onClick={redirect}>
           <img src={thumbnail.thumbnail_url} alt="Failed" />
         </div>
-        <div className="cardIcon" id={iconId} onClick={func}>
-          {!isStars ? <span className="cardIcon" id={iconId}>&#9447;</span>
-            : <span className="cardIcon" id={iconId}>&#x2605;</span>}
+        <div className="cardIcon" onClick={func}>
+          {!isStars ? <span className="cardIcon cardCross" id={iconId}>&times;</span>
+            : <i id={iconId} onClick={func} className="far fa-star cardIcon cardStar" />}
         </div>
         <div className="textContainer" onClick={redirect}>
           {category}
@@ -41,17 +42,15 @@ const Card = (props) => {
           <br />
           <div className="cardRating">
             {ratings && (
-            <ReactStars {
-              ...{
-                size: 18,
-                value: getAverageRating(ratings),
-                a11y: true,
-                isHalf: true,
-                edit: false,
-                activeColor: 'red',
-              }
-            }
-            />
+              <div className="empty-stars">
+                <div className="filled-stars" style={{ width: `${(Math.round(getAverageRating(ratings) * 4) / 4) * 20}%` }}>
+                  <i className="fas fa-star" aria-hidden="true" />
+                  <i className="fas fa-star" aria-hidden="true" />
+                  <i className="fas fa-star" aria-hidden="true" />
+                  <i className="fas fa-star" aria-hidden="true" />
+                  <i className="fas fa-star" aria-hidden="true" />
+                </div>
+              </div>
             )}
           </div>
         </div>

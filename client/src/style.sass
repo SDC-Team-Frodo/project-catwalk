@@ -2,7 +2,7 @@
 $font-stack: Tahoma, Arial, Helvetica, sans-serif
 $header-color: #333333e8
 $body-color: #696969
-$background-color: #eee
+$background-color: #ffffff
 
 body
   background-color: $background-color
@@ -29,9 +29,7 @@ main
 #app
   display: flex
   margin: auto
-  min-width: 400px
   padding: 0 10vw
-
 
 .separator
   display: flex
@@ -333,6 +331,8 @@ main
   overflow: hidden
   position:relative
   width: 1080px
+  padding-top: 25px
+  padding-top: 25px
 
 .carousel_button
   height: 100px
@@ -355,23 +355,24 @@ main
 .card
   margin-left: 6px
   margin-right: 6px
-  height: 384px
-  width: 256px
+  min-height: 384px
+  min-width: 256px
   position: relative
   background-color: white
   border: 1px solid black
   transition: transform 0.25s
 
   &:hover
-    z-index: 2
     cursor: pointer
 
-.plus
-  width: 256px
-  display: flex
+.blankCard
+  min-width: 256px
   justify-content: center
   align-items: center
   text-align: center
+
+.plus
+  padding-top: 60%
 
 .textContainer
   padding: 10px
@@ -395,6 +396,19 @@ main
   &:hover
   cursor: pointer
 
+.far
+  color: red
+
+.cardStar
+  position: absolute
+  top: 4px
+  right: 0px
+
+.cardCross
+  position: absolute
+  top: 0px
+  right: 5px
+
 span.cardIcon
   color: yellow !important
 
@@ -408,12 +422,20 @@ span.cardIcon
 #reviews-ratings-container, #reviews-container, #ratings-container
   display: flex
 
-@media (max-width: 400px)
+@media (max-width: 550px)
   #reviews-ratings-container
     flex-direction: column
-
+    min-width: 350px
+    width: 100%
+  #reviews-container
+    min-width: 350px
+    width: 100%
   #ratings-container
-    flex-direction: row
+    margin: 0
+    min-width: 350px
+    width: 100%
+    #ratings-breakdown
+      width: 100%
 
 #reviews-container, #ratings-container
   flex-direction: column
@@ -423,12 +445,12 @@ span.cardIcon
   margin-top: 1em
 
 #reviews-container
-  min-width: 400px
+  min-width: 275px
   width: 65%
 
 #ratings-container
   margin-right: 50px
-  min-width: 250px
+  min-width: 275px
   width: 30%
 
 #ratings-breakdown
@@ -483,14 +505,12 @@ span.cardIcon
   padding: 0
   width: inherit
 
-.rating-bar, .char-bar
-  align-items: center
-  display: flex
-  justify-content: space-between
+.rating-bar
+  display: grid
+  grid-gap: 0.5rem
+  grid-template-columns: 2fr 7fr 1fr
   margin-bottom: 1em
   padding: 0
-
-.rating-bar
   cursor: pointer
   transition: all 0.25s ease-in-out
   &:hover
@@ -500,16 +520,23 @@ span.cardIcon
 .rating-bar-active
   font-weight: bold
 
+.rating-bar-stars
+  justify-self: flex-start
+
+.rating-bar-reviews
+  justify-self: flex-end
+
 .rating-container
   background-color: lightgray
   border-radius: 10px
   height: 1em
-  width: 70%
+  justify-self: center
+  width: 100%
 
 .rating-filler
-  height: inherit
   background-color: green
-  border-radius: 10px
+  border-radius: inherit
+  height: inherit
 
 .char-bars
   div
@@ -520,8 +547,12 @@ span.cardIcon
       width: inherit
 
 .char-bar
+  align-items: center
+  display: flex
+  justify-content: space-between
   margin-bottom: -0.25em
   margin-top: 0.5em
+  padding: 0
   width: inherit
 
 .char-container
@@ -561,7 +592,7 @@ span.cardIcon
 
 .reviews-count
   font-weight: bold
-  margin-top: -0.25em
+  margin: -0.25em 0 0.5em 0
   select
     background-color: $background-color
     border: none
@@ -599,19 +630,25 @@ span.cardIcon
     font-size: 12px
 
 .review-photos
-    display: flex
-    justify-content: flex-start
-    list-style-type: none
-    margin-bottom: 1em
-    max-height: auto
-    padding: 0
+  align-items: center
+  display: flex
+  justify-content: flex-start
+  list-style-type: none
+  margin-bottom: 1em
+  max-height: auto
+  padding: 0
+  .modalBody
+    img
+      width: auto
+      height: 80vh
 
 .review-photo
   cursor: pointer
-  margin-right: 0.25em
+  margin-right: 0.5em
   img
-    height: auto
-    width: 100px
+    max-height: 100px
+    max-width: 150px
+    width: auto
 
 .recommend, .reviewer
   margin-bottom: 1em
@@ -635,16 +672,77 @@ span.cardIcon
   display: flex
   justify-content: space-between
   margin-top: 2em
-  width: 50%
+  width: 100%
+  button, .modal-container
+    height: 4em
+    min-width: 95px
+    width: 48%
   button
     background-color: lightgray
     border: 1px solid black
     border-radius: 0
     cursor: pointer
-    height: 4em
-    width: 48%
+    .fas
+      margin-left: 0.5em
     &:hover
       color: $header-color
+
+#new-review
+    background-color: lightgray
+    border: 1px solid black
+    border-radius: 0
+    cursor: pointer
+    height: 4em
+    min-width: 95px
+    width: 100%
+    .fas
+      margin-left: 0.5em
+    &:hover
+      color: $header-color
+
+#review-modal
+  min-width: 350px
+  overflow-y: scroll
+  #review-form
+    color: black
+    margin-bottom: 1em
+    padding: 0 1em
+    .review-topic
+      display: inline-block
+      margin-right: 0.5em
+    .rating-description
+      margin-left: 0.5em
+    .rating-input
+      display: flex
+    .char-input
+      display: grid
+      font-size: 12px
+      grid-template-columns: 1fr 4fr 3fr
+      margin-left: 2em
+      .char-rating-buttons
+        display: grid
+        grid-template: repeat(2, 1fr)/repeat(5, 1fr)
+        input, div
+          display: flex
+          justify-self: center
+          margin: 0
+          overflow-wrap: word-break
+          text-align: center
+    .remaining-chars
+      font-size: 10px
+    .username-input, .email-input
+      width: auto
+    .privacy-warning
+      color: red
+      font-size: 12px
+      text-align: center
+    .submit
+      display: flex
+      justify-content: center
+  h3, h4
+    text-align: center
+  textarea
+    width: 98%
 
 // Modal
 img
@@ -667,13 +765,13 @@ img
         max-height: 80vh
 
 #backDrop
-  opacity: 0.5
-  top: 0%
-  left: 0%
+  backdrop-filter: blur(1em) brightness(0.5)
+  top: 0 !important
+  left: 0 !important
   position: fixed
-  background-color: black
-  height: 100%
-  width: 100%
+  background-color: transparent
+  height: 100vh !important
+  width: 100vw !important
   z-index: 2147483645
 
 #CloseBtn
@@ -691,6 +789,7 @@ img
   color: white
 
 #modalImgDiv
+  cursor: pointer
   width: fit-content
 
 .modalHeader
@@ -856,7 +955,50 @@ img
   overflow-y: scroll
 
 #nav
-  margin: 15px
+  margin-top: 1em
+  position: fixed
+  top: 0vh
+  z-index: 2147483645
+  right: 0
+  width: fit-content
+  border-bottom: 1px solid black
+  input
+    font-size: 1em
+    background-color: transparent
+    border: 0px
+  input:focus
+    outline: none
+  button
+    font-size: 1em
+    background-color: transparent
+    cursor: pointer
+    border: 0px
+  button:hover
+    color: grey
+
 
 .answerNameBold
   font-weight: 600
+
+// Browse
+#BrowseList
+  z-index: 1
+  div
+    border-bottom: 2px solid black
+    width: 80vw
+
+.details
+  padding: 2em
+  button
+    position: relative
+    margin: 1em
+    background-color: transparent
+    border: 0px
+    border-bottom: 2px solid black
+    font-size: 25px
+
+.BrowseImage
+  border: 2px solid grey
+  margin: 2em
+  max-width: 100em
+  height: 10em

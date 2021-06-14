@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 const Modal = (props) => {
   const {
-    modalId, header, body, footer, btnName, btnId, isImage, image,
+    modalId, header, body, footer, btnName, btnId, btnPlus, isImage, image,
   } = props;
   const [display, setDisplay] = useState(false);
 
@@ -43,7 +43,7 @@ const Modal = (props) => {
     );
   }
   return (
-    <div>
+    <div className="modal-container">
       { !isImage && (
       <button
         id={btnId}
@@ -54,6 +54,7 @@ const Modal = (props) => {
         }}
       >
         {btnName}
+        {btnPlus}
       </button>
       )}
       { isImage && (

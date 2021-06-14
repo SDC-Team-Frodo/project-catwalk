@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Modal from '../Modal';
 import request from '../../requests';
 import formatDate from '../../helpers/formatDate';
 
@@ -41,12 +42,30 @@ const ReviewTile = ({ review }) => {
           {hidden ? `${review.body.slice(0, 249)}... ` : review.body}
           {review.body.length > 250 && <button type="button" onClick={() => setHidden((isHidden) => !isHidden)}>{hidden ? 'Show More' : 'Show Less'}</button>}
         </p>
-        {!!review.photos.length
+        {/* {!!review.photos.length
         && (
           <ul className="review-photos">
             {review.photos.map((photo) => (
               <li className="review-photo" key={photo.id}>
                 <img src={photo.url} alt="review img" />
+              </li>
+            ))}
+          </ul>
+        )} */}
+        {!!review.photos.length
+        && (
+          <ul className="review-photos">
+            {review.photos.map((photo) => (
+              <li className="review-photo" key={photo.id}>
+                <Modal
+                  key={photo.id}
+                  modalId={`reviewPhoto${photo.id}`}
+                  body={(
+                    <img src={photo.url} alt="review img" />
+                  )}
+                  isImage="true"
+                  image={<img src={photo.url} alt="review img thumbnail" />}
+                />
               </li>
             ))}
           </ul>
