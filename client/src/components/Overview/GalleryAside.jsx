@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
 import StyleGrid from './subcomponents/StyleGrid';
 import ProductContext from '../../contexts/ProductContext';
+import ReviewContext from '../../contexts/ReviewContext';
 import RatingContext from '../../contexts/RatingContext';
 import Price from './subcomponents/Price';
 import SelectSize from './subcomponents/SelectSize';
 import QuantityInput from './subcomponents/QuantityInput';
 
 const GalleryAside = (props) => {
-  const [averageRating, setAverageRating] = useContext(RatingContext);
+  const [averageRating] = useContext(RatingContext);
+  const [allReviews] = useContext(ReviewContext);
+
   const product = useContext(ProductContext);
 
   const {  cartQuantity, setCartQuantity, selectedSizeIndex, setSelectedSizeIndex, activeStyle, styles, selectedStyleIndex, setSelectedStyleIndex, submitCart } = props;
@@ -33,7 +36,9 @@ const GalleryAside = (props) => {
             )}
         </div>
 
-        <a href="#review-widget">Read all reviews</a>
+        <a href="#review-widget">
+          {`Read all reviews (${allReviews.length} reviews)`}
+        </a>
         <br />
         <span className="slim">{product.category}</span>
 

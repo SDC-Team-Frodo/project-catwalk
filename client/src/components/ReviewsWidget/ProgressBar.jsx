@@ -22,13 +22,13 @@ const ProgressBar = ({ numStars, numReviews, totalReviews }) => {
   }, [filtered]);
   return (
     <li className={`rating-bar ${filteredContext.includes(numStars) && "rating-bar-active"}`} onClick={() => setFiltered(!filtered)}>
-      <div>
+      <div className="rating-bar-stars">
         <u>{`${numStars} stars`}</u>
       </div>
       <div className="rating-container">
         <div className="rating-filler" style={{ width: `${Math.round((numReviews / totalReviews) * 100)}%` }} />
       </div>
-      <div>
+      <div className="rating-bar-reviews">
         {numReviews}
       </div>
     </li>

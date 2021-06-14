@@ -405,7 +405,7 @@ span.cardIcon
 
 #ratings-container
   margin-right: 50px
-  min-width: 250px
+  min-width: 275px
   width: 30%
 
 #ratings-breakdown
@@ -460,14 +460,12 @@ span.cardIcon
   padding: 0
   width: inherit
 
-.rating-bar, .char-bar
-  align-items: center
-  display: flex
-  justify-content: space-between
+.rating-bar
+  display: grid
+  grid-gap: 0.5rem
+  grid-template-columns: 2fr 7fr 1fr
   margin-bottom: 1em
   padding: 0
-
-.rating-bar
   cursor: pointer
   transition: all 0.25s ease-in-out
   &:hover
@@ -477,16 +475,23 @@ span.cardIcon
 .rating-bar-active
   font-weight: bold
 
+.rating-bar-stars
+  justify-self: flex-start
+
+.rating-bar-reviews
+  justify-self: flex-end
+
 .rating-container
   background-color: lightgray
   border-radius: 10px
   height: 1em
-  width: 70%
+  justify-self: center
+  width: 100%
 
 .rating-filler
-  height: inherit
   background-color: green
-  border-radius: 10px
+  border-radius: inherit
+  height: inherit
 
 .char-bars
   div
@@ -497,8 +502,12 @@ span.cardIcon
       width: inherit
 
 .char-bar
+  align-items: center
+  display: flex
+  justify-content: space-between
   margin-bottom: -0.25em
   margin-top: 0.5em
+  padding: 0
   width: inherit
 
 .char-container
@@ -538,7 +547,7 @@ span.cardIcon
 
 .reviews-count
   font-weight: bold
-  margin-top: -0.25em
+  margin: -0.25em 0 0.5em 0
   select
     background-color: $background-color
     border: none
@@ -582,6 +591,10 @@ span.cardIcon
     margin-bottom: 1em
     max-height: auto
     padding: 0
+    .modalBody
+      img
+        width: auto
+        height: 80vh
 
 .review-photo
   cursor: pointer
@@ -620,6 +633,8 @@ span.cardIcon
     cursor: pointer
     height: 4em
     width: 48%
+    .fas
+      margin-left: 0.5em
     &:hover
       color: $header-color
 
