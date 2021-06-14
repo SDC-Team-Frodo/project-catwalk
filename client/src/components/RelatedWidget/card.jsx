@@ -1,5 +1,4 @@
-import React, {useContext} from  'react';
-import ReactStars from 'react-rating-stars-component';
+import React, { useContext } from 'react';
 import getAverageRating from '../../helpers/averageRating';
 import ProductIdContext from '../../contexts/ProductIdContext';
 
@@ -31,7 +30,7 @@ const Card = (props) => {
         </div>
         <div className="cardIcon" id={iconId} onClick={func}>
           {!isStars ? <span className="cardIcon cardCross" id={iconId}>&times;</span>
-            : <span className="cardIcon cardStar" id={iconId}><i class="far fa-star"></i></span>}
+            : <span className="cardIcon cardStar"><i id={iconId} onClick={func} className="far fa-star" /></span>}
         </div>
         <div className="textContainer" onClick={redirect}>
           {category}
