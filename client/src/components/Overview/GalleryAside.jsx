@@ -47,7 +47,10 @@ const GalleryAside = (props) => {
         <br />
         <br />
         <div id="styles">
-          <strong>Styles &gt;</strong> {activeStyle && activeStyle.name}
+          <strong>Styles &gt;</strong>
+          <span className="slim">
+            {activeStyle && ' '+ activeStyle.name}
+          </span>
         </div>
         {/*
         selectedSizeIndex={selectedSizeIndex}
@@ -61,7 +64,7 @@ const GalleryAside = (props) => {
           setSelectedStyleIndex={setSelectedStyleIndex}/>
 
         <form>
-          <div className="separator">
+          <div className="separator mobile-row">
             {(activeStyle && activeStyle.skus) && <SelectSize activeStyle={activeStyle}
             selectedSizeIndex={selectedSizeIndex}
             setSelectedSizeIndex={setSelectedSizeIndex}/>}
@@ -71,7 +74,7 @@ const GalleryAside = (props) => {
           </div>
 
           <br />
-          <div className="separator">
+          <div className="separator mobile-row">
             <button id="add-to-bag" onClick={submitCart}>
               ADD TO BAG
               <i className="fas fa-plus"></i>

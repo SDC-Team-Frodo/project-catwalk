@@ -32,14 +32,34 @@ main
   min-width: 400px
   padding: 0 10vw
 
-// overview
+
 .separator
   display: flex
 
+@media only screen and (max-width: 768px)
+  #overview
+    max-width: 90vw
+    margin: 1em 0
+    .separator
+      flex-flow: column wrap
+    .mobile-row
+      flex-direction: row
+  #outer-gallery-nav
+    height: 100%
+  #gallery-container, #gallery-aside,  #description, #features
+    max-width: 90vw !important
+    width: 100% !important
+    #gallery
+      width: 100% !important
+      min-height: inherit
+  .hide
+    display: initial
+  .left-margin
+    margin-left: 0 !important
+
+
 #overview
-  color: black !important
   position: relative
-  min-width: 45em
 
 #gallery-container
   order: 1
@@ -161,6 +181,8 @@ main
     flex-grow: 2
     margin-right: 1.5em
     cursor: pointer
+    &:after
+      right: 1em
 
   .separator // separator NEST INSIDE #gallery-aside
     width: 100%
@@ -175,6 +197,7 @@ main
     padding: 1em 1em 1em 1em
     width: 6em
     font-weight: bold
+
 
   #add-to-bag
       flex: 1 2 0
