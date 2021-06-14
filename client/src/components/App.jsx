@@ -10,6 +10,7 @@ import RatingContext from '../contexts/RatingContext';
 import ReviewContext from '../contexts/ReviewContext';
 
 import ProductContext from '../contexts/ProductContext';
+import ProductIdContext from '../contexts/ProductIdContext';
 import ThemeContext from '../contexts/ThemeContext';
 import testData from '../testData';
 import request from '../requests';
@@ -83,7 +84,9 @@ const App = () => {
                 <OverviewContainer />
               </RatingContext.Provider>
             </ReviewContext.Provider>
-            <RelatedContainer />
+            <ProductIdContext.Provider value={[currentProductId, setCurrentProductId]}>
+              <RelatedContainer />
+            </ProductIdContext.Provider>
             <QALoadContext.Provider value={() => {}}>
               <QaContainer />
             </QALoadContext.Provider>

@@ -29,8 +29,11 @@ main
 #app
   display: flex
   margin: auto
-  min-width: 400px
   padding: 0 10vw
+
+@media (max-width: 400px)
+  #body
+    width: 100vw
 
 // overview
 .separator
@@ -310,6 +313,8 @@ main
   overflow: hidden
   position:relative
   width: 1080px
+  padding-top: 25px
+  padding-top: 25px
 
 .carousel_button
   height: 100px
@@ -332,23 +337,24 @@ main
 .card
   margin-left: 6px
   margin-right: 6px
-  height: 384px
-  width: 256px
+  min-height: 384px
+  min-width: 256px
   position: relative
   background-color: white
   border: 1px solid black
   transition: transform 0.25s
 
   &:hover
-    z-index: 2
     cursor: pointer
 
-.plus
-  width: 256px
-  display: flex
+.blankCard
+  min-width: 256px
   justify-content: center
   align-items: center
   text-align: center
+
+.plus
+  padding-top: 60%
 
 .textContainer
   padding: 10px
@@ -372,6 +378,19 @@ main
   &:hover
   cursor: pointer
 
+.far
+  color: red
+
+.cardStar
+  position: absolute
+  top: 4px
+  right: 0px
+
+.cardCross
+  position: absolute
+  top: 0px
+  right: 5px
+
 span.cardIcon
   color: yellow !important
 
@@ -385,12 +404,20 @@ span.cardIcon
 #reviews-ratings-container, #reviews-container, #ratings-container
   display: flex
 
-@media (max-width: 400px)
+@media (max-width: 550px)
   #reviews-ratings-container
     flex-direction: column
-
+    min-width: 350px
+    width: 100%
+  #reviews-container
+    min-width: 350px
+    width: 100%
   #ratings-container
-    flex-direction: row
+    margin: 0
+    min-width: 350px
+    width: 100%
+    #ratings-breakdown
+      width: 100%
 
 #reviews-container, #ratings-container
   flex-direction: column
@@ -400,7 +427,7 @@ span.cardIcon
   margin-top: 1em
 
 #reviews-container
-  min-width: 400px
+  min-width: 275px
   width: 65%
 
 #ratings-container
@@ -585,23 +612,25 @@ span.cardIcon
     font-size: 12px
 
 .review-photos
-    display: flex
-    justify-content: flex-start
-    list-style-type: none
-    margin-bottom: 1em
-    max-height: auto
-    padding: 0
-    .modalBody
-      img
-        width: auto
-        height: 80vh
+  align-items: center
+  display: flex
+  justify-content: flex-start
+  list-style-type: none
+  margin-bottom: 1em
+  max-height: auto
+  padding: 0
+  .modalBody
+    img
+      width: auto
+      height: 80vh
 
 .review-photo
   cursor: pointer
-  margin-right: 0.25em
+  margin-right: 0.5em
   img
-    height: auto
-    width: 100px
+    max-height: 100px
+    max-width: 150px
+    width: auto
 
 .recommend, .reviewer
   margin-bottom: 1em
@@ -625,18 +654,77 @@ span.cardIcon
   display: flex
   justify-content: space-between
   margin-top: 2em
-  width: 50%
+  width: 100%
+  button, .modal-container
+    height: 4em
+    min-width: 95px
+    width: 48%
   button
     background-color: lightgray
     border: 1px solid black
     border-radius: 0
     cursor: pointer
-    height: 4em
-    width: 48%
     .fas
       margin-left: 0.5em
     &:hover
       color: $header-color
+
+#new-review
+    background-color: lightgray
+    border: 1px solid black
+    border-radius: 0
+    cursor: pointer
+    height: 4em
+    min-width: 95px
+    width: 100%
+    .fas
+      margin-left: 0.5em
+    &:hover
+      color: $header-color
+
+#review-modal
+  min-width: 350px
+  overflow-y: scroll
+  #review-form
+    color: black
+    margin-bottom: 1em
+    padding: 0 1em
+    .review-topic
+      display: inline-block
+      margin-right: 0.5em
+    .rating-description
+      margin-left: 0.5em
+    .rating-input
+      display: flex
+    .char-input
+      display: grid
+      font-size: 12px
+      grid-template-columns: 1fr 4fr 3fr
+      margin-left: 2em
+      .char-rating-buttons
+        display: grid
+        grid-template: repeat(2, 1fr)/repeat(5, 1fr)
+        input, div
+          display: flex
+          justify-self: center
+          margin: 0
+          overflow-wrap: word-break
+          text-align: center
+    .remaining-chars
+      font-size: 10px
+    .username-input, .email-input
+      width: auto
+    .privacy-warning
+      color: red
+      font-size: 12px
+      text-align: center
+    .submit
+      display: flex
+      justify-content: center
+  h3, h4
+    text-align: center
+  textarea
+    width: 98%
 
 // Modal
 img
