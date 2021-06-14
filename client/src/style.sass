@@ -736,7 +736,7 @@ img
   max-height: 80vh
   border: thick double black
   position: fixed
-  background-color: skyblue
+  background-color: lightgreen
   z-index: 2147483646
   max-width: 80vw
   left: 50vw
@@ -937,19 +937,23 @@ img
   overflow-y: scroll
 
 #nav
-  margin-top: 1em
-  position: fixed
-  top: 0vh
-  z-index: 2147483645
+  margin: 1em
+  width: 80vw
   right: 0
-  width: fit-content
   border-bottom: 1px solid black
+  margin-left: 50vw
+  transform: translateX(-50vw)
   input
+    float: right
     font-size: 1em
     background-color: transparent
     border: 0px
   input:focus
     outline: none
+  #changeId
+    float: right
+  #browse
+    margin-left: 10em
   button
     font-size: 1em
     background-color: transparent
@@ -964,10 +968,40 @@ img
 
 // Browse
 #BrowseList
+  padding: 2.5em
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%)
+  background: lightgreen
   z-index: 1
+  align-content: center
+  h1
+    color: green
+  p
+    color: purple
+    font-size: 1.1em
+  p:hover
+    color: green
   div
-    border-bottom: 2px solid black
+    border-bottom: 1px solid black
     width: 80vw
+  button
+    background-color: transparent
+    color: purple
+    margin-top: 1em
+    border: 0
+    font-size: 2em
+    cursor: pointer
+  button:hover
+    color: green
+  #nextBrowse
+    float: right
+  h3
+    bottom: 0.5vh
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
 
 .details
   padding: 2em
@@ -984,3 +1018,6 @@ img
   margin: 2em
   max-width: 100em
   height: 10em
+
+.hoverGreen:hover
+  color: green
