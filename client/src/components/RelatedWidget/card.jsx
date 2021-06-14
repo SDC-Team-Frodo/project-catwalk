@@ -30,8 +30,8 @@ const Card = (props) => {
           <img src={thumbnail.thumbnail_url} alt="Failed" />
         </div>
         <div className="cardIcon" id={iconId} onClick={func}>
-          {!isStars ? <span className="cardIcon" id={iconId}>&#9447;</span>
-            : <span className="cardIcon" id={iconId}>&#x2605;</span>}
+          {!isStars ? <span className="cardIcon cardCross" id={iconId}>&times;</span>
+            : <span className="cardIcon cardStar" id={iconId}><i class="far fa-star"></i></span>}
         </div>
         <div className="textContainer" onClick={redirect}>
           {category}
@@ -43,17 +43,15 @@ const Card = (props) => {
           <br />
           <div className="cardRating">
             {ratings && (
-            <ReactStars {
-              ...{
-                size: 18,
-                value: getAverageRating(ratings),
-                a11y: true,
-                isHalf: true,
-                edit: false,
-                activeColor: 'red',
-              }
-            }
-            />
+              <div className="empty-stars">
+                <div className="filled-stars" style={{ width: `${(Math.round(getAverageRating(ratings) * 4) / 4) * 20}%` }}>
+                  <i className="fas fa-star" aria-hidden="true" />
+                  <i className="fas fa-star" aria-hidden="true" />
+                  <i className="fas fa-star" aria-hidden="true" />
+                  <i className="fas fa-star" aria-hidden="true" />
+                  <i className="fas fa-star" aria-hidden="true" />
+                </div>
+              </div>
             )}
           </div>
         </div>
