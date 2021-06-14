@@ -109,12 +109,14 @@ const OutfitList = () => {
     <div className="outfitRelatedWidget">
       <button type="button" className="carousel_button previous" id="outfitPrevious" onClick={navButtonHandle}>&#60;</button>
       <div className="carousel" id="relatedList">
-        <div className="outfitCard card plus" onClick={addOutfit} id="blank">
-          +
-          <br />
-          Add Current Product To
-          <br />
-          Outfits
+        <div className="outfitCard card blankCard" onClick={addOutfit} id="blank">
+          <div className="plus">
+            <i className="fas fa-plus fa-4x" />
+          </div>
+          <b>
+            <p>Add Current Product To</p>
+            <p>Outfits</p>
+          </b>
         </div>
         {outfitProducts.length > 0 && outfitProducts.map((outfitProduct, i) => (
           <Card
