@@ -25,7 +25,7 @@ const Product = (props) => {
             setClicked(true);
           }}
         >
-          <h2 className="productName hoverGrey">{`${id} : ${name}`}</h2>
+          <p className="productName hoverGreen">{`${id} : ${name}`}</p>
         </div>
       )}
     />
