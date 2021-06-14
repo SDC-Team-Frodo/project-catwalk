@@ -30,7 +30,7 @@ const Card = (props) => {
         </div>
         <div className="cardIcon" onClick={func}>
           {!isStars ? <span className="cardIcon cardCross" id={iconId}>&times;</span>
-            : <span className="cardIcon cardStar"><i id={iconId} onClick={func} className="far fa-star" /></span>}
+            : <i id={iconId} onClick={func} className="far fa-star cardIcon cardStar" />}
         </div>
         <div className="textContainer" onClick={redirect}>
           {category}
