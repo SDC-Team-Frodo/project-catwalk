@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from 'react';
 import request from '../../requests';
 import Modal from '../Modal';
@@ -30,9 +31,9 @@ const Details = (props) => {
     <div className="details">
       <h2>{name}</h2>
       <p>{description}</p>
-      {photos.map((photo, i) => {
-        return <img alt="No Image" className="BrowseImage" src={photo.thumbnail_url} />;
-      })}
+      {photos.map((photo, i) => (
+        <img key={i} alt="No Img" className="BrowseImage" src={photo.thumbnail_url} />
+      ))}
       <button
         className="goToProduct hoverGrey"
         value="Go"

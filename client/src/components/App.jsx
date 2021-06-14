@@ -16,6 +16,7 @@ import '../style.sass';
 const App = () => {
   const [browse, setBrowse] = useState(false);
   const [currentProductId, setCurrentProductId] = useState(17071);
+  const [theme, setTheme] = useState('light');
   const [currentProductData, setCurrentProductData] = useState(testData);
   const [idInput, setIdInput] = useState('');
   const [averageRating, setAverageRating] = useState(null);
@@ -67,8 +68,12 @@ const App = () => {
           >
             Browse Products
           </button>
+          <select id="themeSelect" onChange={(e) => setTheme(e.target.value)}>
+            <option value="dark">Dark Mode</option>
+            <option value="light">Light Mode</option>
+          </select>
         </div>
-        <ThemeContext.Provider value="light">
+        <ThemeContext.Provider value={theme}>
           <ProductContext.Provider value={currentProductData}>
             <RatingContext.Provider value={[averageRating, setAverageRating]}>
               <OverviewContainer />
