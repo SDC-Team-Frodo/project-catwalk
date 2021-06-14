@@ -8,11 +8,20 @@ const OutfitList = () => {
 
   const [numberOfCards, setNumberOfCards] = useState(0);
   const [translateX, setTranslateX] = useState(0);
-  const [outfitIds, setOutfitIds] = useState(JSON.parse(localStorage.getItem('outfit')));
+  const [outfitIds, setOutfitIds] = useState([]);
   const [outfitProducts, setOutfitProducts] = useState([]);
   const [outfitRatings, setOutfitRatings] = useState([]);
   const [outfitThumbnails, setOutfitThumbnails] = useState([]);
   const [index, setIndex] = useState(1);
+
+  useEffect(() => {
+    let outfitIdsLocal = JSON.parse(localStorage.getItem('outfit'));
+    if (!outfitIdsLocal) {
+      outfitIdsLocal = [];
+    }
+    setOutfitIds(outfitIdsLocal);
+    setNumberOfCards(outfitIdsLocal.length);
+  }, [product]);
 
   useEffect(() => {
     if (outfitIds) {
@@ -44,7 +53,7 @@ const OutfitList = () => {
     } else if (!outfitIds) {
       setOutfitIds([]);
     }
-  }, [outfitIds, product]);
+  }, [outfitIds]);
 
   function removeOutfit(event) {
     let id = event.target.id.match(/\d+/);
