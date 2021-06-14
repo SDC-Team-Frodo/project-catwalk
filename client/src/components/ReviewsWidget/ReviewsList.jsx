@@ -2,9 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import FilterContext from './FilterContext';
 import ReviewContext from '../../contexts/ReviewContext';
 import ReviewTile from './ReviewTile';
+import ReviewForm from './ReviewForm';
+import Modal from '../Modal';
 import request from '../../requests';
 
-const ReviewsList = ({ product }) => {
+const ReviewsList = ({ product, characteristics }) => {
   const [allReviews, setAllReviews] = useContext(ReviewContext);
   const [reviews, setReviews] = useState([]);
   const [reviewsShown, setReviewsShown] = useState(2);
@@ -59,6 +61,21 @@ const ReviewsList = ({ product }) => {
           <i className="fas fa-plus" />
         </button>
       </div>
+      <Modal
+        modalId="review-modal"
+        header={(
+          <div className="modalHeader">
+            <h3>Write Your Review</h3>
+            <h4>
+              {`About the ${product.name}`}
+            </h4>
+          </div>
+        )}
+        body={<ReviewForm product={product} characteristics={characteristics} />}
+        btnName={`WRITE A REVIEW ${<i className="fas fa-plus" />}`}
+        btnId="add-review"
+      />
+      {/* {characteristics && <ReviewForm characteristics={characteristics} />} */}
     </section>
   );
 };

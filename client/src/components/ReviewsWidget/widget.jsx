@@ -4,7 +4,6 @@ import FilterContext from './FilterContext';
 import RatingsBreakdown from './RatingsBreakdown';
 import ProductBreakdown from './ProductBreakdown';
 import ReviewsList from './ReviewsList';
-import ReviewForm from './ReviewForm';
 import request from '../../requests';
 import getRecommendedAvg from '../../helpers/recommendedAvg';
 
@@ -42,9 +41,8 @@ const ReviewContainer = () => {
         </div>
         <div id="reviews-container">
           <FilterContext.Provider value={[filteredContext, setFilteredContext]}>
-            <ReviewsList product={product} />
+            <ReviewsList product={product} characteristics={reviewsMeta.characteristics} />
           </FilterContext.Provider>
-          <ReviewForm />
         </div>
       </div>
     </article>

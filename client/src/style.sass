@@ -585,23 +585,25 @@ span.cardIcon
     font-size: 12px
 
 .review-photos
-    display: flex
-    justify-content: flex-start
-    list-style-type: none
-    margin-bottom: 1em
-    max-height: auto
-    padding: 0
-    .modalBody
-      img
-        width: auto
-        height: 80vh
+  align-items: center
+  display: flex
+  justify-content: flex-start
+  list-style-type: none
+  margin-bottom: 1em
+  max-height: auto
+  padding: 0
+  .modalBody
+    img
+      width: auto
+      height: 80vh
 
 .review-photo
   cursor: pointer
-  margin-right: 0.25em
+  margin-right: 0.5em
   img
-    height: auto
-    width: 100px
+    max-height: 100px
+    max-width: 150px
+    width: auto
 
 .recommend, .reviewer
   margin-bottom: 1em
@@ -637,6 +639,24 @@ span.cardIcon
       margin-left: 0.5em
     &:hover
       color: $header-color
+
+#review-modal
+  overflow-y: scroll
+  #review-form
+    padding: 0 1em
+    .review-topic
+      margin-right: 0.5em
+    .rating-input
+      display: flex
+    .char-input
+      display: grid
+      font-size: 12px
+      grid-template-columns: 1fr 2fr 3fr
+      margin-left: 2em
+  h3, h4
+    text-align: center
+  textarea
+    width: 98%
 
 // Modal
 img
