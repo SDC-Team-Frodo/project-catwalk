@@ -44,7 +44,7 @@ const OutfitList = () => {
     } else if (!outfitIds) {
       setOutfitIds([]);
     }
-  }, [outfitIds]);
+  }, [outfitIds, product]);
 
   function removeOutfit(event) {
     let id = event.target.id.match(/\d+/);
