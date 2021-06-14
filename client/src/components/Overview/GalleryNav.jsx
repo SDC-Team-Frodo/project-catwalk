@@ -44,7 +44,13 @@ const GalleryNav = (props) => {
       <i className="fas fa-chevron-up scroll-up" onClick={scrollUp}></i>
       <div id="gallery-nav">
 
-        {photos.map((photo, index) => <GalleryNavTile key={`gallery-nav-${index}`} photo={photo} index={index} setSelectedPhotoIndex={setSelectedPhotoIndex} selected={selectedPhotoIndex===index}/>)}
+        {photos.map((photo, index) => (
+          <GalleryNavTile
+            key={`gallery-nav-${index}`}
+            photo={photo} index={index}
+            setSelectedPhotoIndex={setSelectedPhotoIndex}
+            selected={selectedPhotoIndex===index}/>
+        ))}
       </div>
       <i className="fas fa-chevron-down scroll-down" onClick={scrollDown}></i>
     </div>

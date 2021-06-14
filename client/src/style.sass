@@ -31,18 +31,33 @@ main
   margin: auto
   padding: 0 10vw
 
-@media (max-width: 400px)
-  #body
-    width: 100vw
-
-// overview
 .separator
   display: flex
 
+@media only screen and (max-width: 768px)
+  #overview
+    max-width: 90vw
+    margin: 1em 0
+    .separator
+      flex-flow: column wrap
+    .mobile-row
+      flex-direction: row
+  #outer-gallery-nav
+    height: 100%
+  #gallery-container, #gallery-aside,  #description, #features
+    max-width: 90vw !important
+    width: 100% !important
+    #gallery
+      width: 100% !important
+      min-height: inherit
+  .hide
+    display: initial
+  .left-margin
+    margin-left: 0 !important
+
+
 #overview
-  color: black !important
   position: relative
-  min-width: 45em
 
 #gallery-container
   order: 1
@@ -164,6 +179,8 @@ main
     flex-grow: 2
     margin-right: 1.5em
     cursor: pointer
+    &:after
+      right: 1em
 
   .separator // separator NEST INSIDE #gallery-aside
     width: 100%
@@ -178,6 +195,7 @@ main
     padding: 1em 1em 1em 1em
     width: 6em
     font-weight: bold
+
 
   #add-to-bag
       flex: 1 2 0
@@ -753,7 +771,7 @@ img
   max-height: 80vh
   border: thick double black
   position: fixed
-  background-color: skyblue
+  background-color: lightgreen
   z-index: 2147483646
   max-width: 80vw
   left: 50vw
@@ -954,19 +972,23 @@ img
   overflow-y: scroll
 
 #nav
-  margin-top: 1em
-  position: fixed
-  top: 0vh
-  z-index: 2147483645
+  margin: 1em
+  width: 80vw
   right: 0
-  width: fit-content
   border-bottom: 1px solid black
+  margin-left: 50vw
+  transform: translateX(-50vw)
   input
+    float: right
     font-size: 1em
     background-color: transparent
     border: 0px
   input:focus
     outline: none
+  #changeId
+    float: right
+  #browse
+    margin-left: 10em
   button
     font-size: 1em
     background-color: transparent
@@ -981,10 +1003,40 @@ img
 
 // Browse
 #BrowseList
+  padding: 2.5em
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%)
+  background: lightgreen
   z-index: 1
+  align-content: center
+  h1
+    color: green
+  p
+    color: purple
+    font-size: 1.1em
+  p:hover
+    color: green
   div
-    border-bottom: 2px solid black
+    border-bottom: 1px solid black
     width: 80vw
+  button
+    background-color: transparent
+    color: purple
+    margin-top: 1em
+    border: 0
+    font-size: 2em
+    cursor: pointer
+  button:hover
+    color: green
+  #nextBrowse
+    float: right
+  h3
+    bottom: 0.5vh
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
 
 .details
   padding: 2em
@@ -1001,3 +1053,6 @@ img
   margin: 2em
   max-width: 100em
   height: 10em
+
+.hoverGreen:hover
+  color: green
