@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useContext} from  'react';
 import ReactStars from 'react-rating-stars-component';
 import getAverageRating from '../../helpers/averageRating';
+import ProductIdContext from '../../contexts/ProductIdContext';
 
 const Card = (props) => {
+  const [currentProductId, setCurrentProductId] = useContext(ProductIdContext);
   const {
     product, thumbnail, ratings, cardClass, isStars, func,
   } = props;
@@ -15,7 +17,7 @@ const Card = (props) => {
   const iconId = `${cardClass}${product.id}`;
 
   function redirect() {
-    console.log('redirect to page');
+    setCurrentProductId(product.id);
   }
 
   if (thumbnail) {
