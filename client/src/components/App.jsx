@@ -79,9 +79,9 @@ const App = () => {
                 <OverviewContainer />
               </RatingContext.Provider>
             </ReviewContext.Provider>
-          <ProductIdContext.Provider value={[currentProductId, setCurrentProductId]}>
-            <RelatedContainer />
-          </ProductIdContext.Provider>
+            <ProductIdContext.Provider value={[currentProductId, setCurrentProductId]}>
+              <RelatedContainer />
+            </ProductIdContext.Provider>
             <QALoadContext.Provider value={() => {}}>
               <QaContainer />
             </QALoadContext.Provider>
