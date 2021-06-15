@@ -42,16 +42,6 @@ const ReviewTile = ({ review }) => {
           {hidden ? `${review.body.slice(0, 249)}... ` : review.body}
           {review.body.length > 250 && <button type="button" onClick={() => setHidden((isHidden) => !isHidden)}>{hidden ? 'Show More' : 'Show Less'}</button>}
         </p>
-        {/* {!!review.photos.length
-        && (
-          <ul className="review-photos">
-            {review.photos.map((photo) => (
-              <li className="review-photo" key={photo.id}>
-                <img src={photo.url} alt="review img" />
-              </li>
-            ))}
-          </ul>
-        )} */}
         {!!review.photos.length
         && (
           <ul className="review-photos">

@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import ReactStars from 'react-rating-stars-component';
+import ReviewContext from '../../contexts/ReviewContext';
+import ModalOff from '../../contexts/ModalOffContext';
 import request from '../../requests';
 
 const ReviewForm = ({ product, characteristics }) => {
@@ -49,7 +51,9 @@ const ReviewForm = ({ product, characteristics }) => {
       4: 'Runs slightly long',
       5: 'Runs long',
     },
-  }
+  };
+  const { modalOff, setModalOff } = useContext(ModalOff);
+  const [allReviews, setAllReviews] = useContext(ReviewContext);
   const [rating, setRating] = useState(null);
   const [recommended, setRecommended] = useState(true);
   const [charRatings, setCharRatings] = useState(
@@ -63,8 +67,22 @@ const ReviewForm = ({ product, characteristics }) => {
   const [summary, setSummary] = useState('');
   const [body, setBody] = useState('');
   const [photos, setPhotos] = useState([]);
+  const [thumbnails, setThumbnails] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
+  const postPhotos = (files) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', (event) => {
+      const fileData = event.target.result;
+      setThumbnails([...thumbnails, fileData]);
+      request.postPhotos(fileData)
+        .then((result) => {
+          setPhotos([...photos, result.data]);
+        })
+        .catch((err) => new Error(err));
+    });
+    reader.readAsDataURL(files[0]);
+  };
   const submitReview = (e) => {
     e.preventDefault();
     if (!rating) {
@@ -105,7 +123,10 @@ const ReviewForm = ({ product, characteristics }) => {
       }, {}),
     })
       .then(() => {
-        console.log('You submitted me');
+        setModalOff(true);
+      })
+      .then(() => {
+        setAllReviews([...allReviews, {}]);
       })
       .catch((err) => new Error(err));
   };
@@ -254,7 +275,7 @@ const ReviewForm = ({ product, characteristics }) => {
           required
         />
         <br />
-        <div className="remaining-chars" style={{ color: body.length < 50 ? 'red' : 'green' }}>
+        <div className="remaining-chars" style={{ color: body.length < 50 ? 'red' : 'black' }}>
           {body.length < 50 ? `Minimum required characters left: ${50 - body.length}` : 'Minimum reached'}
         </div>
       </label>
@@ -267,15 +288,15 @@ const ReviewForm = ({ product, characteristics }) => {
           type="file"
           name="photo-input"
           accept=".png, .jpg, .jpeg, .svg"
-          onChange={(e) => setPhotos([...photos, e.target.value])}
+          onChange={(e) => postPhotos(e.target.files)}
         />
       </label>
       )}
       <br />
-      {!!photos.length
+      {!!thumbnails.length
       && (
       <div className="photo-thumbnails">
-        {photos.map((url) => <img key={url} src={url} alt="img thumbnail" />)}
+        {thumbnails.map((url) => <img key={url} src={url} alt="img thumbnail" />)}
         <br />
       </div>
       )}

@@ -68,7 +68,7 @@ const App = () => {
               if (Number(idInput) >= 17067 && Number(idInput) <= 18077) {
                 setCurrentProductId(idInput);
               } else {
-                setIdInput("Not Valid");
+                setIdInput('Not Valid');
               }
             }}
           >
@@ -89,6 +89,13 @@ const App = () => {
             <option value="light">Light Mode</option>
           </select>
         </div>
+        <p id="announcement">
+          <i>SITE-WIDE ANNOUNCEMENT MESSAGE!</i>
+          <span> — SALE/DISCOUNT </span>
+          <b>OFFER</b>
+          <span> — </span>
+          <u>NEW PRODUCT HIGHLIGHT</u>
+        </p>
         <ModalOff.Provider value={{ modalOff, setModalOff }}>
           <ThemeContext.Provider value={theme}>
             <ProductContext.Provider value={currentProductData}>
