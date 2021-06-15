@@ -129,7 +129,7 @@ const RelatedList = () => {
       </div>
 
       <div className="outfitRelatedWidget" id="related">
-        <button type="button" className="carousel_button previous" id="relatedPrevious" onClick={navButtonHandle}>&#60;</button>
+        <button type="button" className="carousel_button previous" id="relatedPrevious" onClick={navButtonHandle}>&#9664;</button>
         <div className="carousel" id="relatedList">
           {relatedProductList.map((relatedProduct, i) => (
             <Card
@@ -143,7 +143,7 @@ const RelatedList = () => {
             />
           ))}
         </div>
-        <button type="button" className="carousel_button next" id="relatedNext" onClick={navButtonHandle}>&#62;</button>
+        <button type="button" className="carousel_button next" id="relatedNext" onClick={navButtonHandle}>&#9654;</button>
       </div>
     </>
   );
