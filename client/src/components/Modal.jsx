@@ -1,12 +1,21 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import ModalOff from '../contexts/ModalOffContext';
 
 const Modal = (props) => {
   const {
     modalId, header, body, footer, btnName, btnId, btnPlus, isImage, image,
   } = props;
   const [display, setDisplay] = useState(false);
+  const { modalOff, setModalOff } = useContext(ModalOff);
+  useEffect(() => {
+    if (modalOff) {
+      console.log('this worked');
+      setDisplay(false);
+      setModalOff(false);
+    }
+  }, [modalOff]);
 
   if (display) {
     return (

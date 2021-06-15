@@ -5,10 +5,12 @@ import ProductContext from '../../contexts/ProductContext';
 import QALoadContext from '../../contexts/QALoadContext';
 import request from '../../requests';
 import isEmail from './isEmail';
+import ModalOff from '../../contexts/ModalOffContext';
 
 const QuestionForm = () => {
   const product = useContext(ProductContext);
   const load = useContext(QALoadContext);
+  const { setModalOff } = useContext(ModalOff);
   const [question, setQuestion] = useState('');
   const [nickName, setNickName] = useState('');
   const [email, setEmail] = useState('');
@@ -35,7 +37,7 @@ const QuestionForm = () => {
           setNickName('');
           setEmail('');
           setSubClicked(false);
-          console.log(res);
+          setModalOff(true);
           load();
         }).catch((err) => {
           console.error(err);
