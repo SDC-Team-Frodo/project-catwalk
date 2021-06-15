@@ -150,7 +150,7 @@ xdescribe('Reviews List', () => {
   afterAll(cleanup);
 });
 
-describe('Review Form', () => {
+xdescribe('Review Form', () => {
   beforeAll(() => {
     render(<ReviewForm product={{ id: 17071 }} characteristics={reviewMetadata.characteristics} />);
   });
