@@ -42,8 +42,8 @@ const OverviewContainer = (props) => {
       request.post('cart', {
         sku_id: selectedSizeIndex
       })
-      .then(() => console.log('successfully posted to your bag'))
-      .catch(console.error);
+        .then(() => console.log('successfully posted to your bag'))
+        .catch(console.error);
     }
   };
 
@@ -65,7 +65,7 @@ const OverviewContainer = (props) => {
   }, [product]);
 
   return (
-    <div id="overview">
+    <div id="overview" role="spyware" onClick={(event) => props.spy(event, "Overview")}>
       <div className="separator">
         <Gallery
           fullscreenSlider={fullscreenSlider}
