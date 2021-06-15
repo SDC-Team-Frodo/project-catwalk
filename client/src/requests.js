@@ -21,6 +21,11 @@ const request = {
       params,
     })
   ),
+  postPhotos: (fileData) => (
+    axios.post('/photos', {
+      fileData,
+    })
+  ),
 };
 
 export default request;

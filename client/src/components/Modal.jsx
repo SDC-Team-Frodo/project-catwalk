@@ -11,7 +11,6 @@ const Modal = (props) => {
   const { modalOff, setModalOff } = useContext(ModalOff);
   useEffect(() => {
     if (modalOff) {
-      console.log('this worked');
       setDisplay(false);
       setModalOff(false);
     }

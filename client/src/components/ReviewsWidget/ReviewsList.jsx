@@ -8,20 +8,22 @@ import request from '../../requests';
 
 const ReviewsList = ({ product, characteristics }) => {
   const [allReviews, setAllReviews] = useContext(ReviewContext);
+  const [reviewCount, setReviewCount] = useState(0);
   const [reviews, setReviews] = useState([]);
   const [reviewsShown, setReviewsShown] = useState(2);
   const [sortOrder, setSortOrder] = useState('relevant');
   const [filteredContext, setFilteredContext] = useContext(FilterContext);
   useEffect(() => {
-    request.get('reviews', { product_id: product.id, count: 500 })
+    request.get('reviews', { product_id: product.id, count: 200 })
       .then((data) => {
         setAllReviews(data.data.results);
         setReviews(data.data.results);
+        setReviewCount(data.data.results.length);
       })
       .catch((err) => new Error(err));
   }, [product]);
   useEffect(() => {
-    request.get('reviews', { product_id: product.id, count: 500, sort: sortOrder })
+    request.get('reviews', { product_id: product.id, count: 200, sort: sortOrder })
       .then((data) => {
         setAllReviews(data.data.results);
         setFilteredContext([...filteredContext]);
@@ -37,6 +39,23 @@ const ReviewsList = ({ product, characteristics }) => {
       setReviews(allReviews);
     }
   }, [filteredContext]);
+  useEffect(() => {
+    if (allReviews.length && allReviews.length !== reviewCount) {
+      request.get('reviews', { product_id: product.id, count: 200, sort: sortOrder })
+        .then((data) => {
+          setAllReviews(data.data.results);
+          if (filteredContext.length) {
+            setReviews(allReviews.filter((review) => (
+              filteredContext.includes(review.rating)
+            )));
+          } else {
+            setReviews(allReviews);
+          }
+          setReviewCount(data.data.results.length);
+        })
+        .catch((err) => new Error(err));
+    }
+  }, [allReviews]);
   return (
     <section id="reviews">
       <h4>REVIEWS</h4>

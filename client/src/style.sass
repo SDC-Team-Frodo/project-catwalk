@@ -12,8 +12,11 @@ body
 h1, h2, h3, h4, header, strong, i
   color: $header-color
 
+header
+  font-weight: bold
+
 h4
-  font-weight: 600
+  font-weight: 500
   margin-block-start: 0
 
 span, p
@@ -30,6 +33,9 @@ main
   display: flex
   margin: auto
   padding: 0 10vw
+
+#announcement
+  text-align: center
 
 .separator
   display: flex
@@ -54,7 +60,6 @@ main
     display: initial
   .left-margin
     margin-left: 0 !important
-
 
 #overview
   position: relative
@@ -508,7 +513,7 @@ span.cardIcon
 .rating-bar
   display: grid
   grid-gap: 0.5rem
-  grid-template-columns: 2fr 7fr 1fr
+  grid-template-columns: 2.25fr 6.75fr 1fr
   margin-bottom: 1em
   padding: 0
   cursor: pointer
@@ -632,6 +637,7 @@ span.cardIcon
 .review-photos
   align-items: center
   display: flex
+  flex-wrap: wrap
   justify-content: flex-start
   list-style-type: none
   margin-bottom: 1em
@@ -730,6 +736,16 @@ span.cardIcon
           text-align: center
     .remaining-chars
       font-size: 10px
+    .photo-thumbnails
+      display: flex
+      align-items: flex-start
+      margin-top: 0.5em
+      img
+        border-radius: 0
+        max-height: 100px
+        margin-left: 0.25em
+        max-width: 18%
+
     .username-input, .email-input
       width: auto
     .privacy-warning
@@ -753,6 +769,7 @@ img
   top: 50vh
   max-height: 80vh
   border: thick double black
+  border-radius: 10px
   position: fixed
   background-color: lightgreen
   z-index: 2147483646
@@ -761,6 +778,7 @@ img
   transform: translate(-50%, -50%)
   .modalBody
       img
+        border-radius: 10px
         max-width: 80vw
         max-height: 80vh
 
