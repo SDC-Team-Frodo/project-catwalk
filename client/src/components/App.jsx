@@ -57,7 +57,7 @@ const App = () => {
               if (Number(idInput) >= 17067 && Number(idInput) <= 18077) {
                 setCurrentProductId(idInput);
               } else {
-                setIdInput("Not Valid");
+                setIdInput('Not Valid');
               }
             }}
           >

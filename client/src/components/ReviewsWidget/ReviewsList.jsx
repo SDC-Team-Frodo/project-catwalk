@@ -13,13 +13,15 @@ const ReviewsList = ({ product, characteristics }) => {
   const [sortOrder, setSortOrder] = useState('relevant');
   const [filteredContext, setFilteredContext] = useContext(FilterContext);
   useEffect(() => {
-    request.get('reviews', { product_id: product.id, count: 500 })
-      .then((data) => {
-        setAllReviews(data.data.results);
-        setReviews(data.data.results);
-      })
-      .catch((err) => new Error(err));
-  }, [product]);
+    if (allReviews.length !== reviews.length || allReviews.length === 0) {
+      request.get('reviews', { product_id: product.id, count: 500 })
+        .then((data) => {
+          setAllReviews(data.data.results);
+          setReviews(data.data.results);
+        })
+        .catch((err) => new Error(err));
+    }
+  }, [product, allReviews]);
   useEffect(() => {
     request.get('reviews', { product_id: product.id, count: 500, sort: sortOrder })
       .then((data) => {

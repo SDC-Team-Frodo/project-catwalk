@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import ReactStars from 'react-rating-stars-component';
+import ReviewContext from '../../contexts/ReviewContext';
+import ModalOff from '../../contexts/ModalOffContext';
 import request from '../../requests';
 
 const ReviewForm = ({ product, characteristics }) => {
@@ -50,6 +52,8 @@ const ReviewForm = ({ product, characteristics }) => {
       5: 'Runs long',
     },
   };
+  const { modalOff, setModalOff } = useContext(ModalOff);
+  const [allReviews, setAllReviews] = useContext(ReviewContext);
   const [rating, setRating] = useState(null);
   const [recommended, setRecommended] = useState(true);
   const [charRatings, setCharRatings] = useState(
@@ -119,7 +123,11 @@ const ReviewForm = ({ product, characteristics }) => {
       }, {}),
     })
       .then(() => {
+        setModalOff(true);
         console.log('You submitted me');
+      })
+      .then(() => {
+        setAllReviews([...allReviews, {}]);
       })
       .catch((err) => new Error(err));
   };
