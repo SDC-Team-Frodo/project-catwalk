@@ -26,6 +26,17 @@ const App = () => {
   const [allReviews, setAllReviews] = useState([]);
   const [modalOff, setModalOff] = useState(false);
 
+  const spy = (event, widget) => {
+    const { target } = event;
+    let element = target.nodeName.toLowerCase();
+    const time = Date.now().toString();
+
+    request.post('interactions/', {
+      element, widget, time,
+    })
+      .catch(console.error);
+  };
+
   useEffect(() => {
     setBrowse(false);
     request.get(`products/${currentProductId}`, {
@@ -90,18 +101,18 @@ const App = () => {
             <ProductContext.Provider value={currentProductData}>
               <ReviewContext.Provider value={[allReviews, setAllReviews]}>
                 <RatingContext.Provider value={[averageRating, setAverageRating]}>
-                  <OverviewContainer />
+                  <OverviewContainer spy={spy}/>
                 </RatingContext.Provider>
               </ReviewContext.Provider>
               <ProductIdContext.Provider value={[currentProductId, setCurrentProductId]}>
-                <RelatedContainer />
+                <RelatedContainer  spy={spy}/>
               </ProductIdContext.Provider>
               <QALoadContext.Provider value={() => {}}>
-                <QaContainer />
+                <QaContainer spy={spy}/>
               </QALoadContext.Provider>
               <ReviewContext.Provider value={[allReviews, setAllReviews]}>
                 <RatingContext.Provider value={[averageRating, setAverageRating]}>
-                  <ReviewsContainer />
+                  <ReviewsContainer spy={spy}/>
                 </RatingContext.Provider>
               </ReviewContext.Provider>
             </ProductContext.Provider>

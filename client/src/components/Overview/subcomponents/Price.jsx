@@ -13,8 +13,8 @@ const Price = (props) => {
 
   return (
     <>
-      <span className={classes}>${price}</span>
-      <span style={{color: 'green'}}>
+      <span className={classes} aria-label={`Original product price: ${price}`}>${price}</span>
+      <span style={{color: 'green'}} aria-label={`Discounted product price: ${salePriceString}`}>
         {salePriceString}
       </span>
     </>

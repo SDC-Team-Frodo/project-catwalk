@@ -31,7 +31,7 @@ const SelectSize = (props) => {
   };
 
   if (availableStyles.length === 0) {
-    return <select id="size-select" name="SOLD OUT" defaultValue="SOLD OUT" disabled>
+    return <select id="size-select" name="SOLD OUT" defaultValue="SOLD OUT" disabled aria-label="Sold out!">
       <option disabled hidden>SOLD OUT</option>
     </select>
   }
@@ -39,11 +39,12 @@ const SelectSize = (props) => {
 
   return (
     <>
-      <select id="size-select" name="SELECT SIZE" value={size} onChange={handleClick}>
+      <select id="size-select" name="SELECT SIZE" value={size} onChange={handleClick} aria-label="Select your size.">
         <option disabled hidden>{size}</option>
         {_.map(availableStyles, (sku) => {
             return (
               <option
+                aria-label={'Size: ' + sku.size}
                 key={`size-${sku.size}`}
                 value={sku.sku}>
                   {sku.size}

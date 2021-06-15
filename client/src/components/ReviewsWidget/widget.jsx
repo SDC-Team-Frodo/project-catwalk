@@ -7,7 +7,7 @@ import ReviewsList from './ReviewsList';
 import request from '../../requests';
 import getRecommendedAvg from '../../helpers/recommendedAvg';
 
-const ReviewContainer = () => {
+const ReviewContainer = (props) => {
   const product = useContext(ProductContext);
   const [reviewsMeta, setReviewsMeta] = useState({});
   const [filteredContext, setFilteredContext] = useState([]);
@@ -20,7 +20,7 @@ const ReviewContainer = () => {
       .catch((err) => new Error(err));
   }, [product]);
   return (
-    <article id="review-widget">
+    <article id="review-widget" onClick={event => props.spy(event, 'Reviews')}>
       <header>RATINGS &amp; REVIEWS</header>
       <div id="reviews-ratings-container">
         <div id="ratings-container">

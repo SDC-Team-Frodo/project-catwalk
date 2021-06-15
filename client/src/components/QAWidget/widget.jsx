@@ -7,7 +7,7 @@ import SearchBar from './SearchBar';
 import Modal from '../Modal';
 import QuestionForm from './QuestionForm';
 
-const QaContainer = () => {
+const QaContainer = (props) => {
   const product = useContext(ProductContext);
   const [data, setData] = useState({ results: [] });
 
@@ -25,7 +25,7 @@ const QaContainer = () => {
   }, [product]);
 
   return (
-    <div id="QAWidget">
+    <div id="QAWidget" onClick={event => props.spy(event, "Q&A")}>
       <h1 id="QATitle" data-testid="QAtitle" className="title">Questions And Answers</h1>
       <QALoadContext.Provider value={load}>
         <QuestionsContext.Provider value={data.results}>
