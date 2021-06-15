@@ -2,7 +2,7 @@ const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'Jul
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
-  return `${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+  return `${monthNames[date.getMonth()]} ${date.getDate() + 1}, ${date.getFullYear()}`;
 };
 
 export default formatDate;
