@@ -11,17 +11,47 @@ const SelectSize = (props) => {
     size = activeStyle.skus[selectedSizeIndex].size
   }
 
+  let availableStyles = [];
+
+  if (activeStyle && activeStyle.skus) {
+    availableStyles = _.map(activeStyle.skus, (sku, key) => {
+      return (
+        {
+          ...sku,
+          sku: key
+        }
+      )
+    });
+    availableStyles = _.filter(availableStyles, (sku => sku.quantity > 0));
+  }
+
   const handleClick = (event) => {
     const sku = event.target.value;
     setSelectedSizeIndex(sku);
   };
 
+  if (availableStyles.length === 0) {
+    return <select id="size-select" name="SOLD OUT" defaultValue="SOLD OUT" disabled aria-label="Sold out!">
+      <option disabled hidden>SOLD OUT</option>
+    </select>
+  }
+
+
   return (
     <>
-      <select id="size-select" name="SELECT SIZE" value={size} onChange={handleClick}>
+      <select id="size-select" name="SELECT SIZE" value={size} onChange={handleClick} aria-label="Select your size.">
         <option disabled hidden>{size}</option>
-        {skus && _.map(skus, (sku, key) => <option key={`size-${sku.size}`} value={key}>{sku.size}</option>)}
-
+        {_.map(availableStyles, (sku) => {
+            return (
+              <option
+                aria-label={'Size: ' + sku.size}
+                key={`size-${sku.size}`}
+                value={sku.sku}>
+                  {sku.size}
+              </option>
+            )
+          })
+        }
       </select>
     </>
   );
