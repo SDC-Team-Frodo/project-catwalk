@@ -68,7 +68,7 @@ const RelatedList = () => {
     } else {
       document.getElementById('relatedPrevious').style.visibility = 'visible';
     }
-    if (index >= numberOfCards - 3) {
+    if (index >= numberOfCards) {
       document.getElementById('relatedNext').style.visibility = 'hidden';
     } else {
       document.getElementById('relatedNext').style.visibility = 'visible';
@@ -99,7 +99,7 @@ const RelatedList = () => {
         setTranslateX((previousTranslateX) => previousTranslateX + 270);
       }
     } else if (response === 'relatedNext') {
-      if (index < numberOfCards - 3) {
+      if (index < numberOfCards) {
         setIndex((previousIndex) => previousIndex + 1);
         setTranslateX((previousTranslateX) => previousTranslateX - 270);
       }
