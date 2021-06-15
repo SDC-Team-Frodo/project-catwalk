@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import request from '../../requests';
 import Product from './Product';
 import allProducts from './AllProducts';
 
 const Browse = (props) => {
   const { setProduct } = props;
-  const [displayedProducts, setDisplayedProducts] = useState([0, 12]);
+  const [displayedProducts, setDisplayedProducts] = useState([0, 10]);
   const [products, setProducts] = useState(allProducts.slice(...displayedProducts));
 
   useEffect(() => {
@@ -15,16 +14,16 @@ const Browse = (props) => {
   return (
     <div id="BrowseList">
       <h1>Browse Products</h1>
-      {products.map((product, i) => {
-        return <Product id={product.id} setProduct={setProduct} key={i} name={product.name} />;
-      })}
+      {products.map((product) => (
+        <Product id={product.id} setProduct={setProduct} key={product.id} name={product.name} />
+      ))}
       {displayedProducts[0] > 0 && (
         <button
           type="button"
           id="previouseBrowse"
           className="hoverGreen"
           onClick={() => {
-            setDisplayedProducts([displayedProducts[0] - 12, displayedProducts[1] - 12]);
+            setDisplayedProducts([displayedProducts[0] - 10, displayedProducts[1] - 10]);
           }}
         >
           {'<'}
@@ -35,7 +34,7 @@ const Browse = (props) => {
         id="nextBrowse"
         className="hoverGreen"
         onClick={() => {
-          setDisplayedProducts([displayedProducts[0] + 12, displayedProducts[1] + 12]);
+          setDisplayedProducts([displayedProducts[0] + 10, displayedProducts[1] + 10]);
         }}
       >
         {'>'}
