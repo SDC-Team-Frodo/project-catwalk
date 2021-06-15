@@ -5,10 +5,13 @@ import React, { useState, useEffect, useContext } from 'react';
 import isEmail from './isEmail';
 import request from '../../requests';
 import QALoadContext from '../../contexts/QALoadContext';
+import ModalOff from '../../contexts/ModalOffContext';
+
 // import ProductContext from '../../ProductContext';
 
 const AnswerForm = (props) => {
   const { question_id } = props;
+  const { modalOff, setModalOff } = useContext(ModalOff);
   const load = useContext(QALoadContext);
   const [answer, setAnswer] = useState('');
   const [nickName, setNickName] = useState('');
@@ -42,7 +45,8 @@ const AnswerForm = (props) => {
             setDisplaySent(false);
           }, 2500);
           load();
-        }).catch(() => alert('couldn\'t send answer'));
+          setModalOff(true);
+        }).catch((err) => alert(err));
       }
     }
   }, [subClicked]);
