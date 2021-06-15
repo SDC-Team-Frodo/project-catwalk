@@ -15,7 +15,7 @@ const Style = (props) => {
   }
 
   return (
-    <div className="style-tile" style={css} onClick={() => setSelectedStyleIndex(index)}>
+    <div aria-label={'Style: ' + style.name} className="style-tile" style={css} onClick={() => setSelectedStyleIndex(index)}>
 
     </div>
   );
