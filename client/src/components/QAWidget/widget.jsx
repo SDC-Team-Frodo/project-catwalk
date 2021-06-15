@@ -26,7 +26,7 @@ const QaContainer = (props) => {
 
   return (
     <div id="QAWidget" onClick={event => props.spy(event, "Q&A")}>
-      <h1 id="QATitle" data-testid="QAtitle" className="title">Questions And Answers</h1>
+      <h2 id="QATitle" data-testid="QAtitle" className="title">QUESTIONS {'&'} ANSWERS</h2>
       <QALoadContext.Provider value={load}>
         <QuestionsContext.Provider value={data.results}>
           <SearchBar />
@@ -49,5 +49,3 @@ const QaContainer = (props) => {
 };
 
 export default QaContainer;
-// Testign the pull request
-// Another one

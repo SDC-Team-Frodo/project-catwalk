@@ -12,7 +12,7 @@ describe('QA component', () => {
 
   // Need a test for making sure that the title is rendering
   test('Should render QA Container', () => {
-    expect(screen.getByText('Questions And Answers')).toBeInTheDocument();
+    expect(screen.getByText('QUESTIONS & ANSWERS')).toBeInTheDocument();
   })
 
   afterAll(cleanup);
