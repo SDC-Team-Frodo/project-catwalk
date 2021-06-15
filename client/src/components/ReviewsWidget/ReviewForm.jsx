@@ -124,7 +124,6 @@ const ReviewForm = ({ product, characteristics }) => {
     })
       .then(() => {
         setModalOff(true);
-        console.log('You submitted me');
       })
       .then(() => {
         setAllReviews([...allReviews, {}]);
