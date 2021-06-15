@@ -12,8 +12,11 @@ body
 h1, h2, h3, h4, header, strong, i
   color: $header-color
 
+header
+  font-weight: bold
+
 h4
-  font-weight: 600
+  font-weight: 500
   margin-block-start: 0
 
 span, p
@@ -734,10 +737,11 @@ span.cardIcon
       font-size: 10px
     .photo-thumbnails
       display: flex
+      align-items: flex-start
       margin-top: 0.5em
       img
         border-radius: 0
-        height: auto
+        max-height: 100px
         margin-left: 0.25em
         max-width: 18%
 
