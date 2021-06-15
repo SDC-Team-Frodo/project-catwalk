@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import request from '../../requests';
 import Product from './Product';
 import allProducts from './AllProducts';
 
@@ -15,9 +14,9 @@ const Browse = (props) => {
   return (
     <div id="BrowseList">
       <h1>Browse Products</h1>
-      {products.map((product, i) => {
-        return <Product id={product.id} setProduct={setProduct} key={i} name={product.name} />;
-      })}
+      {products.map((product) => (
+        <Product id={product.id} setProduct={setProduct} key={product.id} name={product.name} />
+      ))}
       {displayedProducts[0] > 0 && (
         <button
           type="button"
