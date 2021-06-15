@@ -84,11 +84,6 @@ app.post('/photos', (req, res) => {
     api_key: `${process.env.API_KEY}`,
     api_secret: `${process.env.API_SECRET}`,
   });
-  // const stream = cloudinary.uploader.upload_stream((err, result) => {
-  //   // console.log(result);
-  //   res.send(result.url);
-  // });
-  // fs.createReadStream(fileData).pipe(stream);
   cloudinary.uploader.upload(fileData, (err, result) => {
     if (err) { throw new Error(err); }
     res.send(result.url);
