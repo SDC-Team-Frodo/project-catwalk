@@ -8,7 +8,7 @@ import RelatedContainer from './RelatedWidget/widget';
 import QALoadContext from '../contexts/QALoadContext';
 import RatingContext from '../contexts/RatingContext';
 import ReviewContext from '../contexts/ReviewContext';
-
+import ModalOff from '../contexts/ModalOffContext';
 import ProductContext from '../contexts/ProductContext';
 import ProductIdContext from '../contexts/ProductIdContext';
 import ThemeContext from '../contexts/ThemeContext';
@@ -24,6 +24,18 @@ const App = () => {
   const [idInput, setIdInput] = useState('');
   const [averageRating, setAverageRating] = useState(null);
   const [allReviews, setAllReviews] = useState([]);
+  const [modalOff, setModalOff] = useState(false);
+
+  const spy = (event, widget) => {
+    const { target } = event;
+    let element = target.nodeName.toLowerCase();
+    const time = Date.now().toString();
+
+    request.post('interactions/', {
+      element, widget, time,
+    })
+      .catch(console.error);
+  };
 
   useEffect(() => {
     setBrowse(false);
@@ -77,26 +89,28 @@ const App = () => {
             <option value="light">Light Mode</option>
           </select>
         </div>
-        <ThemeContext.Provider value={theme}>
-          <ProductContext.Provider value={currentProductData}>
-            <ReviewContext.Provider value={[allReviews, setAllReviews]}>
-              <RatingContext.Provider value={[averageRating, setAverageRating]}>
-                <OverviewContainer />
-              </RatingContext.Provider>
-            </ReviewContext.Provider>
-            <ProductIdContext.Provider value={[currentProductId, setCurrentProductId]}>
-              <RelatedContainer />
-            </ProductIdContext.Provider>
-            <QALoadContext.Provider value={() => {}}>
-              <QaContainer />
-            </QALoadContext.Provider>
-            <ReviewContext.Provider value={[allReviews, setAllReviews]}>
-              <RatingContext.Provider value={[averageRating, setAverageRating]}>
-                <ReviewsContainer />
-              </RatingContext.Provider>
-            </ReviewContext.Provider>
-          </ProductContext.Provider>
-        </ThemeContext.Provider>
+        <ModalOff.Provider value={{ modalOff, setModalOff }}>
+          <ThemeContext.Provider value={theme}>
+            <ProductContext.Provider value={currentProductData}>
+              <ReviewContext.Provider value={[allReviews, setAllReviews]}>
+                <RatingContext.Provider value={[averageRating, setAverageRating]}>
+                  <OverviewContainer spy={spy}/>
+                </RatingContext.Provider>
+              </ReviewContext.Provider>
+              <ProductIdContext.Provider value={[currentProductId, setCurrentProductId]}>
+                <RelatedContainer  spy={spy}/>
+              </ProductIdContext.Provider>
+              <QALoadContext.Provider value={() => {}}>
+                <QaContainer spy={spy}/>
+              </QALoadContext.Provider>
+              <ReviewContext.Provider value={[allReviews, setAllReviews]}>
+                <RatingContext.Provider value={[averageRating, setAverageRating]}>
+                  <ReviewsContainer spy={spy}/>
+                </RatingContext.Provider>
+              </ReviewContext.Provider>
+            </ProductContext.Provider>
+          </ThemeContext.Provider>
+        </ModalOff.Provider>
       </main>
     );
   }

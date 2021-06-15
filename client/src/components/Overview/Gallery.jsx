@@ -58,6 +58,7 @@ const Gallery = (props) => {
         id="gallery"
         className={(fullscreenSlider ? 'full' : '')+ (zoom ? ' zoom' : '')}
         style={css}
+        aria-label="Image of current product"
         onClick={handleGalleryClick}
         onPointerMove={handleMouseMove}>
            {activeStyle && <GalleryNav
