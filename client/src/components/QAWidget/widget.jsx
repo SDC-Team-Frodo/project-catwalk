@@ -26,7 +26,7 @@ const QaContainer = () => {
 
   return (
     <div id="QAWidget">
-      <h1 id="QATitle" data-testid="QAtitle" className="title">Questions And Answers</h1>
+      <h1 id="QATitle" data-testid="QAtitle" className="title">{'QUESTIONS & ANSWERS'}</h1>
       <QALoadContext.Provider value={load}>
         <QuestionsContext.Provider value={data.results}>
           <SearchBar />

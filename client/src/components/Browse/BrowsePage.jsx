@@ -5,7 +5,7 @@ import allProducts from './AllProducts';
 
 const Browse = (props) => {
   const { setProduct } = props;
-  const [displayedProducts, setDisplayedProducts] = useState([0, 12]);
+  const [displayedProducts, setDisplayedProducts] = useState([0, 10]);
   const [products, setProducts] = useState(allProducts.slice(...displayedProducts));
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const Browse = (props) => {
           id="previouseBrowse"
           className="hoverGreen"
           onClick={() => {
-            setDisplayedProducts([displayedProducts[0] - 12, displayedProducts[1] - 12]);
+            setDisplayedProducts([displayedProducts[0] - 10, displayedProducts[1] - 10]);
           }}
         >
           {'<'}
@@ -35,7 +35,7 @@ const Browse = (props) => {
         id="nextBrowse"
         className="hoverGreen"
         onClick={() => {
-          setDisplayedProducts([displayedProducts[0] + 12, displayedProducts[1] + 12]);
+          setDisplayedProducts([displayedProducts[0] + 10, displayedProducts[1] + 10]);
         }}
       >
         {'>'}
