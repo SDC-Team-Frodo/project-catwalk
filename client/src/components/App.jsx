@@ -77,6 +77,13 @@ const App = () => {
             <option value="light">Light Mode</option>
           </select>
         </div>
+        <p id="announcement">
+          <i>SITE-WIDE ANNOUNCEMENT MESSAGE!</i>
+          <span> — SALE/DISCOUNT </span>
+          <b>OFFER</b>
+          <span> — </span>
+          <u>NEW PRODUCT HIGHLIGHT</u>
+        </p>
         <ThemeContext.Provider value={theme}>
           <ProductContext.Provider value={currentProductData}>
             <ReviewContext.Provider value={[allReviews, setAllReviews]}>
