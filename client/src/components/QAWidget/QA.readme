@@ -1,0 +1,154 @@
+______________________________________________QA-READ-ME_______________________________________________________
+Overview of my Widget:
+The QA section contains a list of questions,
+a search bar for looking up specific questions,
+each questions has a list of answers that pertain to that question,
+an answer can have pictures that are contained in the modal componant,
+There are also two forms for adding a question and for adding an answer.
+Componants Mounted Here:
+----------------------------------------------Widget Structure-------------------------------------------------
+QaContainer
+  Searchbar
+    QuestionList
+      Question
+        Answer
+        Modal
+          AnswerForm
+        Modal
+          Photos
+  modal
+    QuestionForm
+----------------------------------------------Widget.jsx-------------------------------------------------------
+Description:
+  The widget.jsx is where everything starts. every componant is a child of the QaContainer this way the seperation
+  of concerns is clear through the app.
+State:
+  data:
+    this is the current data that is being rendered. It is an object that contains a list of questions. upon
+    loading there will be a request sent to the API for a new list of questions based on the current product id.
+    This is updated when the load function is invoked.
+Context:
+  ProductContext:
+    useContext:
+      This pulls the Product context passed in from app.jsx. The only thing that is used from this is
+      the Id, which is used to make a request to the server for the questions.
+  QALoadContext:
+    Provider:
+      This passes a load function down to all of the children so that when you need to re-render the
+      questions all you have to do is useContext and then invoke it.
+  QuestionsContext
+    Provider:
+      This passes the list of questions down to all of the children.
+----------------------------------------------SearchBar.jsx----------------------------------------------------
+Description:
+  The SearchBar is responsible for filtering the QuestionsContext based on the search function in the search.js.
+  it will only pass down the relevant questions to the children componants.
+State:
+  allQuestions:
+    I store the QuestionsContext as a string here. This allowed me to watch for changes and have my
+    useEffect work properly. For some reason when i was storing this state as an obfect instead of a string, it
+    would turn into an empty object. This is updated when the QuestionsContext changes.
+  relevantQuestions:
+    This is where a store the filtered Questions. It allows me to only pass the filtered questions
+    and since i'm storing allQuestions seperately i can still have access to the full list. This
+    is updated when the search button is clicked.
+  search:
+    This is where i store what is actually in the searchBar. It is updated in the onChange function of the
+    search input.
+  searchClicked:
+    Here i store weather or not the search button was clicked. Because of storing this in state i'm able to
+    to update all the other state in a useEffect function that watches for searchClicked to be true. This is
+    updated when the search button is clicked.
+Context:
+  QuestionsContext:
+    useContext:
+      this allows me to access all of the currently loaded questions data. I can then use this for my allQuestions
+      State. When this changes everychild element will re-render.
+    Provider:
+      Here i pass down the relevant questions state. This allows for me to only give the filtered questions
+      to the children so there is no chance of rendering the wrong questions.
+----------------------------------------------QuestionList.jsx-------------------------------------------------
+Description:
+  This is where all of the questions passed down from the QuestionsContext are mapped and turned into componants.
+  this also manages how many questions are supposed to be displayed, and holds the Modal that contains the
+  QuestionForm, where a user can submit a new question.
+State:
+  allQuestions:
+    This is where all of the questions that are passed from the QuestionsContext are stored in state. This is
+    Changed when the QuestionsContext changes.
+  displayedQuestions:
+    This is where the amount of questions that are supposed to be displayed is stored. It stores a number that
+    starts at 4 and will increment by two upon clicking the more questions button.
+  questions:
+    This is where i store the questions that need to be rendered on the screen. It's value is allQuestions sliced
+    from 0 to the displayedQuestions number. It changes when the displayedQuestions changes.
+  buttonDisplay:
+    This stores a boolean that will determine if the more questions button should be rendered or not. It is true
+    but becomes false when there are no more questions.
+Context:
+  QuestionsContext:
+    useContext:
+      This is where i get the full list of questions that need to ready to render.
+----------------------------------------------Question.jsx-----------------------------------------------------
+Description:
+  This is where the question is rendered onto the screen with a few different buttons including helpful and
+  add answer. There is an answers list in this componant that contains all the currently displayed answers.
+  The answers are also organized here to have any Seller answers at the top of the list.
+State:
+  displayedAnswers:
+    This is where i store the number of answers that should be on the screen at the moment. This is changed with
+    this click of the more answers button.
+  answers:
+    this is where i store the actuall list of displayed answers. This comes from slicing the prop question.answers
+    from 0 to the displayedAnswers. This is changed when the displayedAnswers changes or when the prop question
+    changes.
+  buttonLabel:
+    this is where a store the current label of the more answers/collapse button. After clicking the more answers
+    this button turns into a collapse button that will shrink the answers list back down.
+  yesClicked:
+    this is used to keep a user from pressing the yes button multiple times. It also allows me do display the
+    incremented value withought having to run the load function. This is changed when the helpful yes button
+    is pressed.
+Context:
+  ProductContext:
+    useContext:
+      I use this context for the PUT API call within this componant. This allows me to easily access the current
+      product id, and not have to worrie about inconsitencies with where the PUT request is going.
+----------------------------------------------Answer.jsx-------------------------------------------------------
+Description:
+  This is where the answer is rendered along with any text, photos, and username that go with it. There is a
+  Modal in this componant for the images. Upon clicking an image the modal will display the image larger. there
+  is a helpful button like question and there is a report button on the answer that will send a PUT to the API.
+State:
+  display:
+    this is used for deciding weather or not to display the answer. This is changed from true to false when
+    a user presses report button. When this is false all that will be displayed is the word reported.
+  yesClicked:
+    this operates the same way as in Question.
+----------------------------------------------AnswerForm.jsx---------------------------------------------------
+Description:
+  This form is used for submitting a new answer to a question.
+Fields:
+  Answer:
+    This is where the user is required to type an answer of at least 3 characters and no more than 1000.
+  NickName:
+    This is where a user is required to type a nickname of at least 3 characters
+  Email:
+    This is where the user must type in email format:
+    anynumberofCharacters@email.com <--I made it check for 3 characters after the . so this will need refactored later.
+  Photos:
+    Never got to this but it was one of the extra features.
+Submit:
+  upon clicking the submit a POST will be sent to the API that will contain all of the data provided. Then
+  if the POST fails the user will be allerted and nothing else will happen, however if the post goes through the
+  modal will be closed and the input fields will all be clieared.
+----------------------------------------------QuestionForm.jsx-------------------------------------------------
+Description:
+  This form is used for submitting a new Question.
+Fields:
+  Quesiton:
+    This is where the user will type their question min 3 max 1000.
+  NickName:*
+  Email:*
+  Submit:*
+Context:

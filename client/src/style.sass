@@ -838,28 +838,11 @@ img
 
 
 /////////////QA//////////////
-#QATitle
-  border-bottom: thick double black
-  padding: 2px
-  text-align: center
-  font-weight: 250
-  font-size: 40px
-
-#Qinput
-  border: 0px
-  border-bottom: 2px solid black
-  width: 30vw
-  font-size: 30px
-
-#Qinput:focus
-  outline: none
-
-#search
-  cursor: pointer
-  margin-left: 5px
-  margin-top: 10px
-  width: 30px
-  height: 30px
+#QAWidget
+  h2
+    font-size: 1em
+    font-weight: 200
+    color: #333333e8
 
 #loadQ, #loadA
   cursor: pointer
@@ -870,14 +853,16 @@ img
   width: fit-content
 
 #QButton
+  background-color: lightgray
   cursor: pointer
   margin-left: 50%
   transform: translateX(-50%)
   border: 0px
-  border-bottom: 2px solid black
-  background-color: white
-  font-size: 30px
-  width: 20vw
+  border: 1px solid black
+  font-size: 1.25em
+  font-weight: 200
+  width: 10em
+  padding: .75em
 
 .question
   padding: 10px
@@ -906,11 +891,23 @@ img
   position: relative
   margin-left: 50%
   transform: translateX(-50%)
+  #search
+    cursor: pointer
+    margin-left: 5px
+    margin-top: 10px
+    width: 30px
+    height: 30px
+  #Qinput
+    border: 0px
+    border-bottom: 2px solid black
+    width: 30vw
+    font-size: 1.25em
+  #Qinput:focus
+    outline: none
 
 .answerImage
   margin: 5px
-  height: 50px
-  width: 50px
+  height: 8em
   border: 2px solid black
 
 #answerImageDiv
@@ -969,6 +966,8 @@ img
     height: 75px
 
 .QuestionList
+  padding-top: 3em
+  padding-bottom: 3em
   margin-bottom: 10px
   max-height: 75vh
   overflow-y: scroll
@@ -992,7 +991,7 @@ img
   color: black
 
 .AnswerList
-  max-height: 50vh
+  max-height: 60vh
   overflow-y: scroll
 
 #nav
@@ -1028,10 +1027,6 @@ img
 // Browse
 #BrowseList
   padding: 2.5em
-  position: absolute
-  left: 50%
-  top: 50%
-  transform: translate(-50%, -50%)
   background: lightgreen
   z-index: 1
   align-content: center
@@ -1039,12 +1034,12 @@ img
     color: green
   p
     color: purple
-    font-size: 1.1em
+    font-size: 1.325em
   p:hover
     color: green
   div
     border-bottom: 1px solid black
-    width: 80vw
+    width: 75vw
   button
     background-color: transparent
     color: purple
