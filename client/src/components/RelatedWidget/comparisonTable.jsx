@@ -6,10 +6,10 @@ const ComparisonTable = (props) => {
   return (
     <table className="compareContent">
       <thead>
-        <tr>
-          <th>{overviewName}</th>
-          <th>Characteristics</th>
-          <th>{cardName}</th>
+        <tr className="compareTr">
+          <th className="compareTh compareColumns">{overviewName}</th>
+          <th className="compareTh compareColumns">Characteristics</th>
+          <th className="compareTh compareColumns">{cardName}</th>
         </tr>
       </thead>
       <tbody>

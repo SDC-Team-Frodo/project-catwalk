@@ -304,19 +304,39 @@ main
   overflow: auto
   background-color: rgb(0,0,0)
   background-color: rgba(0,0,0,0.4)
+  border 1px solid black
 
 .compareContent
   background-color: #fefefe
   margin: 15% auto
-  padding: 20px
-  border: 1px solid #888
-  width: 80%
+  padding-bottom: 1px
+  padding-left: 20px
+  padding-right: 20px
+  width: 750px
+  border-radius: 10px
 
 .compareClose
   color: #aaa
   float: right
   font-size: 28px
   font-weight: bold
+  padding-top: 10px
+
+table thead
+  position: sticky
+  color: red
+
+.compareColumns
+    width: 100px;
+
+.compareCurrentCol
+  text-align: left
+
+.compareCharCol
+  text-align: center
+
+.compareCardCol
+  text-align: right
 
 .compareClose:hover,
 .compareClose:focus
@@ -337,11 +357,12 @@ main
   position:relative
   width: 1080px
   padding-top: 25px
-  padding-top: 25px
+  padding-bottom: 25px
 
 .carousel_button
   height: 100px
-  width: 3rem
+  width: 50px
+  border-radius: 25px
   cursor: pointer
   border: 0
   font-weight: bold
@@ -365,10 +386,12 @@ main
   position: relative
   background-color: white
   border: 1px solid black
+  border-radius: 10px
   transition: transform 0.25s
 
   &:hover
     cursor: pointer
+    box-shadow: 2px 2px 10px, -2px -2px 10px,  2px -2px 10px,  -2px 2px 10px
 
 .blankCard
   min-width: 256px
@@ -391,6 +414,7 @@ main
   justify-content: center
   align-items: center
   text-align: center
+  border-radius: 10px
 
 .cardIcon
   position: absolute
@@ -415,7 +439,7 @@ main
   right: 5px
 
 span.cardIcon
-  color: yellow !important
+  color: red !important
 
 // reviews
 #review-widget

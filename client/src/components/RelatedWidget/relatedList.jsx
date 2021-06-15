@@ -29,13 +29,18 @@ const RelatedList = () => {
       .catch((err) => console.log(err));
   }, [product]);
 
+  function delay(i) {
+    setTimeout(() => {
+    }, 2000 * i);
+  }
+
   useEffect(() => {
     setRelatedProductList([]);
     setRelatedRatings([]);
     setRelatedThumbnails([]);
     setTranslateX(0);
     setIndex(1);
-    relatedIds.forEach((id) => {
+    relatedIds.forEach((id, indexDelay) => {
       request.get(`products/${id}`, { endpoint: `products/${id}` })
         .then((newRelatedProduct) => {
           setRelatedProductList((oldProducts) => [...oldProducts, newRelatedProduct.data]);
@@ -53,6 +58,7 @@ const RelatedList = () => {
           setRelatedThumbnails((oldThumbnails) => [...oldThumbnails, thumbnail.data.results[0].photos[0]]);
         })
         .catch((err) => console.log(err));
+      delay(indexDelay);
     });
   }, [relatedIds]);
 
@@ -123,7 +129,7 @@ const RelatedList = () => {
       </div>
 
       <div className="outfitRelatedWidget" id="related">
-        <button type="button" className="carousel_button previous" id="relatedPrevious" onClick={navButtonHandle}>&#60;</button>
+        <button type="button" className="carousel_button previous" id="relatedPrevious" onClick={navButtonHandle}>&#9664;</button>
         <div className="carousel" id="relatedList">
           {relatedProductList.map((relatedProduct, i) => (
             <Card
@@ -137,7 +143,7 @@ const RelatedList = () => {
             />
           ))}
         </div>
-        <button type="button" className="carousel_button next" id="relatedNext" onClick={navButtonHandle}>&#62;</button>
+        <button type="button" className="carousel_button next" id="relatedNext" onClick={navButtonHandle}>&#9654;</button>
       </div>
     </>
   );
