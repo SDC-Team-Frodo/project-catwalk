@@ -105,18 +105,18 @@ const OutfitList = () => {
   // Initiates the movement for the carousel
   useEffect(() => {
     if (index === 1) {
-      document.getElementById('outfitPrevious').style.visibility = 'hidden';
+      outfitPrevious.style.visibility = 'hidden';
     } else {
-      document.getElementById('outfitPrevious').style.visibility = 'visible';
+      outfitPrevious.style.visibility = 'visible';
     }
     if (index >= numberOfCards) {
-      document.getElementById('outfitNext').style.visibility = 'hidden';
+      outfitNext.style.visibility = 'hidden';
     } else {
-      document.getElementById('outfitNext').style.visibility = 'visible';
+      outfitNext.style.visibility = 'visible';
     }
 
     let initial = 0;
-    const cards = document.getElementsByClassName('outfitCard');
+    const cards = outfitList.getElementsByClassName('outfitCard');
     for (initial; initial < cards.length; initial += 1) {
       cards[initial].style.transform = `translateX(${translateX}px`;
     }
@@ -136,7 +136,7 @@ const OutfitList = () => {
     <>
       <div className="outfitRelatedWidget">
         {!isMobile && <button type="button" className="carousel_button previous" id="outfitPrevious" onClick={navButtonHandle}>&#9664;</button>}
-        <div className="carousel" id="relatedList">
+        <div className="carousel" id="outfitList">
           <div className="outfitCard card blankCard" onClick={addOutfit} id="blank">
             <div className="plus">
               <i className="fas fa-plus fa-4x" />

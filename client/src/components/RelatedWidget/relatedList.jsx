@@ -66,18 +66,18 @@ const RelatedList = () => {
 
   useEffect(() => {
     if (index === 1) {
-      document.getElementById('relatedPrevious').style.visibility = 'hidden';
+      relatedPrevious.style.visibility = 'hidden';
     } else {
-      document.getElementById('relatedPrevious').style.visibility = 'visible';
+      relatedPrevious.style.visibility = 'visible';
     }
     if (index >= numberOfCards) {
-      document.getElementById('relatedNext').style.visibility = 'hidden';
+      relatedNext.style.visibility = 'hidden';
     } else {
-      document.getElementById('relatedNext').style.visibility = 'visible';
+      relatedNext.style.visibility = 'visible';
     }
 
     let initial = 0;
-    const cards = document.getElementsByClassName('relatedCard');
+    const cards = related.getElementsByClassName('relatedCard');
     for (initial; initial < cards.length; initial += 1) {
       cards[initial].style.transform = `translateX(${translateX}px`;
     }
@@ -88,7 +88,7 @@ const RelatedList = () => {
       const feat = helpers.compareFeatures(product.features, cardTarget.features);
       setCombinedFeatures(feat);
       setIsModal(true);
-      document.getElementById('compareModal').style.display = 'block';
+      compareModal.style.display = 'block';
     }
   }, [cardTarget]);
 
@@ -111,7 +111,7 @@ const RelatedList = () => {
   function closeCompareWindow() {
     setIsModal(false);
     setCardTarget(null);
-    document.getElementById('compareModal').style.display = 'none';
+    compareModal.style.display = 'none';
   }
 
   function compareFeaturesModal(event) {
