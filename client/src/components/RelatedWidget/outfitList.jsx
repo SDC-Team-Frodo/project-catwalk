@@ -6,6 +6,7 @@ import ProductContext from '../../contexts/ProductContext';
 const OutfitList = () => {
   const product = useContext(ProductContext);
 
+  const [isMobile, setIsMobile] = useState(null);
   const [numberOfCards, setNumberOfCards] = useState(0);
   const [translateX, setTranslateX] = useState(0);
   const [outfitIds, setOutfitIds] = useState([]);
@@ -15,6 +16,7 @@ const OutfitList = () => {
   const [index, setIndex] = useState(1);
 
   useEffect(() => {
+    moveButton();
     let outfitIdsLocal = JSON.parse(localStorage.getItem('outfit'));
     if (!outfitIdsLocal) {
       outfitIdsLocal = [];
@@ -54,7 +56,7 @@ const OutfitList = () => {
             setOutfitThumbnails((oldThumbnails) => [...oldThumbnails, thumbnail.data.results[0].photos[0]]);
           })
           .catch((err) => console.log(err));
-        delay(indexDelay)
+        delay(indexDelay);
       });
     } else if (!outfitIds) {
       setOutfitIds([]);
@@ -90,12 +92,12 @@ const OutfitList = () => {
     if (response === 'outfitPrevious') {
       if (index !== 1) {
         setIndex((previousIndex) => previousIndex - 1);
-        setTranslateX((previousTranslateX) => previousTranslateX + 270);
+        setTranslateX((previousTranslateX) => previousTranslateX + 258);
       }
     } else if (response === 'outfitNext') {
       if (index < numberOfCards) {
         setIndex((previousIndex) => previousIndex + 1);
-        setTranslateX((previousTranslateX) => previousTranslateX - 270);
+        setTranslateX((previousTranslateX) => previousTranslateX - 258);
       }
     }
   }
@@ -120,33 +122,49 @@ const OutfitList = () => {
     }
   }, [index, translateX, numberOfCards]);
 
+  function moveButton() {
+    const windowWidth = window.innerWidth;
+    if (windowWidth <= 394 && !isMobile) {
+      setIsMobile(true);
+    } else if (windowWidth > 394 && isMobile) {
+      setIsMobile(false);
+    }
+  }
+  window.addEventListener('resize', moveButton);
+
   return (
-    <div className="outfitRelatedWidget">
-      <button type="button" className="carousel_button previous" id="outfitPrevious" onClick={navButtonHandle}>&#60;</button>
-      <div className="carousel" id="relatedList">
-        <div className="outfitCard card blankCard" onClick={addOutfit} id="blank">
-          <div className="plus">
-            <i className="fas fa-plus fa-4x" />
+    <>
+      <div className="outfitRelatedWidget">
+        {!isMobile && <button type="button" className="carousel_button previous" id="outfitPrevious" onClick={navButtonHandle}>&#9664;</button>}
+        <div className="carousel" id="relatedList">
+          <div className="outfitCard card blankCard" onClick={addOutfit} id="blank">
+            <div className="plus">
+              <i className="fas fa-plus fa-4x" />
+            </div>
+            <b>
+              <p>Add Current Product To</p>
+              <p>Outfits</p>
+            </b>
           </div>
-          <b>
-            <p>Add Current Product To</p>
-            <p>Outfits</p>
-          </b>
+          {outfitProducts.length > 0 && outfitProducts.map((outfitProduct, i) => (
+            <Card
+              product={outfitProduct}
+              thumbnail={outfitThumbnails[i]}
+              ratings={outfitRatings[i]}
+              key={`${product.id}${i}`}
+              cardClass="outfitCard"
+              func={removeOutfit}
+              isStars={false}
+            />
+          ))}
         </div>
-        {outfitProducts.length > 0 && outfitProducts.map((outfitProduct, i) => (
-          <Card
-            product={outfitProduct}
-            thumbnail={outfitThumbnails[i]}
-            ratings={outfitRatings[i]}
-            key={`${product.id}${i}`}
-            cardClass="outfitCard"
-            func={removeOutfit}
-            isStars={false}
-          />
-        ))}
+        {!isMobile && <button type="button" className="carousel_button next" id="outfitNext" onClick={navButtonHandle}>&#9654;</button>}
       </div>
-      <button type="button" className="carousel_button next" id="outfitNext" onClick={navButtonHandle}>&#62;</button>
-    </div>
+      <div id="mobileNavButtons">
+        {isMobile && <button type="button" className="carousel_button previous mobileButton" id="outfitPrevious" onClick={navButtonHandle}>&#9664;</button>}
+        {isMobile && <button type="button" className="carousel_button next mobileButton" id="outfitNext" onClick={navButtonHandle}>&#9654;</button>}
+      </div>
+    </>
   );
 };
 
