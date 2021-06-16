@@ -20,44 +20,62 @@ const Card = (props) => {
   }
 
   if (thumbnail) {
-    const background = {
-      backgroundImage: `url("${thumbnail.thumbnail_url}")`,
-    };
-    return (
-      <div className={cardClasses}>
-        <div className="imageContainer" style={background} onClick={redirect}>
-          <img src={thumbnail.thumbnail_url} alt="Failed" />
-        </div>
-        <div className="cardIcon" onClick={func}>
-          {!isStars ? <span className="cardIcon cardCross" id={iconId}>&times;</span>
-            : <i id={iconId} onClick={func} className="far fa-star cardIcon cardStar" />}
-        </div>
-        <div className="textContainer" onClick={redirect}>
-          {category}
-          <br />
-          <b>{name}</b>
-          <br />
-          $
-          {default_price}
-          <br />
-          <div className="cardRating">
-            {ratings && (
-              <div className="empty-stars">
-                <div className="filled-stars" style={{ width: `${(Math.round(getAverageRating(ratings) * 4) / 4) * 20}%` }}>
-                  <i className="fas fa-star" aria-hidden="true" />
-                  <i className="fas fa-star" aria-hidden="true" />
-                  <i className="fas fa-star" aria-hidden="true" />
-                  <i className="fas fa-star" aria-hidden="true" />
-                  <i className="fas fa-star" aria-hidden="true" />
+    const cardProduct = thumbnail.filter((styles) => styles['default?']);
+    if (Object.keys(cardProduct).length > 0) {
+      const { original_price, sale_price, photos } = cardProduct[0];
+      const thumbnailUrl = photos[0].thumbnail_url;
+      const background = {
+        backgroundImage: `url("${thumbnailUrl}")`,
+      };
+      return (
+        <div className={cardClasses}>
+          <div className="imageContainer" style={background} onClick={redirect}>
+            <img src={thumbnailUrl} alt="Failed" />
+          </div>
+          <div className="cardIcon" onClick={func}>
+            {!isStars ? <span className="cardIcon cardCross" id={iconId}>&times;</span>
+              : <i id={iconId} onClick={func} className="far fa-star cardIcon cardStar" />}
+          </div>
+          <div className="textContainer" onClick={redirect}>
+            {category}
+            <br />
+            <b>{name}</b>
+            <br />
+            <span>
+              {!sale_price ? (
+                <span>
+                  $
+                  {original_price}
+                </span>
+              ) : (
+                <span>
+                  $
+                  {sale_price}
+                  <strike>{original_price}</strike>
+                </span>
+              )}
+            </span>
+            <br />
+            <div className="cardRating">
+              {ratings && (
+                <div className="empty-stars">
+                  <div className="filled-stars" style={{ width: `${(Math.round(getAverageRating(ratings) * 4) / 4) * 20}%` }}>
+                    <i className="fas fa-star" aria-hidden="true" />
+                    <i className="fas fa-star" aria-hidden="true" />
+                    <i className="fas fa-star" aria-hidden="true" />
+                    <i className="fas fa-star" aria-hidden="true" />
+                    <i className="fas fa-star" aria-hidden="true" />
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
+    return <></>;
   }
-  return <p>List Loading</p>;
+  return <></>;
 };
 
 export default Card;
