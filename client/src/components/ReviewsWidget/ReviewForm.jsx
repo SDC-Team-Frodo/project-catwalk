@@ -72,11 +72,11 @@ const ReviewForm = ({ product, characteristics }) => {
   const [email, setEmail] = useState('');
   const postPhotos = (files) => {
     if (!files[0]) {
-      alert("No File Selected");
+      alert('No File Selected');
       return;
     }
     if (files[0].size > 2097152) {
-      alert("File is too big!");
+      alert('File is too big (Max size: 2MB)');
       return;
     }
     const reader = new FileReader();
