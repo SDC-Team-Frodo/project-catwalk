@@ -8,6 +8,7 @@ import helpers from './relatedHelpers';
 const RelatedList = () => {
   const product = useContext(ProductContext);
 
+  const [isMobile, setIsMobile] = useState(null);
   const [numberOfCards, setNumberOfCards] = useState(0);
   const [translateX, setTranslateX] = useState(0);
   const [relatedProductList, setRelatedProductList] = useState([]);
@@ -21,6 +22,7 @@ const RelatedList = () => {
 
   // Get initial value for related product's id, ratings, thumbnails
   useEffect(() => {
+    moveButton();
     request.get(`products/${product.id}/related`, { endpoint: `products/${product.id}/related` })
       .then((relatedProductIds) => {
         setRelatedIds(relatedProductIds.data);
@@ -64,18 +66,18 @@ const RelatedList = () => {
 
   useEffect(() => {
     if (index === 1) {
-      document.getElementById('relatedPrevious').style.visibility = 'hidden';
+      relatedPrevious.style.visibility = 'hidden';
     } else {
-      document.getElementById('relatedPrevious').style.visibility = 'visible';
+      relatedPrevious.style.visibility = 'visible';
     }
-    if (index >= numberOfCards - 3) {
-      document.getElementById('relatedNext').style.visibility = 'hidden';
+    if (index >= numberOfCards) {
+      relatedNext.style.visibility = 'hidden';
     } else {
-      document.getElementById('relatedNext').style.visibility = 'visible';
+      relatedNext.style.visibility = 'visible';
     }
 
     let initial = 0;
-    const cards = document.getElementsByClassName('relatedCard');
+    const cards = related.getElementsByClassName('relatedCard');
     for (initial; initial < cards.length; initial += 1) {
       cards[initial].style.transform = `translateX(${translateX}px`;
     }
@@ -86,7 +88,7 @@ const RelatedList = () => {
       const feat = helpers.compareFeatures(product.features, cardTarget.features);
       setCombinedFeatures(feat);
       setIsModal(true);
-      document.getElementById('compareModal').style.display = 'block';
+      compareModal.style.display = 'block';
     }
   }, [cardTarget]);
 
@@ -96,12 +98,12 @@ const RelatedList = () => {
     if (response === 'relatedPrevious') {
       if (index !== 1) {
         setIndex((previousIndex) => previousIndex - 1);
-        setTranslateX((previousTranslateX) => previousTranslateX + 270);
+        setTranslateX((previousTranslateX) => previousTranslateX + 258);
       }
     } else if (response === 'relatedNext') {
-      if (index < numberOfCards - 3) {
+      if (index < numberOfCards) {
         setIndex((previousIndex) => previousIndex + 1);
-        setTranslateX((previousTranslateX) => previousTranslateX - 270);
+        setTranslateX((previousTranslateX) => previousTranslateX - 258);
       }
     }
   }
@@ -109,7 +111,7 @@ const RelatedList = () => {
   function closeCompareWindow() {
     setIsModal(false);
     setCardTarget(null);
-    document.getElementById('compareModal').style.display = 'none';
+    compareModal.style.display = 'none';
   }
 
   function compareFeaturesModal(event) {
@@ -118,6 +120,16 @@ const RelatedList = () => {
     const cardDetails = relatedProductList[relatedIds.indexOf(id)];
     setCardTarget(cardDetails);
   }
+
+  function moveButton() {
+    const windowWidth = window.innerWidth;
+    if (windowWidth <= 394 && !isMobile) {
+      setIsMobile(true);
+    } else if (windowWidth > 394 && isMobile) {
+      setIsMobile(false);
+    }
+  }
+  window.addEventListener('resize', moveButton);
 
   return (
     <>
@@ -129,7 +141,7 @@ const RelatedList = () => {
       </div>
 
       <div className="outfitRelatedWidget" id="related">
-        <button type="button" className="carousel_button previous" id="relatedPrevious" onClick={navButtonHandle}>&#9664;</button>
+        {!isMobile && <button type="button" className="carousel_button previous" id="relatedPrevious" onClick={navButtonHandle}>&#9664;</button>}
         <div className="carousel" id="relatedList">
           {relatedProductList.map((relatedProduct, i) => (
             <Card
@@ -143,7 +155,11 @@ const RelatedList = () => {
             />
           ))}
         </div>
-        <button type="button" className="carousel_button next" id="relatedNext" onClick={navButtonHandle}>&#9654;</button>
+        {!isMobile && <button type="button" className="carousel_button next" id="relatedNext" onClick={navButtonHandle}>&#9654;</button>}
+      </div>
+      <div id="mobileNavButtons">
+        {isMobile && <button type="button" className="carousel_button previous mobileButton" id="relatedPrevious" onClick={navButtonHandle}>&#9664;</button>}
+        {isMobile && <button type="button" className="carousel_button next mobileButton" id="relatedNext" onClick={navButtonHandle}>&#9654;</button>}
       </div>
     </>
   );
