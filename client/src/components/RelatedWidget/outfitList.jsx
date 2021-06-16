@@ -93,7 +93,7 @@ const OutfitList = () => {
         setTranslateX((previousTranslateX) => previousTranslateX + 270);
       }
     } else if (response === 'outfitNext') {
-      if (index < numberOfCards - 3) {
+      if (index < numberOfCards) {
         setIndex((previousIndex) => previousIndex + 1);
         setTranslateX((previousTranslateX) => previousTranslateX - 270);
       }
@@ -107,7 +107,7 @@ const OutfitList = () => {
     } else {
       document.getElementById('outfitPrevious').style.visibility = 'visible';
     }
-    if (index >= numberOfCards - 3) {
+    if (index >= numberOfCards) {
       document.getElementById('outfitNext').style.visibility = 'hidden';
     } else {
       document.getElementById('outfitNext').style.visibility = 'visible';
