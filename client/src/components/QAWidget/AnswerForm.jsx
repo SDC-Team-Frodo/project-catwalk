@@ -20,8 +20,22 @@ const AnswerForm = (props) => {
   const [validA, setValidA] = useState(false);
   const [validN, setValidN] = useState(false);
   const [validE, setValidE] = useState(false);
-  const [displaySent, setDisplaySent] = useState(false);
   const [photos, setPhotos] = useState([]);
+  const [available, setAvailable] = useState(true);
+
+  const postPhotos = (files) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    reader.onload = (e) => {
+      const fileData = e.target.result;
+      request.postPhotos(fileData)
+        .then((result) => {
+          setPhotos([...photos, result.data]);
+          setAvailable(true);
+        })
+        .catch((err) => new Error(err));
+    };
+  };
 
   useEffect(() => {
     if (subClicked) {
@@ -40,10 +54,6 @@ const AnswerForm = (props) => {
           setNickName('');
           setEmail('');
           setSubClicked(false);
-          setDisplaySent(true);
-          setTimeout(() => {
-            setDisplaySent(false);
-          }, 2500);
           load();
           setModalOff(true);
         }).catch((err) => alert(err));
@@ -108,20 +118,29 @@ const AnswerForm = (props) => {
         />
         <h4 className="disclaimer">*For authentication reasons, you will not be emailed*</h4>
       </div>
-      {/* <div>
+      <div className="uploadphotos">
         <label className="formInput" htmlFor="image">
-          Upload Photo
+          Upload Photos
         </label>
         <input
-          type="text"
+          type="file"
           id="image"
+          accept=".jpg, .jpeg, .png, .svg"
           alt="none"
           placeholder="Enter a URL to your photo"
           onChange={(e) => {
-            setPhotos([...photos, e.target.value]);
+            if (available) {
+              setAvailable(false);
+              postPhotos(e.target.files);
+            } else {
+              alert('Wait for first file to finish.');
+            }
           }}
         />
-      </div> */}
+        <section className="imgDiv">
+          {photos.map((photo) => <img key={photo} alt="no img" className="answerUpload" src={photo} />)}
+        </section>
+      </div>
       <button
         className="hoverGrey"
         type="button"
@@ -130,7 +149,7 @@ const AnswerForm = (props) => {
           setSubClicked(true);
         }}
       >
-        {displaySent ? 'Sent' : 'Submit!'}
+        Submit!
       </button>
     </div>
   );
