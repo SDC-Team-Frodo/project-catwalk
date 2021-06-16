@@ -23,6 +23,20 @@ const AnswerForm = (props) => {
   const [displaySent, setDisplaySent] = useState(false);
   const [photos, setPhotos] = useState([]);
 
+  const postPhotos = (files) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    reader.onload = (e) => {
+      const fileData = e.target.result;
+      request.postPhotos(fileData)
+        .then((result) => {
+          setPhotos([...photos, result.data]);
+          console.log(photos);
+        })
+        .catch((err) => new Error(err));
+    };
+  };
+
   useEffect(() => {
     if (subClicked) {
       if (
@@ -108,20 +122,24 @@ const AnswerForm = (props) => {
         />
         <h4 className="disclaimer">*For authentication reasons, you will not be emailed*</h4>
       </div>
-      {/* <div>
+      <div className="uploadphotos">
         <label className="formInput" htmlFor="image">
-          Upload Photo
+          Upload Photos
         </label>
         <input
-          type="text"
+          type="file"
           id="image"
+          accept=".jpg, .jpeg, .png, .svg"
           alt="none"
           placeholder="Enter a URL to your photo"
           onChange={(e) => {
-            setPhotos([...photos, e.target.value]);
+            postPhotos(e.target.files);
           }}
         />
-      </div> */}
+        <section className="imgDiv">
+          {photos.map((photo) => <img key={photo} alt="no img" className="answerUpload" src={photo} />)}
+        </section>
+      </div>
       <button
         className="hoverGrey"
         type="button"
