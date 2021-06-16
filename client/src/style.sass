@@ -850,7 +850,7 @@ img
   background-color: white
   border: 0px
   text-decoration: underline
-  font-size: 20px
+  font-size: 1.2em
   width: fit-content
 
 #QButton
@@ -866,14 +866,14 @@ img
   padding: .75em
 
 .question
-  padding: 10px
+  padding: 1.5em
   border-bottom: 2px solid black
   margin: 3%
   .AnswerText
     font-weight: 200
 
 .answer
-  padding: 5px
+  padding: .75em
   border-bottom: 1px solid grey
   margin: 3%
 
@@ -902,7 +902,7 @@ img
     border: 0px
     border-bottom: 2px solid black
     width: 30vw
-    font-size: 1.25em
+    font-size: 1em
   #Qinput:focus
     outline: none
 
@@ -939,34 +939,38 @@ img
     background-color: white
     border: none
 
-#questionForm, #answerForm
-  max-height: 70vh
+#answerForm
+  height: 60vh
+  min-width: 275px
   overflow-y: auto
   color: black
-  width: 60vw
+  width: fit-content
   button
     cursor: pointer
     color: black
     text-decoration: none
     margin-left: 42%
-    margin-bottom: 10px
-    font-size: 25px
+    margin-bottom: 1em
+    font-size: 1.25em
     border: 2px solid black
   button:hover
     background-color: lightgrey
   div
-    height: 100px
+    display: flex
+    flex-wrap: wrap
+    height: 10em
     border-bottom: 1px solid black
-    font-size: 25px
+    font-size: 1.25em
     margin: 10px
   input, textarea
+    height: 10%
     border: 2px solid black
-    width: 45%
-    font-size: 25px
-    float: right
+    width: 35%
+    font-size: 1em
+    margin-left: auto
     margin-right: 5%
   #Question
-    height: 75px
+    height: 7em
   .uploadphotos
     height: fit-content
     padding-bottom: .75em
@@ -986,6 +990,39 @@ img
         height: 7em
         max-width: 15em
 
+#questionForm
+  height: 50vh
+  overflow-y: auto
+  min-width: 275px
+  color: black
+  width: fit-content
+  button
+    cursor: pointer
+    color: black
+    text-decoration: none
+    margin-left: 42%
+    margin-bottom: 1em
+    font-size: 1.25em
+    border: 2px solid black
+  button:hover
+    background-color: lightgrey
+  div
+    display: flex
+    flex-wrap: wrap
+    height: 7em
+    border-bottom: 1px solid black
+    font-size: 1.25em
+    margin: 10px
+  input, textarea
+    height: 10%
+    border: 2px solid black
+    width: 35%
+    font-size: 1em
+    margin-left: auto
+    margin-right: 5%
+  #Question
+    height: 7em
+
 .QuestionList
   min-width: 300px
   padding-top: 3em
@@ -1001,16 +1038,9 @@ img
   color: red
 
 .disclaimer
-  font-size: 15px
+  font-size: 1em
   font-weight: 200
   color: grey
-
-.sent
-  font-weight: 200
-  margin-left: 50%
-  transform: translateX(-50%)
-  font-size: 80px
-  color: black
 
 .AnswerList
   min-width: 300px
