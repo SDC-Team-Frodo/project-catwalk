@@ -37,7 +37,7 @@ const GalleryAside = (props) => {
         </div>
 
         <a href="#review-widget" aria-label={`Click here to read all reviews on this product.`}>
-          {`Read all reviews (${allReviews.length} reviews)`}
+          {`Read all ${allReviews.length} reviews`}
         </a>
         <br />
         <span className="slim" aria-label={`Product category: ${product.category}`}>{product.category}</span>

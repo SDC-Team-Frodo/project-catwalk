@@ -1,7 +1,7 @@
 import React from 'react';
 
 const CharLabels = ({ char }) => {
-  const labels2 = {
+  const labels = {
     Size: ['Too small', 'Perfect', 'Too big'],
     Width: ['Too narrow', 'Perfect', 'Too wide'],
     Length: ['Too short', 'Too long'],
@@ -11,7 +11,7 @@ const CharLabels = ({ char }) => {
   };
   return (
     <div className="char-labels">
-      {labels2[char].map((label) => (<div key={label}>{label}</div>))}
+      {labels[char].map((label) => (<div key={label}>{label}</div>))}
     </div>
   );
 };
