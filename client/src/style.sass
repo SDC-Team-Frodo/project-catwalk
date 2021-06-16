@@ -987,6 +987,7 @@ img
         max-width: 15em
 
 .QuestionList
+  min-width: 300px
   padding-top: 3em
   padding-bottom: 3em
   margin-bottom: 10px
@@ -1012,6 +1013,7 @@ img
   color: black
 
 .AnswerList
+  min-width: 300px
   max-height: 60vh
   overflow-y: scroll
 
@@ -1023,15 +1025,26 @@ img
   margin-left: 50vw
   transform: translateX(-50vw)
   input
-    float: right
+    position: absolute
+    top: 1em
+    right: 10em
+    border: 1px solid grey
+    width: 7.5em
     font-size: 1em
     background-color: transparent
-    border: 0px
   input:focus
     outline: none
   #changeId
+    border: 1px solid grey
     float: right
+    position: absolute
+    top: 1em
+    right: 1em
   #browse
+    border: 1px solid grey
+    position: absolute
+    top: 2.5em
+    right: 1em
     margin-left: 10em
   button
     font-size: 1em
@@ -1040,6 +1053,10 @@ img
     border: 0px
   button:hover
     color: grey
+  #themeSelect
+    position: absolute
+    top: 5em
+    right: 1em
 
 
 .answerNameBold

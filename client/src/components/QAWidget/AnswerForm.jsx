@@ -20,8 +20,8 @@ const AnswerForm = (props) => {
   const [validA, setValidA] = useState(false);
   const [validN, setValidN] = useState(false);
   const [validE, setValidE] = useState(false);
-  const [displaySent, setDisplaySent] = useState(false);
   const [photos, setPhotos] = useState([]);
+  const [available, setAvailable] = useState(true);
 
   const postPhotos = (files) => {
     const reader = new FileReader();
@@ -31,7 +31,7 @@ const AnswerForm = (props) => {
       request.postPhotos(fileData)
         .then((result) => {
           setPhotos([...photos, result.data]);
-          console.log(photos);
+          setAvailable(true);
         })
         .catch((err) => new Error(err));
     };
@@ -54,10 +54,6 @@ const AnswerForm = (props) => {
           setNickName('');
           setEmail('');
           setSubClicked(false);
-          setDisplaySent(true);
-          setTimeout(() => {
-            setDisplaySent(false);
-          }, 2500);
           load();
           setModalOff(true);
         }).catch((err) => alert(err));
@@ -133,7 +129,12 @@ const AnswerForm = (props) => {
           alt="none"
           placeholder="Enter a URL to your photo"
           onChange={(e) => {
-            postPhotos(e.target.files);
+            if (available) {
+              setAvailable(false);
+              postPhotos(e.target.files);
+            } else {
+              alert('Wait for first file to finish.');
+            }
           }}
         />
         <section className="imgDiv">
@@ -148,7 +149,7 @@ const AnswerForm = (props) => {
           setSubClicked(true);
         }}
       >
-        {displaySent ? 'Sent' : 'Submit!'}
+        Submit!
       </button>
     </div>
   );
