@@ -71,6 +71,14 @@ const ReviewForm = ({ product, characteristics }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const postPhotos = (files) => {
+    if (!files[0]) {
+      alert("No File Selected");
+      return;
+    }
+    if (files[0].size > 2097152) {
+      alert("File is too big!");
+      return;
+    }
     const reader = new FileReader();
     reader.addEventListener('load', (event) => {
       const fileData = event.target.result;
@@ -280,7 +288,7 @@ const ReviewForm = ({ product, characteristics }) => {
         </div>
       </label>
       <br />
-      {photos.length < 5
+      {thumbnails.length < 5
       && (
       <label htmlFor="photo-input">
         <div className="review-topic">Upload your photos</div>
