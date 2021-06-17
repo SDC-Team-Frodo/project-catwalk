@@ -13,6 +13,7 @@ import ProductContext from '../contexts/ProductContext';
 import ProductIdContext from '../contexts/ProductIdContext';
 import ThemeContext from '../contexts/ThemeContext';
 import testData from '../testData';
+import logo from './logo';
 import request from '../requests';
 import '../style.sass';
 
@@ -57,6 +58,7 @@ const App = () => {
       <ThemeContext.Provider value={theme}>
         <main>
           <div id="nav">
+            <img x="6" y="2" width="108" height="90" src={logo} />
             <input
               type="text"
               placeholder="17067 -- 18077"
