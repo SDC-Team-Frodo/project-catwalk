@@ -92,9 +92,9 @@ const App = () => {
               Browse Products
             </button>
             <select id="themeSelect" onChange={(e) => setTheme(e.target.value)}>
-              <option value="light" selected={theme === 'light'}>Light Mode</option>
-              <option value="dark" selected={theme === 'dark'}>Dark Mode</option>
-              <option value="beast-boy" selected={theme === 'beast-boy'}>Beast Boy</option>
+              <option value="light" defaultValue={theme === 'light'}>Light Mode</option>
+              <option value="dark" defaultValue={theme === 'dark'}>Dark Mode</option>
+              <option value="beast-boy" defaultValue={theme === 'beast-boy'}>Beast Boy</option>
             </select>
           </div>
           <p id="announcement">
