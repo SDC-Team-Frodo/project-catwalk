@@ -28,11 +28,11 @@ const QaContainer = (props) => {
 
   return (
     <div id="QAWidget" onClick={(event) => props.spy(event, 'Q&A')}>
-      <h2 id="QATitle" data-testid="QAtitle" className="title">
+      <header id="QATitle" data-testid="QAtitle" className="title">
         QUESTIONS
         &
         ANSWERS
-      </h2>
+      </header>
       <QALoadContext.Provider value={load}>
         <QuestionsContext.Provider value={data.results}>
           <SearchBar />
