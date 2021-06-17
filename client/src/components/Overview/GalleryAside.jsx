@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
+import _ from 'lodash';
 import StyleGrid from './subcomponents/StyleGrid';
 import ProductContext from '../../contexts/ProductContext';
 import ReviewContext from '../../contexts/ReviewContext';
@@ -13,12 +14,39 @@ const GalleryAside = (props) => {
 
   const product = useContext(ProductContext);
 
-  const {  cartQuantity, setCartQuantity, selectedSizeIndex, setSelectedSizeIndex, activeStyle, styles, selectedStyleIndex, setSelectedStyleIndex, submitCart } = props;
+  const {
+    cartQuantity, setCartQuantity,
+    selectedSizeIndex, setSelectedSizeIndex,
+    activeStyle, styles,
+    selectedStyleIndex, setSelectedStyleIndex,
+    submitCart,
+    fullscreenSlider,
+  } = props;
 
-  // Added support for hiding.
-  // I assume conditionally rendering will break the useState hook if it misses rendering any of the children using said hook.
+  let max = 15;
+  if (activeStyle && selectedSizeIndex > 0) {
+    const inventory = activeStyle.skus[selectedSizeIndex].quantity;
+    max = Math.min(inventory, max);
+  }
+
+  let availableStyles = [];
+
+  if (activeStyle && activeStyle.skus) {
+    availableStyles = _.map(activeStyle.skus, (sku, key) => {
+      return (
+        {
+          ...sku,
+          sku: key,
+        }
+      );
+    });
+    availableStyles = _.filter(availableStyles, ((sku) => sku.quantity > 0));
+  }
+
+  const soldOut = availableStyles.length < 1;
+
   return (
-    <div id="gallery-aside" className={props.fullscreenSlider ? 'hide' : ''}>
+    <div id="gallery-aside" className={fullscreenSlider ? 'hide' : ''}>
       <section className="left-margin top-margin">
 
         <div id="gallery-aside-stars">
@@ -36,9 +64,11 @@ const GalleryAside = (props) => {
             )}
         </div>
 
-        <a href="#review-widget" aria-label={`Click here to read all reviews on this product.`}>
-          {`Read all ${allReviews.length} reviews`}
-        </a>
+        {allReviews.length > 0 && (
+          <a href="#review-widget" aria-label="Click here to read all reviews on this product.">
+            {`Read all (${allReviews.length}) reviews`}
+          </a>
+        )}
         <br />
         <span className="slim" aria-label={`Product category: ${product.category}`}>{product.category}</span>
 
@@ -48,42 +78,62 @@ const GalleryAside = (props) => {
         <Price
           price={activeStyle ? activeStyle.original_price : 0}
           salePrice={activeStyle ? activeStyle.sale_price : null}
-          />
+        />
         <br />
         <br />
         <div id="styles">
           <strong>Styles &gt;</strong>
           <span className="slim">
-            {activeStyle && ' ' + activeStyle.name}
+            {activeStyle && ` ${activeStyle.name}`}
           </span>
         </div>
 
         <StyleGrid
           styles={styles}
           selectedStyleIndex={selectedStyleIndex}
-          setSelectedStyleIndex={setSelectedStyleIndex}/>
+          setSelectedStyleIndex={setSelectedStyleIndex}
+        />
 
         <form>
           <div className="separator mobile-row">
-            {(activeStyle && activeStyle.skus) && <SelectSize activeStyle={activeStyle}
-            selectedSizeIndex={selectedSizeIndex}
-            setSelectedSizeIndex={setSelectedSizeIndex}/>}
-            <QuantityInput
-              cartQuantity={cartQuantity}
-              setCartQuantity={setCartQuantity} />
+            {(activeStyle && activeStyle.skus) && (
+              <SelectSize
+                activeStyle={activeStyle}
+                selectedSizeIndex={selectedSizeIndex}
+                setSelectedSizeIndex={setSelectedSizeIndex}
+                setCartQuantity={setCartQuantity}
+                availableStyles={availableStyles}
+              />
+            )}
+            {!soldOut && (
+              <QuantityInput
+                cartQuantity={cartQuantity}
+                setCartQuantity={setCartQuantity}
+                max={max}
+              />
+            )}
           </div>
 
           <br />
           <div className="separator mobile-row">
-            <button id="add-to-bag" onClick={submitCart} aria-label="Add to bag">
-              ADD TO BAG
-              <i className="fas fa-plus"></i>
-            </button>
-            <button id="favorite-button" aria-label="Add to outfits"><i className="far fa-star"></i></button>
+            {!soldOut && (
+              <>
+                <button type="submit" id="add-to-bag" onClick={submitCart} aria-label="Add to bag">
+                  ADD TO BAG
+                  <i className="fas fa-plus" />
+                </button>
+                <button
+                  type="submit"
+                  id="favorite-button"
+                  aria-label="Add to outfits"
+                >
+                  <i className="far fa-star" />
+                </button>
+              </>
+            )}
           </div>
         </form>
-    </section>
-
+      </section>
     </div>
   );
 };

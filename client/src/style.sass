@@ -1,4 +1,7 @@
 // app level
+html
+  scroll-behavior: smooth
+
 $font-stack: Tahoma, Arial, Helvetica, sans-serif
 $body-color-light: #696969
 $background-color-light: #ffffff
@@ -20,18 +23,35 @@ body
   color: $body-color-light
   #nav
     background-color: $header-background-light
+  .modal
+    color: black
+    background-color: $header-background-light
+  #review-form
+    color: black
 
 .dark
   background-color: $background-color-dark
   color: $body-color-dark
   #nav
     background-color: $header-background-dark
+  .card
+    color: $body-color-light
+  .modal
+    color: black
+    background-color: $header-background-light
+  #review-form
+    color: black
 
 .beast-boy
   background-color: $background-color-beast
   color: $body-color-beast
   #nav
     background-color: $header-background-beast
+  .modal
+    color: black
+    background-color: $background-color-beast
+  #review-form
+    color: black
 
 header
   font-weight: bold
@@ -89,6 +109,8 @@ main
   min-width: 15em
   width: 60%
   min-height: 30em
+  box-shadow: .2em .2em .5em #333
+  // transition: width 1s ease, height 1s ease
   &.full
     margin: auto
     width: 100% !important
@@ -116,8 +138,20 @@ main
   height: 100%
   margin: 0 !important
   cursor: zoom-in
+  i
+    color: black
+    text-shadow: 0 0 .3em white
+
   &.zoom
     cursor: zoom-out
+  .scroll-right
+    position: absolute
+    right: 1em
+    top: 49%
+  .scroll-left
+    position: absolute
+    left: 2em
+    top: 49%
 
 #outer-gallery-nav
   z-index: 2
@@ -631,7 +665,7 @@ span.cardIcon
   font-size: 18px
   height: 2em
   margin-bottom: 1em
-  padding-left: 1em
+  padding: 0 2em 0 1em
   width: 100%
 
 .review-tiles
@@ -771,7 +805,6 @@ span.cardIcon
   min-width: 350px
   overflow-y: scroll
   #review-form
-    color: black
     margin-bottom: 1em
     padding: 0 1em
     .review-topic
@@ -810,7 +843,7 @@ span.cardIcon
     .username-input, .email-input
       width: auto
     .privacy-warning
-      color: red
+      color: #c00000
       font-size: 12px
       text-align: center
     .submit
@@ -831,10 +864,12 @@ img
   max-height: 80vh
   border: 5px double black
   border-radius: 10px
-  color: black
   position: fixed
+<<<<<<< HEAD
   background: linear-gradient(coral, yellow, coral)
   //background-color: coral
+=======
+>>>>>>> main
   z-index: 2147483646
   max-width: 80vw
   left: 50vw
@@ -846,11 +881,16 @@ img
         max-height: 80vh
 
 #backDrop
+  -webkit-backdrop-filter: blur(1em) brightness(0.5)
+  -ms-backdrop-filter: blur(1em) brightness(0.5)
+  -o-backdrop-filter: blur(1em) brightness(0.5)
   backdrop-filter: blur(1em) brightness(0.5)
   top: 0 !important
   left: 0 !important
   position: fixed
   background-color: transparent
+  @-moz-document url-prefix()
+    background-color: rgba(255, 255, 255, .9)
   height: 100vh !important
   width: 100vw !important
   z-index: 2147483645
