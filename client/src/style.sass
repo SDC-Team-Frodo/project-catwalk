@@ -540,6 +540,7 @@ span.cardIcon
   i
     color: red
 
+
 .rating-bars, .char-bars
   list-style-type: none
   margin-top: 1.5em
@@ -575,7 +576,7 @@ span.cardIcon
   width: 100%
 
 .rating-filler
-  background-color: green
+  background: linear-gradient(0.25turn, yellow, red)
   border-radius: inherit
   height: inherit
 
@@ -1061,52 +1062,60 @@ img
   overflow-y: scroll
 
 #nav
-  margin: 1em
+  color: inherit
+  margin: 0
   width: 80vw
   right: 0
   border-bottom: 1px solid black
   margin-left: 50vw
   transform: translateX(-50vw)
+  img
+    height: 50px
+    width: auto
   input
     position: absolute
-    top: 1em
-    right: 10em
-    border: 1px solid grey
+    color: inherit
+    top: 2.5em
+    right: 2em
+    border: none
     width: 7.5em
-    font-size: 1em
     background-color: transparent
+    cursor: pointer
   input:focus
     outline: none
   #changeId
     color: inherit
-    border: 1px solid grey
+    border: none
     float: right
     position: absolute
-    top: 1em
-    right: 1em
+    top: 2em
+    right: 0
+    cursor: pointer
   #browse
     color: inherit
-    border: 1px solid grey
+    border: none
+    font-size: 14px
+    position: absolute
+    top: 1em
+    right: 0
+    margin-left: 10em
+    cursor: pointer
+  #themeSelect
     position: absolute
     top: 2.5em
-    right: 1em
-    margin-left: 10em
-  #themeSelect
+    right: 11em
+    background-color: transparent
     border: none
-    border-bottom: 1px solid black
+    color: inherit
     cursor: pointer
     outline: none
   button
     font-size: 1em
     background-color: transparent
     cursor: pointer
-    border: 0px
+    border: none
   button:hover
     color: grey
-  #themeSelect
-    position: absolute
-    top: 5em
-    right: 1em
 
 
 .answerNameBold
@@ -1162,74 +1171,3 @@ img
 
 .hoverGreen:hover
   color: green
-
-
-
-
-
-
-  /* The switch - the box around the slider
-
-.switch
-  position: relative
-  display: inline-block
-  width: 40px
-  height: 22px
-
-  input
-    opacity: 0
-    width: 100px
-    height: 100px
-    z-index: 20
-
-/* Hide default HTML checkbox
-
-/* The slider
-
-.slider
-  position: absolute
-  cursor: pointer
-  top: 0
-  left: 0
-  right: 0
-  bottom: 0
-  background-color: #ccc
-  -webkit-transition: .4s
-  -moz-transition: .4s
-  -o-transition: .4s
-  transition: .4s
-
-  &:before
-    position: absolute
-    content: ""
-    height: 18px
-    width: 18px
-    left: 2px
-    bottom: 2px
-    background-color: white
-    -webkit-transition: .4s
-    -moz-transition: .4s
-    -o-transition: .4s
-    transition: .4s
-
-input
-  &:checked + .slider
-    background-color: #2196F3
-
-  &:focus + .slider
-    box-shadow: 0 0 1px #2196F3
-
-  &:checked + .slider:before
-    -webkit-transform: translateX(18px)
-    -moz-transform: translateX(18px)
-    -o-transform: translateX(18px)
-    -ms-transform: translateX(18px)
-    transform: translateX(18px)
-
-/* Rounded sliders
-
-.slider.round
-  border-radius: 22px
-
-  &:before
-    border-radius: 50%

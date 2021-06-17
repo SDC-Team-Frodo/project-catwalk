@@ -79,7 +79,7 @@ const App = () => {
                 }
               }}
             >
-              Change Product
+              <i className="fa fa-search" aria-hidden="true" />
             </button>
             <button
               value="Browse"
