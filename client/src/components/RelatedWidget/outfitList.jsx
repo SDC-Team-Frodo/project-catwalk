@@ -32,13 +32,13 @@ const OutfitList = () => {
 
   useEffect(() => {
     if (outfitIds) {
+      const outfitIdsLocal = JSON.parse(localStorage.getItem('outfit'));
       setOutfitProducts([]);
       setOutfitRatings([]);
       setOutfitThumbnails([]);
       setTranslateX(0);
       setIndex(1);
-      setNumberOfCards(outfitIds.length);
-      const outfitIdsLocal = JSON.parse(localStorage.getItem('outfit'));
+      setNumberOfCards(outfitIdsLocal.length);
       outfitIdsLocal.forEach((id, indexDelay) => {
         request.get(`products/${id}`, { endpoint: `products/${id}` })
           .then((newOutfitProduct) => {
