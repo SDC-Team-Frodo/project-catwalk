@@ -7,8 +7,6 @@ import request from '../../requests';
 import QALoadContext from '../../contexts/QALoadContext';
 import ModalOff from '../../contexts/ModalOffContext';
 
-// import ProductContext from '../../ProductContext';
-
 const AnswerForm = (props) => {
   const { question_id } = props;
   const { modalOff, setModalOff } = useContext(ModalOff);
@@ -119,6 +117,7 @@ const AnswerForm = (props) => {
         <h4 className="disclaimer">*For authentication reasons, you will not be emailed*</h4>
       </div>
       <div className="uploadphotos">
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label className="formInput" htmlFor="image">
           Upload Photos
         </label>

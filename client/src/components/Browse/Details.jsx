@@ -1,7 +1,6 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import request from '../../requests';
-import Modal from '../Modal';
 
 const Details = (props) => {
   const { id, clicked, setProduct } = props;
@@ -13,7 +12,6 @@ const Details = (props) => {
   if (clicked && !loaded) {
     request.get(`products/${id}`, {})
       .then((res) => {
-        console.log(res.data);
         setLoaded(true);
         setName(res.data.name);
         setDescription(res.data.description);

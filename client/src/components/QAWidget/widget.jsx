@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect, useContext } from 'react';
 import QuestionsContext from '../../contexts/QuestionsContext';
 import QALoadContext from '../../contexts/QALoadContext';
@@ -25,8 +27,12 @@ const QaContainer = (props) => {
   }, [product]);
 
   return (
-    <div id="QAWidget" onClick={event => props.spy(event, "Q&A")}>
-      <h2 id="QATitle" data-testid="QAtitle" className="title">QUESTIONS {'&'} ANSWERS</h2>
+    <div id="QAWidget" onClick={(event) => props.spy(event, 'Q&A')}>
+      <header id="QATitle" data-testid="QAtitle" className="title">
+        QUESTIONS
+        &
+        ANSWERS
+      </header>
       <QALoadContext.Provider value={load}>
         <QuestionsContext.Provider value={data.results}>
           <SearchBar />
