@@ -2,8 +2,11 @@
 $font-stack: Tahoma, Arial, Helvetica, sans-serif
 $body-color-light: #696969
 $background-color-light: #ffffff
-$body-color-dark: white
+$header-background-light: #caf9ff
+$body-color-dark: #ffffff
 $background-color-dark: #333333
+$header-background-dark: #001a33
+
 
 body
   font-family: $font-stack
@@ -12,14 +15,14 @@ body
 .light
   background-color: $background-color-light
   color: $body-color-light
+  #nav
+    background-color: $header-background-light
 
 .dark
   background-color: $background-color-dark
   color: $body-color-dark
-
-
-// h1, h2, h3, h4, header, strong, i
-//   color: $header-color
+  #nav
+    background-color: $header-background-dark
 
 header
   font-weight: bold
@@ -27,9 +30,6 @@ header
 h4
   font-weight: 500
   margin-block-start: 0
-
-// span, p
-//   color: $body-color
 
 div
   margin: 0
@@ -612,6 +612,22 @@ span.cardIcon
   margin-bottom: 1em
   text-align: center
 
+#reviews
+  .fa-search
+    color: black
+    position: absolute
+    transform: translate(-200%, 50%)
+
+.reviews-search
+  border: 1px solid inherit
+  border-radius: 18px
+  box-sizing: border-box
+  font-size: 18px
+  height: 2em
+  margin-bottom: 1em
+  padding-left: 1em
+  width: 100%
+
 .review-tiles
   list-style-type: none
   margin: 0
@@ -1063,12 +1079,14 @@ img
 
 #nav
   color: inherit
-  margin: 0
-  width: 80vw
-  right: 0
-  border-bottom: 1px solid black
-  margin-left: 50vw
-  transform: translateX(-50vw)
+  // background-color: $header-background-light
+  padding: 0
+  margin-left: -10vw
+  width: 100vw
+  // right: 0
+  // border-bottom: 1px solid black
+  // margin-left: 50vw
+  // transform: translateX(-50vw)
   img
     height: 50px
     width: auto
