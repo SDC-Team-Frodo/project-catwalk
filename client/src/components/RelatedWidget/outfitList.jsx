@@ -53,7 +53,7 @@ const OutfitList = () => {
 
         request.get(`products/${id}/styles`, { endpoint: `products/${id}/styles` })
           .then((thumbnail) => {
-            setOutfitThumbnails((oldThumbnails) => [...oldThumbnails, thumbnail.data.results[0].photos[0]]);
+            setOutfitThumbnails((oldThumbnails) => [...oldThumbnails, thumbnail.data.results]);
           })
           .catch((err) => console.log(err));
         delay(indexDelay);

@@ -3,7 +3,7 @@ import Modal from '../Modal';
 import request from '../../requests';
 import formatDate from '../../helpers/formatDate';
 
-const ReviewTile = ({ review }) => {
+const ReviewTile = ({ review, searchText }) => {
   const [hidden, setHidden] = useState(review.body.length > 250);
   const [selectedHelpful, setSelectedHelpful] = useState(false);
   const [helpfulCount, setHelpfulCount] = useState(review.helpfulness);
