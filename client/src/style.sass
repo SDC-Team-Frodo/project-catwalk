@@ -6,6 +6,9 @@ $header-background-light: #caf9ff
 $body-color-dark: #ffffff
 $background-color-dark: #333333
 $header-background-dark: #001a33
+$body-color-beast: #6100a1
+$background-color-beast: #5fff6c
+$header-background-beast: #048100
 
 
 body
@@ -23,6 +26,12 @@ body
   color: $body-color-dark
   #nav
     background-color: $header-background-dark
+
+.beast-boy
+  background-color: $background-color-beast
+  color: $body-color-beast
+  #nav
+    background-color: $header-background-beast
 
 header
   font-weight: bold
@@ -652,8 +661,10 @@ span.cardIcon
   font-weight: bold
   margin: -0.25em 0 0.5em 0
   select
+    background-color: transparent
     border: none
     border-bottom: 1px solid black
+    color: inherit
     cursor: pointer
     outline: none
 
