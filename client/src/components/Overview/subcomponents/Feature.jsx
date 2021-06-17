@@ -6,9 +6,14 @@ const Feature = (props) => {
 
   return (
     <>
-      <i className="fas fa-check"></i><strong>{feature.feature}</strong> <span className="slim">{feature.value}</span><br />
+      <i className="fas fa-check" />
+      <strong>
+        {feature.feature}
+      </strong>
+      <span className="slim">{` ${feature.value}`}</span>
+      <br />
     </>
   );
-}
+};
 
 export default Feature;
