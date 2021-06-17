@@ -38,7 +38,8 @@ const OutfitList = () => {
       setTranslateX(0);
       setIndex(1);
       setNumberOfCards(outfitIds.length);
-      outfitIds.forEach((id, indexDelay) => {
+      const outfitIdsLocal = JSON.parse(localStorage.getItem('outfit'));
+      outfitIdsLocal.forEach((id, indexDelay) => {
         request.get(`products/${id}`, { endpoint: `products/${id}` })
           .then((newOutfitProduct) => {
             setOutfitProducts((oldProducts) => [...oldProducts, newOutfitProduct.data]);
