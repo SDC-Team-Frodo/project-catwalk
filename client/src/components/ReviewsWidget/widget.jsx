@@ -20,7 +20,10 @@ const ReviewContainer = (props) => {
       .catch((err) => new Error(err));
   }, [product]);
   return (
-    <article id="review-widget" onClick={event => props.spy(event, 'Reviews')}>
+    <article
+      id="review-widget"
+      onClick={event => props.spy(event, 'Reviews')}
+    >
       <header>RATINGS &amp; REVIEWS</header>
       <div id="reviews-ratings-container">
         <div id="ratings-container">

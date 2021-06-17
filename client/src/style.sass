@@ -1,16 +1,37 @@
 // app level
 $font-stack: Tahoma, Arial, Helvetica, sans-serif
-$header-color: #333333e8
-$body-color: #696969
-$background-color: #ffffff
+$body-color-light: #696969
+$background-color-light: #ffffff
+$header-background-light: #caf9ff
+$body-color-dark: #ffffff
+$background-color-dark: #333333
+$header-background-dark: #001a33
+$body-color-beast: #6100a1
+$background-color-beast: #5fff6c
+$header-background-beast: #048100
+
 
 body
-  background-color: $background-color
-  color: $body-color
   font-family: $font-stack
+  margin: 0
 
-h1, h2, h3, h4, header, strong, i
-  color: $header-color
+.light
+  background-color: $background-color-light
+  color: $body-color-light
+  #nav
+    background-color: $header-background-light
+
+.dark
+  background-color: $background-color-dark
+  color: $body-color-dark
+  #nav
+    background-color: $header-background-dark
+
+.beast-boy
+  background-color: $background-color-beast
+  color: $body-color-beast
+  #nav
+    background-color: $header-background-beast
 
 header
   font-weight: bold
@@ -18,9 +39,6 @@ header
 h4
   font-weight: 500
   margin-block-start: 0
-
-span, p
-  color: $body-color
 
 div
   margin: 0
@@ -31,7 +49,7 @@ main
 
 #app
   display: flex
-  margin: auto
+  margin: 0
   padding: 0 10vw
 
 #announcement
@@ -66,13 +84,11 @@ main
 
 #gallery-container
   order: 1
-  // flex-grow: 2
   z-index: 2
   position: relative
   min-width: 15em
   width: 60%
   min-height: 30em
-  // transition: width 1s ease, height 1s ease
   &.full
     margin: auto
     width: 100% !important
@@ -95,7 +111,6 @@ main
 
 #gallery
   z-index: 1 !important
-  // background-color: grey
   position: relative
   width: 100%
   height: 100%
@@ -120,7 +135,6 @@ main
   opacity: .9
   height: 87%
   width: 4em
-  // background-color: blue
   overflow: hidden
   &:hover
     opacity: 1
@@ -146,13 +160,11 @@ main
   &:hover
     filter: brightness(1.1)
   &.selected
-    // border-bottom: .2em solid black
     box-shadow: 0 .25em #F39C12
 
 #gallery-aside
   order: 2
   position: relative
-  // background-color: darkgrey
   width: 40%
   min-height: 30em
   #gallery-aside-stars
@@ -163,6 +175,8 @@ main
     display: inline-block !important
     margin-left: .5em
     top: -.15em
+    &:visited
+      color: inherit
   .strikethrough
     text-decoration: line-through
   h2
@@ -250,17 +264,12 @@ main
       color: #34526f
     &.fa-share-alt:hover
       color: #00995e
-// i className="fab fa-pinterest"></i>
-//           <i className="fab fa-tumblr"></i>
-//           <i className="fas fa-share-alt"></i>
 
 #features
   order: 2
   display: inline-block
   position: relative
-  // background: lightgrey
   width: 40%
-  // height: 15em
 
 .left-margin
   margin-left: 2.5em
@@ -294,6 +303,7 @@ main
 
 //Related
 #compareModal
+  color: black
   display: none
   position: fixed
   z-index: 5000
@@ -519,6 +529,7 @@ span.cardIcon
   color: red
   font-family: FontAwesome
   font-size: 16px
+  font-weight: normal
   left: 0
   position: relative
   top: 0
@@ -534,6 +545,7 @@ span.cardIcon
   white-space: nowrap
   i
     color: red
+
 
 .rating-bars, .char-bars
   list-style-type: none
@@ -570,7 +582,7 @@ span.cardIcon
   width: 100%
 
 .rating-filler
-  background-color: green
+  background: linear-gradient(0.25turn, yellow, red)
   border-radius: inherit
   height: inherit
 
@@ -606,6 +618,22 @@ span.cardIcon
   margin-bottom: 1em
   text-align: center
 
+#reviews
+  .fa-search
+    color: black
+    position: absolute
+    transform: translate(-200%, 50%)
+
+.reviews-search
+  border: 1px solid inherit
+  border-radius: 18px
+  box-sizing: border-box
+  font-size: 18px
+  height: 2em
+  margin-bottom: 1em
+  padding-left: 1em
+  width: 100%
+
 .review-tiles
   list-style-type: none
   margin: 0
@@ -630,9 +658,10 @@ span.cardIcon
   font-weight: bold
   margin: -0.25em 0 0.5em 0
   select
-    background-color: $background-color
+    background-color: transparent
     border: none
     border-bottom: 1px solid black
+    color: inherit
     cursor: pointer
     outline: none
 
@@ -647,7 +676,7 @@ span.cardIcon
     padding: 0 0.25em 0 0.5em
     text-decoration: underline
     &:hover
-      color: $header-color
+      font-weight: bold
 
 .review-date
   align-items: center
@@ -722,7 +751,7 @@ span.cardIcon
     .fas
       margin-left: 0.5em
     &:hover
-      color: $header-color
+      font-weight: bold
 
 #new-review
     background-color: lightgray
@@ -735,7 +764,8 @@ span.cardIcon
     .fas
       margin-left: 0.5em
     &:hover
-      color: $header-color
+      color: black
+      font-weight: bold
 
 #review-modal
   min-width: 350px
@@ -769,7 +799,7 @@ span.cardIcon
       font-size: 10px
     .photo-thumbnails
       display: flex
-      align-items: flex-start
+      align-items: center
       margin-top: 0.5em
       img
         border-radius: 0
@@ -801,6 +831,7 @@ img
   max-height: 80vh
   border: thick double black
   border-radius: 10px
+  color: black
   position: fixed
   background-color: lightgreen
   z-index: 2147483646
@@ -850,7 +881,7 @@ img
   h2
     font-size: 1em
     font-weight: 200
-    color: #333333e8
+    color: inherit
 
 #loadQ, #loadA
   cursor: pointer
@@ -1057,45 +1088,58 @@ img
   overflow-y: scroll
 
 #nav
-  margin: 1em
-  width: 80vw
-  right: 0
-  border-bottom: 1px solid black
-  margin-left: 50vw
-  transform: translateX(-50vw)
+  color: inherit
+  padding: 0
+  margin-left: -10vw
+  width: 100vw
+  img
+    height: 50px
+    width: auto
   input
     position: absolute
-    top: 1em
-    right: 10em
-    border: 1px solid grey
+    color: inherit
+    font-size: 18px
+    top: 1.75em
+    right: 1em
+    border: none
     width: 7.5em
-    font-size: 1em
     background-color: transparent
+    cursor: pointer
   input:focus
     outline: none
   #changeId
-    border: 1px solid grey
+    color: inherit
+    border: none
     float: right
     position: absolute
-    top: 1em
-    right: 1em
+    top: 2em
+    right: 0
+    cursor: pointer
   #browse
-    border: 1px solid grey
+    color: inherit
+    border: none
+    font-size: 18px
+    position: absolute
+    top: 0.25em
+    right: 0
+    margin-left: 10em
+    cursor: pointer
+  #themeSelect
     position: absolute
     top: 2.5em
-    right: 1em
-    margin-left: 10em
+    right: 12em
+    background-color: transparent
+    border: none
+    color: inherit
+    cursor: pointer
+    outline: none
   button
     font-size: 1em
     background-color: transparent
     cursor: pointer
-    border: 0px
+    border: none
   button:hover
     color: grey
-  #themeSelect
-    position: absolute
-    top: 5em
-    right: 1em
 
 
 .answerNameBold
