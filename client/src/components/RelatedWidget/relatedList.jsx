@@ -25,8 +25,14 @@ const RelatedList = () => {
     moveButton();
     request.get(`products/${product.id}/related`, { endpoint: `products/${product.id}/related` })
       .then((relatedProductIds) => {
-        setRelatedIds(relatedProductIds.data);
-        setNumberOfCards(relatedProductIds.data.length);
+        const uniqRelatedIds = [];
+        relatedProductIds.data.forEach((ids) => {
+          if (uniqRelatedIds.indexOf(ids) === -1) {
+            uniqRelatedIds.push(ids);
+          }
+        });
+        setRelatedIds(uniqRelatedIds);
+        setNumberOfCards(uniqRelatedIds.length);
       })
       .catch((err) => console.log(err));
   }, [product]);
@@ -57,7 +63,7 @@ const RelatedList = () => {
 
       request.get(`products/${id}/styles`, { endpoint: `products/${id}/styles` })
         .then((thumbnail) => {
-          setRelatedThumbnails((oldThumbnails) => [...oldThumbnails, thumbnail.data.results[0].photos[0]]);
+          setRelatedThumbnails((oldThumbnails) => [...oldThumbnails, thumbnail.data.results]);
         })
         .catch((err) => console.log(err));
       delay(indexDelay);
@@ -70,6 +76,7 @@ const RelatedList = () => {
     } else {
       relatedPrevious.style.visibility = 'visible';
     }
+
     if (index >= numberOfCards) {
       relatedNext.style.visibility = 'hidden';
     } else {
