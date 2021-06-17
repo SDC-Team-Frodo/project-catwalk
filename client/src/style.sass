@@ -829,11 +829,12 @@ img
 .modal
   top: 50vh
   max-height: 80vh
-  border: thick double black
+  border: 5px double black
   border-radius: 10px
   color: black
   position: fixed
-  background-color: lightgreen
+  background: linear-gradient(coral, yellow, coral)
+  //background-color: coral
   z-index: 2147483646
   max-width: 80vw
   left: 50vw
@@ -885,7 +886,8 @@ img
 
 #loadQ, #loadA
   cursor: pointer
-  background-color: white
+  color: inherit
+  background-color: inherit
   border: 0px
   text-decoration: underline
   font-size: 1.2em
@@ -931,14 +933,16 @@ img
   margin-left: 50%
   transform: translateX(-50%)
   #search
+    position: absolute
     cursor: pointer
-    margin-left: 5px
-    margin-top: 10px
-    width: 30px
-    height: 30px
+    right: 1em
+    top: 0.5em
+    width: 20px
+    height: 20px
   #Qinput
-    border: 0px
-    border-bottom: 2px solid black
+    padding: 0.5em 2.5em 0.5em 1em
+    border-radius: 18px
+    border: 2px solid black
     width: 30vw
     font-size: 1em
   #Qinput:focus
@@ -965,7 +969,7 @@ img
     cursor: pointer
     color: gray
     text-decoration: underline
-    background-color: white
+    background-color: transparent
     border: none
 
 
@@ -976,7 +980,7 @@ img
     cursor: pointer
     color: gray
     text-decoration: underline
-    background-color: white
+    background-color: transparent
     border: none
 
 #answerForm
@@ -1064,6 +1068,7 @@ img
     height: 7em
 
 .QuestionList
+  scrollbar-color:
   min-width: 300px
   padding-top: 3em
   padding-bottom: 3em
