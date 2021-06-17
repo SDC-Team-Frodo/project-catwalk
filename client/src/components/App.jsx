@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useState, useEffect, useContext, createContext, Provider } from 'react';
+import React, { useState, useEffect } from 'react';
 import QaContainer from './QAWidget/widget';
 import OverviewContainer from './Overview/widget';
 import ReviewsContainer from './ReviewsWidget/widget';
@@ -28,7 +28,7 @@ const App = () => {
 
   const spy = (event, widget) => {
     const { target } = event;
-    let element = target.nodeName.toLowerCase();
+    const element = target.nodeName.toLowerCase();
     const time = Date.now().toString();
 
     request.post('interactions/', {
@@ -48,77 +48,81 @@ const App = () => {
       alert('The product couldn\'t load');
     });
   }, [currentProductId]);
+  useEffect(() => {
+    const app = document.getElementById('app');
+    app.className = theme;
+  }, [theme])
   if (!browse) {
     return (
-      <main>
-        <div id="nav">
-          <input
-            type="text"
-            placeholder="17067 -- 18077"
-            value={idInput}
-            onChange={(e) => {
-              setIdInput(e.target.value);
-            }}
-          />
-          <button
-            value="search"
-            type="button"
-            id="changeId"
-            onClick={() => {
-              if (Number(idInput) >= 17067 && Number(idInput) <= 18077) {
-                setCurrentProductId(idInput);
-              } else {
-                setIdInput('Not Valid');
-              }
-            }}
-          >
-            Change Product
-          </button>
-          <button
-            value="Browse"
-            type="button"
-            id="browse"
-            onClick={() => {
-              setBrowse(true);
-            }}
-          >
-            Browse Products
-          </button>
-          <select id="themeSelect" onChange={(e) => setTheme(e.target.value)}>
-            <option value="dark">Dark Mode</option>
-            <option value="light">Light Mode</option>
-          </select>
-        </div>
-        <p id="announcement">
-          <i>SITE-WIDE ANNOUNCEMENT MESSAGE!</i>
-          <span> — SALE/DISCOUNT </span>
-          <b>OFFER</b>
-          <span> — </span>
-          <u>NEW PRODUCT HIGHLIGHT</u>
-        </p>
-        <ModalOff.Provider value={{ modalOff, setModalOff }}>
-          <ThemeContext.Provider value={theme}>
+      <ThemeContext.Provider value={theme}>
+        <main>
+          <div id="nav">
+            <input
+              type="text"
+              placeholder="17067 -- 18077"
+              value={idInput}
+              onChange={(e) => {
+                setIdInput(e.target.value);
+              }}
+            />
+            <button
+              value="search"
+              type="button"
+              id="changeId"
+              onClick={() => {
+                if (Number(idInput) >= 17067 && Number(idInput) <= 18077) {
+                  setCurrentProductId(idInput);
+                } else {
+                  setIdInput('Not Valid');
+                }
+              }}
+            >
+              Change Product
+            </button>
+            <button
+              value="Browse"
+              type="button"
+              id="browse"
+              onClick={() => {
+                setBrowse(true);
+              }}
+            >
+              Browse Products
+            </button>
+            <select id="themeSelect" onChange={(e) => setTheme(e.target.value)}>
+              <option value="light">Light Mode</option>
+              <option value="dark">Dark Mode</option>
+            </select>
+          </div>
+          <p id="announcement">
+            <i>SITE-WIDE ANNOUNCEMENT MESSAGE!</i>
+            <span> — SALE/DISCOUNT </span>
+            <b>OFFER</b>
+            <span> — </span>
+            <u>NEW PRODUCT HIGHLIGHT</u>
+          </p>
+          <ModalOff.Provider value={{ modalOff, setModalOff }}>
             <ProductContext.Provider value={currentProductData}>
               <ReviewContext.Provider value={[allReviews, setAllReviews]}>
                 <RatingContext.Provider value={[averageRating, setAverageRating]}>
-                  <OverviewContainer spy={spy}/>
+                  <OverviewContainer spy={spy} />
                 </RatingContext.Provider>
               </ReviewContext.Provider>
               <ProductIdContext.Provider value={[currentProductId, setCurrentProductId]}>
-                <RelatedContainer  spy={spy}/>
+                <RelatedContainer spy={spy} />
               </ProductIdContext.Provider>
               <QALoadContext.Provider value={() => {}}>
-                <QaContainer spy={spy}/>
+                <QaContainer spy={spy} />
               </QALoadContext.Provider>
               <ReviewContext.Provider value={[allReviews, setAllReviews]}>
                 <RatingContext.Provider value={[averageRating, setAverageRating]}>
-                  <ReviewsContainer spy={spy}/>
+                  <ReviewsContainer spy={spy} />
                 </RatingContext.Provider>
               </ReviewContext.Provider>
             </ProductContext.Provider>
-          </ThemeContext.Provider>
-        </ModalOff.Provider>
-      </main>
+          </ModalOff.Provider>
+        </main>
+      </ThemeContext.Provider>
     );
   }
   return <Browse setProduct={setCurrentProductId} />;

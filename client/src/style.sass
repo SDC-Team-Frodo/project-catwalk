@@ -1,16 +1,25 @@
 // app level
 $font-stack: Tahoma, Arial, Helvetica, sans-serif
-$header-color: #333333e8
-$body-color: #696969
-$background-color: #ffffff
+$body-color-light: #696969
+$background-color-light: #ffffff
+$body-color-dark: white
+$background-color-dark: #333333
 
 body
-  background-color: $background-color
-  color: $body-color
   font-family: $font-stack
+  margin: 0
 
-h1, h2, h3, h4, header, strong, i
-  color: $header-color
+.light
+  background-color: $background-color-light
+  color: $body-color-light
+
+.dark
+  background-color: $background-color-dark
+  color: $body-color-dark
+
+
+// h1, h2, h3, h4, header, strong, i
+//   color: $header-color
 
 header
   font-weight: bold
@@ -19,8 +28,8 @@ h4
   font-weight: 500
   margin-block-start: 0
 
-span, p
-  color: $body-color
+// span, p
+//   color: $body-color
 
 div
   margin: 0
@@ -31,7 +40,7 @@ main
 
 #app
   display: flex
-  margin: auto
+  margin: 0
   padding: 0 10vw
 
 #announcement
@@ -163,6 +172,8 @@ main
     display: inline-block !important
     margin-left: .5em
     top: -.15em
+    &:visited
+      color: inherit
   .strikethrough
     text-decoration: line-through
   h2
@@ -294,6 +305,7 @@ main
 
 //Related
 #compareModal
+  color: black
   display: none
   position: fixed
   z-index: 5000
@@ -384,7 +396,7 @@ table thead
   margin-left: 1em
   margin-right: 1em
   position: relative
-  background-color: white
+  // background-color: white
   border: 1px solid black
   border-radius: 1em
   transition: transform 0.25s
@@ -623,7 +635,6 @@ span.cardIcon
   font-weight: bold
   margin: -0.25em 0 0.5em 0
   select
-    background-color: $background-color
     border: none
     border-bottom: 1px solid black
     cursor: pointer
@@ -640,7 +651,7 @@ span.cardIcon
     padding: 0 0.25em 0 0.5em
     text-decoration: underline
     &:hover
-      color: $header-color
+      font-weight: bold
 
 .review-date
   align-items: center
@@ -715,7 +726,7 @@ span.cardIcon
     .fas
       margin-left: 0.5em
     &:hover
-      color: $header-color
+      font-weight: bold
 
 #new-review
     background-color: lightgray
@@ -728,7 +739,8 @@ span.cardIcon
     .fas
       margin-left: 0.5em
     &:hover
-      color: $header-color
+      color: black
+      font-weight: bold
 
 #review-modal
   min-width: 350px
@@ -794,6 +806,7 @@ img
   max-height: 80vh
   border: thick double black
   border-radius: 10px
+  color: black
   position: fixed
   background-color: lightgreen
   z-index: 2147483646
@@ -843,7 +856,7 @@ img
   h2
     font-size: 1em
     font-weight: 200
-    color: #333333e8
+    color: inherit
 
 #loadQ, #loadA
   cursor: pointer
@@ -1010,9 +1023,16 @@ img
   input:focus
     outline: none
   #changeId
+    color: inherit
     float: right
   #browse
+    color: inherit
     margin-left: 10em
+  #themeSelect
+    border: none
+    border-bottom: 1px solid black
+    cursor: pointer
+    outline: none
   button
     font-size: 1em
     background-color: transparent
@@ -1076,3 +1096,74 @@ img
 
 .hoverGreen:hover
   color: green
+
+
+
+
+
+
+  /* The switch - the box around the slider
+
+.switch
+  position: relative
+  display: inline-block
+  width: 40px
+  height: 22px
+
+  input
+    opacity: 0
+    width: 100px
+    height: 100px
+    z-index: 20
+
+/* Hide default HTML checkbox
+
+/* The slider
+
+.slider
+  position: absolute
+  cursor: pointer
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  background-color: #ccc
+  -webkit-transition: .4s
+  -moz-transition: .4s
+  -o-transition: .4s
+  transition: .4s
+
+  &:before
+    position: absolute
+    content: ""
+    height: 18px
+    width: 18px
+    left: 2px
+    bottom: 2px
+    background-color: white
+    -webkit-transition: .4s
+    -moz-transition: .4s
+    -o-transition: .4s
+    transition: .4s
+
+input
+  &:checked + .slider
+    background-color: #2196F3
+
+  &:focus + .slider
+    box-shadow: 0 0 1px #2196F3
+
+  &:checked + .slider:before
+    -webkit-transform: translateX(18px)
+    -moz-transform: translateX(18px)
+    -o-transform: translateX(18px)
+    -ms-transform: translateX(18px)
+    transform: translateX(18px)
+
+/* Rounded sliders
+
+.slider.round
+  border-radius: 22px
+
+  &:before
+    border-radius: 50%
