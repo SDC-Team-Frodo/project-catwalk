@@ -12,6 +12,7 @@ const ReviewsList = ({ product, characteristics }) => {
   const [reviews, setReviews] = useState([]);
   const [reviewsShown, setReviewsShown] = useState(2);
   const [sortOrder, setSortOrder] = useState('relevant');
+  const [searchText, setSearchText] = useState('');
   const [filteredContext, setFilteredContext] = useContext(FilterContext);
   useEffect(() => {
     request.get('reviews', { product_id: product.id, count: 200 })
@@ -31,14 +32,29 @@ const ReviewsList = ({ product, characteristics }) => {
       .catch((err) => new Error(err));
   }, [sortOrder]);
   useEffect(() => {
-    if (filteredContext.length) {
+    if (searchText.length > 2) {
+      if (filteredContext.length) {
+      setReviews(allReviews.filter((review) => (
+        filteredContext.includes(review.rating)
+        && (review.body.includes(searchText)
+        || review.summary.includes(searchText)
+        || review.reviewer_name.includes(searchText))
+      )));
+      } else {
+        setReviews(allReviews.filter((review) => (
+          review.body.toLowerCase().includes(searchText.toLowerCase())
+          || review.summary.toLowerCase().includes(searchText.toLowerCase())
+          || review.reviewer_name.toLowerCase().includes(searchText.toLowerCase())
+        )));
+      }
+    } else if (filteredContext.length) {
       setReviews(allReviews.filter((review) => (
         filteredContext.includes(review.rating)
       )));
     } else {
       setReviews(allReviews);
     }
-  }, [filteredContext]);
+  }, [filteredContext, searchText]);
   useEffect(() => {
     if (allReviews.length && allReviews.length !== reviewCount) {
       request.get('reviews', { product_id: product.id, count: 200, sort: sortOrder })
@@ -59,6 +75,14 @@ const ReviewsList = ({ product, characteristics }) => {
   return (
     <section id="reviews">
       <h4>REVIEWS</h4>
+      <input
+        type="text"
+        className="reviews-search"
+        name="reviews-search"
+        placeholder="Search for a review"
+        onChange={(e) => setSearchText(e.target.value)}
+      />
+      <i className="fa fa-search" aria-hidden="true" />
       <div className="reviews-count">
         {`${reviews.length} reviews, sorted by `}
         <select onChange={(e) => setSortOrder(() => e.target.value)}>
@@ -70,7 +94,11 @@ const ReviewsList = ({ product, characteristics }) => {
       {!reviews.length && <p className="empty-reviews">No reviews currently available for this product</p>}
       <ul className="review-tiles">
         {reviews.slice(0, reviewsShown).map((review) => (
-          <ReviewTile key={review.review_id} review={review} />
+          <ReviewTile
+            key={review.review_id}
+            review={review}
+            searchText={searchText}
+          />
         ))}
       </ul>
       <div className="review-buttons">
