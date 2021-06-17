@@ -4,9 +4,9 @@ import RelatedList from './relatedList';
 
 const RelatedContainer = (props) => (
   <>
-    <div onClick={event => props.spy(event, 'Related Products')}><p>RELATED PRODUCTS</p></div>
+    <header onClick={event => props.spy(event, 'Related Products')}><p>RELATED PRODUCTS</p></header>
     <RelatedList />
-    <div onClick={event => props.spy(event, 'Your Outfit')}><p>YOUR OUTFIT</p></div>
+    <header onClick={event => props.spy(event, 'Your Outfit')}><p>YOUR OUTFIT</p></header>
     <OutfitList />
   </>
 );
