@@ -76,6 +76,7 @@ const RelatedList = () => {
     } else {
       relatedPrevious.style.visibility = 'visible';
     }
+
     if (index >= numberOfCards) {
       relatedNext.style.visibility = 'hidden';
     } else {
