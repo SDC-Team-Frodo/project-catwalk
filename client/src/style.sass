@@ -84,13 +84,11 @@ main
 
 #gallery-container
   order: 1
-  // flex-grow: 2
   z-index: 2
   position: relative
   min-width: 15em
   width: 60%
   min-height: 30em
-  // transition: width 1s ease, height 1s ease
   &.full
     margin: auto
     width: 100% !important
@@ -113,7 +111,6 @@ main
 
 #gallery
   z-index: 1 !important
-  // background-color: grey
   position: relative
   width: 100%
   height: 100%
@@ -138,7 +135,6 @@ main
   opacity: .9
   height: 87%
   width: 4em
-  // background-color: blue
   overflow: hidden
   &:hover
     opacity: 1
@@ -164,13 +160,11 @@ main
   &:hover
     filter: brightness(1.1)
   &.selected
-    // border-bottom: .2em solid black
     box-shadow: 0 .25em #F39C12
 
 #gallery-aside
   order: 2
   position: relative
-  // background-color: darkgrey
   width: 40%
   min-height: 30em
   #gallery-aside-stars
@@ -270,17 +264,12 @@ main
       color: #34526f
     &.fa-share-alt:hover
       color: #00995e
-// i className="fab fa-pinterest"></i>
-//           <i className="fab fa-tumblr"></i>
-//           <i className="fas fa-share-alt"></i>
 
 #features
   order: 2
   display: inline-block
   position: relative
-  // background: lightgrey
   width: 40%
-  // height: 15em
 
 .left-margin
   margin-left: 2.5em
@@ -1097,22 +1086,18 @@ img
 
 #nav
   color: inherit
-  // background-color: $header-background-light
   padding: 0
   margin-left: -10vw
   width: 100vw
-  // right: 0
-  // border-bottom: 1px solid black
-  // margin-left: 50vw
-  // transform: translateX(-50vw)
   img
     height: 50px
     width: auto
   input
     position: absolute
     color: inherit
-    top: 2.5em
-    right: 2em
+    font-size: 18px
+    top: 1.75em
+    right: 1em
     border: none
     width: 7.5em
     background-color: transparent
@@ -1130,16 +1115,16 @@ img
   #browse
     color: inherit
     border: none
-    font-size: 14px
+    font-size: 18px
     position: absolute
-    top: 1em
+    top: 0.25em
     right: 0
     margin-left: 10em
     cursor: pointer
   #themeSelect
     position: absolute
     top: 2.5em
-    right: 11em
+    right: 12em
     background-color: transparent
     border: none
     color: inherit
