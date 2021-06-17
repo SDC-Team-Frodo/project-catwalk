@@ -3,7 +3,7 @@ import GalleryNavTile from './subcomponents/GalleryNavTile';
 
 const GalleryNav = (props) => {
 
-  const { handleScroll, scroll, setScroll, activeStyle, setSelectedPhotoIndex, selectedPhotoIndex } = props;
+  const { handleScroll,activeStyle, setSelectedPhotoIndex, selectedPhotoIndex } = props;
   let { photos } = activeStyle;
 
   const scrollUp = (event) => {
