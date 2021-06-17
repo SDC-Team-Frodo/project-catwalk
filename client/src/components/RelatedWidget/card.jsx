@@ -12,6 +12,20 @@ const Card = (props) => {
     default_price, category, name,
   } = product;
 
+  let thumbnailUrl = 'https://i.imgur.com/EUjIJmB.png';
+  let salePrice;
+  let originalPrice = default_price;
+
+  if (thumbnail) {
+    const cardProduct = thumbnail.filter((styles) => styles['default?']);
+    if (Object.keys(cardProduct).length > 0) {
+      const { original_price, sale_price, photos } = cardProduct[0];
+      thumbnailUrl = photos[0].thumbnail_url || 'https://i.imgur.com/EUjIJmB.png';
+      salePrice = sale_price;
+      originalPrice = original_price;
+    }
+  }
+
   const cardClasses = `${cardClass} card`;
   const iconId = `${cardClass}${product.id}`;
 
@@ -19,63 +33,53 @@ const Card = (props) => {
     setCurrentProductId(product.id);
   }
 
-  if (thumbnail) {
-    const cardProduct = thumbnail.filter((styles) => styles['default?']);
-    if (Object.keys(cardProduct).length > 0) {
-      const { original_price, sale_price, photos } = cardProduct[0];
-      const thumbnailUrl = photos[0].thumbnail_url;
-      const background = {
-        backgroundImage: `url("${thumbnailUrl}")`,
-      };
-      return (
-        <div className={cardClasses}>
-          <div className="imageContainer" style={background} onClick={redirect}>
-            <img src={thumbnailUrl} alt="Failed" />
-          </div>
-          <div className="cardIcon" onClick={func}>
-            {!isStars ? <span className="cardIcon cardCross" id={iconId}>&times;</span>
-              : <i id={iconId} onClick={func} className="far fa-star cardIcon cardStar" />}
-          </div>
-          <div className="textContainer" onClick={redirect}>
-            {category}
-            <br />
-            <b>{name}</b>
-            <br />
-            <span>
-              {!sale_price ? (
-                <span>
-                  $
-                  {original_price}
-                </span>
-              ) : (
-                <span>
-                  $
-                  {sale_price}
-                  <strike>{original_price}</strike>
-                </span>
-              )}
+  const background = {
+    backgroundImage: `url("${thumbnailUrl}")`,
+  };
+
+  return (
+    <div className={cardClasses}>
+      <div className="imageContainer" style={background} onClick={redirect} />
+      <div className="cardIcon" onClick={func}>
+        {!isStars ? <span className="cardIcon cardCross" id={iconId}>&times;</span>
+          : <i id={iconId} onClick={func} className="far fa-star cardIcon cardStar" />}
+      </div>
+      <div className="textContainer" onClick={redirect}>
+        {category}
+        <br />
+        <b>{name}</b>
+        <br />
+        {
+          salePrice ? (
+            <span className>
+              <b>$</b>
+              {salePrice}
+              <strike>{originalPrice}</strike>
             </span>
-            <br />
-            <div className="cardRating">
-              {ratings && (
-                <div className="empty-stars">
-                  <div className="filled-stars" style={{ width: `${(Math.round(getAverageRating(ratings) * 4) / 4) * 20}%` }}>
-                    <i className="fas fa-star" aria-hidden="true" />
-                    <i className="fas fa-star" aria-hidden="true" />
-                    <i className="fas fa-star" aria-hidden="true" />
-                    <i className="fas fa-star" aria-hidden="true" />
-                    <i className="fas fa-star" aria-hidden="true" />
-                  </div>
-                </div>
-              )}
+          ) : (
+            <span>
+              <b>$</b>
+              {originalPrice}
+            </span>
+          )
+        }
+        <br />
+        <div className="cardRating">
+          {ratings && (
+            <div className="empty-stars">
+              <div className="filled-stars" style={{ width: `${(Math.round(getAverageRating(ratings) * 4) / 4) * 20}%` }}>
+                <i className="fas fa-star" aria-hidden="true" />
+                <i className="fas fa-star" aria-hidden="true" />
+                <i className="fas fa-star" aria-hidden="true" />
+                <i className="fas fa-star" aria-hidden="true" />
+                <i className="fas fa-star" aria-hidden="true" />
+              </div>
             </div>
-          </div>
+          )}
         </div>
-      );
-    }
-    return <></>;
-  }
-  return <></>;
+      </div>
+    </div>
+  );
 };
 
 export default Card;
