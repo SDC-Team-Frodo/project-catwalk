@@ -2,13 +2,15 @@ import React from 'react';
 
 const GalleryNavTile = (props) => {
 
-  const { photo, setSelectedPhotoIndex, index, selected } = props;
+  const {
+    photo, setSelectedPhotoIndex, index, selected,
+  } = props;
 
   const css = {
     backgroundImage: `url(${photo.url})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
   };
 
   let classes = 'gallery-nav-tile';
@@ -19,15 +21,13 @@ const GalleryNavTile = (props) => {
   const handleClick = (event) => {
     event.stopPropagation();
     setSelectedPhotoIndex(index);
-  }
+  };
 
   return (
     <div
       className={classes}
       style={css}
-      onClick={handleClick}>
-
-    </div>
+      onClick={handleClick} />
   );
 };
 

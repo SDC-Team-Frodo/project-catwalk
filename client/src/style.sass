@@ -1,4 +1,7 @@
 // app level
+html
+  scroll-behavior: smooth
+
 $font-stack: Tahoma, Arial, Helvetica, sans-serif
 $body-color-light: #696969
 $background-color-light: #ffffff
@@ -106,6 +109,8 @@ main
   min-width: 15em
   width: 60%
   min-height: 30em
+  box-shadow: .2em .2em .5em #333
+  // transition: width 1s ease, height 1s ease
   &.full
     margin: auto
     width: 100% !important
@@ -133,8 +138,20 @@ main
   height: 100%
   margin: 0 !important
   cursor: zoom-in
+  i
+    color: black
+    text-shadow: 0 0 .3em white
+
   &.zoom
     cursor: zoom-out
+  .scroll-right
+    position: absolute
+    right: 1em
+    top: 49%
+  .scroll-left
+    position: absolute
+    left: 2em
+    top: 49%
 
 #outer-gallery-nav
   z-index: 2
