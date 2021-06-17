@@ -6,3 +6,4 @@ coverage/
 
 .DS_store
 .env
+catwalk.pem
