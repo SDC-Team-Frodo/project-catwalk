@@ -18,7 +18,7 @@ import '../style.sass';
 
 const App = () => {
   const [browse, setBrowse] = useState(false);
-  const [currentProductId, setCurrentProductId] = useState(17076);
+  const [currentProductId, setCurrentProductId] = useState(17071);
   const [theme, setTheme] = useState('light');
   const [currentProductData, setCurrentProductData] = useState(null);
   const [idInput, setIdInput] = useState('');
@@ -138,7 +138,11 @@ const App = () => {
   } else if (!currentProductData) {
     return null;
   }
-  return <Browse setProduct={setCurrentProductId} />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Browse setProduct={setCurrentProductId} />
+    </Suspense>
+  );
 };
 
 export default App;
