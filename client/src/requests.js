@@ -22,7 +22,7 @@ const request = {
     })
   ),
   postPhotos: (fileData) => (
-    axios.post('/photos', {
+    post('/photos', {
       fileData,
     })
   ),
