@@ -4,9 +4,10 @@
   "description": "Show relevant information for a single product in the catalog. Single page react app that displays individual product information.",
   "main": "index.js",
   "scripts": {
-    "start": "node server/index.js",
+    "start:prod": "node server/index.js",
     "start:dev": "npx nodemon server/index.js -w",
-    "build": "webpack -w",
+    "build:prod": "webpack",
+    "build:dev": "webpack -w",
     "test": "jest"
   },
   "repository": {
