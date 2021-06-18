@@ -6,4 +6,4 @@ coverage/
 
 .DS_store
 .env
-.pem
+fec.pem
