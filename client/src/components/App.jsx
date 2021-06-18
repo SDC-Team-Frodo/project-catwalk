@@ -1,10 +1,15 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useState, useEffect } from 'react';
-import QaContainer from './QAWidget/widget';
-import OverviewContainer from './Overview/widget';
-import ReviewsContainer from './ReviewsWidget/widget';
-import Browse from './Browse/BrowsePage';
-import RelatedContainer from './RelatedWidget/widget';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
+const OverviewContainer = React.lazy(() => import('./Overview/widget'));
+const RelatedContainer = React.lazy(() => import('./RelatedWidget/widget'));
+const QaContainer = React.lazy(() => import('./QAWidget/widget'));
+const ReviewsContainer = React.lazy(() => import('./ReviewsWidget/widget'));
+const Browse = React.lazy(() => import('./Browse/BrowsePage'));
+// import QaContainer from './QAWidget/widget';
+// import OverviewContainer from './Overview/widget';
+// import ReviewsContainer from './ReviewsWidget/widget';
+// import Browse from './Browse/BrowsePage';
+// import RelatedContainer from './RelatedWidget/widget';
 import QALoadContext from '../contexts/QALoadContext';
 import RatingContext from '../contexts/RatingContext';
 import ReviewContext from '../contexts/ReviewContext';
@@ -108,18 +113,26 @@ const App = () => {
             <ProductContext.Provider value={currentProductData}>
               <ReviewContext.Provider value={[allReviews, setAllReviews]}>
                 <RatingContext.Provider value={[averageRating, setAverageRating]}>
-                  <OverviewContainer spy={spy} />
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <OverviewContainer spy={spy} />
+                  </Suspense>
                 </RatingContext.Provider>
               </ReviewContext.Provider>
               <ProductIdContext.Provider value={[currentProductId, setCurrentProductId]}>
-                <RelatedContainer spy={spy} />
+                <Suspense fallback={<div>Loading...</div>}>
+                  <RelatedContainer spy={spy} />
+                </Suspense>
               </ProductIdContext.Provider>
               <QALoadContext.Provider value={() => {}}>
-                <QaContainer spy={spy} />
+                <Suspense fallback={<div>Loading...</div>}>
+                  <QaContainer spy={spy} />
+                </Suspense>
               </QALoadContext.Provider>
               <ReviewContext.Provider value={[allReviews, setAllReviews]}>
                 <RatingContext.Provider value={[averageRating, setAverageRating]}>
-                  <ReviewsContainer spy={spy} />
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <ReviewsContainer spy={spy} />
+                  </Suspense>
                 </RatingContext.Provider>
               </ReviewContext.Provider>
             </ProductContext.Provider>
