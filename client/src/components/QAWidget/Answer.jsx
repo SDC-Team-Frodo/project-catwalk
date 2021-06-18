@@ -64,7 +64,7 @@ const Answer = (props) => {
               Report
             </button>
           </div>
-          <div id="answerImageDiv">
+          <div className="answerImageDiv">
             {answer.photos.length > 0 && (
               answer.photos.map((photo, i) => (
                 <Modal
