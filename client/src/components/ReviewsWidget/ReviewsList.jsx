@@ -36,9 +36,9 @@ const ReviewsList = ({ product, characteristics }) => {
       if (filteredContext.length) {
       setReviews(allReviews.filter((review) => (
         filteredContext.includes(review.rating)
-        && (review.body.includes(searchText)
-        || review.summary.includes(searchText)
-        || review.reviewer_name.includes(searchText))
+        && (review.body.toLowerCase().includes(searchText.toLowerCase())
+        || review.summary.toLowerCase().includes(searchText.toLowerCase())
+        || review.reviewer_name.toLowerCase().includes(searchText.toLowerCase()))
       )));
       } else {
         setReviews(allReviews.filter((review) => (
