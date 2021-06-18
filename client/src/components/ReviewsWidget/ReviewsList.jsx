@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext, lazy, Suspense } from 'react';
 import FilterContext from './FilterContext';
 import ReviewContext from '../../contexts/ReviewContext';
 const ReviewTile = React.lazy(() => import('./ReviewTile'));
-// import ReviewTile from './ReviewTile';
 import ReviewForm from './ReviewForm';
 import Modal from '../Modal';
 import request from '../../requests';
