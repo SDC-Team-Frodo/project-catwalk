@@ -1,8 +1,8 @@
-import axios from 'axios';
+import { get, post, put } from 'axios';
 
 const request = {
   get: (endpoint, params) => (
-    axios.get('/api', {
+    get('/api', {
       params: {
         endpoint,
         params,
@@ -10,19 +10,19 @@ const request = {
     })
   ),
   post: (endpoint, data) => (
-    axios.post('/api', {
+    post('/api', {
       endpoint,
       data,
     })
   ),
   put: (endpoint, params) => (
-    axios.put('/api', {
+    put('/api', {
       endpoint,
       params,
     })
   ),
   postPhotos: (fileData) => (
-    axios.post('/photos', {
+    post('/photos', {
       fileData,
     })
   ),

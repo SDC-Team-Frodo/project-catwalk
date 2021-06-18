@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import _ from 'lodash';
+import _ from 'lodash-core';
 import StyleGrid from './subcomponents/StyleGrid';
 import ProductContext from '../../contexts/ProductContext';
 import ReviewContext from '../../contexts/ReviewContext';

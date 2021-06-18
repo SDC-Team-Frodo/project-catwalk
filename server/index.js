@@ -86,7 +86,10 @@ app.post('/photos', (req, res) => {
   });
   cloudinary.uploader.upload(fileData, (err, result) => {
     if (err) { throw new Error(err); }
-    res.send(result.url);
+    const transform = 'w_200,c_scale/';
+    const insertInd = result.url.indexOf('upload/') + 7;
+    const transformedUrl = result.url.slice(0, insertInd) + transform + result.url.slice(insertInd);
+    res.send(transformedUrl);
   });
 });
 

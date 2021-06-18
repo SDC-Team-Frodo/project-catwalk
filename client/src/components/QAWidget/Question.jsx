@@ -101,8 +101,7 @@ const Question = (props) => {
       {Object.values(question.answers).length > 2 && (
         <button
           type="button"
-          id="loadA"
-          className="hoverGrey"
+          className="hoverGrey loadA"
           onClick={() => {
             // eslint-disable-next-line no-unused-expressions
             buttonLabel === 'More Answers' ? setDisplayedAnswers('all') : setDisplayedAnswers('collapsed');

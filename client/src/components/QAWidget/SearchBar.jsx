@@ -49,7 +49,7 @@ const SearchBar = () => {
         <img
           id="search"
           src="https://img.icons8.com/android/24/000000/search.png"
-          alt="search"
+          alt="magnifying glass search icon"
           type="button"
           onClick={() => {
             setSearchClicked(true);
