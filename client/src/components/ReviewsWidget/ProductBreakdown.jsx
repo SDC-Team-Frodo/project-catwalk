@@ -9,9 +9,9 @@ const ProductBreakdown = ({ characteristics }) => (
       {Object.keys(characteristics).map((char) => (
         <div key={characteristics[char].id}>
           <CharBar char={char} />
-          <div>
+          {/* <div> */}
             <i className="fas fa-caret-up" style={{ left: `${Math.round((characteristics[char].value / 5) * 100)}%` }} />
-          </div>
+          {/* </div> */}
           <CharLabels char={char} />
         </div>
       ))}
