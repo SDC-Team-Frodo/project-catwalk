@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import _ from 'lodash';
 import Feature from './subcomponents/Feature'
 import ProductContext from '../../contexts/ProductContext';
 
