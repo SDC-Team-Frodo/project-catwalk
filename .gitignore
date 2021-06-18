@@ -1,9 +1,22 @@
+# Package Manager
 yarn.lock
+yarn-error.log
+
+# Node Modules
 node_modules/
-client/dist
-coverage/
+
+# VS Code
 .vscode/
-catwalk.pem
 .DS_store
+
+# API's/secrets
 .env
+catwalk.pem
 fec.pem
+
+# Testing Coverage Reports
+coverage/
+
+# Distribution files
+client/dist
+*.bundle.js

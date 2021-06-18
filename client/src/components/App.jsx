@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useState, useEffect } from 'react';
-import QaContainer from './QAWidget/widget';
-import OverviewContainer from './Overview/widget';
-import ReviewsContainer from './ReviewsWidget/widget';
-import Browse from './Browse/BrowsePage';
-import RelatedContainer from './RelatedWidget/widget';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
+const OverviewContainer = React.lazy(() => import('./Overview/widget'));
+const RelatedContainer = React.lazy(() => import('./RelatedWidget/widget'));
+const QaContainer = React.lazy(() => import('./QAWidget/widget'));
+const ReviewsContainer = React.lazy(() => import('./ReviewsWidget/widget'));
+const Browse = React.lazy(() => import('./Browse/BrowsePage'));
 import QALoadContext from '../contexts/QALoadContext';
 import RatingContext from '../contexts/RatingContext';
 import ReviewContext from '../contexts/ReviewContext';
@@ -12,16 +12,15 @@ import ModalOff from '../contexts/ModalOffContext';
 import ProductContext from '../contexts/ProductContext';
 import ProductIdContext from '../contexts/ProductIdContext';
 import ThemeContext from '../contexts/ThemeContext';
-import testData from '../testData';
 import logo from './logo';
 import request from '../requests';
 import '../style.sass';
 
 const App = () => {
   const [browse, setBrowse] = useState(false);
-  const [currentProductId, setCurrentProductId] = useState(17071);
+  const [currentProductId, setCurrentProductId] = useState(17076);
   const [theme, setTheme] = useState('light');
-  const [currentProductData, setCurrentProductData] = useState(testData);
+  const [currentProductData, setCurrentProductData] = useState(null);
   const [idInput, setIdInput] = useState('');
   const [averageRating, setAverageRating] = useState(null);
   const [allReviews, setAllReviews] = useState([]);
@@ -52,13 +51,13 @@ const App = () => {
   useEffect(() => {
     const app = document.getElementById('app');
     app.className = theme;
-  }, [theme])
-  if (!browse) {
+  }, [theme]);
+  if (!browse && currentProductData) {
     return (
       <ThemeContext.Provider value={theme}>
         <main>
           <div id="nav">
-            <img x="6" y="2" width="108" height="90" src={logo} />
+            <img x="6" y="2" width="108" height="90" src={logo} alt="Project Catwalk logo" />
             <input
               type="text"
               placeholder="17067 -- 18077"
@@ -71,6 +70,7 @@ const App = () => {
               value="search"
               type="button"
               id="changeId"
+              aria-label="Search for another product (17067 - 18077)"
               onClick={() => {
                 if (Number(idInput) >= 17067 && Number(idInput) <= 18077) {
                   setCurrentProductId(idInput);
@@ -108,18 +108,26 @@ const App = () => {
             <ProductContext.Provider value={currentProductData}>
               <ReviewContext.Provider value={[allReviews, setAllReviews]}>
                 <RatingContext.Provider value={[averageRating, setAverageRating]}>
-                  <OverviewContainer spy={spy} />
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <OverviewContainer spy={spy} />
+                  </Suspense>
                 </RatingContext.Provider>
               </ReviewContext.Provider>
               <ProductIdContext.Provider value={[currentProductId, setCurrentProductId]}>
-                <RelatedContainer spy={spy} />
+                <Suspense fallback={<div>Loading...</div>}>
+                  <RelatedContainer spy={spy} />
+                </Suspense>
               </ProductIdContext.Provider>
               <QALoadContext.Provider value={() => {}}>
-                <QaContainer spy={spy} />
+                <Suspense fallback={<div>Loading...</div>}>
+                  <QaContainer spy={spy} />
+                </Suspense>
               </QALoadContext.Provider>
               <ReviewContext.Provider value={[allReviews, setAllReviews]}>
                 <RatingContext.Provider value={[averageRating, setAverageRating]}>
-                  <ReviewsContainer spy={spy} />
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <ReviewsContainer spy={spy} />
+                  </Suspense>
                 </RatingContext.Provider>
               </ReviewContext.Provider>
             </ProductContext.Provider>
@@ -127,8 +135,14 @@ const App = () => {
         </main>
       </ThemeContext.Provider>
     );
+  } else if (!currentProductData) {
+    return null;
   }
-  return <Browse setProduct={setCurrentProductId} />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Browse setProduct={setCurrentProductId} />
+    </Suspense>
+  );
 };
 
 export default App;

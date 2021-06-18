@@ -137,7 +137,7 @@ const AnswerForm = (props) => {
           }}
         />
         <section className="imgDiv">
-          {photos.map((photo) => <img key={photo} alt="no img" className="answerUpload" src={photo} />)}
+          {photos.map((photo) => <img key={photo} alt="new answer img" className="answerUpload" src={photo} />)}
         </section>
       </div>
       <button

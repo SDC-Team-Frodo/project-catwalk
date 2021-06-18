@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, lazy, Suspense } from 'react';
 import FilterContext from './FilterContext';
 import ReviewContext from '../../contexts/ReviewContext';
-import ReviewTile from './ReviewTile';
+const ReviewTile = React.lazy(() => import('./ReviewTile'));
 import ReviewForm from './ReviewForm';
 import Modal from '../Modal';
 import request from '../../requests';
@@ -36,9 +36,9 @@ const ReviewsList = ({ product, characteristics }) => {
       if (filteredContext.length) {
       setReviews(allReviews.filter((review) => (
         filteredContext.includes(review.rating)
-        && (review.body.includes(searchText)
-        || review.summary.includes(searchText)
-        || review.reviewer_name.includes(searchText))
+        && (review.body.toLowerCase().includes(searchText.toLowerCase())
+        || review.summary.toLowerCase().includes(searchText.toLowerCase())
+        || review.reviewer_name.toLowerCase().includes(searchText.toLowerCase()))
       )));
       } else {
         setReviews(allReviews.filter((review) => (
@@ -94,11 +94,12 @@ const ReviewsList = ({ product, characteristics }) => {
       {!reviews.length && <p className="empty-reviews">No reviews currently available for this product</p>}
       <ul className="review-tiles">
         {reviews.slice(0, reviewsShown).map((review) => (
-          <ReviewTile
-            key={review.review_id}
-            review={review}
-            searchText={searchText}
-          />
+          <Suspense key={review.review_id} fallback={<div>Loading...</div>}>
+            <ReviewTile
+              review={review}
+              searchText={searchText}
+            />
+          </Suspense>
         ))}
       </ul>
       <div className="review-buttons">

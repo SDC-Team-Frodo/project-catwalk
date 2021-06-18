@@ -71,10 +71,10 @@ const Answer = (props) => {
                   key={i}
                   modalId={`answerPhoto${i}`}
                   body={(
-                    <img className="Image" src={photo} />
+                    <img className="Image" src={photo} alt="answer img" />
                   )}
                   isImage="true"
-                  image={<img className="answerImage" src={photo} />}
+                  image={<img className="answerImage" src={photo} alt="answer img thumbnail" />}
                 />
               ))
             )}

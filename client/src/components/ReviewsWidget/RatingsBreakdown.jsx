@@ -13,7 +13,7 @@ const RatingsBreakdown = ({ ratings }) => {
   }, [ratings]);
   return (
     <section id="ratings-breakdown">
-      <h4>RATINGS</h4>
+      <h3>RATINGS</h3>
       {filteredContext.length !== 0
       && (
         <div className="filter-summary">
