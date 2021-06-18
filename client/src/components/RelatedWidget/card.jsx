@@ -17,6 +17,7 @@ const Card = (props) => {
   let originalPrice = default_price;
 
   if (thumbnail) {
+    thumbnailUrl = thumbnail[0].photos[0].thumbnail_url;
     const cardProduct = thumbnail.filter((styles) => styles['default?']);
     if (Object.keys(cardProduct).length > 0) {
       const { original_price, sale_price, photos } = cardProduct[0];
