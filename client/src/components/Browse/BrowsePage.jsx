@@ -17,29 +17,31 @@ const Browse = (props) => {
       {products.map((product) => (
         <Product id={product.id} setProduct={setProduct} key={product.id} name={product.name} />
       ))}
-      {displayedProducts[0] > 0 && (
+      <div id="browseNav">
+        {displayedProducts[0] > 0 && (
+          <button
+            type="button"
+            id="previouseBrowse"
+            className="hoverGreen"
+            onClick={() => {
+              setDisplayedProducts([displayedProducts[0] - 10, displayedProducts[1] - 10]);
+            }}
+          >
+            {'<'}
+          </button>
+        )}
         <button
           type="button"
-          id="previouseBrowse"
+          id="nextBrowse"
           className="hoverGreen"
           onClick={() => {
-            setDisplayedProducts([displayedProducts[0] - 10, displayedProducts[1] - 10]);
+            setDisplayedProducts([displayedProducts[0] + 10, displayedProducts[1] + 10]);
           }}
         >
-          {'<'}
+          {'>'}
         </button>
-      )}
-      <button
-        type="button"
-        id="nextBrowse"
-        className="hoverGreen"
-        onClick={() => {
-          setDisplayedProducts([displayedProducts[0] + 10, displayedProducts[1] + 10]);
-        }}
-      >
-        {'>'}
-      </button>
-      <h3 id="curProductCount">{`${displayedProducts[0]} to ${displayedProducts[1]}`}</h3>
+        <h3 id="curProductCount">{`${displayedProducts[0]} to ${displayedProducts[1]}`}</h3>
+      </div>
     </div>
   );
 };
