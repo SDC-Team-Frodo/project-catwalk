@@ -3,7 +3,7 @@ node_modules/
 client/dist
 coverage/
 .vscode/
-
+catwalk.pem
 .DS_store
 .env
 fec.pem
