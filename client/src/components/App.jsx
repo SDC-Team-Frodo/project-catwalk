@@ -12,16 +12,15 @@ import ModalOff from '../contexts/ModalOffContext';
 import ProductContext from '../contexts/ProductContext';
 import ProductIdContext from '../contexts/ProductIdContext';
 import ThemeContext from '../contexts/ThemeContext';
-import testData from '../testData';
 import logo from './logo';
 import request from '../requests';
 import '../style.sass';
 
 const App = () => {
   const [browse, setBrowse] = useState(false);
-  const [currentProductId, setCurrentProductId] = useState(17071);
+  const [currentProductId, setCurrentProductId] = useState(17067);
   const [theme, setTheme] = useState('light');
-  const [currentProductData, setCurrentProductData] = useState(testData);
+  const [currentProductData, setCurrentProductData] = useState(null);
   const [idInput, setIdInput] = useState('');
   const [averageRating, setAverageRating] = useState(null);
   const [allReviews, setAllReviews] = useState([]);
@@ -52,8 +51,8 @@ const App = () => {
   useEffect(() => {
     const app = document.getElementById('app');
     app.className = theme;
-  }, [theme])
-  if (!browse) {
+  }, [theme]);
+  if (!browse && currentProductData) {
     return (
       <ThemeContext.Provider value={theme}>
         <main>
@@ -128,6 +127,8 @@ const App = () => {
         </main>
       </ThemeContext.Provider>
     );
+  } else if (!currentProductData) {
+    return null;
   }
   return <Browse setProduct={setCurrentProductId} />;
 };
