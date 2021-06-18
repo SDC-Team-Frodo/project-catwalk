@@ -4,17 +4,11 @@ const common = require('./webpack.common');
 
 module.exports = merge(common, {
   mode: 'production',
-  devtool: 'inline-source-map',
   plugins: [
     new MiniCssExtractPlugin(),
   ],
   module: {
     rules: [
-      {
-        test: /\.jsx?/,
-        loader: 'babel-loader',
-        exclude: /node_modules\/.*/,
-      },
       {
         test: /\.s[ac]ss$/i,
         use: [
