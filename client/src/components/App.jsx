@@ -138,15 +138,11 @@ const App = () => {
   } else if (!currentProductData) {
     return null;
   }
-<<<<<<< HEAD
-  return <div id="browseBackground"><Browse setProduct={setCurrentProductId} /></div>;
-=======
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Browse setProduct={setCurrentProductId} />
     </Suspense>
   );
->>>>>>> main
 };
 
 export default App;
