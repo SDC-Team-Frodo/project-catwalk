@@ -18,7 +18,7 @@ import '../style.sass';
 
 const App = () => {
   const [browse, setBrowse] = useState(false);
-  const [currentProductId, setCurrentProductId] = useState(17067);
+  const [currentProductId, setCurrentProductId] = useState(17076);
   const [theme, setTheme] = useState('light');
   const [currentProductData, setCurrentProductData] = useState(null);
   const [idInput, setIdInput] = useState('');
