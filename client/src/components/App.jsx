@@ -58,7 +58,7 @@ const App = () => {
       <ThemeContext.Provider value={theme}>
         <main>
           <div id="nav">
-            <img x="6" y="2" width="108" height="90" src={logo} />
+            <img x="6" y="2" width="108" height="90" src={logo} alt="Project Catwalk logo" />
             <input
               type="text"
               placeholder="17067 -- 18077"

@@ -304,7 +304,7 @@ const ReviewForm = ({ product, characteristics }) => {
       {!!thumbnails.length
       && (
       <div className="photo-thumbnails">
-        {thumbnails.map((url) => <img key={url} src={url} alt="img thumbnail" />)}
+        {thumbnails.map((url) => <img key={url} src={url} alt="submitted review img thumbnail" />)}
         <br />
       </div>
       )}
