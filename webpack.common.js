@@ -22,6 +22,7 @@ module.exports = {
   optimization: {
     minimizer: [
       new CssMinimizerPlugin({
+        parallel: true,
         minimizerOptions: {
           preset: [
             'default',
