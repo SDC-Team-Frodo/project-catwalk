@@ -65,7 +65,7 @@ const OverviewContainer = (props) => {
   }, [product]);
 
   return (
-    <div id="overview" role="spyware" onClick={(event) => props.spy(event, "Overview")}>
+    <div id="overview" onClick={(event) => props.spy(event, "Overview")}>
       <div className="separator">
         <Gallery
           fullscreenSlider={fullscreenSlider}
