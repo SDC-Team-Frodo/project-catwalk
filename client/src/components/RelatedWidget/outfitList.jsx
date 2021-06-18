@@ -2,91 +2,89 @@ import React, { useState, useEffect, useContext } from 'react';
 import Card from './card';
 import request from '../../requests';
 import ProductContext from '../../contexts/ProductContext';
+import defaultStyles from './defaultStyles';
+import defaultRatings from './defaultRatings';
 
 const OutfitList = () => {
   const product = useContext(ProductContext);
-
+  const [thumbnail, setThumbnail] = useState(defaultStyles);
+  const [rating, setRating] = useState(defaultRatings);
   const [isMobile, setIsMobile] = useState(null);
   const [numberOfCards, setNumberOfCards] = useState(0);
   const [translateX, setTranslateX] = useState(0);
-  const [outfitIds, setOutfitIds] = useState([]);
-  const [outfitProducts, setOutfitProducts] = useState([]);
-  const [outfitRatings, setOutfitRatings] = useState([]);
-  const [outfitThumbnails, setOutfitThumbnails] = useState([]);
+  const [all, setAll] = useState([]);
   const [index, setIndex] = useState(1);
 
   useEffect(() => {
+    request.get(`products/${product.id}/styles`, { endpoint: `products/${product.id}/styles` })
+      .then((result) => {
+        setThumbnail(result.data.results);
+      })
+      .catch((err) => console.log(err));
+
+    request.get('reviews/meta', { endpoint: 'reviews/meta', product_id: product.id })
+      .then((result) => {
+        setRating(result.data.ratings);
+      })
+      .catch((err) => console.log(err));
+
     moveButton();
-    let outfitIdsLocal = JSON.parse(localStorage.getItem('outfit'));
-    if (!outfitIdsLocal) {
-      outfitIdsLocal = [];
+
+    let allOutfit = JSON.parse(localStorage.getItem('outfit'));
+    if (!allOutfit) {
+      allOutfit = [[], [], []]
+      localStorage.setItem('outfit', JSON.stringify(allOutfit));
     }
-    setOutfitIds(outfitIdsLocal);
-    setNumberOfCards(outfitIdsLocal.length);
+    setAll(allOutfit);
+    setNumberOfCards(allOutfit[0].length);
   }, [product]);
-
-  function delay(i) {
-    setTimeout(() => {
-    }, 2000 * i);
-  }
-
-  useEffect(() => {
-    if (outfitIds) {
-      setOutfitProducts([]);
-      setOutfitRatings([]);
-      setOutfitThumbnails([]);
-      setTranslateX(0);
-      setIndex(1);
-      setNumberOfCards(outfitIds.length);
-      outfitIds.forEach((id, indexDelay) => {
-        request.get(`products/${id}`, { endpoint: `products/${id}` })
-          .then((newOutfitProduct) => {
-            setOutfitProducts((oldProducts) => [...oldProducts, newOutfitProduct.data]);
-          })
-          .catch((err) => console.log(err));
-
-        request.get('reviews/meta', { endpoint: 'reviews/meta', product_id: id })
-          .then((rating) => {
-            setOutfitRatings((oldRatings) => [...oldRatings, rating.data.ratings]);
-          })
-          .catch((err) => console.log(err));
-
-        request.get(`products/${id}/styles`, { endpoint: `products/${id}/styles` })
-          .then((thumbnail) => {
-            setOutfitThumbnails((oldThumbnails) => [...oldThumbnails, thumbnail.data.results]);
-          })
-          .catch((err) => console.log(err));
-        delay(indexDelay);
-      });
-    } else if (!outfitIds) {
-      setOutfitIds([]);
-    }
-  }, [outfitIds]);
 
   function removeOutfit(event) {
     let id = event.target.id.match(/\d+/);
     id = parseInt(id[0], 10);
-    const outfitIdsLocal = JSON.parse(localStorage.getItem('outfit'));
-    outfitIdsLocal.splice(outfitIdsLocal.indexOf(id), 1);
-    setOutfitIds(outfitIdsLocal);
-    localStorage.setItem('outfit', JSON.stringify(outfitIdsLocal));
+    const outfitAll = JSON.parse(localStorage.getItem('outfit'));
+    const [localProducts, localThumbnails, localRatings] = outfitAll;
+    const cardIndex = localProducts.indexOf(id);
+
+    localProducts.splice(cardIndex, 1);
+    localThumbnails.splice(cardIndex, 1);
+    localRatings.splice(cardIndex, 1);
+
+    setAll([localProducts, localThumbnails, localRatings]);
+    setNumberOfCards(localProducts.length);
+
+    localStorage.setItem('outfit', JSON.stringify([localProducts, localThumbnails, localRatings]));
   }
 
   function addOutfit() {
-    let outfitIdsLocal = JSON.parse(localStorage.getItem('outfit'));
-
-    if (!outfitIdsLocal) {
-      outfitIdsLocal = [];
+    const outfitAll = JSON.parse(localStorage.getItem('outfit'));
+    let isIndexOf = false;
+    let localProducts = [];
+    let localThumbnails = [];
+    let localRatings = [];
+    if (outfitAll[0].length > 0) {
+      localProducts = outfitAll[0].slice();
+      localThumbnails = outfitAll[1].slice();
+      localRatings = outfitAll[2].slice();
     }
 
-    if (outfitIdsLocal.indexOf(product.id) === -1) {
-      outfitIdsLocal.push(product.id);
-      localStorage.setItem('outfit', JSON.stringify(outfitIdsLocal));
-      setOutfitIds(outfitIdsLocal);
+    localProducts.forEach((localProduct) => {
+      if (!isIndexOf && localProduct.id === product.id) {
+        isIndexOf = true;
+      }
+    });
+
+    if (!isIndexOf) {
+      localProducts.push(product);
+      localThumbnails.push(thumbnail);
+      localRatings.push(rating);
+      localStorage.setItem('outfit', JSON.stringify([localProducts, localThumbnails, localRatings]));
+
+      setNumberOfCards(localProducts.length);
+      setAll([localProducts, localThumbnails, localRatings]);
     }
   }
 
-  // Handles button event related to carousel next and previous buttons
   function navButtonHandle(event) {
     const response = event.target.id;
     if (response === 'outfitPrevious') {
@@ -102,7 +100,6 @@ const OutfitList = () => {
     }
   }
 
-  // Initiates the movement for the carousel
   useEffect(() => {
     if (index === 1) {
       outfitPrevious.style.visibility = 'hidden';
@@ -146,12 +143,12 @@ const OutfitList = () => {
               <p>Outfits</p>
             </b>
           </div>
-          {outfitProducts.length > 0 && outfitProducts.map((outfitProduct, i) => (
+          {all.length > 0 && all[0].map((categories, i) => (
             <Card
-              product={outfitProduct}
-              thumbnail={outfitThumbnails[i]}
-              ratings={outfitRatings[i]}
-              key={`${product.id}${i}`}
+              product={all[0][i]}
+              thumbnail={all[1][i]}
+              ratings={all[2][i]}
+              key={`${all[0][i].id}${i}`}
               cardClass="outfitCard"
               func={removeOutfit}
               isStars={false}
