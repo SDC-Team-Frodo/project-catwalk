@@ -93,7 +93,7 @@ const OutfitList = () => {
         setTranslateX((previousTranslateX) => previousTranslateX + 258);
       }
     } else if (response === 'outfitNext') {
-      if (index < numberOfCards) {
+      if (index < numberOfCards + 1) {
         setIndex((previousIndex) => previousIndex + 1);
         setTranslateX((previousTranslateX) => previousTranslateX - 258);
       }
@@ -106,7 +106,7 @@ const OutfitList = () => {
     } else {
       outfitPrevious.style.visibility = 'visible';
     }
-    if (index >= numberOfCards) {
+    if (index >= numberOfCards + 1) {
       outfitNext.style.visibility = 'hidden';
     } else {
       outfitNext.style.visibility = 'visible';
@@ -158,8 +158,8 @@ const OutfitList = () => {
         {!isMobile && <button type="button" className="carousel_button next" id="outfitNext" onClick={navButtonHandle}>&#9654;</button>}
       </div>
       <div id="mobileNavButtons">
-        {isMobile && <button type="button" className="carousel_button previous mobileButton" id="outfitPrevious" onClick={navButtonHandle}>&#9664;</button>}
-        {isMobile && <button type="button" className="carousel_button next mobileButton" id="outfitNext" onClick={navButtonHandle}>&#9654;</button>}
+        {(isMobile && numberOfCards + 1) && <button type="button" className="carousel_button previous mobileButton" id="outfitPrevious" onClick={navButtonHandle}>&#9664;</button>}
+        {(isMobile && numberOfCards + 1) && <button type="button" className="carousel_button next mobileButton" id="outfitNext" onClick={navButtonHandle}>&#9654;</button>}
       </div>
     </>
   );
