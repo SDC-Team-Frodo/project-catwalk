@@ -44,6 +44,9 @@ const Question = (props) => {
 
   useEffect(() => {
     setAnswers(organizeA(Object.values(question.answers)).slice(0, 2));
+    return () => {
+      setButtonLabel('More Answers');
+    };
   }, [question]);
 
   useEffect(() => {
