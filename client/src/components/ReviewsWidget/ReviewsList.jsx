@@ -95,9 +95,8 @@ const ReviewsList = ({ product, characteristics }) => {
       {!reviews.length && <p className="empty-reviews">No reviews currently available for this product</p>}
       <ul className="review-tiles">
         {reviews.slice(0, reviewsShown).map((review) => (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense key={review.review_id} fallback={<div>Loading...</div>}>
             <ReviewTile
-              key={review.review_id}
               review={review}
               searchText={searchText}
             />
