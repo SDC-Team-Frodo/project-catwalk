@@ -68,6 +68,7 @@ main
   width: 100%
 
 #app
+  min-height: 100vh
   display: flex
   margin: 0
   padding: 0 10vw
@@ -803,7 +804,6 @@ span.cardIcon
       font-weight: bold
 
 #review-modal
-  min-width: 350px
   overflow-y: scroll
   #review-form
     margin-bottom: 1em
@@ -863,11 +863,13 @@ img
 .modal
   top: 50vh
   max-height: 80vh
+  min-height: 463px
   border: 5px double black
   border-radius: 10px
   position: fixed
   z-index: 2147483646
   max-width: 80vw
+  min-width: 300px
   left: 50vw
   transform: translate(-50%, -50%)
   .modalBody
@@ -1133,7 +1135,7 @@ img
   color: inherit
   padding: 0
   margin-left: -10vw
-  width: 100vw
+  width: 99.125vw
   img
     height: 50px
     width: auto
@@ -1200,8 +1202,10 @@ img
   #BrowseList
     flex-wrap: nowrap
     flex-direction: column
-    .modal-container
-      width: 100%
+    // .modal-container
+    //   width: 100%
+    div.modal-container
+      min-width: 80%
 
 #BrowseList
   padding-bottom: 10%
@@ -1233,6 +1237,7 @@ img
     border: 2px solid black
     border-radius: 10px
     .productName
+      color: gray
       width: 100%
       font-size: 2.125rem
       border-radius: 10px
@@ -1270,11 +1275,13 @@ img
       transform: translateX(-50%)
 
 .details
-  min-width: 400px
+  min-width: 350px
   padding: 2em
   max-width: 100%
-  max-height: 700px
+  max-height: 400px
   overflow-y: auto
+  .description
+    max-width: 80%
   button
     position: relative
     margin: 1em
@@ -1284,6 +1291,7 @@ img
     font-size: 25px
 
 .browsePhotosDiv
+  margin-left: -3em
   display: flex
   flex-wrap: wrap
   justify-content: center
