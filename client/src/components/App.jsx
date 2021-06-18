@@ -128,7 +128,7 @@ const App = () => {
       </ThemeContext.Provider>
     );
   }
-  return <Browse setProduct={setCurrentProductId} />;
+  return <div id="browseBackground"><Browse setProduct={setCurrentProductId} /></div>;
 };
 
 export default App;

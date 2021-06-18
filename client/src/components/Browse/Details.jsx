@@ -27,10 +27,12 @@ const Details = (props) => {
   return (
     <div className="details">
       <h2>{name}</h2>
-      <p>{description}</p>
-      {photos.slice(0, 8).map((photo, i) => (
-        <img key={i} alt="No Img" className="BrowseImage" src={photo.thumbnail_url} />
-      ))}
+      <p className="description">{description}</p>
+      <div className="browsePhotosDiv">
+        {photos.slice(0, 8).map((photo, i) => (
+          <img key={i} alt="No Img" className="BrowseImage" src={photo.thumbnail_url} />
+        ))}
+      </div>
       <button
         className="goToProduct hoverGrey"
         value="Go"

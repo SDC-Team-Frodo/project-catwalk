@@ -890,6 +890,8 @@ img
   width: 100vw !important
   z-index: 2147483645
 
+
+
 #CloseBtn
   cursor: pointer
   position: fixed
@@ -898,11 +900,11 @@ img
   left: 8vh
   font-weight: 400
   font-size: 35px
-  color: lightgrey
+  color: lightgrey !important
   z-index: 2147483647
 
 #CloseBtn:hover
-  color: white
+  color: white !important
 
 #modalImgDiv
   cursor: pointer
@@ -1185,43 +1187,89 @@ img
   font-weight: 600
 
 // Browse
+// #browseBackground
+//   position: absolute
+//   z-index: 1
+//   left: 0
+//   top: 0
+//   height: 100vh
+//   width: 100vw
+//   background-color: lightgrey
+@media only screen and (max-width: 672px)
+  #BrowseList
+    flex-wrap: nowrap
+    flex-direction: column
+    .modal-container
+      width: 100%
+
 #BrowseList
-  max-height: 95vh
-  padding: 2.5em
-  background: lightgreen
+  padding-bottom: 10%
+  position: relative
+  display: flex
+  justify-content: space-evenly
+  flex-wrap: wrap
+  min-width: 400px
+  overflow-y: auto
   z-index: 1
-  align-content: center
   h1
     color: green
-  p
-    color: purple
-    font-size: 1.325em
-    max-width: 95%
-  .productName
-    font-size: 2.125em
-    border-bottom: 2px solid black
-  .productName:hover
-    border-bottom: 3px solid black
-  div
-    width: 75vw
-  button
-    background-color: transparent
-    color: purple
-    margin-top: 1em
-    border: 0
-    font-size: 2em
-    cursor: pointer
-  button:hover
+    width: 100%
+  div.modal-container
+    width: 42%
+  div#modalImgDiv
+    position: relative
+    width: 100%
+  .productDiv
+    width: 100%
+  .product
+    padding: 1em 0
+    min-width: 10em
+    text-align: center
+    transition: transform .25s
+    background: linear-gradient(45deg, rgba(252,252,252,1) 0%, rgba(214,247,223,1) 35%, rgba(221,194,245,1) 100%)
+    width: 100%
+    margin: 10px
+    border: 2px solid black
+    border-radius: 10px
+    .productName
+      width: 100%
+      font-size: 2.125rem
+      border-radius: 10px
+    .description
+      font-size: 2em
+      max-width: 95%
+  .product:hover
+    -webkit-transform: scale(1.2)
+    -ms-transform: scale(1.2)
+    transform: scale(1.2)
+    box-shadow: .2em .2em .5em #333
+  #browseNav
     color: green
-  #nextBrowse
-    float: right
-  h3
-    bottom: 0.5vh
+    dispaly: flex
     position: absolute
+    bottom: 0%
+    width: 50%
     left: 50%
     transform: translateX(-50%)
+    button
+      background-color: transparent
+      color: purple
+      margin-top: 1em
+      border: 0
+      font-size: 2em
+      cursor: pointer
+    button:hover
+      color: green
+    #nextBrowse
+      float: right
+    h3
+      bottom: 0.5vh
+      position: absolute
+      left: 50%
+      transform: translateX(-50%)
 
 .details
+  min-width: 400px
   padding: 2em
   max-width: 100%
   max-height: 700px
@@ -1234,11 +1282,15 @@ img
     border-bottom: 2px solid black
     font-size: 25px
 
-.BrowseImage
-  border: 2px solid grey
-  margin: 2em
-  max-width: 100em
-  height: 10em
+.browsePhotosDiv
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  .BrowseImage
+    border: 2px solid grey
+    margin: 2em
+    max-width: 100em
+    height: 10em
 
 .hoverGreen:hover
   color: green
