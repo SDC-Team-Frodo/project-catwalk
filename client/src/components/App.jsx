@@ -71,6 +71,7 @@ const App = () => {
               value="search"
               type="button"
               id="changeId"
+              aria-label="Search for another product (17067 - 18077)"
               onClick={() => {
                 if (Number(idInput) >= 17067 && Number(idInput) <= 18077) {
                   setCurrentProductId(idInput);
