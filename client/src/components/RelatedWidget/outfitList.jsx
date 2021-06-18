@@ -40,11 +40,11 @@ const OutfitList = () => {
   }, [product]);
 
   function removeOutfit(event) {
-    const outfitAll = JSON.parse(localStorage.getItem('outfit'));
-    const [localProducts, localThumbnails, localRatings] = outfitAll;
     let id = event.target.id.match(/\d+/);
     id = parseInt(id[0], 10);
     const cardIndex = localProducts.indexOf(id);
+    const outfitAll = JSON.parse(localStorage.getItem('outfit'));
+    const [localProducts, localThumbnails, localRatings] = outfitAll;
 
     localProducts.splice(cardIndex, 1);
     localThumbnails.splice(cardIndex, 1);
