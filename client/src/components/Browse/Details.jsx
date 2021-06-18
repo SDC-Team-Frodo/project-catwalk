@@ -17,7 +17,6 @@ const Details = (props) => {
         setDescription(res.data.description);
         request.get(`products/${id}/styles`, {})
           .then((res2) => {
-            console.log(res2.data);
             setPhotos(res2.data.results[0].photos);
           }).catch((err) => console.error(err));
       }).catch((err) => {

@@ -863,7 +863,7 @@ img
 .modal
   top: 50vh
   max-height: 80vh
-  border: thick double black
+  border: 5px double black
   border-radius: 10px
   position: fixed
   z-index: 2147483646
@@ -922,6 +922,10 @@ img
 
 #loadQ, .loadA
   cursor: pointer
+<<<<<<< HEAD
+=======
+  color: inherit
+>>>>>>> main
   background-color: inherit
   border: 0px
   color: inherit
@@ -969,26 +973,30 @@ img
   margin-left: 50%
   transform: translateX(-50%)
   #search
+    position: absolute
     cursor: pointer
-    margin-left: 5px
-    margin-top: 10px
-    width: 30px
-    height: 30px
+    right: 1em
+    top: 0.5em
+    width: 20px
+    height: 20px
   #Qinput
-    border: 0px
-    border-bottom: 2px solid black
+    padding: 0.5em 2.5em 0.5em 1em
+    border-radius: 18px
+    border: 2px solid black
     width: 30vw
     font-size: 1em
   #Qinput:focus
     outline: none
 
 .answerImage
+  max-width: 55vw
   margin: 5px
   height: 8em
   border: 2px solid black
 
-#answerImageDiv
+.answerImageDiv
   display: flex
+  flex-wrap: wrap
 
 
 #helpfulQ
@@ -1002,6 +1010,10 @@ img
     background-color: inherit
     color: inherit
     text-decoration: underline
+<<<<<<< HEAD
+=======
+    background-color: inherit
+>>>>>>> main
     border: none
 
 
@@ -1013,6 +1025,10 @@ img
     background-color: inherit
     color: inherit
     text-decoration: underline
+<<<<<<< HEAD
+=======
+    background-color: inherit
+>>>>>>> main
     border: none
 
 #answerForm
@@ -1220,6 +1236,9 @@ img
 
 .details
   padding: 2em
+  max-width: 100%
+  max-height: 700px
+  overflow-y: auto
   button
     position: relative
     margin: 1em
